@@ -1,13 +1,14 @@
 import React from 'react';
-import { Font } from 'expo';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Permissions, Notifications, Font } from 'expo';
+import { Platform, StatusBar, StyleSheet, View, AsyncStorage } from 'react-native';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga'
 import { Provider } from 'react-redux';
 
+import actions from './actions';
 import AppNavigator from './navigation/AppNavigator';
 import reducers from './reducers';
-import { fetchLotsSaga, fetchSettingsSaga } from './sagas/sagas';
+import { fetchCarLotsSaga, fetchHouseLotsSaga, fetchSettingsSaga, udateWatchHouseLotsSaga } from './sagas/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -15,13 +16,30 @@ const store = createStore(reducers,
   applyMiddleware(sagaMiddleware)
 );
 
-sagaMiddleware.run(fetchLotsSaga);
+const registerForPushNotifications  = async () => {
+    const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+
+    if (status !== 'granted') {
+        const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+        if (status !== 'granted') {
+            return;
+        }
+    }
+
+    return Notifications.getExpoPushTokenAsync();
+};
+
+sagaMiddleware.run(udateWatchHouseLotsSaga);
+sagaMiddleware.run(fetchCarLotsSaga);
+sagaMiddleware.run(fetchHouseLotsSaga);
 sagaMiddleware.run(fetchSettingsSaga);
 
 class App extends React.Component {
   state = {
     assetsLoaded: false,
-  }
+    token: '',
+    notification: {},
+  };
 
   async componentDidMount() {
     await Font.loadAsync({
@@ -29,7 +47,27 @@ class App extends React.Component {
       'sans-bold': require('./assets/fonts/NotoSansTC-Black.otf')
     });
 
+    const TOKEN = await registerForPushNotifications();
+
+    await AsyncStorage.setItem(`@RootStore:NOTIFICATIONS_TOKEN`, TOKEN);
+
+    this._notificationSubscription = Notifications.addListener(this._handleNotification);
+
     this.setState({ assetsLoaded: true });
+  }
+
+  async componentWillUnmount() {
+      await AsyncStorage.clear();
+  }
+
+  _handleNotification(notification) {
+    const splitted = notification.data.type.split('-');
+    // if (splitted.length < 2) {
+      if (splitted[0] === 'update') {
+        console.log('Main handler: ' + JSON.stringify(notification.data.apartments));
+        store.dispatch(actions.houseLotsActions.updateHouseWatchLots(notification.data.apartments));
+      }
+    // }
   }
 
   render() {

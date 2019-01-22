@@ -1,13 +1,28 @@
 import React from 'react';
 import  { connect } from 'react-redux';
-import { ScrollView, ActivityIndicator } from 'react-native';
+import { ScrollView, ActivityIndicator, AsyncStorage } from 'react-native';
 
-import SettingItem from '../components/SettingItem';
+import SettingSectionItem from '../components/settings/SettingSectionItem';
 import actions from '../actions';
 
 class SettingsContainer extends React.Component {
     componentDidMount() {
-        this.props.onFetchSetings();
+        this.props.onFetchSettings();
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
+    componentWillUnmount() {
+        AsyncStorage.clear();
+    }
+
+    async handleInputChange(inputId, parentId, text) {
+        try {
+            console.log(inputId, parentId, text);
+            await AsyncStorage.setItem(`@InputsStore:${inputId}`, text);
+        } catch (err) {
+
+        }
     }
 
     render() {
@@ -16,9 +31,7 @@ class SettingsContainer extends React.Component {
         } else {
             return (
                 <ScrollView>
-                    {this.props.settings.map((value, key) => {
-                        return <SettingItem key={key} setting={value}></SettingItem>;
-                    })}
+                    {this.props.settings.map((value, key) => { return <SettingSectionItem handleInputChange={this.handleInputChange} key={key} setting={value} /> })}
                 </ScrollView>
             );
         }
@@ -28,13 +41,14 @@ class SettingsContainer extends React.Component {
 function mapStateToProps(state) {
     return {
         settings: state.settingsReducers.settings,
-        isFetching: state.settingsReducers.isFetching,
+        isFetching: state.settingsReducers.isFetching
     }
 }
-  
+
 function mapDispatchToProps(dispatch) {
     return {
-        onFetchSetings: () => dispatch(actions.settingsActions.fetchSettings())
+        onFetchSettings: () => dispatch(actions.settingsActions.fetchSettings()),
+        onConfigSave: () => dispatch(actions.rootActions.setAddr())
     }
 }
 

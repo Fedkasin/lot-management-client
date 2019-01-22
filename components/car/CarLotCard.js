@@ -4,10 +4,10 @@ import { Text, View, StyleSheet, ImageBackground } from 'react-native';
 
 const styles = StyleSheet.create({
     item: {
-	    marginBottom: 20, 
+        marginBottom: 20,
         paddingBottom: 30,
         marginTop: 10,
-	    backgroundColor: '#fefff9',
+        backgroundColor: '#fefff9',
         color: '#363636',
         borderRadius: 4,
     },
@@ -51,14 +51,14 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class LotItem extends React.PureComponent {
+export default class CarLotCard extends React.PureComponent {
     render() {
         return (
             <View style={styles.item}>
                 <ImageBackground style={styles.innerImage} source={{ uri: 'https://content.onliner.by/automarket/456974/800x800/0510d6cd493c7dda740d767df5b12294.jpeg' }}>
                     <LinearGradient
-                      colors={['rgba(0,0,0,0.5)', 'transparent']}
-                      style={styles.imageHeadingBlock}>
+                        colors={['rgba(0,0,0,0.5)', 'transparent']}
+                        style={styles.imageHeadingBlock}>
                         <View style={styles.itemDescription}>
                             <Text numberOfLines={1} style={styles.itemDescriptionText}>
                                 Oleg Terpilov
@@ -69,8 +69,8 @@ export default class LotItem extends React.PureComponent {
                         </View>
                     </LinearGradient>
                     <LinearGradient
-                      colors={['transparent', 'rgba(0,0,0,0.5)']}
-                      style={styles.imageDescriptionBlock}>
+                        colors={['transparent', 'rgba(0,0,0,0.5)']}
+                        style={styles.imageDescriptionBlock}>
                         <View style={styles.itemTitle}>
                             <Text numberOfLines={1} style={styles.itemTitleText}>
                                 Toyota Corolla

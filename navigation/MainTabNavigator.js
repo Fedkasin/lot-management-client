@@ -2,34 +2,35 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
-import TabBarIcon from '../components/TabBarIcon';
-import LotsScreen from '../screens/LotsScreen';
-import ConfigurationScreen from '../screens/ConfigurationScreen';
+import TabBarIcon from '../components/core/TabBarIcon';
+import CarLotsScreen from '../screens/CarLotsScreen';
+import HouseLotsScreen from '../screens/HouseLotsScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
-const ConfigurationStack = createStackNavigator({
-  Configuration: ConfigurationScreen,
+const SettingsStack = createStackNavigator({
+  Settings: SettingsScreen,
 });
 
-ConfigurationStack.navigationOptions = {
-  tabBarLabel: 'Configuration',
+SettingsStack.navigationOptions = {
+  tabBarLabel: 'Settings',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? 'ios-options'
+          ? 'ios-cog'
           : 'md-information-circle'
       }
     />
   ),
 };
 
-const LotsStack = createStackNavigator({
-  Lots: LotsScreen,
+const CarLotsStack = createStackNavigator({
+  CarLots: CarLotsScreen,
 });
 
-LotsStack.navigationOptions = {
-  tabBarLabel: 'Lots',
+CarLotsStack.navigationOptions = {
+  tabBarLabel: 'Cars',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -38,7 +39,22 @@ LotsStack.navigationOptions = {
   ),
 };
 
+const HouseLotsStack = createStackNavigator({
+  HouseLots: HouseLotsScreen,
+});
+
+HouseLotsStack.navigationOptions = {
+    tabBarLabel: 'Houses',
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+            focused={focused}
+            name={Platform.OS === 'ios' ? 'ios-information' : 'md-options'}
+        />
+    ),
+};
+
 export default createBottomTabNavigator({
-  ConfigurationStack,
-  LotsStack,
+  SettingsStack,
+  CarLotsStack,
+  HouseLotsStack
 });

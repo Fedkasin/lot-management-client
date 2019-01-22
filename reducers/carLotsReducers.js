@@ -1,39 +1,39 @@
-import { FETCH_LOTS, FETCH_LOTS_SUCCESS, FETCH_LOTS_FAIL } from '../constants/Actions';
+import { FETCH_CAR_LOTS, FETCH_CAR_LOTS_SUCCESS, FETCH_CAR_LOTS_FAIL } from '../constants/Actions';
 
 const initialState = {
     isFetching: false,
-    lots: [],
+    carLots: [],
     page: 0,
     itemsPerPage: 10,
     error: null,
-}
+};
 
-const lotsReducers = (state = initialState, action) => {
+const carLotsReducers = (state = initialState, action) => {
     switch(action.type) {
-        case FETCH_LOTS:
+        case FETCH_CAR_LOTS:
             return {
                 ...state,
                 isFetching: true,
                 page: action.payload.page,
                 itemsPerPage: action.payload.itemsPerPage,
-            }
-        case FETCH_LOTS_SUCCESS:
+            };
+        case FETCH_CAR_LOTS_SUCCESS:
             return {
                 ...state,
                 error: null,
-                lots: [...state.lots, ...action.payload],
+                carLots: [...state.carLots, ...action.payload],
                 isFetching: false,
-            }
-        case FETCH_LOTS_FAIL:
+            };
+        case FETCH_CAR_LOTS_FAIL:
             return {
                 ...state,
                 error: action.error,
-                lots: [],
+                carLots: [],
                 isFetching: false,
-            }
-        default: 
+            };
+        default:
             return state;
     }
-}
+};
 
-export default lotsReducers;
+export default carLotsReducers;
