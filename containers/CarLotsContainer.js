@@ -26,7 +26,7 @@ class CarLotsContainer extends React.Component {
                 renderItem={({item}) => <CarLotCard item={item}></CarLotCard>}
                 keyExtractor={item => item.id.toString()}
                 onEndReached={this.handleScrollEnd}
-                onEndReachedThreshold={0}
+                onEndReachedThreshold={1}
                 refreshing={this.props.isFetching}
                 >
             </FlatList>
