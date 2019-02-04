@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     },
     imageHeadingBlock: {
         padding: '5%',
-        height: '18%'
+        height: '22.5%'
     },
     imageDescriptionBlock: {
         padding: '5%',
@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
     },
     itemTitleText: {
         color: '#e8ffff',
-        fontSize: 24,
         fontWeight: '500',
     },
     itemDescription: {
@@ -48,7 +47,7 @@ const styles = StyleSheet.create({
     },
     itemDescriptionText: {
         color: '#e8ffff',
-        fontSize: 16,
+        fontSize: 16
     }
 });
 
@@ -66,7 +65,15 @@ export default class HouseLotCard extends React.PureComponent {
                                     ANALner
                                 </Text>
                                 <Text numberOfLines={1} style={styles.itemDescriptionText}>
-                                    {moment(this.props.item.last_time_up).fromNow()}
+                                    Created: {moment(this.props.item.created_at).fromNow()}
+                                </Text>
+                            </View>
+                            <View style={styles.itemDescription}>
+                                <Text numberOfLines={1} style={styles.itemDescriptionText}>
+
+                                </Text>
+                                <Text numberOfLines={1} style={styles.itemDescriptionText}>
+                                    Up: {moment(this.props.item.last_time_up).fromNow()}
                                 </Text>
                             </View>
                         </LinearGradient>

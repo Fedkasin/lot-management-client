@@ -51,15 +51,19 @@ export default class SettingSectionItem extends React.PureComponent {
                 </View>
                 <Divider style={{ backgroundColor: 'gray' }} />
                 <View style={styles.settingBody}>
-
                     <View style={styles.settingButtonsContainer}>
                         {this.props.setting.children.inputs
-                        && this.props.setting.children.inputs.map((value, key) => <SettingChildInput handleInputChange={this.props.handleInputChange} key={key} child={value} />)}
+                        && this.props.setting.children.inputs.map((value, key) => <SettingChildInput
+                            key={key}
+                            sectionIndex={this.props.sectionIndex}
+                            settingIndex={key} />)}
                     </View>
 
                     <View style={styles.settingButtonsContainer}>
                         {this.props.setting.children.buttons
-                        && this.props.setting.children.buttons.map((value, key) => <SettingChildButton key={key} child={value} />)}
+                        && this.props.setting.children.buttons.map((value, key) => <SettingChildButton
+                            key={key}
+                            child={value} />)}
                     </View>
 
                     <View style={styles.settingFromToSelectsContainer}>

@@ -1,14 +1,21 @@
-import { FETCH_SETTINGS, FETCH_SETTINGS_SUCCESS, FETCH_SETTINGS_FAIL } from '../constants/Actions';
+import {FETCH_SETTINGS, FETCH_SETTINGS_SUCCESS, FETCH_SETTINGS_FAIL, CHANGE_SETTING} from '../constants/Actions';
 
 const initialState = {
     settings: [],
-    addr: '',
     isFetching: false,
     error: null,
 };
 
 const settingsReducer = (state = initialState, action) => {
     switch(action.type) {
+        case CHANGE_SETTING:
+            const settings = [...state.settings];
+            settings[action.payload.sectionIndex]
+                .children[action.payload.settingType][action.payload.settingIndex].value = action.payload.value;
+            return {
+                ...state,
+                settings: [...settings]
+            };
         case FETCH_SETTINGS:
             return {
                 ...state,

@@ -8,7 +8,13 @@ import { Provider } from 'react-redux';
 import actions from './actions';
 import AppNavigator from './navigation/AppNavigator';
 import reducers from './reducers';
-import { fetchCarLotsSaga, fetchHouseLotsSaga, fetchSettingsSaga, udateWatchHouseLotsSaga } from './sagas/sagas';
+import {
+    fetchCarLotsSaga,
+    fetchHouseLotsSaga,
+    fetchSettingsSaga,
+    udateWatchHouseLotsSaga,
+    changeSettingSaga
+} from './sagas/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -29,6 +35,7 @@ const registerForPushNotifications  = async () => {
     return Notifications.getExpoPushTokenAsync();
 };
 
+sagaMiddleware.run(changeSettingSaga);
 sagaMiddleware.run(udateWatchHouseLotsSaga);
 sagaMiddleware.run(fetchCarLotsSaga);
 sagaMiddleware.run(fetchHouseLotsSaga);
@@ -48,7 +55,7 @@ class App extends React.Component {
     });
 
     const TOKEN = await registerForPushNotifications();
-
+    console.log(TOKEN);
     await AsyncStorage.setItem(`@RootStore:NOTIFICATIONS_TOKEN`, TOKEN);
 
     this._notificationSubscription = Notifications.addListener(this._handleNotification);
@@ -62,12 +69,9 @@ class App extends React.Component {
 
   _handleNotification(notification) {
     const splitted = notification.data.type.split('-');
-    // if (splitted.length < 2) {
-      if (splitted[0] === 'update') {
-        console.log('Main handler: ' + JSON.stringify(notification.data.apartments));
-        store.dispatch(actions.houseLotsActions.updateHouseWatchLots(notification.data.apartments));
-      }
-    // }
+    if (splitted[0] === 'update') {
+      store.dispatch(actions.houseLotsActions.updateHouseWatchLots(notification.data.apartments));
+    }
   }
 
   render() {

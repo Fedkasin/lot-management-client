@@ -17,6 +17,7 @@ import {
     fetchSettings,
     fetchSettingsSuccess,
     fetchSettingsFail,
+    changeSetting,
 } from './settingsActionCreators';
 
 import {
@@ -44,5 +45,6 @@ import {
         fetchSettings,
         fetchSettingsSuccess,
         fetchSettingsFail,
+        changeSetting,
     }
  }

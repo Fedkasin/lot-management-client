@@ -6,6 +6,7 @@ import TabBarIcon from '../components/core/TabBarIcon';
 import CarLotsScreen from '../screens/CarLotsScreen';
 import HouseLotsScreen from '../screens/HouseLotsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import HouseWatchLotsScreen from '../screens/HouseWatchLotsScreen';
 
 const SettingsStack = createStackNavigator({
   Settings: SettingsScreen,
@@ -34,7 +35,7 @@ CarLotsStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-menu' : 'md-options'}
+      name={Platform.OS === 'ios' ? 'ios-car' : 'md-options'}
     />
   ),
 };
@@ -44,17 +45,36 @@ const HouseLotsStack = createStackNavigator({
 });
 
 HouseLotsStack.navigationOptions = {
-    tabBarLabel: 'Houses',
+    tabBarLabel: 'Houses (all)',
     tabBarIcon: ({ focused }) => (
         <TabBarIcon
             focused={focused}
-            name={Platform.OS === 'ios' ? 'ios-information' : 'md-options'}
+            name={Platform.OS === 'ios' ? 'ios-home' : 'md-options'}
+        />
+    ),
+};
+
+const HouseWatchLotsStack = createStackNavigator({
+    HouseWatchLots: HouseWatchLotsScreen,
+});
+
+HouseWatchLotsStack.navigationOptions = {
+    tabBarLabel: 'Houses (live)',
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+            focused={focused}
+            name={
+                Platform.OS === 'ios'
+                    ? 'ios-home'
+                    : 'md-information-circle'
+            }
         />
     ),
 };
 
 export default createBottomTabNavigator({
-  SettingsStack,
-  CarLotsStack,
-  HouseLotsStack
+    SettingsStack,
+    CarLotsStack,
+    HouseLotsStack,
+    HouseWatchLotsStack
 });
