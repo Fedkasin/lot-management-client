@@ -17,11 +17,7 @@ SettingsStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? 'ios-cog'
-          : 'md-information-circle'
-      }
+      name={Platform.OS === 'ios' ? 'ios-cog' : 'md-settings'}
     />
   ),
 };
@@ -35,7 +31,7 @@ CarLotsStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-car' : 'md-options'}
+      name={Platform.OS === 'ios' ? 'ios-car' : 'md-car'}
     />
   ),
 };
@@ -49,7 +45,7 @@ HouseLotsStack.navigationOptions = {
     tabBarIcon: ({ focused }) => (
         <TabBarIcon
             focused={focused}
-            name={Platform.OS === 'ios' ? 'ios-home' : 'md-options'}
+            name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
         />
     ),
 };
@@ -63,11 +59,7 @@ HouseWatchLotsStack.navigationOptions = {
     tabBarIcon: ({ focused }) => (
         <TabBarIcon
             focused={focused}
-            name={
-                Platform.OS === 'ios'
-                    ? 'ios-home'
-                    : 'md-information-circle'
-            }
+            name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
         />
     ),
 };
