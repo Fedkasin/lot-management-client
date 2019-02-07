@@ -4,6 +4,7 @@ import { FlatList } from 'react-native';
 
 import actions from '../actions';
 import HouseLotCard from "../components/house/HouseLotCard";
+import BgMessage from "../components/bgmessage";
 
 class HouseLotsContainer extends React.Component {
     constructor(props) {
@@ -26,6 +27,9 @@ class HouseLotsContainer extends React.Component {
     }
 
     render () {
+        if (!this.props.houseLots.length) {
+            return <BgMessage text = 'There is no houses'/>
+        }
         return (
             <FlatList
                 data={this.props.houseLots}
