@@ -5,9 +5,9 @@ import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga'
 import { Provider } from 'react-redux';
 
-import actions from './actions';
+import actions from './actions/index';
 import AppNavigator from './navigation/AppNavigator';
-import reducers from './reducers';
+import reducers from './reducers/index';
 import {
     fetchCarLotsSaga,
     fetchHouseLotsSaga,
@@ -50,8 +50,8 @@ class App extends React.Component {
 
   async componentDidMount() {
     await Font.loadAsync({
-      'sans': require('./assets/fonts/NotoSansTC-Regular.otf'),
-      'sans-bold': require('./assets/fonts/NotoSansTC-Black.otf')
+      'sans': require('../assets/fonts/NotoSansTC-Regular.otf'),
+      'sans-bold': require('../assets/fonts/NotoSansTC-Black.otf')
     });
 
     const TOKEN = await registerForPushNotifications();
