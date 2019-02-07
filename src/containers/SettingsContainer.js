@@ -3,7 +3,7 @@ import  { connect } from 'react-redux';
 import { ScrollView, ActivityIndicator, AsyncStorage } from 'react-native';
 
 import SettingSectionItem from '../components/settings/SettingSectionItem';
-import actions from '../actions';
+import actions from '../actions/index';
 
 const DEFAULT_ADDR = '0e40c705.ngrok.io';
 

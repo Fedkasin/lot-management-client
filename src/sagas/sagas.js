@@ -2,7 +2,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { AsyncStorage } from "react-native"
 import axios from 'axios';
 
-import actions from '../actions';
+import actions from '../actions/index';
 import {
     FETCH_CAR_LOTS,
     FETCH_SETTINGS,

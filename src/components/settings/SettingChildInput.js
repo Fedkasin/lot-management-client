@@ -2,7 +2,7 @@ import React from 'react';
 import  { connect } from 'react-redux';
 import { View, StyleSheet, Text, TextInput } from 'react-native';
 import settingsReducers from "../../reducers/settingsReducers";
-import actions from "../../actions";
+import actions from "../../actions/index";
 
 const styles = StyleSheet.create({
     container: {

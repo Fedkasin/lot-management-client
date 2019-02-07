@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "expo start",
+    "login": "expo login",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
@@ -13,9 +14,9 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@expo/samples": "2.1.1",
     "axios": "^0.18.0",
     "expo": "^31.0.2",
+    "expo-cli": "^2.9.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "react": "16.5.0",
@@ -25,14 +26,17 @@
     "react-native-picker-select": "^5.1.1",
     "react-navigation": "^2.18.2",
     "react-redux": "^5.1.1",
-    "recompose": "^0.30.0",
     "redux": "^4.0.1",
-    "redux-form": "^8.1.0",
     "redux-saga": "^0.16.2",
     "reselect": "^4.0.0"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",
     "jest-expo": "^31.0.0"
+  },
+  "engines": {
+    "node": ">=8.11.3 <=11.9.0",
+    "npm": "<=6.7.0",
+    "yarn": "<=1.13.0"
   }
 }

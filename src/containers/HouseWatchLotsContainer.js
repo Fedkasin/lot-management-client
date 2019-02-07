@@ -2,7 +2,7 @@ import React from 'react';
 import  { connect } from 'react-redux';
 import { FlatList } from 'react-native';
 
-import actions from '../actions';
+import actions from '../actions/index';
 import HouseLotCard from "../components/house/HouseLotCard";
 import BgMessage from "../components/bgmessage";
 
