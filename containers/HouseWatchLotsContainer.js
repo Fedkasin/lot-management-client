@@ -1,19 +1,19 @@
 import React from 'react';
 import  { connect } from 'react-redux';
-import { FlatList, Text } from 'react-native';
+import { FlatList } from 'react-native';
 
 import actions from '../actions';
 import HouseLotCard from "../components/house/HouseLotCard";
+import BgMessage from "../components/bgmessage";
 
 class HouseWatchLotsContainer extends React.Component {
     constructor(props) {
         super(props);
-
     }
 
     render () {
         if (!this.props.houseLots.length) {
-            return <Text>No new houses</Text>
+            return <BgMessage text = 'There is no new houses'/>
         }
         return (
             <FlatList
