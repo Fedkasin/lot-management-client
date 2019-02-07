@@ -7,5 +7,9 @@ The you'll need [expo](https://expo.io/learn) to run your application in emulato
  
 **Comands to launch the application:**
 
-1. <code> npm install</code>
-2. <code> expo start</code>
+1. <code> yarn install</code>
+2. <code> yarn start</code> or <code> expo start</code>
+
+Or through the docker
+
+1. <code> ./bin/start.sh </code>
