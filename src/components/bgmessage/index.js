@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     text: {
-        fontSize: 28, 
+        fontSize: 28,
         opacity: .5
     }
 });
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 class BgMessage extends React.Component {
 
     render() {
-        const {text} = this.props
+        const {text} = this.props;
         return (
             <View style = {styles.container}>
                 <Text style = {styles.text}>{text}</Text>

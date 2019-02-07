@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "used-car-lot-client",
+    "entryPoint": "./src/App.js",
     "description": "A very interesting project.",
     "slug": "used-car-lot-client",
     "privacy": "public",

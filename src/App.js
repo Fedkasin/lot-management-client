@@ -1,5 +1,5 @@
 import React from 'react';
-import { Permissions, Notifications, Font } from 'expo';
+import { Permissions, Notifications, Font, registerRootComponent } from 'expo';
 import { Platform, StatusBar, StyleSheet, View, AsyncStorage } from 'react-native';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga'
@@ -95,4 +95,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default registerRootComponent(App);

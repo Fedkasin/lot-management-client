@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form'
 
 import rootReducers from './rootReducers';
 import carLotsReducers from './carLotsReducers';
@@ -11,5 +10,4 @@ export default combineReducers({
     carLotsReducers,
     houseLotsReducers,
     settingsReducers,
-    formReducer,
 });
