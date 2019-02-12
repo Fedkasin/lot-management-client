@@ -2,3 +2,4 @@ __tests__
 bin
 node_modules
 docker
+.env-sample

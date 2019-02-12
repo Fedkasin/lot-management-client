@@ -8,7 +8,12 @@ services:
     build:
       context: .
       dockerfile: docker/mobilebuilder/Dockerfile
+      args:
+        - EXPO_USER=${EXPO_USER}
+        - EXPO_PASSWORD=${EXPO_PASSWORD}
     env_file: .env
+    volumes:
+      - ./src:/usr/src/app/srct
     ports:
      - 19000:19000
      - 19001:19001
