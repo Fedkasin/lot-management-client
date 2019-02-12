@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import actions from '../actions/index';
 import CarLotCard from '../components/car/CarLotCard';
-import BgMessage from '../components/bgmessage/BackgroundMessage';
+import BgMessage from '../components/bgmessage';
 
 class CarLotsContainer extends PureComponent {
   constructor(props) {
@@ -23,20 +23,21 @@ class CarLotsContainer extends PureComponent {
     onFetchCarLots(page + 1, itemsPerPage);
   }
 
-  render() {
-    const { carLots, isFetching } = this.props;
-    if (!carLots.length) {
-      return <BgMessage text="There are no cars" />;
+  render () {
+    if (!this.props.carLots.length) {
+          console.log('isFetching: ', JSON.stringify(this.props.isFetching));
+          return <BgMessage text = 'There is no cars'/>
     }
     return (
-      <FlatList
-        data={carLots}
-        renderItem={({ item }) => <CarLotCard item={item} />}
-        keyExtractor={item => item.id.toString()}
-        onEndReached={this.handleScrollEnd}
-        onEndReachedThreshold={1}
-        refreshing={isFetching}
-      />
+          <FlatList
+              data={this.props.carLots}
+              renderItem={({item}) => <CarLotCard item={item}></CarLotCard>}
+              keyExtractor={item => item.id.toString()}
+              onEndReached={this.handleScrollEnd}
+              onEndReachedThreshold={1}
+              refreshing={this.props.isFetching}
+              >
+          </FlatList>
     );
   }
 }

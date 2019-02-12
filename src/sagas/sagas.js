@@ -22,6 +22,17 @@ function* fetchCarLots(action) {
   }
 }
 
+function* fetchCarLots(action) {
+    try {
+        const start = action.payload.page*action.payload.itemsPerPage;
+        const limit = action.payload.itemsPerPage;
+        const response = yield call(axios.get, `https://jsonplaceholder.typicode.com/photos?_start=${start}&_limit=${limit}`);
+        yield put(actions.carLotsActions.fetchCarLotsSuccess(response.data));
+    } catch (err) {
+        yield put(actions.carLotsActions.fetchCarLotsFail(err));
+    }
+}
+
 function* updateWatchHouseLots(action) {
   try {
     // MIN-MAX -number ROOMS - array (spec). example: ?min=10&max=20&rooms[]=1&rooms[]=2
@@ -64,6 +75,18 @@ function* changeSetting(action) {
   }
 }
 
+function* fetchAuthKey(action) {
+    try {
+        const response = yield call(axios.get('https://reqres.in/api/login', {
+            "email": action.payload.login,
+            "password": action.payload.password
+        }));
+        yield put(actions.authActions.fetchAuthKeySuccess(response.data));
+    } catch (err) {
+        yield put(actions.authActions.fetchAuthKeyFail(err));
+    }
+}
+
 export function* changeSettingSaga() {
   yield takeLatest(CHANGE_SETTING, changeSetting);
 }
@@ -82,4 +105,8 @@ export function* fetchHouseLotsSaga() {
 
 export function* fetchSettingsSaga() {
   yield takeLatest(FETCH_SETTINGS, fetchSettings);
+}
+
+export function* fetchAuthKeySaga() {
+    yield takeLatest(FETCH_AUTH_KEY, fetchAuthKey);
 }
