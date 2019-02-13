@@ -1,4 +1,4 @@
-# used-lot-car-client
+# lot-management-client
 
 If you don't have NodeJS installed please install it through the nvm or from official site
 [here](https://nodejs.org/en/)
