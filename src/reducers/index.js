@@ -6,8 +6,8 @@ import houseLotsReducers from './houseLotsReducers';
 import settingsReducers from './settingsReducers';
 
 export default combineReducers({
-    rootReducers,
-    carLotsReducers,
-    houseLotsReducers,
-    settingsReducers,
+  rootReducers,
+  carLotsReducers,
+  houseLotsReducers,
+  settingsReducers,
 });

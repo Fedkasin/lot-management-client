@@ -8,7 +8,9 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
-    "test": "node ./node_modules/jest/bin/jest.js --watchAll"
+    "test": "node ./node_modules/jest/bin/jest.js --watchAll",
+    "lint-me": "eslint ./src --fix",
+    "lint": "eslint ./src"
   },
   "jest": {
     "preset": "jest-expo"
@@ -19,6 +21,7 @@
     "expo-cli": "^2.9.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
+    "prop-types": "^15.7.1",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
     "react-native-elements": "^0.19.1",
@@ -26,12 +29,19 @@
     "react-native-picker-select": "^5.1.1",
     "react-navigation": "^2.18.2",
     "react-redux": "^5.1.1",
+    "react-test-renderer": "^16.8.1",
     "redux": "^4.0.1",
     "redux-saga": "^0.16.2",
     "reselect": "^4.0.0"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
     "babel-preset-expo": "^5.0.0",
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
     "jest-expo": "^31.0.0"
   },
   "engines": {

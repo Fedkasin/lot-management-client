@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import SettingsContainer from '../containers/SettingsContainer';
 
-class SettingsScreen extends React.Component {
+class SettingsScreen extends PureComponent {
   static navigationOptions = {
     title: 'Settings',
   };
 
   render() {
-    return <SettingsContainer></SettingsContainer>
+    return <SettingsContainer />;
   }
 }
 

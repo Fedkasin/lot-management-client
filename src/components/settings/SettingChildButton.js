@@ -1,29 +1,40 @@
 import React from 'react';
-import { View, StyleSheet, SegmentedControlIOS, Text } from 'react-native';
+import {
+  View, StyleSheet, SegmentedControlIOS, Text,
+} from 'react-native';
+import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
-    container: {
-        paddingTop: 5,
-        flex: 1,
-    },
-    label: {
-        fontFamily: 'sans',
-        fontSize: 20,
-        padding: 5,
-        textAlign: 'center'
-    }
+  container: {
+    paddingTop: 5,
+    flex: 1,
+  },
+  label: {
+    fontFamily: 'sans',
+    fontSize: 20,
+    padding: 5,
+    textAlign: 'center',
+  },
 });
 
-export default class SettingChildButton extends React.PureComponent {
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.label}>{this.props.child.label}</Text>
-                <SegmentedControlIOS 
-                    values={this.props.child.options}
-                    selectedIndex={this.props.child.options.indexOf(this.props.child.value)}>
-                </SegmentedControlIOS>
-            </View>
-        );
-    }
+class SettingChildButton extends React.PureComponent {
+  render() {
+    const { child } = this.props;
+    return (
+      <View style={styles.container}>
+        <Text style={styles.label}>{child.label}</Text>
+        <SegmentedControlIOS
+          values={child.options}
+          selectedIndex={child.options.indexOf(child.value)}
+        />
+      </View>
+    );
+  }
 }
+
+SettingChildButton.propTypes = {
+  child: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+
+
+export default SettingChildButton;

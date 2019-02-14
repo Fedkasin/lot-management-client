@@ -3,11 +3,11 @@ import HouseLotsContainer from '../containers/HouseLotsContainer';
 
 class HouseLotsScreen extends React.Component {
     static navigationOptions = {
-        title: 'Houses',
+      title: 'Houses',
     };
 
     render() {
-        return <HouseLotsContainer></HouseLotsContainer>
+      return <HouseLotsContainer />;
     }
 }
 
