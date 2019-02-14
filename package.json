@@ -9,7 +9,8 @@
     "ios": "expo start --ios",
     "eject": "expo eject",
     "test": "node ./node_modules/jest/bin/jest.js --watchAll",
-    "lint-me": "eslint ./src --fix"
+    "lint-me": "eslint ./src --fix",
+    "lint": "eslint ./src"
   },
   "jest": {
     "preset": "jest-expo"
