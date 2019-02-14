@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import actions from '../actions/index';
 import CarLotCard from '../components/car/CarLotCard';
-import BgMessage from '../components/bgmessage';
+import BgMessage from '../components/bgmessage/BackgroundMessage';
 
 class CarLotsContainer extends PureComponent {
   constructor(props) {
@@ -25,7 +25,6 @@ class CarLotsContainer extends PureComponent {
 
   render () {
     if (!this.props.carLots.length) {
-          console.log('isFetching: ', JSON.stringify(this.props.isFetching));
           return <BgMessage text = 'There is no cars'/>
     }
     return (
