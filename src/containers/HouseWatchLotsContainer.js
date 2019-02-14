@@ -1,43 +1,44 @@
 import React from 'react';
-import  { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { FlatList } from 'react-native';
+import PropTypes from 'prop-types';
 
-import actions from '../actions/index';
-import HouseLotCard from "../components/house/HouseLotCard";
-import BgMessage from "../components/bgmessage";
+import HouseLotCard from '../components/house/HouseLotCard';
+import BgMessage from '../components/bgmessage/BackgroundMessage';
 
 class HouseWatchLotsContainer extends React.Component {
-    constructor(props) {
-        super(props);
+  render() {
+    const { isFetching, houseLots } = this.props;
+    if (!houseLots.length) {
+      return <BgMessage text="There are no new houses" />;
     }
-
-    render () {
-        if (!this.props.houseLots.length) {
-            return <BgMessage text = 'There is no new houses'/>
-        }
-        return (
-            <FlatList
-                data={this.props.houseLots}
-                renderItem={({item}) => <HouseLotCard item={item}></HouseLotCard>}
-                keyExtractor={item => item.id.toString()}
-                onRefresh={this.handleRefresh}
-                onEndReached={this.handleScrollEnd}
-                onEndReachedThreshold={0}
-                refreshing={this.props.isFetching}
-            >
-            </FlatList>
-        );
-    }
+    return (
+      <FlatList
+        data={houseLots}
+        renderItem={({ item }) => <HouseLotCard item={item} />}
+        keyExtractor={item => item.id.toString()}
+        onRefresh={this.handleRefresh}
+        onEndReached={this.handleScrollEnd}
+        onEndReachedThreshold={0}
+        refreshing={isFetching}
+      />
+    );
+  }
 }
 
 function mapStateToProps(state) {
-    return {
-        isFetching: state.houseLotsReducers.isFetching,
-        houseLots: state.houseLotsReducers.houseLots,
-        page: state.houseLotsReducers.page,
-        itemsPerPage: state.houseLotsReducers.itemsPerPage,
-        error: state.houseLotsReducers.error ? state.houseLotsReducers.error : null,
-    }
+  return {
+    isFetching: state.houseLotsReducers.isFetching,
+    houseLots: state.houseLotsReducers.houseLots,
+    page: state.houseLotsReducers.page,
+    itemsPerPage: state.houseLotsReducers.itemsPerPage,
+    error: state.houseLotsReducers.error ? state.houseLotsReducers.error : null,
+  };
 }
+
+HouseWatchLotsContainer.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
+  houseLots: PropTypes.arrayOf(PropTypes.any).isRequired,
+};
 
 export default connect(mapStateToProps)(HouseWatchLotsContainer);

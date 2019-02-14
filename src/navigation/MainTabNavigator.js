@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
@@ -41,32 +42,32 @@ const HouseLotsStack = createStackNavigator({
 });
 
 HouseLotsStack.navigationOptions = {
-    tabBarLabel: 'Houses (all)',
-    tabBarIcon: ({ focused }) => (
-        <TabBarIcon
-            focused={focused}
-            name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
-        />
-    ),
+  tabBarLabel: 'Houses (all)',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
+    />
+  ),
 };
 
 const HouseWatchLotsStack = createStackNavigator({
-    HouseWatchLots: HouseWatchLotsScreen,
+  HouseWatchLots: HouseWatchLotsScreen,
 });
 
 HouseWatchLotsStack.navigationOptions = {
-    tabBarLabel: 'Houses (live)',
-    tabBarIcon: ({ focused }) => (
-        <TabBarIcon
-            focused={focused}
-            name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
-        />
-    ),
+  tabBarLabel: 'Houses (live)',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
+    />
+  ),
 };
 
 export default createBottomTabNavigator({
-    SettingsStack,
-    CarLotsStack,
-    HouseLotsStack,
-    HouseWatchLotsStack
+  SettingsStack,
+  CarLotsStack,
+  HouseLotsStack,
+  HouseWatchLotsStack,
 });

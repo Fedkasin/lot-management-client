@@ -3,11 +3,11 @@ import HouseWatchLotsContainer from '../containers/HouseWatchLotsContainer';
 
 class HouseWatchScreen extends React.Component {
     static navigationOptions = {
-        title: 'Houses (Live)',
+      title: 'Houses (Live)',
     };
 
     render() {
-        return <HouseWatchLotsContainer></HouseWatchLotsContainer>
+      return <HouseWatchLotsContainer />;
     }
 }
 

@@ -1,0 +1,36 @@
+{
+    "extends": "airbnb",
+    "parser": "babel-eslint",
+    "env": {
+        "node": true,
+        "browser": true,
+        "es6": true
+    },
+    "rules": {
+        "semi" : [2, "always"],
+        "no-param-reassign": 0,
+        "func-names": 0,
+        "no-shadow": [2, {"allow": ["err", "done", "user", "data", "options"]}],
+        "no-unused-vars": [2, {"vars": "all", "args": "after-used", "argsIgnorePattern": "next|options|res"}],
+        "new-cap": [2, {"capIsNewExceptions": ["Router","Promise"]}],
+        "no-else-return": 0,
+        "no-underscore-dangle": 0,
+        "strict": [0, "global"],
+        "global-require": 0,
+        "no-continue": 0,
+        "class-methods-use-this": 0,
+        "max-len": [2, { "ignoreComments": true, "code": 175 }],
+        "valid-jsdoc": "error",
+        "arrow-parens": 0,
+        "spaced-comment": ["error", "always", { "markers": [":"]}],
+        "no-unused-expressions": ["error", { "allowShortCircuit": true }],
+        "comma-dangle": ["error", {
+            "arrays": "always-multiline",
+            "objects": "always-multiline",
+            "imports": "always-multiline",
+            "exports": "always-multiline",
+            "functions": "ignore"
+        }],
+        "react/jsx-filename-extension": [ 1, { "extensions": [ ".js", ".jsx" ] } ]
+    }
+}

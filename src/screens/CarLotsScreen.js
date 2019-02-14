@@ -7,7 +7,7 @@ class CarLotsScreen extends React.Component {
   };
 
   render() {
-    return <CarLotsContainer></CarLotsContainer>
+    return <CarLotsContainer />;
   }
 }
 
