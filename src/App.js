@@ -35,17 +35,17 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducers,
   applyMiddleware(sagaMiddleware));
 
-const registerForPushNotifications = async () => {
+const getPushToken = async () => {
   const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
 
   if (status !== 'granted') {
     const { stat } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
     if (stat !== 'granted') {
-      return;
+      return null;
     }
   }
 
-  return Notifications.getExpoPushTokenAsync(); // eslint-disable-line consistent-return
+  return Notifications.getExpoPushTokenAsync();
 };
 
 sagaMiddleware.run(changeSettingSaga);
@@ -65,7 +65,7 @@ class App extends React.Component {
       'sans-bold': require('../assets/fonts/NotoSansTC-Black.otf'),
     });
 
-    const TOKEN = await registerForPushNotifications();
+    const TOKEN = await getPushToken();
 
     await AsyncStorage.setItem('@RootStore:NOTIFICATIONS_TOKEN', TOKEN);
 
