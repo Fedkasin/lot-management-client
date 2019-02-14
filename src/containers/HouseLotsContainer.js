@@ -12,17 +12,12 @@ class HouseLotsContainer extends PureComponent {
     super(props);
 
     this.handleRefresh = this.handleRefresh.bind(this);
-    // this.handleScrollEnd = this.handleScrollEnd.bind(this);
   }
 
   componentDidMount() {
     const { onFetchHouseLots } = this.props;
     onFetchHouseLots();
   }
-
-  // handleScrollEnd() {
-  //     this.props.onFetchHouseLots(this.props.page + 1, this.props.itemsPerPage);
-  // }
 
   handleRefresh() {
     const { onFetchHouseLots } = this.props;
