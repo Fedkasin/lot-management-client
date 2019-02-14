@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { StyleSheet, Text, View, Alert, Button, TextInput } from 'react-native';
+import  { connect } from 'react-redux';
+import actions from '../../actions/index';
 
 const styles = StyleSheet.create({
     container: {
@@ -17,6 +19,9 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 26,
     },
+    error: {
+        color: '#f00'
+    },
     input: {
         height: 35,
         width: '100%',
@@ -26,13 +31,33 @@ const styles = StyleSheet.create({
     }
 });
 
-class AuthForm extends React.Component {
-    static navigationOptions = {
-        title: 'Welcome',
-      };
+let login = null;
+let password = null;
 
-/*     "peter@klaven"
-    "cityslicka" */
+class AuthForm extends PureComponent {
+    constructor() {
+        super();
+        this.handleLogin = this.handleLogin.bind(this);
+        this.handlePassword = this.handlePassword.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.authKey !== null) this.props.navigation.navigate('App');
+    }
+
+    handleClick() {
+        this.props.onFetchAuthKey(login, password);
+    }
+
+    handleLogin(e) {
+        login = e.nativeEvent.text;
+    }
+
+    handlePassword(e) {
+        password = e.nativeEvent.text;
+    }
 
     render() {
         return (
@@ -40,26 +65,46 @@ class AuthForm extends React.Component {
                 <View style = {styles.bgButton}>
                     <Text style = {styles.text}>E-mail</Text>
                     <TextInput 
-                    autoFocus = {true}
-                    value = 'peter@klaven'
-                    placeholder = 'your e-mail'
-                    maxLength = {20}
-                    textContentType = 'emailAddress'
-                    style = {styles.input} />
+                        autoFocus = {true}
+                        onEndEditing={this.handleLogin}
+                        placeholder = 'your e-mail'
+                        maxLength = {20}
+                        textContentType = 'emailAddress'
+                        style = {styles.input}>
+                        <Text>{this.props.login}</Text>
+                    </TextInput>
                 </View>
                 <View style = {styles.bgButton}>
-                    <Text style = {styles.text}>Password</Text>
+                <Text style = {styles.text}>Password</Text>
                     <TextInput
-                    secureTextEntry={true}
-                    value = 'cityslicka'
-                    placeholder = '8 symbols at least'
-                    style = {styles.input} />
+                        secureTextEntry={true}
+                        onEndEditing={this.handlePassword}
+                        placeholder = '8 symbols at least'
+                        style = {styles.input}>
+                        <Text>{this.props.password}</Text>
+                    </TextInput>
                 </View>
-                <Button title='Log In'  onPress={() => this.props.navigation.navigate('App')} />
+                <Text style = {styles.error}>{this.props.error}</Text>
+                <Button title='Log In' onPress={this.handleClick} />
             </View>
         )
     }
-
 }
 
-export default AuthForm
+function mapStateToProps(state) {
+    return {
+        isFetching: state.authReducers.isFetching,
+        login: state.authReducers.login,
+        password: state.authReducers.password,
+        authKey: state.authReducers.authKey,
+        error: state.authReducers.error ? state.authReducers.error : null,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        onFetchAuthKey: ( login, password ) => dispatch(actions.authActions.fetchAuthKey({ login, password }) )
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthForm);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Alert, Button } from 'react-native';
-import { AsyncStorage } from 'react-native';
+import { withNavigation } from 'react-navigation';
 
 const styles = StyleSheet.create({
     container: {
@@ -22,12 +22,6 @@ const styles = StyleSheet.create({
 });
 
 class AuthSignOrRegister extends React.Component {
-
-    constructor(props) {
-      super(props);
-      //this._storeData = this._storeData.bind(this);
-    }
-
     login = async () => {
       this.props.navigation.navigate('AuthFormScreen', {})
     }
@@ -35,28 +29,7 @@ class AuthSignOrRegister extends React.Component {
     regist = async () => {
       Alert.alert('Sorry, this option is temporary not avalible')
     }
-
-/*     _storeData = async () => {
-        try {
-          await AsyncStorage.setItem('TASKS', 'I like to save it.');
-        } catch (error) {
-          // Error saving data
-          console.log('error');
-        }
-    }; 
-    
-      _removeData = async () => {
-        try {
-          await AsyncStorage.removeItem('TASKS');
-        } catch (error) {
-          // Error saving data
-          console.log('error');
-        }
-      }; */
-
     render() {
-      console.log(JSON.stringify(this.props.navigation, null, 2));
-        //const {text} = this.props
         return (
             <View style = {styles.container}>
                 <View style = {styles.bgButton}>
@@ -69,7 +42,6 @@ class AuthSignOrRegister extends React.Component {
             </View>
         )
     }
-
 }
 
-export default AuthSignOrRegister
+export default withNavigation(AuthSignOrRegister);

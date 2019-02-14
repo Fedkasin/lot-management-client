@@ -2,7 +2,7 @@ import { FETCH_AUTH_KEY, FETCH_AUTH_KEY_SUCCESS, FETCH_AUTH_KEY_FAIL } from '../
 
 const initialState = {
     isFetching: false,
-    key: null,
+    authKey: null,
     login: null,
     password: null,
     error: null,
@@ -21,14 +21,14 @@ const authReducers = (state = initialState, action) => {
             return {
                 ...state,
                 error: null,
-                key: action.payload.key,
+                authKey: action.payload.data.token,
                 isFetching: false,
             };
         case FETCH_AUTH_KEY_FAIL:
             return {
                 ...state,
-                error: action.error,
-                key: null,
+                error: action.error.response.data.error,
+                authKey: null,
                 isFetching: false,
             };
         default:

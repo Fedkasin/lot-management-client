@@ -4,11 +4,12 @@ import axios from 'axios';
 
 import actions from '../actions/index';
 import {
-  FETCH_CAR_LOTS,
-  FETCH_SETTINGS,
-  FETCH_HOUSE_LOTS,
-  UPDATE_HOUSE_WATCH_LOTS,
-  CHANGE_SETTING,
+    FETCH_CAR_LOTS,
+    FETCH_SETTINGS,
+    FETCH_HOUSE_LOTS,
+    FETCH_AUTH_KEY,
+    UPDATE_HOUSE_WATCH_LOTS,
+    CHANGE_SETTING,
 } from '../constants/Actions';
 
 function* fetchCarLots(action) {
@@ -20,17 +21,6 @@ function* fetchCarLots(action) {
   } catch (err) {
     yield put(actions.carLotsActions.fetchCarLotsFail(err));
   }
-}
-
-function* fetchCarLots(action) {
-    try {
-        const start = action.payload.page*action.payload.itemsPerPage;
-        const limit = action.payload.itemsPerPage;
-        const response = yield call(axios.get, `https://jsonplaceholder.typicode.com/photos?_start=${start}&_limit=${limit}`);
-        yield put(actions.carLotsActions.fetchCarLotsSuccess(response.data));
-    } catch (err) {
-        yield put(actions.carLotsActions.fetchCarLotsFail(err));
-    }
 }
 
 function* updateWatchHouseLots(action) {
@@ -77,11 +67,11 @@ function* changeSetting(action) {
 
 function* fetchAuthKey(action) {
     try {
-        const response = yield call(axios.get('https://reqres.in/api/login', {
-            "email": action.payload.login,
-            "password": action.payload.password
-        }));
-        yield put(actions.authActions.fetchAuthKeySuccess(response.data));
+        const response = yield call(axios.post, 'https://reqres.in/api/login', {
+            email: action.payload.login,
+            password: action.payload.password
+        });
+        yield put(actions.authActions.fetchAuthKeySuccess(response));
     } catch (err) {
         yield put(actions.authActions.fetchAuthKeyFail(err));
     }

@@ -1,8 +1,5 @@
 import React from 'react';
-import  { connect } from 'react-redux';
-import { FlatList } from 'react-native';
 
-import actions from '../actions/index';
 import AuthSignOrRegister from '../components/auth/AuthSignOrRegister';
 
 class AuthSignOrRegisterContainer extends React.Component {
@@ -12,7 +9,7 @@ class AuthSignOrRegisterContainer extends React.Component {
 
     render () {
         return (
-            <AuthSignOrRegister navigation={this.props.navigation} />
+            <AuthSignOrRegister />
         );
     }
 }
