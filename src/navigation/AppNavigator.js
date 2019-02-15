@@ -3,12 +3,12 @@ import { createSwitchNavigator } from 'react-navigation';
 import MainTabNavigator from './MainTabNavigator';
 import AuthNavigator from './AuthNavigator';
 
-export default AppNavigator = createSwitchNavigator(
+export default createSwitchNavigator(
   {
     App: MainTabNavigator,
-    Auth: AuthNavigator
+    Auth: AuthNavigator,
   },
   {
-    initialRouteName: 'Auth'
+    initialRouteName: 'Auth',
   }
 );

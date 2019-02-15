@@ -3,11 +3,11 @@ import AuthSignOrRegisterContainer from '../containers/AuthSignOrRegisterContain
 
 class AuthSignOrRegisterScreen extends React.Component {
   static navigationOptions = {
-    title: 'Welcome'
+    title: 'Welcome',
   };
 
   render() {
-    return <AuthSignOrRegisterContainer navigation={this.props.navigation} />
+    return <AuthSignOrRegisterContainer />;
   }
 }
 

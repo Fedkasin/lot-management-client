@@ -23,20 +23,20 @@ class CarLotsContainer extends PureComponent {
     onFetchCarLots(page + 1, itemsPerPage);
   }
 
-  render () {
-    if (!this.props.carLots.length) {
-          return <BgMessage text = 'There is no cars'/>
+  render() {
+    const { carLots, isFetching } = this.props;
+    if (!carLots.length) {
+      return <BgMessage text="There is no cars" />;
     }
     return (
-          <FlatList
-              data={this.props.carLots}
-              renderItem={({item}) => <CarLotCard item={item}></CarLotCard>}
-              keyExtractor={item => item.id.toString()}
-              onEndReached={this.handleScrollEnd}
-              onEndReachedThreshold={1}
-              refreshing={this.props.isFetching}
-              >
-          </FlatList>
+      <FlatList
+        data={carLots}
+        renderItem={({ item }) => <CarLotCard item={item} />}
+        keyExtractor={item => item.id.toString()}
+        onEndReached={this.handleScrollEnd}
+        onEndReachedThreshold={1}
+        refreshing={isFetching}
+      />
     );
   }
 }

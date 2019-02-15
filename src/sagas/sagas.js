@@ -4,12 +4,12 @@ import axios from 'axios';
 
 import actions from '../actions/index';
 import {
-    FETCH_CAR_LOTS,
-    FETCH_SETTINGS,
-    FETCH_HOUSE_LOTS,
-    FETCH_AUTH_KEY,
-    UPDATE_HOUSE_WATCH_LOTS,
-    CHANGE_SETTING,
+  FETCH_CAR_LOTS,
+  FETCH_SETTINGS,
+  FETCH_HOUSE_LOTS,
+  FETCH_AUTH_KEY,
+  UPDATE_HOUSE_WATCH_LOTS,
+  CHANGE_SETTING,
 } from '../constants/Actions';
 
 function* fetchCarLots(action) {
@@ -66,15 +66,15 @@ function* changeSetting(action) {
 }
 
 function* fetchAuthKey(action) {
-    try {
-        const response = yield call(axios.post, 'https://reqres.in/api/login', {
-            email: action.payload.login,
-            password: action.payload.password
-        });
-        yield put(actions.authActions.fetchAuthKeySuccess(response));
-    } catch (err) {
-        yield put(actions.authActions.fetchAuthKeyFail(err));
-    }
+  try {
+    const response = yield call(axios.post, 'https://reqres.in/api/login', {
+      email: action.payload.login,
+      password: action.payload.password,
+    });
+    yield put(actions.authActions.fetchAuthKeySuccess(response));
+  } catch (err) {
+    yield put(actions.authActions.fetchAuthKeyFail(err));
+  }
 }
 
 export function* changeSettingSaga() {
@@ -98,5 +98,5 @@ export function* fetchSettingsSaga() {
 }
 
 export function* fetchAuthKeySaga() {
-    yield takeLatest(FETCH_AUTH_KEY, fetchAuthKey);
+  yield takeLatest(FETCH_AUTH_KEY, fetchAuthKey);
 }

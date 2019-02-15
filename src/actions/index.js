@@ -21,41 +21,36 @@ import {
 } from './settingsActionCreators';
 
 import {
-    setAddr,
-} from './rootActionCreators';
+  fetchAuthKey,
+  fetchAuthKeySuccess,
+  fetchAuthKeyFail,
+} from './authActionCreators';
 
-import {
+export default {
+  rootActions: {
+  },
+  carLotsActions: {
+    fetchCarLots,
+    fetchCarLotsSuccess,
+    fetchCarLotsFail,
+  },
+  houseLotsActions: {
+    updateHouseWatchLots,
+    updateHouseWatchLotsSuccess,
+    updateHouseWatchLotsFail,
+    fetchHouseLots,
+    fetchHouseLotsSuccess,
+    fetchHouseLotsFail,
+  },
+  settingsActions: {
+    fetchSettings,
+    fetchSettingsSuccess,
+    fetchSettingsFail,
+    changeSetting,
+  },
+  authActions: {
     fetchAuthKey,
     fetchAuthKeySuccess,
     fetchAuthKeyFail,
-} from './authActionCreators';
-
- export default {
-    rootActions: {
-        setAddr,
-    },
-    carLotsActions: {
-        fetchCarLots,
-        fetchCarLotsSuccess,
-        fetchCarLotsFail,
-    },
-    houseLotsActions: {
-        updateHouseWatchLots,
-        updateHouseWatchLotsSuccess,
-        updateHouseWatchLotsFail,
-        fetchHouseLots,
-        fetchHouseLotsSuccess,
-        fetchHouseLotsFail,
-    },
-    settingsActions: {
-        fetchSettings,
-        fetchSettingsSuccess,
-        fetchSettingsFail,
-        changeSetting,
-    },
-    authActions: {
-        fetchAuthKey,
-        fetchAuthKeySuccess,
-        fetchAuthKeyFail,
-    }
- }
+  },
+};

@@ -16,12 +16,12 @@ import actions from './actions/index';
 import AppNavigator from './navigation/AppNavigator';
 import reducers from './reducers/index';
 import {
-    fetchCarLotsSaga,
-    fetchHouseLotsSaga,
-    fetchSettingsSaga,
-    fetchAuthKeySaga,
-    udateWatchHouseLotsSaga,
-    changeSettingSaga
+  fetchCarLotsSaga,
+  fetchHouseLotsSaga,
+  fetchSettingsSaga,
+  fetchAuthKeySaga,
+  udateWatchHouseLotsSaga,
+  changeSettingSaga,
 } from './sagas/sagas';
 
 const styles = StyleSheet.create({

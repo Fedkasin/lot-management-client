@@ -3,11 +3,11 @@ import AuthFormContainer from '../containers/AuthFormContainer';
 
 class AuthFormScreen extends React.Component {
   static navigationOptions = {
-    title: 'Welcome'
+    title: 'Welcome',
   };
 
   render() {
-    return <AuthFormContainer navigation={this.props.navigation} />
+    return <AuthFormContainer />;
   }
 }
 
