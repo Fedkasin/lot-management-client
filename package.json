@@ -50,5 +50,7 @@
     "npm": "<=6.7.0",
     "yarn": "<=1.13.0"
   },
-  "pre-commit": ".githooks/pre-commit"
+  "pre-commit": {
+    "run": "lint"
+  }
 }
