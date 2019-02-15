@@ -26,7 +26,7 @@ class CarLotsContainer extends PureComponent {
   render() {
     const { carLots, isFetching } = this.props;
     if (!carLots.length) {
-      return <BgMessage text="There are no cars" />;
+      return <BgMessage text="There is no cars" />;
     }
     return (
       <FlatList

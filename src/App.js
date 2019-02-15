@@ -19,6 +19,7 @@ import {
   fetchCarLotsSaga,
   fetchHouseLotsSaga,
   fetchSettingsSaga,
+  fetchAuthKeySaga,
   udateWatchHouseLotsSaga,
   changeSettingSaga,
 } from './sagas/sagas';
@@ -32,8 +33,10 @@ const styles = StyleSheet.create({
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(reducers,
-  applyMiddleware(sagaMiddleware));
+const store = createStore(
+  reducers,
+  applyMiddleware(sagaMiddleware)
+);
 
 const getPushToken = async () => {
   const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
@@ -53,6 +56,7 @@ sagaMiddleware.run(udateWatchHouseLotsSaga);
 sagaMiddleware.run(fetchCarLotsSaga);
 sagaMiddleware.run(fetchHouseLotsSaga);
 sagaMiddleware.run(fetchSettingsSaga);
+sagaMiddleware.run(fetchAuthKeySaga);
 
 class App extends React.Component {
   state = {

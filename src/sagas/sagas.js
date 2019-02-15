@@ -7,6 +7,7 @@ import {
   FETCH_CAR_LOTS,
   FETCH_SETTINGS,
   FETCH_HOUSE_LOTS,
+  FETCH_AUTH_KEY,
   UPDATE_HOUSE_WATCH_LOTS,
   CHANGE_SETTING,
 } from '../constants/Actions';
@@ -64,6 +65,18 @@ function* changeSetting(action) {
   }
 }
 
+function* fetchAuthKey(action) {
+  try {
+    const response = yield call(axios.post, 'https://reqres.in/api/login', {
+      email: action.payload.login,
+      password: action.payload.password,
+    });
+    yield put(actions.authActions.fetchAuthKeySuccess(response));
+  } catch (err) {
+    yield put(actions.authActions.fetchAuthKeyFail(err));
+  }
+}
+
 export function* changeSettingSaga() {
   yield takeLatest(CHANGE_SETTING, changeSetting);
 }
@@ -82,4 +95,8 @@ export function* fetchHouseLotsSaga() {
 
 export function* fetchSettingsSaga() {
   yield takeLatest(FETCH_SETTINGS, fetchSettings);
+}
+
+export function* fetchAuthKeySaga() {
+  yield takeLatest(FETCH_AUTH_KEY, fetchAuthKey);
 }

@@ -20,6 +20,12 @@ import {
   changeSetting,
 } from './settingsActionCreators';
 
+import {
+  fetchAuthKey,
+  fetchAuthKeySuccess,
+  fetchAuthKeyFail,
+} from './authActionCreators';
+
 export default {
   rootActions: {
   },
@@ -41,5 +47,10 @@ export default {
     fetchSettingsSuccess,
     fetchSettingsFail,
     changeSetting,
+  },
+  authActions: {
+    fetchAuthKey,
+    fetchAuthKeySuccess,
+    fetchAuthKeyFail,
   },
 };
