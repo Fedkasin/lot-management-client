@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { FlatList } from 'react-native';
+import { FlatList, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 
 import actions from '../actions/index';
@@ -25,9 +25,8 @@ class CarLotsContainer extends PureComponent {
 
   render() {
     const { carLots, isFetching } = this.props;
-    if (!carLots.length) {
-      return <BgMessage text="There is no cars" />;
-    }
+    if (!carLots.length && isFetching) return <ActivityIndicator size="large" color="#0000ff" />;
+    if (!carLots.length && !isFetching) return <BgMessage text="There is no cars" />;
     return (
       <FlatList
         data={carLots}

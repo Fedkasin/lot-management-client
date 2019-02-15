@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { FlatList } from 'react-native';
+import { FlatList, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 
 import HouseLotCard from '../components/house/HouseLotCard';
@@ -9,9 +9,8 @@ import BgMessage from '../components/bgmessage/BackgroundMessage';
 class HouseWatchLotsContainer extends React.Component {
   render() {
     const { isFetching, houseLots } = this.props;
-    if (!houseLots.length) {
-      return <BgMessage text="There are no new houses" />;
-    }
+    if (!houseLots.length && isFetching) return <ActivityIndicator size="large" color="#0000ff" />;
+    if (!houseLots.length && !isFetching) return <BgMessage text="There are no new houses" />;
     return (
       <FlatList
         data={houseLots}
