@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import {
-  StyleSheet, Text, View, Button, TextInput,
+  StyleSheet, Text, View, Button, TextInput, ActivityIndicator,
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
@@ -65,7 +65,8 @@ class AuthForm extends PureComponent {
   }
 
   render() {
-    const { error } = this.props;
+    const { isFetching, error } = this.props;
+    if (isFetching) return <ActivityIndicator size="large" color="#0000ff" style={{ flex: 1 }} />;
     return (
       <View style={styles.container}>
         <View style={styles.bgButton}>
@@ -118,6 +119,7 @@ AuthForm.propTypes = {
   navigation: PropTypes.objectOf(PropTypes.any).isRequired,
   onFetchAuthKey: PropTypes.func.isRequired,
   error: PropTypes.objectOf(PropTypes.any).isRequired,
+  isFetching: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(AuthForm));
