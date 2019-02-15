@@ -46,6 +46,7 @@ class SettingChildSelect extends React.PureComponent {
         <Text style={styles.label}>{child.label}</Text>
         <RNPickerSelect
           placeholder={{}}
+          onValueChange={() => {}}
           items={child.options.map(opt => ({ label: opt, value: opt }))}
           style={styles.pickerSelectStyle}
           value={child.value}

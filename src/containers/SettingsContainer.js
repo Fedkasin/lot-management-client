@@ -117,6 +117,9 @@ class SettingsContainer extends React.Component {
             ],
             singleSelects: [],
           },
+          buttons: [],
+          checkboxes: [],
+          inputs: [],
         },
       },
       {
@@ -141,6 +144,9 @@ class SettingsContainer extends React.Component {
             ],
             singleSelects: [],
           },
+          buttons: [],
+          checkboxes: [],
+          inputs: [],
         },
       },
     ];
@@ -216,8 +222,8 @@ SettingsContainer.propTypes = {
       })),
       checkboxes: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string.isRequired,
-        options: PropTypes.arrayOf(PropTypes.string).isRequired,
-        value: PropTypes.string,
+        options: PropTypes.arrayOf(PropTypes.string),
+        value: PropTypes.bool,
         label: PropTypes.string.isRequired,
       })),
       inputs: PropTypes.arrayOf(PropTypes.shape({
