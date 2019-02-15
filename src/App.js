@@ -15,14 +15,7 @@ import { Provider } from 'react-redux';
 import actions from './actions/index';
 import AppNavigator from './navigation/AppNavigator';
 import reducers from './reducers/index';
-import {
-  fetchCarLotsSaga,
-  fetchHouseLotsSaga,
-  fetchSettingsSaga,
-  fetchAuthKeySaga,
-  udateWatchHouseLotsSaga,
-  changeSettingSaga,
-} from './sagas/sagas';
+import rootSaga from './sagas/root';
 
 const styles = StyleSheet.create({
   container: {
@@ -51,12 +44,7 @@ const getPushToken = async () => {
   return Notifications.getExpoPushTokenAsync();
 };
 
-sagaMiddleware.run(changeSettingSaga);
-sagaMiddleware.run(udateWatchHouseLotsSaga);
-sagaMiddleware.run(fetchCarLotsSaga);
-sagaMiddleware.run(fetchHouseLotsSaga);
-sagaMiddleware.run(fetchSettingsSaga);
-sagaMiddleware.run(fetchAuthKeySaga);
+sagaMiddleware.run(rootSaga);
 
 class App extends React.Component {
   state = {
