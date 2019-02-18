@@ -6,6 +6,7 @@ import {
 import ErrorContainer from '../core/ErrorContainer';
 import IcoButton from '../core/IcoButton';
 import IonIcon from '../core/IonIcon';
+import IcoButton from '../core/IcoButton';
 
 const styles = StyleSheet.create({
   container: {
