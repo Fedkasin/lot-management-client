@@ -1,8 +1,9 @@
-export const SETTINGS = 'SETTINGS';
-export const CAR_LOTS = 'CAR_LOTS';
-export const HOUSE_LOTS = 'HOUSE_LOTS';
-export const HOUSE_WATCH_LOTS = 'HOUSE_WATCH_LOTS';
-export const AUTH_SIGN_OR_REGISTER = 'AUTH_SIGN_OR_REGISTER';
-export const AUTH_FORM = 'AUTH_FORM';
-export const APP = 'APP';
-export const AUTH = 'AUTH';
+export const SETTINGS_SCREEN = 'SETTINGS_SCREEN';
+export const CAR_LOTS_SCREEN = 'CAR_LOTS_SCREEN';
+export const HOUSE_LOTS_SCREEN = 'HOUSE_LOTS_SCREEN';
+export const HOUSE_WATCH_LOTS_SCREEN = 'HOUSE_WATCH_LOTS_SCREEN';
+export const AUTH_SIGN_OR_REGISTER_SCREEN = 'AUTH_SIGN_OR_REGISTER_SCREEN';
+export const AUTH_FORM_SCREEN = 'AUTH_FORM_SCREEN';
+
+export const APP_STACK = 'APP_STACK';
+export const AUTH_STACK = 'AUTH_STACK';
