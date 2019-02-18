@@ -6,6 +6,7 @@ import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import actions from '../../actions/index';
+import { APP_STACK } from '../../constants/Routes';
 
 const styles = StyleSheet.create({
   container: {
@@ -48,7 +49,7 @@ class AuthForm extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     const { navigation } = this.props;
-    if (nextProps.authKey !== null) navigation.navigate('App');
+    if (nextProps.authKey !== null) navigation.navigate(APP_STACK);
   }
 
   handleClick() {
