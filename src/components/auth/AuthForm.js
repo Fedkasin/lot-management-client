@@ -3,11 +3,11 @@ import {
   compose, withHandlers, withState,
 } from 'recompose';
 import {
-  StyleSheet, Text, View, TextInput, TouchableOpacity, Platform, Button,
+  StyleSheet, Text, View, TextInput, Button,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import ErrorContainer from '../core/ErrorContainer';
-import ButtonIcon from '../core/ButtonIcon';
+import IcoButton from '../core/IcoButton';
 
 const styles = StyleSheet.create({
   container: {
@@ -18,21 +18,9 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#fff',
   },
-  bgButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
+  bgContainer: {
     width: '100%',
-  },
-  button: {
     alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    width: '90%',
-    height: 50,
-    marginTop: 20,
-    borderColor: '#000',
-    borderWidth: 1,
-    borderRadius: 9,
   },
   colorSuccess: {
     backgroundColor: '#28a745',
@@ -80,6 +68,8 @@ const styles = StyleSheet.create({
     borderRadius: 9,
     padding: 5,
     fontSize: 20,
+    marginTop: 0,
+    marginBottom: 20,
   },
 });
 
@@ -91,7 +81,7 @@ class AuthForm extends PureComponent {
 
     return (
       <View style={styles.container}>
-        <View style={styles.bgButton}>
+        <View style={styles.bgContainer}>
           <Text style={styles.text}>E-mail</Text>
           <TextInput
             autoFocus
@@ -102,7 +92,7 @@ class AuthForm extends PureComponent {
             style={[styles.input, styles.colorLight]}
           />
         </View>
-        <View style={styles.bgButton}>
+        <View style={styles.bgContainer}>
           <Text style={styles.text}>Password</Text>
           <TextInput
             secureTextEntry
@@ -116,15 +106,15 @@ class AuthForm extends PureComponent {
         <Text style={styles.error}>
           { error }
         </Text>
-        <View style={styles.bgButton}>
-          <TouchableOpacity onPress={this.handleClick} style={[styles.button, styles.colorInfo]}>
-            <ButtonIcon
-              name={Platform.OS === 'ios' ? 'ios-checkmark' : 'md-checkmark'}
-              color="#f8f9fa"
-            />
-            <Text style={[styles.text, styles.textLight]}>Log In</Text>
-          </TouchableOpacity>
-        </View>
+        <IcoButton
+          text="Log In"
+          color="#28a745"
+          onPress={this.handleClick}
+          textColor="#f8f9fa"
+          iconColor="#f8f9fa"
+          iosIcon="ios-checkmark"
+          otherIcon="md-checkmark"
+        />
       </View>
     );
   }

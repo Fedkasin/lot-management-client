@@ -4,7 +4,8 @@ import {
   StyleSheet, Text, View, TouchableOpacity, Platform, Button,
 } from 'react-native';
 import ErrorContainer from '../core/ErrorContainer';
-import ButtonIcon from '../core/ButtonIcon';
+import IcoButton from '../core/IcoButton';
+import IonIcon from '../core/IonIcon';
 
 const styles = StyleSheet.create({
   container: {
@@ -14,21 +15,6 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     backgroundColor: '#fff',
-  },
-  bgButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-  },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    width: '90%',
-    height: 50,
-    borderColor: '#000',
-    borderWidth: 1,
-    borderRadius: 9,
   },
   colorSuccess: {
     backgroundColor: '#28a745',
@@ -75,7 +61,7 @@ class AuthSignOrRegister extends PureComponent {
         <View style={styles.bgButton}>
           <Button title="Sign In With Google" onPress={onSignIn} />
           <TouchableOpacity onPress={this.login} style={[styles.button, styles.colorSuccess, styles.textLight]}>
-            <ButtonIcon
+            <IonIcon
               name={Platform.OS === 'ios' ? 'ios-key' : 'md-key'}
               color="#f8f9fa"
             />
@@ -86,7 +72,7 @@ class AuthSignOrRegister extends PureComponent {
         <View style={styles.bgButton}>
           <Button title="Sign Up" onPress={onSignUp} />
           <TouchableOpacity onPress={this.regist} style={styles.button}>
-            <ButtonIcon
+            <IonIcon
               name={Platform.OS === 'ios' ? 'ios-create' : 'md-create'}
               color="#343a40"
             />
@@ -94,6 +80,25 @@ class AuthSignOrRegister extends PureComponent {
           </TouchableOpacity>
         </View>
         { authError && <ErrorContainer error={authError} /> }
+        <IcoButton
+          text="SIGN IN"
+          color="#28a745"
+          onPress={this.login}
+          textColor="#f8f9fa"
+          iconColor="#f8f9fa"
+          iosIcon="ios-key"
+          otherIcon="md-key"
+        />
+        <Text style={styles.text}>or</Text>
+        <IcoButton
+          text="SIGN UP"
+          color="#fff"
+          onPress={this.regist}
+          textColor="#343a40"
+          iconColor="#343a40"
+          iosIcon="ios-create"
+          otherIcon="md-create"
+        />
       </View>
     );
   }
