@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
 import {
-  StyleSheet, Text, View, Button, TextInput, ActivityIndicator,
+  StyleSheet, Text, View, TextInput, ActivityIndicator, TouchableOpacity, Platform,
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import actions from '../../actions/index';
+import ButtonIcon from '../core/ButtonIcon';
 
 const styles = StyleSheet.create({
   container: {
@@ -14,24 +15,70 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: '100%',
     width: '100%',
+    backgroundColor: '#fff',
   },
   bgButton: {
-    textAlign: 'center',
-    width: '75%',
-    margin: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+  },
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    width: '90%',
+    height: 50,
+    marginTop: 20,
+    borderColor: '#000',
+    borderWidth: 1,
+    borderRadius: 9,
+  },
+  colorSuccess: {
+    backgroundColor: '#28a745',
+  },
+  colorPrimary: {
+    backgroundColor: '#007bff',
+  },
+  colorSecondary: {
+    backgroundColor: '#6c757d',
+  },
+  colorInfo: {
+    backgroundColor: '#17a2b8',
+  },
+  colorWarning: {
+    backgroundColor: '#ffc107',
+  },
+  colorDanger: {
+    backgroundColor: '#dc3545',
+  },
+  colorLight: {
+    backgroundColor: '#f8f9fa',
+  },
+  colorDark: {
+    backgroundColor: '#343a40',
+  },
+  textLight: {
+    color: '#f8f9fa',
+  },
+  textDark: {
+    color: '#343a40',
   },
   text: {
     fontSize: 26,
+    textAlign: 'center',
+    margin: 20,
   },
   error: {
     color: '#f00',
   },
   input: {
-    height: 35,
-    width: '100%',
+    height: 50,
+    width: '90%',
     borderColor: '#000',
     borderWidth: 1,
+    borderRadius: 9,
     padding: 5,
+    fontSize: 20,
   },
 });
 
@@ -77,7 +124,7 @@ class AuthForm extends PureComponent {
             placeholder="your e-mail"
             maxLength={20}
             textContentType="emailAddress"
-            style={styles.input}
+            style={[styles.input, styles.colorLight]}
           />
         </View>
         <View style={styles.bgButton}>
@@ -86,13 +133,21 @@ class AuthForm extends PureComponent {
             secureTextEntry
             onEndEditing={this.handlePassword}
             placeholder="8 symbols at least"
-            style={styles.input}
+            style={[styles.input, styles.colorLight]}
           />
         </View>
         <Text style={styles.error}>
           { error }
         </Text>
-        <Button title="Log In" onPress={this.handleClick} />
+        <View style={styles.bgButton}>
+          <TouchableOpacity onPress={this.handleClick} style={[styles.button, styles.colorInfo]}>
+            <ButtonIcon
+              name={Platform.OS === 'ios' ? 'ios-checkmark' : 'md-checkmark'}
+              color="#f8f9fa"
+            />
+            <Text style={[styles.text, styles.textLight]}>Log In</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
