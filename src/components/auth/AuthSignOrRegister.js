@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import {
   StyleSheet, Text, View, Alert, Button,
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import withNavigation from 'react-navigation';
+import AUTH_FORM from '../../constants/Routes';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,7 +33,7 @@ class AuthSignOrRegister extends React.Component {
 
   login() {
     const { navigation } = this.props;
-    navigation.navigate('AuthFormScreen');
+    navigation.navigate(AUTH_FORM);
   }
 
   regist() {
