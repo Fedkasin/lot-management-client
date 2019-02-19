@@ -27,10 +27,10 @@ function IcoButton({
       marginTop: 9,
     },
     text: {
-      fontSize: 26,
+      fontSize: 18,
       color: [textColor],
       textAlign: 'center',
-      margin: 20,
+      paddingLeft: 9,
     },
   });
   return (

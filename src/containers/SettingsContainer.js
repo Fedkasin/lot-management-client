@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ScrollView, ActivityIndicator, AsyncStorage } from 'react-native';
+import {
+  ScrollView, ActivityIndicator, AsyncStorage, Image,
+} from 'react-native';
 
 import SettingSectionItem from '../components/settings/SettingSectionItem';
 import actions from '../actions/index';
@@ -163,6 +165,10 @@ class SettingsContainer extends React.Component {
     }
     return (
       <ScrollView>
+        <Image
+          source={require('../../assets/images/bluround.svg')}
+          style={{ width: '100%' }}
+        />
         {settings.map((value, key) => (
           <SettingSectionItem
             key={value.id}
