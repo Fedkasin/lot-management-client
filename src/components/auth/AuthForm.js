@@ -6,6 +6,7 @@ import {
   StyleSheet, Text, View, TextInput, Button,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import LottieView from 'lottie-react-native';
 import ErrorContainer from '../core/ErrorContainer';
 import IcoButton from '../core/IcoButton';
 
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 26,
     textAlign: 'center',
-    margin: 20,
+    marginTop: 9,
   },
   error: {
     color: '#f00',
@@ -66,10 +67,15 @@ const styles = StyleSheet.create({
     borderColor: '#000',
     borderWidth: 1,
     borderRadius: 9,
+    opacity: 0.5,
     padding: 5,
     fontSize: 20,
     marginTop: 0,
     marginBottom: 20,
+  },
+  lottieBack: {
+    position: 'absolute',
+    width: '100%',
   },
 });
 
@@ -81,6 +87,12 @@ class AuthForm extends PureComponent {
 
     return (
       <View style={styles.container}>
+        <LottieView
+          source={require('../../../assets/animation/gradient-background.json')}
+          style={styles.lottieBack}
+          autoPlay
+          loop
+        />
         <View style={styles.bgContainer}>
           <Text style={styles.text}>E-mail</Text>
           <TextInput
