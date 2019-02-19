@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
 import {
-  StyleSheet, Text, View, TextInput, ActivityIndicator, TouchableOpacity, Platform,
+  StyleSheet, Text, View, TextInput, ActivityIndicator,
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import LottieView from 'lottie-react-native';
 import actions from '../../actions/index';
 import IcoButton from '../core/IcoButton';
 
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 26,
     textAlign: 'center',
-    margin: 20,
+    marginTop: 9,
   },
   error: {
     color: '#f00',
@@ -65,10 +66,15 @@ const styles = StyleSheet.create({
     borderColor: '#000',
     borderWidth: 1,
     borderRadius: 9,
+    opacity: 0.5,
     padding: 5,
     fontSize: 20,
     marginTop: 0,
     marginBottom: 20,
+  },
+  lottieBack: {
+    position: 'absolute',
+    width: '100%',
   },
 });
 
@@ -106,6 +112,12 @@ class AuthForm extends PureComponent {
     if (isFetching) return <ActivityIndicator size="large" color="#0000ff" style={{ flex: 1 }} />;
     return (
       <View style={styles.container}>
+        <LottieView
+          source={require('../../../assets/animation/gradient-background.json')}
+          style={styles.lottieBack}
+          autoPlay
+          loop
+        />
         <View style={styles.bgContainer}>
           <Text style={styles.text}>E-mail</Text>
           <TextInput

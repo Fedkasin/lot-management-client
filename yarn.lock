@@ -5924,6 +5924,16 @@ lottie-react-native@2.5.0:
     prop-types "^15.5.10"
     react-native-safe-module "^1.1.0"
 
+lottie-react-native@^2.5.11:
+  version "2.5.11"
+  resolved "https://registry.yarnpkg.com/lottie-react-native/-/lottie-react-native-2.5.11.tgz#95771a0eadf75847a50f627ec43740dcbe5c5870"
+  integrity sha512-RIDBEQJQy8lxqTyulpd3xaxmlibYy1j+4iVekX3AjjA2imrM5EIggCNxZhnjqu4HuTYC1/KylaQihIfWCRwuRw==
+  dependencies:
+    invariant "^2.2.2"
+    lottie-ios "^2.5.0"
+    prop-types "^15.5.10"
+    react-native-safe-module "^1.1.0"
+
 lowercase-keys@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/lowercase-keys/-/lowercase-keys-1.0.0.tgz#4e3366b39e7f5457e35f1324bdf6f88d0bfc7306"
