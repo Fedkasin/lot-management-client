@@ -113,7 +113,7 @@ class AuthForm extends PureComponent {
     return (
       <View style={styles.container}>
         <LottieView
-          source={require('../../../assets/animation/gradient-background.json')}
+          source={require('../../../assets/animation/world-map.json')}
           style={styles.lottieBack}
           autoPlay
           loop

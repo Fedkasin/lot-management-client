@@ -80,10 +80,10 @@ class AuthSignOrRegister extends React.Component {
           source={require('../../../assets/animation/house.json')}
           style={styles.lottieLogo}
           autoPlay
-          loop
+          loop={false}
         />
         <IcoButton
-          text="SIGN IN"
+          text="Sign in"
           color="#28a745"
           onPress={this.login}
           textColor="#f8f9fa"
@@ -93,7 +93,7 @@ class AuthSignOrRegister extends React.Component {
         />
         <Text style={styles.text}>or</Text>
         <IcoButton
-          text="SIGN UP"
+          text="Sign up"
           color="#fff"
           onPress={this.regist}
           textColor="#343a40"
