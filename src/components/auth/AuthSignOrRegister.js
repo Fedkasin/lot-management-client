@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import {
   StyleSheet, Text, View, TouchableOpacity, Platform, Button,
 } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import ErrorContainer from '../core/ErrorContainer';
 import IcoButton from '../core/IcoButton';
 import IonIcon from '../core/IonIcon';
+import LottieView from 'lottie-react-native';
 import IcoButton from '../core/IcoButton';
 
 const styles = StyleSheet.create({
@@ -52,6 +54,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 20,
   },
+  lottieLogo: {
+    width: '100%',
+    marginTop: -60,
+    marginBottom: -30,
+  },
 });
 
 class AuthSignOrRegister extends PureComponent {
@@ -81,6 +88,12 @@ class AuthSignOrRegister extends PureComponent {
           </TouchableOpacity>
         </View>
         { authError && <ErrorContainer error={authError} /> }
+        <LottieView
+          source={require('../../../assets/animation/house.json')}
+          style={styles.lottieLogo}
+          autoPlay
+          loop
+        />
         <IcoButton
           text="SIGN IN"
           color="#28a745"
