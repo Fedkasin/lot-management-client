@@ -7,7 +7,6 @@ import RNPickerSelect from 'react-native-picker-select';
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 30,
     backgroundColor: '#fff',
     justifyContent: 'center',
     paddingHorizontal: 10,
@@ -17,17 +16,14 @@ const styles = StyleSheet.create({
     flex: 1,
     fontFamily: 'sans',
     fontSize: 20,
-    padding: 5,
-    textAlign: 'center',
+    paddingLeft: 9,
+    textAlign: 'left',
   },
   pickerSelectStyle: {
     fontSize: 16,
-    paddingTop: 13,
+    paddingTop: 9,
     paddingHorizontal: 10,
     paddingBottom: 12,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 4,
     backgroundColor: 'white',
     color: 'black',
   },
@@ -38,19 +34,38 @@ const styles = StyleSheet.create({
   },
 });
 
+const pickerStyle = {
+  inputIOS: {
+    color: '#131313',
+    paddingTop: 9,
+    paddingHorizontal: 10,
+    paddingBottom: 9,
+  },
+  inputAndroid: {
+    color: '#131313',
+  },
+  placeholderColor: '#131313',
+  underline: { borderTopWidth: 0 },
+};
+
 class SettingChildSelect extends React.PureComponent {
   render() {
     const { child } = this.props;
     return (
       <View style={styles.container}>
         <Text style={styles.label}>{child.label}</Text>
-        <RNPickerSelect
-          placeholder={{}}
-          onValueChange={() => {}}
-          items={child.options.map(opt => ({ label: opt, value: opt }))}
-          style={styles.pickerSelectStyle}
-          value={child.value}
-        />
+        <View style={{
+          height: 40, borderWidth: 1, borderColor: '#999', borderRadius: 5, marginBottom: 9, justifyContent: 'center',
+        }}
+        >
+          <RNPickerSelect
+            placeholder={{}}
+            onValueChange={() => {}}
+            items={child.options.map(opt => ({ label: opt, value: opt }))}
+            style={pickerStyle}
+            value={child.value}
+          />
+        </View>
       </View>
     );
   }
