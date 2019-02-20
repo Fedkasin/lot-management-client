@@ -3,21 +3,20 @@ import HouseLotsContainer from '../containers/HouseLotsContainer';
 import TopBarButton from '../components/core/TopBarButton';
 
 class HouseLotsScreen extends React.Component {
-    static navigationOptions = {
-      title: 'Houses',
-      headerRight: (
-        <TopBarButton
-          onPress={() => alert('This is a button!')}
-          iconColor="#131313"
-          iosIcon="ios-options"
-          otherIcon="md-options"
-        />
-      ),
-    };
+  static navigationOptions = {
+    title: 'Houses',
+    headerRight: (
+      <TopBarButton
+        iconColor="#131313"
+        iosIcon="ios-options"
+        otherIcon="md-options"
+      />
+    ),
+  };
 
-    render() {
-      return <HouseLotsContainer />;
-    }
+  render() {
+    return <HouseLotsContainer />;
+  }
 }
 
 export default HouseLotsScreen;
