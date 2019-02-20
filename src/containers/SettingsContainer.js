@@ -174,10 +174,10 @@ class SettingsContainer extends React.Component {
     }
     return (
       <ScrollView style={{ backgroundColor: '#fff' }}>
-        <View style={{ alignItems: 'center', marginTop: -550, marginBottom: 90 }}>
+        <View style={{ alignItems: 'center', marginTop: -550, marginBottom: 110 }}>
           <View
             style={{
-              zIndex: 1, width: '200%', height: 800, backgroundColor: '#e2e2e2', borderRadius: 100000,
+              zIndex: 1, width: '200%', height: 800, backgroundColor: '#efefef', borderRadius: 100000,
             }}
           />
           <Text style={{
