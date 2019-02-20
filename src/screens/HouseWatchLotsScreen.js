@@ -7,7 +7,6 @@ class HouseWatchScreen extends React.Component {
       title: 'Houses (Live)',
       headerRight: (
         <TopBarButton
-          onPress={() => alert('This is a button!')}
           iconColor="#131313"
           iosIcon="ios-options"
           otherIcon="md-options"

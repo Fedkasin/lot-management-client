@@ -7,7 +7,6 @@ class CarLotsScreen extends React.Component {
     title: 'Cars',
     headerRight: (
       <TopBarButton
-        onPress={() => alert('This is a button!')}
         iconColor="#131313"
         iosIcon="ios-options"
         otherIcon="md-options"

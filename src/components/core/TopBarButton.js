@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withNavigation } from 'react-navigation';
 import {
   StyleSheet, TouchableOpacity, Platform,
 } from 'react-native';
 import IonIcon from './IonIcon';
 
 function TopBarButton({
-  onPress, iconColor, iosIcon, otherIcon,
+  iconColor, iosIcon, otherIcon, navigation,
 }) {
   const styles = StyleSheet.create({
     button: {
@@ -18,7 +19,7 @@ function TopBarButton({
     },
   });
   return (
-    <TouchableOpacity onPress={onPress} style={styles.button}>
+    <TouchableOpacity onPress={() => navigation.navigate('Filter')} style={styles.button}>
       <IonIcon
         name={Platform.OS === 'ios' ? iosIcon : otherIcon}
         color={iconColor}
@@ -28,10 +29,10 @@ function TopBarButton({
 }
 
 TopBarButton.propTypes = {
-  onPress: PropTypes.func.isRequired,
+  navigation: PropTypes.objectOf(PropTypes.any).isRequired,
   iconColor: PropTypes.string.isRequired,
   iosIcon: PropTypes.string.isRequired,
   otherIcon: PropTypes.string.isRequired,
 };
 
-export default TopBarButton;
+export default withNavigation(TopBarButton);

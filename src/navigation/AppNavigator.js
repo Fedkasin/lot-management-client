@@ -1,5 +1,4 @@
 import { createSwitchNavigator, createAppContainer } from 'react-navigation';
-
 import AppStackNavigator from './AppStackNavigator';
 import AuthStackNavigator from './AuthStackNavigator';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
