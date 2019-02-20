@@ -61,11 +61,11 @@ const styles = StyleSheet.create({
     color: '#f00',
   },
   input: {
-    height: 50,
+    height: 40,
     width: '90%',
     borderColor: '#000',
     borderWidth: 1,
-    borderRadius: 9,
+    borderRadius: 5,
     opacity: 0.5,
     padding: 5,
     fontSize: 20,

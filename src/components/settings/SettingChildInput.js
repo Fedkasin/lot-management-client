@@ -28,6 +28,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     height: 40,
   },
+  input: {
+    height: 40,
+    borderColor: '#999',
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 5,
+    fontSize: 20,
+  },
 });
 
 class SettingChildInput extends React.PureComponent {
@@ -67,7 +75,7 @@ class SettingChildInput extends React.PureComponent {
         <TextInput
           name={name}
           onEndEditing={this.handleInputChange}
-          style={styles.textInputStyle}
+          style={styles.input}
           type={type}
         >
           <Text>{value}</Text>

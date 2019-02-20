@@ -14,15 +14,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+    paddingBottom: 24,
   },
   settingHeader: {
     flex: 1,
+    height: 45,
+    backgroundColor: '#efefef',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   settingHeaderText: {
-    fontSize: 32,
+    fontSize: 28,
     fontFamily: 'sans',
     textAlign: 'center',
-    padding: 10,
   },
   settingBody: {
     flex: 1,
