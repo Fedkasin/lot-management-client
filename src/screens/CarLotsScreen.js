@@ -1,9 +1,18 @@
 import React from 'react';
 import CarLotsContainer from '../containers/CarLotsContainer';
+import TopBarButton from '../components/core/TopBarButton';
 
 class CarLotsScreen extends React.Component {
   static navigationOptions = {
     title: 'Cars',
+    headerRight: (
+      <TopBarButton
+        onPress={() => alert('This is a button!')}
+        iconColor="#131313"
+        iosIcon="ios-options"
+        otherIcon="md-options"
+      />
+    ),
   };
 
   render() {
