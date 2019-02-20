@@ -1,19 +1,31 @@
-import { FETCH_AUTH_KEY, FETCH_AUTH_KEY_SUCCESS, FETCH_AUTH_KEY_FAIL } from '../constants/Actions';
+import {
+  AUTHORIZE, AUTHORIZE_SUCCESS, AUTHORIZE_FAIL, CHECK_IF_LOGGED_IN, IS_LOGGED_IN, IS_NOT_LOGGED_IN,
+} from '../constants/Actions';
 
-export const fetchAuthKey = (payload) => ({
-  type: FETCH_AUTH_KEY,
-  payload: {
-    login: payload.login,
-    password: payload.password,
-  },
+export const authorize = config => ({
+  type: AUTHORIZE,
+  payload: config,
 });
 
-export const fetchAuthKeySuccess = (data) => ({
-  type: FETCH_AUTH_KEY_SUCCESS,
+export const authorizeSuccess = data => ({
+  type: AUTHORIZE_SUCCESS,
   payload: data,
 });
 
-export const fetchAuthKeyFail = (err) => ({
-  type: FETCH_AUTH_KEY_FAIL,
+export const authorizeFail = err => ({
+  type: AUTHORIZE_FAIL,
   error: err,
+});
+
+export const checkIfLoggedIn = () => ({
+  type: CHECK_IF_LOGGED_IN,
+});
+
+export const isLoggedIn = user => ({
+  type: IS_LOGGED_IN,
+  payload: user,
+});
+
+export const isNotLoggedIn = () => ({
+  type: IS_NOT_LOGGED_IN,
 });

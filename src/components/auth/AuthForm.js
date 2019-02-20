@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react';
 import {
-  StyleSheet, Text, View, Button, TextInput, ActivityIndicator,
+  compose, withHandlers, withState,
+} from 'recompose';
+import {
+  StyleSheet, Text, View, Button, TextInput,
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import actions from '../../actions/index';
-import { APP_STACK } from '../../constants/Routes';
+
+import ErrorContainer from '../core/ErrorContainer';
 
 const styles = StyleSheet.create({
   container: {
@@ -36,45 +37,19 @@ const styles = StyleSheet.create({
   },
 });
 
-let login = null;
-let password = null;
-
 class AuthForm extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.handleLogin = this.handleLogin.bind(this);
-    this.handlePassword = this.handlePassword.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { navigation } = this.props;
-    if (nextProps.authKey !== null) navigation.navigate(APP_STACK);
-  }
-
-  handleClick() {
-    const { onFetchAuthKey } = this.props;
-    onFetchAuthKey(login, password);
-  }
-
-  handleLogin(e) {
-    login = e.nativeEvent.text;
-  }
-
-  handlePassword(e) {
-    password = e.nativeEvent.text;
-  }
-
   render() {
-    const { isFetching, error } = this.props;
-    if (isFetching) return <ActivityIndicator size="large" color="#0000ff" style={{ flex: 1 }} />;
+    const {
+      handleClick, handlePassword, handleLogin, error,
+    } = this.props;
+
     return (
       <View style={styles.container}>
         <View style={styles.bgButton}>
           <Text style={styles.text}>E-mail</Text>
           <TextInput
             autoFocus
-            onEndEditing={this.handleLogin}
+            onEndEditing={handleLogin}
             placeholder="your e-mail"
             maxLength={20}
             textContentType="emailAddress"
@@ -85,42 +60,42 @@ class AuthForm extends PureComponent {
           <Text style={styles.text}>Password</Text>
           <TextInput
             secureTextEntry
-            onEndEditing={this.handlePassword}
+            onEndEditing={handlePassword}
             placeholder="8 symbols at least"
             style={styles.input}
           />
         </View>
-        <Text style={styles.error}>
-          { error }
-        </Text>
-        <Button title="Log In" onPress={this.handleClick} />
+        { error && <ErrorContainer error={error} /> }
+        <Button title="Log In" onPress={handleClick} />
       </View>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    isFetching: state.authReducers.isFetching,
-    login: state.authReducers.login,
-    password: state.authReducers.password,
-    authKey: state.authReducers.authKey,
-    error: state.authReducers.error ? state.authReducers.error : null,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    onFetchAuthKey: (log, pass) => dispatch(actions.authActions.fetchAuthKey({ login: log, password: pass })),
-  };
-}
-
 AuthForm.propTypes = {
-  authKey: PropTypes.string.isRequired,
-  navigation: PropTypes.objectOf(PropTypes.any).isRequired,
-  onFetchAuthKey: PropTypes.func.isRequired,
-  error: PropTypes.objectOf(PropTypes.any).isRequired,
-  isFetching: PropTypes.bool.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  handlePassword: PropTypes.func.isRequired,
+  handleLogin: PropTypes.func.isRequired,
+  error: PropTypes.string,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(AuthForm));
+AuthForm.defaultProps = {
+  error: null,
+};
+
+export default compose(
+  withState('login', 'setLogin', ''),
+  withState('password', 'setPassword', ''),
+  withHandlers({
+    handleClick: props => () => {
+      const { onSignIn, login, password } = props;
+      onSignIn(login, password);
+    },
+    handleLogin: props => e => {
+      props.setLogin(e.nativeEvent.text);
+    },
+    handlePassword: props => e => {
+      props.setPassword(e.nativeEvent.text);
+    },
+  }),
+)(AuthForm);

@@ -1,35 +1,60 @@
-import { FETCH_AUTH_KEY, FETCH_AUTH_KEY_SUCCESS, FETCH_AUTH_KEY_FAIL } from '../constants/Actions';
+import {
+  AUTHORIZE,
+  AUTHORIZE_SUCCESS,
+  AUTHORIZE_FAIL,
+  CHECK_IF_LOGGED_IN,
+  IS_LOGGED_IN,
+  IS_NOT_LOGGED_IN,
+} from '../constants/Actions';
 
 const initialState = {
-  isFetching: false,
-  authKey: null,
-  login: null,
-  password: null,
+  isLogging: false,
+  isLoggedIn: false,
+  user: null,
   error: null,
 };
 
 const authReducers = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_AUTH_KEY:
+    case AUTHORIZE:
       return {
         ...state,
-        isFetching: true,
-        login: action.payload.login,
-        password: action.payload.password,
+        isLogging: true,
       };
-    case FETCH_AUTH_KEY_SUCCESS:
+    case AUTHORIZE_SUCCESS:
       return {
         ...state,
         error: null,
-        authKey: action.payload.data.token,
-        isFetching: false,
+        user: action.payload,
+        isLoggedIn: true,
+        isLogging: false,
       };
-    case FETCH_AUTH_KEY_FAIL:
+    case AUTHORIZE_FAIL:
       return {
         ...state,
-        error: action.error.response.data.error,
-        authKey: null,
-        isFetching: false,
+        error: action.error,
+        user: null,
+        isLoggedIn: false,
+        isLogging: false,
+      };
+    case CHECK_IF_LOGGED_IN:
+      return {
+        ...state,
+        isLogging: true,
+      };
+    case IS_LOGGED_IN:
+      return {
+        ...state,
+        user: action.payload,
+        isLogging: false,
+        isLoggedIn: true,
+      };
+    case IS_NOT_LOGGED_IN:
+      return {
+        ...state,
+        user: null,
+        isLogging: false,
+        isLoggedIn: false,
       };
     default:
       return state;

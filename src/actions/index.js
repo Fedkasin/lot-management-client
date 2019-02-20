@@ -21,9 +21,12 @@ import {
 } from './settingsActionCreators';
 
 import {
-  fetchAuthKey,
-  fetchAuthKeySuccess,
-  fetchAuthKeyFail,
+  authorize,
+  authorizeSuccess,
+  authorizeFail,
+  checkIfLoggedIn,
+  isLoggedIn,
+  isNotLoggedIn,
 } from './authActionCreators';
 
 export default {
@@ -49,8 +52,11 @@ export default {
     changeSetting,
   },
   authActions: {
-    fetchAuthKey,
-    fetchAuthKeySuccess,
-    fetchAuthKeyFail,
+    authorize,
+    authorizeSuccess,
+    authorizeFail,
+    checkIfLoggedIn,
+    isLoggedIn,
+    isNotLoggedIn,
   },
 };
