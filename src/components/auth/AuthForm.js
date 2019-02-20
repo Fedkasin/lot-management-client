@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import LottieView from 'lottie-react-native';
 import actions from '../../actions/index';
 import IcoButton from '../core/IcoButton';
+import { APP_STACK } from '../../constants/Routes';
 
 const styles = StyleSheet.create({
   container: {
@@ -91,7 +92,7 @@ class AuthForm extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     const { navigation } = this.props;
-    if (nextProps.authKey !== null) navigation.navigate('App');
+    if (nextProps.authKey !== null) navigation.navigate(APP_STACK);
   }
 
   handleClick() {

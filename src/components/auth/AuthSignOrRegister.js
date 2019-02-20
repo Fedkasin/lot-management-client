@@ -6,6 +6,7 @@ import {
 import { withNavigation } from 'react-navigation';
 import LottieView from 'lottie-react-native';
 import IcoButton from '../core/IcoButton';
+import { AUTH_FORM_SCREEN } from '../../constants/Routes';
 
 const styles = StyleSheet.create({
   container: {
@@ -66,7 +67,7 @@ class AuthSignOrRegister extends React.Component {
 
   login() {
     const { navigation } = this.props;
-    navigation.navigate('AuthFormScreen');
+    navigation.navigate(AUTH_FORM_SCREEN);
   }
 
   regist() {
