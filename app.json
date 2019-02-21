@@ -23,7 +23,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "example.expo.googlesignin",
+      "bundleIdentifier": "net.exp.exponent",
       "config": {
         "googleSignIn": {
           "reservedClientId": "com.googleusercontent.apps.703291837548-tnn5kk1fus8f0sj0g90oo0dhbh8eb858"
@@ -31,7 +31,7 @@
       }
     },
     "android": {
-      "package": "example.expo.googlesignin",
+      "package": "net.exp.exponent",
       "googleServicesFile": "./google-services.json"
     }
   }

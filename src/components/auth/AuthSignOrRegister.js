@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 
 class AuthSignOrRegister extends PureComponent {
   render() {
-    const { onSignIn, onSignUp, error } = this.props;
+    const { onSignIn, onSignUp, authError } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.bgButton}>
@@ -37,7 +37,7 @@ class AuthSignOrRegister extends PureComponent {
         <View style={styles.bgButton}>
           <Button title="Sign Up" onPress={onSignUp} />
         </View>
-        { error && <ErrorContainer error={error} /> }
+        { authError && <ErrorContainer error={authError} /> }
       </View>
     );
   }
@@ -46,11 +46,11 @@ class AuthSignOrRegister extends PureComponent {
 AuthSignOrRegister.propTypes = {
   onSignIn: PropTypes.func.isRequired,
   onSignUp: PropTypes.func.isRequired,
-  error: PropTypes.string,
+  authError: PropTypes.string,
 };
 
 AuthSignOrRegister.defaultProps = {
-  error: null,
+  authError: null,
 };
 
 export default AuthSignOrRegister;

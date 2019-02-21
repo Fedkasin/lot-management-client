@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 class AuthForm extends PureComponent {
   render() {
     const {
-      handleClick, handlePassword, handleLogin, error,
+      handleClick, handlePassword, handleLogin, authError,
     } = this.props;
 
     return (
@@ -65,7 +65,7 @@ class AuthForm extends PureComponent {
             style={styles.input}
           />
         </View>
-        { error && <ErrorContainer error={error} /> }
+        { authError && <ErrorContainer error={authError} /> }
         <Button title="Log In" onPress={handleClick} />
       </View>
     );
@@ -76,11 +76,11 @@ AuthForm.propTypes = {
   handleClick: PropTypes.func.isRequired,
   handlePassword: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
-  error: PropTypes.string,
+  authError: PropTypes.string,
 };
 
 AuthForm.defaultProps = {
-  error: null,
+  authError: null,
 };
 
 export default compose(

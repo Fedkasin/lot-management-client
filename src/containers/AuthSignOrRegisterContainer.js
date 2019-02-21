@@ -40,7 +40,7 @@ class AuthSignOrRegisterContainer extends PureComponent {
       return <SettingsScreen />;
     }
 
-    return <AuthSignOrRegister onSignIn={this.onSignIn} onSignUp={this.onSignUp} error={error} />;
+    return <AuthSignOrRegister onSignIn={this.onSignIn} onSignUp={this.onSignUp} authError={error} />;
   }
 }
 

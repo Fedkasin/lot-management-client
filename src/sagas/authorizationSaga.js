@@ -30,27 +30,28 @@ const onSignIn = googleUser => {
   const unsubscribe = firebase.auth().onAuthStateChanged(firebaseUser => {
     unsubscribe();
     // Check if we are already signed-in Firebase with the correct user.
-    if (!isUserEqual(googleUser, firebaseUser)) {
-      // Build Firebase credential with the Google ID token.
-      const credential = firebase.auth.GoogleAuthProvider.credential(
-        googleUser.idToken,
-        googleUser.accessToken,
-      );
-      // Sign in with credential from the Google user.
-      firebase.auth()
-        .signInAndRetrieveDataWithCredential(credential)
-        .catch(error => {
-          throw new Error(error);
-          // Handle Errors here.
-          // const errorCode = error.code;
-          // const errorMessage = error.message;
-          // // The email of the user's account used.
-          // const email = error.email;
-          // // The firebase.auth.AuthCredential type that was used.
-          // const credential = error.credential;
-          // // ...
-        });
+    if (isUserEqual(googleUser, firebaseUser)) {
+      return;
     }
+    // Build Firebase credential with the Google ID token.
+    const credential = firebase.auth.GoogleAuthProvider.credential(
+      googleUser.idToken,
+      googleUser.accessToken,
+    );
+    // Sign in with credential from the Google user.
+    firebase.auth()
+      .signInAndRetrieveDataWithCredential(credential)
+      .catch(error => {
+        throw new Error(error);
+        // Handle Errors here.
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+        // // The email of the user's account used.
+        // const email = error.email;
+        // // The firebase.auth.AuthCredential type that was used.
+        // const credential = error.credential;
+        // // ...
+      });
   });
 };
 
