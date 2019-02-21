@@ -14,7 +14,7 @@ import { Provider } from 'react-redux';
 import firebase from 'firebase';
 
 import actions from './actions/index';
-import MainAppNavigator from './navigation/MainAppNavigator';
+import AppNavigator from './navigation/AppNavigator';
 import reducers from './reducers/index';
 import rootSaga from './sagas/root';
 import { firebaseConfig } from './constants/Config';
@@ -89,7 +89,7 @@ class App extends React.Component {
           {assetsLoaded && (
           <View style={styles.container}>
             {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-            <MainAppNavigator />
+            <AppNavigator />
           </View>
           )}
         </View>
