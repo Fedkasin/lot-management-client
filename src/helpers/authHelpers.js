@@ -2,6 +2,8 @@ import firebase from 'firebase';
 import { Google } from 'expo';
 import { AsyncStorage } from 'react-native';
 
+export const getUser = () => firebase.auth().currentUser;
+
 export const isLoggedIn = loggedUser => firebase.auth().onAuthStateChanged(loggedUser);
 
 export const isUserEqual = (googleUser, firebaseUser) => {
