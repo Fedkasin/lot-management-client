@@ -7,9 +7,9 @@ import {
 } from '../constants/Actions';
 import { signInWithGoogleAsync, signOut } from '../helpers/authHelpers';
 
-function* login(action) {
+async function* login(action) {
   try {
-    const user = yield call(signInWithGoogleAsync, action.payload);
+    const user = await signInWithGoogleAsync(action.payload);
     yield put(actions.authActions.loginSuccess(user));
   } catch (err) {
     yield put(actions.authActions.loginFail(err));

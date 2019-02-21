@@ -9,7 +9,6 @@ import {
 
 const initialState = {
   isLogging: false,
-  isLoggedIn: false,
   user: null,
   error: null,
 };
@@ -26,12 +25,14 @@ const authReducers = (state = initialState, action) => {
         ...state,
         error: null,
         user: action.payload,
+        isLogging: false,
       };
     case LOGIN_FAIL:
       return {
         ...state,
         error: action.error,
         user: null,
+        isLogging: false,
       };
     case LOGOUT:
       return {
