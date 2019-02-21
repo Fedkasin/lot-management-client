@@ -2,10 +2,12 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Alert } from 'react-native';
+import { withNavigation } from 'react-navigation';
 
 import AuthSignOrRegister from '../components/auth/AuthSignOrRegister';
 import { googleAuthorizationConfig } from '../constants/Config';
 import actions from '../actions';
+import { AUTH_LOADING } from '../constants/Routes';
 
 
 class AuthSignOrRegisterContainer extends PureComponent {
@@ -16,8 +18,9 @@ class AuthSignOrRegisterContainer extends PureComponent {
   }
 
   onSignIn() {
-    const { onSignIn } = this.props;
+    const { onSignIn, navigation } = this.props;
     onSignIn();
+    navigation.navigate(AUTH_LOADING);
   }
 
   onSignUp() {
@@ -47,6 +50,7 @@ function mapDispatchToProps(dispatch) {
 
 AuthSignOrRegisterContainer.propTypes = {
   onSignIn: PropTypes.func.isRequired,
+  navigation: PropTypes.objectOf(PropTypes.any).isRequired,
   error: PropTypes.string,
 };
 
@@ -54,4 +58,4 @@ AuthSignOrRegisterContainer.defaultProps = {
   error: null,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthSignOrRegisterContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(AuthSignOrRegisterContainer));
