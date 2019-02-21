@@ -4,6 +4,7 @@ import {
   StatusBar,
   View,
 } from 'react-native';
+import PropTypes from 'prop-types';
 
 import { APP_STACK, AUTH_STACK } from '../constants/Routes';
 import { isLoggedIn } from '../helpers/authHelpers';
@@ -34,5 +35,9 @@ class AuthLoadingScreen extends PureComponent {
     );
   }
 }
+
+AuthLoadingScreen.propTypes = {
+  navigation: PropTypes.objectOf(PropTypes.any).isRequired,
+};
 
 export default AuthLoadingScreen;
