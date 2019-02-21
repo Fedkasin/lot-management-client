@@ -14,7 +14,7 @@ import { Provider } from 'react-redux';
 import firebase from 'firebase';
 
 import actions from './actions/index';
-import MainAppNavigator from './navigation/MainAppNavigator';
+import AppNavigator from './navigation/AppNavigator';
 import reducers from './reducers/index';
 import rootSaga from './sagas/root';
 import NavigatorService from './services/navigator';

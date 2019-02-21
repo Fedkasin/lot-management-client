@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, StyleSheet, SegmentedControlIOS, Text,
+  View, StyleSheet, Text,
 } from 'react-native';
 import { ButtonGroup } from 'react-native-elements';
 import PropTypes from 'prop-types';
@@ -25,10 +25,6 @@ class SettingChildButton extends React.PureComponent {
     return (
       <View style={styles.container}>
         <Text style={styles.label}>{child.label}</Text>
-        <SegmentedControlIOS
-          values={child.options}
-          selectedIndex={child.options.indexOf(child.value)}
-        />
         <ButtonGroup
           buttons={child.options}
           selectedIndex={child.options.indexOf(child.value)}

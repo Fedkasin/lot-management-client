@@ -19,7 +19,7 @@ function TopBarButton({
     },
   });
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('Filter')} style={styles.button}>
+    <TouchableOpacity onPress={() => navigation.navigate('FILTER_SCREEN')} style={styles.button}>
       <IonIcon
         name={Platform.OS === 'ios' ? iosIcon : otherIcon}
         color={iconColor}
