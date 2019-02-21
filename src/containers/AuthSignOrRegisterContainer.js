@@ -1,14 +1,12 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Alert } from 'react-native';
+import { Alert, ActivityIndicator } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import AuthSignOrRegister from '../components/auth/AuthSignOrRegister';
 import { googleAuthorizationConfig } from '../constants/Config';
 import actions from '../actions';
-import { AUTH_LOADING } from '../constants/Routes';
-
 
 class AuthSignOrRegisterContainer extends PureComponent {
   constructor(props) {
@@ -18,9 +16,8 @@ class AuthSignOrRegisterContainer extends PureComponent {
   }
 
   onSignIn() {
-    const { onSignIn, navigation } = this.props;
+    const { onSignIn } = this.props;
     onSignIn();
-    navigation.navigate(AUTH_LOADING);
   }
 
   onSignUp() {
@@ -28,7 +25,10 @@ class AuthSignOrRegisterContainer extends PureComponent {
   }
 
   render() {
-    const { error } = this.props;
+    const { error, isLogging } = this.props;
+    if (isLogging) {
+      return <ActivityIndicator size="large" color="#0000ff" style={{ flex: 1 }} />;
+    }
     return <AuthSignOrRegister onSignIn={this.onSignIn} onSignUp={this.onSignUp} authError={error} />;
   }
 }
@@ -36,7 +36,6 @@ class AuthSignOrRegisterContainer extends PureComponent {
 function mapStateToProps(state) {
   return {
     isLogging: state.authReducers.isLogging,
-    isLoggedIn: state.authReducers.isLoggedIn,
     authToken: state.authReducers.authToken,
     error: state.authReducers.error ? state.authReducers.error : null,
   };
@@ -50,7 +49,7 @@ function mapDispatchToProps(dispatch) {
 
 AuthSignOrRegisterContainer.propTypes = {
   onSignIn: PropTypes.func.isRequired,
-  navigation: PropTypes.objectOf(PropTypes.any).isRequired,
+  isLogging: PropTypes.bool.isRequired,
   error: PropTypes.string,
 };
 
