@@ -10,6 +10,7 @@ class HouseLotsScreen extends React.Component {
         iconColor="#131313"
         iosIcon="ios-options"
         otherIcon="md-options"
+        parentScreen={this.className}
       />
     ),
   };
