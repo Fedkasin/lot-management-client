@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 import {
-  StyleSheet, Text, View, Alert, Button,
+  StyleSheet, Text, View, Button,
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
-import { AUTH_FORM_SCREEN } from '../../constants/Routes';
+import PropTypes from 'prop-types';
+
+import ErrorContainer from '../core/ErrorContainer';
 
 const styles = StyleSheet.create({
   container: {
@@ -25,38 +25,32 @@ const styles = StyleSheet.create({
   },
 });
 
-class AuthSignOrRegister extends React.Component {
-  constructor(props) {
-    super(props);
-    this.login = this.login.bind(this);
-  }
-
-  login() {
-    const { navigation } = this.props;
-    navigation.navigate(AUTH_FORM_SCREEN);
-  }
-
-  regist() {
-    Alert.alert('Sorry, this option is temporary not avalible');
-  }
-
+class AuthSignOrRegister extends PureComponent {
   render() {
+    const { onSignIn, onSignUp, authError } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.bgButton}>
-          <Button title="SIGN IN" onPress={this.login} />
+          <Button title="Sign In With Google" onPress={onSignIn} />
         </View>
         <Text style={styles.text}>OR</Text>
         <View style={styles.bgButton}>
-          <Button title="SIGN UP" onPress={this.regist} />
+          <Button title="Sign Up" onPress={onSignUp} />
         </View>
+        { authError && <ErrorContainer error={authError} /> }
       </View>
     );
   }
 }
 
 AuthSignOrRegister.propTypes = {
-  navigation: PropTypes.objectOf(PropTypes.any).isRequired,
+  onSignIn: PropTypes.func.isRequired,
+  onSignUp: PropTypes.func.isRequired,
+  authError: PropTypes.string,
 };
 
-export default withNavigation(AuthSignOrRegister);
+AuthSignOrRegister.defaultProps = {
+  authError: null,
+};
+
+export default AuthSignOrRegister;

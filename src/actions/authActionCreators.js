@@ -1,19 +1,31 @@
-import { FETCH_AUTH_KEY, FETCH_AUTH_KEY_SUCCESS, FETCH_AUTH_KEY_FAIL } from '../constants/Actions';
+import {
+  LOGIN, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL,
+} from '../constants/Actions';
 
-export const fetchAuthKey = (payload) => ({
-  type: FETCH_AUTH_KEY,
-  payload: {
-    login: payload.login,
-    password: payload.password,
-  },
+export const login = config => ({
+  type: LOGIN,
+  payload: config,
 });
 
-export const fetchAuthKeySuccess = (data) => ({
-  type: FETCH_AUTH_KEY_SUCCESS,
+export const loginSuccess = data => ({
+  type: LOGIN_SUCCESS,
   payload: data,
 });
 
-export const fetchAuthKeyFail = (err) => ({
-  type: FETCH_AUTH_KEY_FAIL,
+export const loginFail = err => ({
+  type: LOGIN_FAIL,
+  error: err,
+});
+
+export const logout = () => ({
+  type: LOGOUT,
+});
+
+export const logoutSuccess = () => ({
+  type: LOGOUT_SUCCESS,
+});
+
+export const logoutFail = err => ({
+  type: LOGOUT_FAIL,
   error: err,
 });

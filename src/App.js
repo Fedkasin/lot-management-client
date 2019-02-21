@@ -11,11 +11,13 @@ import {
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
+import firebase from 'firebase';
 
 import actions from './actions/index';
 import AppNavigator from './navigation/AppNavigator';
 import reducers from './reducers/index';
 import rootSaga from './sagas/root';
+import { firebaseConfig } from './constants/Config';
 
 const styles = StyleSheet.create({
   container: {
@@ -23,6 +25,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+
+firebase.initializeApp(firebaseConfig);
 
 const sagaMiddleware = createSagaMiddleware();
 
