@@ -6,3 +6,4 @@ export const AUTH_SIGN_OR_REGISTER_SCREEN = 'AUTH_SIGN_OR_REGISTER_SCREEN';
 
 export const APP_STACK = 'APP_STACK';
 export const AUTH_STACK = 'AUTH_STACK';
+export const AUTH_LOADING = 'AUTH_LOADING';

@@ -1,10 +1,10 @@
 import {
-  AUTHORIZE,
-  AUTHORIZE_SUCCESS,
-  AUTHORIZE_FAIL,
-  CHECK_IF_LOGGED_IN,
-  IS_LOGGED_IN,
-  IS_NOT_LOGGED_IN,
+  LOGIN,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAIL,
 } from '../constants/Actions';
 
 const initialState = {
@@ -16,45 +16,38 @@ const initialState = {
 
 const authReducers = (state = initialState, action) => {
   switch (action.type) {
-    case AUTHORIZE:
+    case LOGIN:
       return {
         ...state,
         isLogging: true,
       };
-    case AUTHORIZE_SUCCESS:
+    case LOGIN_SUCCESS:
       return {
         ...state,
         error: null,
         user: action.payload,
-        isLoggedIn: true,
-        isLogging: false,
       };
-    case AUTHORIZE_FAIL:
+    case LOGIN_FAIL:
       return {
         ...state,
         error: action.error,
         user: null,
-        isLoggedIn: false,
-        isLogging: false,
       };
-    case CHECK_IF_LOGGED_IN:
+    case LOGOUT:
       return {
         ...state,
-        isLogging: true,
       };
-    case IS_LOGGED_IN:
-      return {
-        ...state,
-        user: action.payload,
-        isLogging: false,
-        isLoggedIn: true,
-      };
-    case IS_NOT_LOGGED_IN:
+    case LOGOUT_SUCCESS:
       return {
         ...state,
         user: null,
-        isLogging: false,
-        isLoggedIn: false,
+        err: null,
+      };
+    case LOGOUT_FAIL:
+      return {
+        ...state,
+        user: null,
+        err: action.error,
       };
     default:
       return state;

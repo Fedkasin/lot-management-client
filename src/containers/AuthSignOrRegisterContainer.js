@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Alert, ActivityIndicator } from 'react-native';
+import { Alert } from 'react-native';
 
 import AuthSignOrRegister from '../components/auth/AuthSignOrRegister';
 import { googleAuthorizationConfig } from '../constants/Config';
 import actions from '../actions';
-import SettingsScreen from '../screens/SettingsScreen';
 
 
 class AuthSignOrRegisterContainer extends PureComponent {
@@ -14,11 +13,6 @@ class AuthSignOrRegisterContainer extends PureComponent {
     super(props);
 
     this.onSignIn = this.onSignIn.bind(this);
-  }
-
-  componentDidMount() {
-    const { checkIfLoggedIn } = this.props;
-    checkIfLoggedIn();
   }
 
   onSignIn() {
@@ -31,15 +25,7 @@ class AuthSignOrRegisterContainer extends PureComponent {
   }
 
   render() {
-    const { isLogging, error, isLoggedIn } = this.props;
-    if (isLogging && !isLoggedIn) {
-      return <ActivityIndicator size="large" color="#0000ff" style={{ flex: 1 }} />;
-    }
-
-    if (!isLogging && isLoggedIn) {
-      return <SettingsScreen />;
-    }
-
+    const { error } = this.props;
     return <AuthSignOrRegister onSignIn={this.onSignIn} onSignUp={this.onSignUp} authError={error} />;
   }
 }
@@ -55,16 +41,12 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onSignIn: () => dispatch(actions.authActions.authorize(googleAuthorizationConfig)),
-    checkIfLoggedIn: () => dispatch(actions.authActions.checkIfLoggedIn()),
+    onSignIn: () => dispatch(actions.authActions.login(googleAuthorizationConfig)),
   };
 }
 
 AuthSignOrRegisterContainer.propTypes = {
   onSignIn: PropTypes.func.isRequired,
-  checkIfLoggedIn: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired,
-  isLogging: PropTypes.bool.isRequired,
   error: PropTypes.string,
 };
 

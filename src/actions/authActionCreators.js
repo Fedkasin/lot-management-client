@@ -1,31 +1,31 @@
 import {
-  AUTHORIZE, AUTHORIZE_SUCCESS, AUTHORIZE_FAIL, CHECK_IF_LOGGED_IN, IS_LOGGED_IN, IS_NOT_LOGGED_IN,
+  LOGIN, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL,
 } from '../constants/Actions';
 
-export const authorize = config => ({
-  type: AUTHORIZE,
+export const login = config => ({
+  type: LOGIN,
   payload: config,
 });
 
-export const authorizeSuccess = data => ({
-  type: AUTHORIZE_SUCCESS,
+export const loginSuccess = data => ({
+  type: LOGIN_SUCCESS,
   payload: data,
 });
 
-export const authorizeFail = err => ({
-  type: AUTHORIZE_FAIL,
+export const loginFail = err => ({
+  type: LOGIN_FAIL,
   error: err,
 });
 
-export const checkIfLoggedIn = () => ({
-  type: CHECK_IF_LOGGED_IN,
+export const logout = () => ({
+  type: LOGOUT,
 });
 
-export const isLoggedIn = user => ({
-  type: IS_LOGGED_IN,
-  payload: user,
+export const logoutSuccess = () => ({
+  type: LOGOUT_SUCCESS,
 });
 
-export const isNotLoggedIn = () => ({
-  type: IS_NOT_LOGGED_IN,
+export const logoutFail = err => ({
+  type: LOGOUT_FAIL,
+  error: err,
 });

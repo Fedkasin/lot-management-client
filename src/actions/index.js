@@ -21,12 +21,12 @@ import {
 } from './settingsActionCreators';
 
 import {
-  authorize,
-  authorizeSuccess,
-  authorizeFail,
-  checkIfLoggedIn,
-  isLoggedIn,
-  isNotLoggedIn,
+  login,
+  loginSuccess,
+  loginFail,
+  logout,
+  logoutSuccess,
+  logoutFail,
 } from './authActionCreators';
 
 export default {
@@ -52,11 +52,11 @@ export default {
     changeSetting,
   },
   authActions: {
-    authorize,
-    authorizeSuccess,
-    authorizeFail,
-    checkIfLoggedIn,
-    isLoggedIn,
-    isNotLoggedIn,
+    login,
+    loginSuccess,
+    loginFail,
+    logout,
+    logoutSuccess,
+    logoutFail,
   },
 };
