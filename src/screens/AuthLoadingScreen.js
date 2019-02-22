@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import {
-  ActivityIndicator,
+  ActivityIndicator, View, StatusBar,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
