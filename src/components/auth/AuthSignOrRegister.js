@@ -1,65 +1,93 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import {
-  StyleSheet, Text, View, TouchableOpacity, Platform, Button,
+  StyleSheet, Text, View, Platform,
 } from 'react-native';
-import LottieView from 'lottie-react-native';
+import { DangerZone } from 'expo';
 import ErrorContainer from '../core/ErrorContainer';
 import IonIcon from '../core/IonIcon';
+import IcoButton from '../core/IcoButton';
+
+const { Lottie } = DangerZone;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    height: '100%',
     width: '100%',
+    marginTop: 20,
     backgroundColor: '#fff',
   },
   text: {
-    fontSize: 20,
+    fontSize: 21,
     textAlign: 'center',
-    margin: 20,
+    marginBottom: 20,
   },
   lottieLogo: {
     width: '100%',
-    marginTop: -60,
-    marginBottom: -30,
+    height: '40%',
+    marginTop: 10,
   },
 });
 
 class AuthSignOrRegister extends PureComponent {
+  componentDidMount() {
+    this.animation.play();
+  }
+
   render() {
     const { onSignIn, onSignUp, authError } = this.props;
     return (
-      <View style={styles.container}>
-        <View style={{}}>
-          <IonIcon
-            name={Platform.OS === 'ios' ? 'ios-key' : 'md-key'}
-            color="#131313"
-            style={{ marginRight: 9 }}
-          />
-          <Text style={styles.text}>
-Sign In
-          </Text>
-        </View>
-        <Text style={styles.text}>or</Text>
-        <View style={styles.bgButton}>
-          <TouchableOpacity onPress={onSignIn} style={styles.button}>
-            <IonIcon
-              name="logo-google"
-              color="#343a40"
-            />
-            <Text style={styles.text}>SIGN UP</Text>
-          </TouchableOpacity>
-        </View>
-        { authError && <ErrorContainer error={authError} /> }
-        <LottieView
+      <View style={{ alignItems: 'center' }}>
+        <Lottie
+          ref={animation => {
+            this.animation = animation;
+          }}
           source={require('../../../assets/animation/house.json')}
-          style={styles.lottieLogo}
           autoPlay
           loop={false}
+          style={styles.lottieLogo}
         />
+        <View style={{
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'row',
+          width: '80%',
+          height: 50,
+        }}
+        >
+          <Text style={[styles.text, { marginTop: 20 }]}>Please log in using one of your existing accounts:</Text>
+        </View>
+        <View style={styles.container}>
+          <IcoButton
+            text="Google"
+            color="#fff"
+            onPress={onSignIn}
+            textColor="#131313"
+            iconColor="#131313"
+            iosIcon="logo-google"
+            otherIcon="logo-google"
+          />
+          <IcoButton
+            text="Github"
+            color="#fff"
+            onPress={onSignUp}
+            textColor="#131313"
+            iconColor="#131313"
+            iosIcon="logo-github"
+            otherIcon="logo-github"
+          />
+          <IcoButton
+            text="Facebook"
+            color="#fff"
+            onPress={onSignUp}
+            textColor="#131313"
+            iconColor="#131313"
+            iosIcon="logo-facebook"
+            otherIcon="logo-facebook"
+          />
+          { authError && <ErrorContainer error={authError} /> }
+        </View>
       </View>
     );
   }

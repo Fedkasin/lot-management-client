@@ -12,6 +12,7 @@ async function* login(action) {
     const user = await signInWithGoogleAsync(action.payload);
     yield put(actions.authActions.loginSuccess(user));
   } catch (err) {
+    console.log('HEREE');
     yield put(actions.authActions.loginFail(err));
   }
 }
