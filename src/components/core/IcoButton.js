@@ -20,17 +20,14 @@ function IcoButton({
       flexDirection: 'row',
       width: '90%',
       height: 50,
-      borderColor: '#000',
       backgroundColor: [color],
-      borderWidth: 1,
-      borderRadius: 9,
       marginTop: 9,
     },
     text: {
       fontSize: 18,
       color: [textColor],
       textAlign: 'center',
-      paddingLeft: 9,
+      paddingLeft: 5,
     },
   });
   return (

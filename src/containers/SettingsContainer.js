@@ -270,7 +270,7 @@ SettingsContainer.propTypes = {
       })),
     }),
   })).isRequired,
-  user: PropTypes.objectOf(PropTypes.any).isRequired,
+/*   user: PropTypes.objectOf(PropTypes.any).isRequired, */
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsContainer);

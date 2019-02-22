@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { PureComponent } from 'react';
 import {
   compose, withHandlers, withState,
