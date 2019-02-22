@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react';
 import {
   ActivityIndicator,
-  StatusBar,
-  View,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -19,12 +17,7 @@ class AuthLoadingScreen extends PureComponent {
   }
 
   render() {
-    return (
-      <View>
-        <ActivityIndicator size="large" color="#0000ff" style={{ flex: 1 }} />
-        <StatusBar barStyle="default" />
-      </View>
-    );
+    return <ActivityIndicator size="large" color="#0000ff" style={{ flex: 1 }} />;
   }
 }
 

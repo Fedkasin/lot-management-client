@@ -35,7 +35,7 @@ export const onSignIn = googleUser => {
         firebase.auth()
           .signInAndRetrieveDataWithCredential(credential)
           .catch(error => {
-            throw new Error(error);
+            throw error;
             // Handle Errors here.
             // const errorCode = error.code;
             // const errorMessage = error.message;
@@ -61,10 +61,10 @@ export const signInWithGoogleAsync = async config => {
       return { cancelled: true };
     }
   } catch (err) {
-    throw new Error(err);
+    throw err;
   }
 };
 
 export const signOut = async () => firebase.auth().signOut().catch(err => {
-  throw new Error(err);
+  throw err;
 });
