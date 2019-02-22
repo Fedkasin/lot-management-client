@@ -12,7 +12,6 @@ import { isLoggedIn /* signOut */ } from '../helpers/authHelpers';
 class AuthLoadingScreen extends PureComponent {
   // Fetch the token from storage then navigate to our appropriate place
   componentDidMount() {
-    console.log('DID MOUNT');
     const { navigation } = this.props;
     isLoggedIn(user => {
       /* console.log(user); */

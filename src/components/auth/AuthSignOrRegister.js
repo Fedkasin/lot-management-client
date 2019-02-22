@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import {
-  StyleSheet, Text, View, Platform,
+  StyleSheet, Text, View,
 } from 'react-native';
 import { DangerZone } from 'expo';
 import ErrorContainer from '../core/ErrorContainer';
-import IonIcon from '../core/IonIcon';
 import IcoButton from '../core/IcoButton';
 
 const { Lottie } = DangerZone;
