@@ -130,8 +130,10 @@ class CarLotsContainer extends PureComponent {
   }
 
   handleScrollEnd() {
-    const { onFetchCarLots, page, itemsPerPage } = this.props;
-    onFetchCarLots(page + 1, itemsPerPage);
+    const {
+      onFetchCarLots, page, itemsPerPage, filters,
+    } = this.props;
+    onFetchCarLots(page + 1, itemsPerPage, filters);
   }
 
   render() {
@@ -157,13 +159,14 @@ function mapStateToProps(state) {
     carLots: state.carLotsReducers.carLots,
     page: state.carLotsReducers.page,
     itemsPerPage: state.carLotsReducers.itemsPerPage,
+    filters: state.carLotsReducers.filters,
     error: state.carLotsReducers.error ? state.carLotsReducers.error : null,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    onFetchCarLots: (page, itemsPerPage, filtersMock) => dispatch(actions.carLotsActions.fetchCarLots({ page, itemsPerPage, filtersMock })),
+    onFetchCarLots: (page, itemsPerPage, filters) => dispatch(actions.carLotsActions.fetchCarLots({ page, itemsPerPage, filters })),
   };
 }
 
@@ -173,6 +176,7 @@ CarLotsContainer.propTypes = {
   itemsPerPage: PropTypes.number.isRequired,
   carLots: PropTypes.arrayOf(PropTypes.any).isRequired,
   isFetching: PropTypes.bool.isRequired,
+  filters: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarLotsContainer);

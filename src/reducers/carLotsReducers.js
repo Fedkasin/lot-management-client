@@ -6,6 +6,7 @@ const initialState = {
   page: 0,
   itemsPerPage: 10,
   error: null,
+  filters: null,
 };
 
 const carLotsReducers = (state = initialState, action) => {
@@ -15,6 +16,7 @@ const carLotsReducers = (state = initialState, action) => {
         ...state,
         isFetching: true,
         page: action.payload.page,
+        filters: action.payload.filters,
         itemsPerPage: action.payload.itemsPerPage,
       };
     case FETCH_CAR_LOTS_SUCCESS:

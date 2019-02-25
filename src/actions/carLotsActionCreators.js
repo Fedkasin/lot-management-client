@@ -5,6 +5,7 @@ export const fetchCarLots = payload => ({
   payload: {
     page: payload.page,
     itemsPerPage: payload.itemsPerPage,
+    filters: payload.filters,
   },
 });
 
