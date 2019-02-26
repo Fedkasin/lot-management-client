@@ -56,7 +56,7 @@ export const signInWithGoogleAsync = async config => {
     if (result.type === 'success') {
       onSignIn(result);
       await AsyncStorage.setItem('@AuthStore:AUTH_TOKEN', result.accessToken);
-      return result.accessToken;
+      return result;
     } else {
       return { cancelled: true };
     }

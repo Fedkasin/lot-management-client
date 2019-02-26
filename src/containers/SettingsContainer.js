@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ScrollView, ActivityIndicator, AsyncStorage } from 'react-native';
+import {
+  ScrollView, ActivityIndicator, AsyncStorage, View, Image, Text, StyleSheet,
+} from 'react-native';
+import { withNavigation } from 'react-navigation';
 
 import SettingSectionItem from '../components/settings/SettingSectionItem';
 import actions from '../actions/index';
@@ -13,7 +16,6 @@ class SettingsContainer extends React.Component {
   async componentDidMount() {
     const { onFetchSettings } = this.props;
     let addr = await AsyncStorage.getItem('@InputsStore:Address');
-
     if (!addr) {
       await AsyncStorage.setItem('@InputStore:Address', DEFAULT_ADDR);
       addr = await AsyncStorage.getItem('@InputStore:Address');
@@ -156,13 +158,44 @@ class SettingsContainer extends React.Component {
   }
 
   render() {
-    const { isFetching, settings } = this.props;
-
+    const { isFetching, settings, user } = this.props;
+    const styles = StyleSheet.create({
+      shadow: {
+        width: 110,
+        height: 110,
+        zIndex: 2,
+        borderRadius: 200,
+        marginTop: -150,
+      },
+    });
+    const userName = user.name || user.displayName;
+    const userAvatar = user.photoUrl || user.photoURL;
     if (isFetching) {
       return <ActivityIndicator />;
     }
     return (
-      <ScrollView>
+      <ScrollView style={{ backgroundColor: '#fff' }}>
+        <View style={{ alignItems: 'center', marginTop: -550, marginBottom: 110 }}>
+          <View
+            style={{
+              zIndex: 1, width: '200%', height: 800, backgroundColor: '#efefef', borderRadius: 100000,
+            }}
+          />
+          <Text style={{
+            zIndex: 2, fontSize: 24, color: '#131313', marginTop: -80,
+          }}
+          >
+            { userName }
+          </Text>
+          <View style={styles.shadow}>
+            <Image
+              source={{ uri: userAvatar }}
+              style={{
+                width: 100, height: 100, borderRadius: 100, backgroundColor: '#999',
+              }}
+            />
+          </View>
+        </View>
         {settings.map((value, key) => (
           <SettingSectionItem
             key={value.id}
@@ -178,7 +211,7 @@ class SettingsContainer extends React.Component {
 function mapStateToProps(state) {
   return {
     settings: state.settingsReducers.settings,
-    user: getUser(),
+    user: getUser() || state.authReducers.user.user,
     isFetching: state.settingsReducers.isFetching,
   };
 }
@@ -238,6 +271,7 @@ SettingsContainer.propTypes = {
       })),
     }),
   })).isRequired,
+  user: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SettingsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(SettingsContainer));

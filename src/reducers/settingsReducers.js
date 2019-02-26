@@ -24,12 +24,13 @@ const settingsReducer = (state = initialState, action) => {
         ...state,
         isFetching: true,
       };
-    case FETCH_SETTINGS_SUCCESS:
+    case FETCH_SETTINGS_SUCCESS: {
       return {
         ...state,
         settings: action.payload,
         isFetching: false,
       };
+    }
     case FETCH_SETTINGS_FAIL:
       return {
         ...state,

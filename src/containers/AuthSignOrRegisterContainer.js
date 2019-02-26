@@ -11,7 +11,6 @@ import actions from '../actions';
 class AuthSignOrRegisterContainer extends PureComponent {
   constructor(props) {
     super(props);
-
     this.onSignIn = this.onSignIn.bind(this);
   }
 

@@ -14,12 +14,16 @@ class CarLotsContainer extends PureComponent {
   }
 
   componentDidMount() {
-    const { onFetchCarLots, page, itemsPerPage } = this.props;
+    const {
+      onFetchCarLots, page, itemsPerPage,
+    } = this.props;
     onFetchCarLots(page, itemsPerPage);
   }
 
   handleScrollEnd() {
-    const { onFetchCarLots, page, itemsPerPage } = this.props;
+    const {
+      onFetchCarLots, page, itemsPerPage,
+    } = this.props;
     onFetchCarLots(page + 1, itemsPerPage);
   }
 

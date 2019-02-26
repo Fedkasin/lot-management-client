@@ -1,7 +1,8 @@
 import React from 'react';
 import {
-  View, StyleSheet, SegmentedControlIOS, Text,
+  View, StyleSheet, Text,
 } from 'react-native';
+import { ButtonGroup } from 'react-native-elements';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
@@ -20,11 +21,12 @@ const styles = StyleSheet.create({
 class SettingChildButton extends React.PureComponent {
   render() {
     const { child } = this.props;
+
     return (
       <View style={styles.container}>
         <Text style={styles.label}>{child.label}</Text>
-        <SegmentedControlIOS
-          values={child.options}
+        <ButtonGroup
+          buttons={child.options}
           selectedIndex={child.options.indexOf(child.value)}
         />
       </View>
