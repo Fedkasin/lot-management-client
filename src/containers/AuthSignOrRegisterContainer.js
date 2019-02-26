@@ -26,6 +26,7 @@ class AuthSignOrRegisterContainer extends PureComponent {
 
   render() {
     const { error, isLogging } = this.props;
+    /* console.log(isLogging); */
     if (isLogging) {
       return <ActivityIndicator size="large" color="#0000ff" style={{ flex: 1 }} />;
     }

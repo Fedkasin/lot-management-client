@@ -10,7 +10,6 @@ import BgMessage from '../components/bgmessage/BackgroundMessage';
 class HouseLotsContainer extends PureComponent {
   constructor(props) {
     super(props);
-
     this.handleRefresh = this.handleRefresh.bind(this);
   }
 

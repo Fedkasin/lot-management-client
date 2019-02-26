@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { PureComponent } from 'react';
 import {
   StyleSheet, Text, View, TextInput, ActivityIndicator,
@@ -8,9 +9,9 @@ import {
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import actions from '../../actions/index';
-import IcoButton from '../core/IcoButton';
 import { APP_STACK } from '../../constants/Routes';
 import ErrorContainer from '../core/ErrorContainer';
+import IcoButton from '../core/IcoButton';
 
 const styles = StyleSheet.create({
   container: {
@@ -94,6 +95,18 @@ class AuthForm extends PureComponent {
           otherIcon="md-checkmark"
         />
         { authError && <ErrorContainer error={authError} /> }
+        <Text style={styles.error}>
+          { error }
+        </Text>
+        <IcoButton
+          text="Log In"
+          color="#28a745"
+          onPress={handleClick}
+          textColor="#f8f9fa"
+          iconColor="#f8f9fa"
+          iosIcon="ios-checkmark"
+          otherIcon="md-checkmark"
+        />
       </View>
     );
   }
