@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '40%',
     marginTop: 10,
+    marginBottom: 20,
   },
 });
 
@@ -37,7 +38,7 @@ class AuthSignOrRegister extends PureComponent {
   render() {
     const { onSignIn, onSignUp, authError } = this.props;
     return (
-      <View style={{ alignItems: 'center' }}>
+      <View style={styles.container}>
         <Lottie
           ref={animation => {
             this.animation = animation;
@@ -47,16 +48,7 @@ class AuthSignOrRegister extends PureComponent {
           loop={false}
           style={styles.lottieLogo}
         />
-        <View style={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexDirection: 'row',
-          width: '80%',
-          height: 50,
-        }}
-        >
-          <Text style={[styles.text, { marginTop: 20 }]}>Please log in using one of your existing accounts:</Text>
-        </View>
+        <Text style={[styles.text]}>Please log in using one of your existing accounts:</Text>
         <View style={styles.container}>
           <IcoButton
             text="Google"

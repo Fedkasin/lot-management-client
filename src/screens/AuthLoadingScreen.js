@@ -12,7 +12,6 @@ class AuthLoadingScreen extends PureComponent {
   componentDidMount() {
     const { navigation } = this.props;
     isLoggedIn(user => {
-      /* console.log(user); */
       navigation.navigate(user ? APP_TAB : AUTH_STACK);
     });
   }

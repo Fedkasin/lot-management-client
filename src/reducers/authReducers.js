@@ -8,8 +8,8 @@ import {
 } from '../constants/Actions';
 
 const initialState = {
-  isLogging: false,
-  user: null,
+  isLoading: false,
+  isLoggedIn: false,
   error: null,
 };
 
@@ -18,36 +18,43 @@ const authReducers = (state = initialState, action) => {
     case LOGIN:
       return {
         ...state,
-        isLogging: true,
+        isLoggedIn: false,
+        isLoading: true,
       };
     case LOGIN_SUCCESS:
       return {
         ...state,
         error: null,
-        user: action.payload,
-        isLogging: false,
+        isLoggedIn: true,
+        isLoading: false,
       };
     case LOGIN_FAIL:
       return {
         ...state,
         error: action.error,
-        user: null,
-        isLogging: false,
+        isLoggedIn: false,
+        isLoading: false,
       };
     case LOGOUT:
+      /* console.log(state); */
       return {
         ...state,
+        isLoggedIn: true,
+        isLoading: true,
       };
     case LOGOUT_SUCCESS:
       return {
         ...state,
-        user: null,
+        user: {},
         err: null,
+        isLoggedIn: false,
+        isLoading: false,
       };
     case LOGOUT_FAIL:
       return {
         ...state,
-        user: null,
+        isLoading: false,
+        isLoggedIn: true,
         err: action.error,
       };
     default:

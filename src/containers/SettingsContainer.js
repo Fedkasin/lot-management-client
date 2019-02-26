@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  ScrollView, ActivityIndicator, AsyncStorage, View, Image, Text, StyleSheet,
+  ScrollView, ActivityIndicator, AsyncStorage, View, Image, Text, StyleSheet, TouchableOpacity,
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
 
 import SettingSectionItem from '../components/settings/SettingSectionItem';
 import actions from '../actions/index';
@@ -12,7 +11,14 @@ import { getUser } from '../helpers/authHelpers';
 
 const DEFAULT_ADDR = '0e40c705.ngrok.io';
 
-class SettingsContainer extends React.Component {
+let user = null;
+
+class SettingsContainer extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
   async componentDidMount() {
     const { onFetchSettings } = this.props;
     let addr = await AsyncStorage.getItem('@InputsStore:Address');
@@ -21,6 +27,8 @@ class SettingsContainer extends React.Component {
       addr = await AsyncStorage.getItem('@InputStore:Address');
     }
 
+    user = JSON.parse(await AsyncStorage.getItem('@UserStore:USER')) || getUser();
+    /* console.log(user); */
     const settingsMock = [
       {
         id: 'Api',
@@ -157,8 +165,14 @@ class SettingsContainer extends React.Component {
     onFetchSettings(settingsMock);
   }
 
+  handleClick() {
+    const onSignOut = this.props;
+    /* console.log('HEREE'); */
+    onSignOut.onSignOut();
+  }
+
   render() {
-    const { isFetching, settings, user } = this.props;
+    const { isLoading, settings } = this.props;
     const styles = StyleSheet.create({
       shadow: {
         width: 110,
@@ -168,11 +182,14 @@ class SettingsContainer extends React.Component {
         marginTop: -150,
       },
     });
+
+    if (isLoading || !user) {
+      return <ActivityIndicator size="large" color="#0000ff" />;
+    }
+
     const userName = user.name || user.displayName;
     const userAvatar = user.photoUrl || user.photoURL;
-    if (isFetching) {
-      return <ActivityIndicator />;
-    }
+
     return (
       <ScrollView style={{ backgroundColor: '#fff' }}>
         <View style={{ alignItems: 'center', marginTop: -550, marginBottom: 110 }}>
@@ -181,6 +198,9 @@ class SettingsContainer extends React.Component {
               zIndex: 1, width: '200%', height: 800, backgroundColor: '#efefef', borderRadius: 100000,
             }}
           />
+          <TouchableOpacity onPress={this.handleClick}>
+            <Text>LOGOUT</Text>
+          </TouchableOpacity>
           <Text style={{
             zIndex: 2, fontSize: 24, color: '#131313', marginTop: -80,
           }}
@@ -191,7 +211,7 @@ class SettingsContainer extends React.Component {
             <Image
               source={{ uri: userAvatar }}
               style={{
-                width: 100, height: 100, borderRadius: 100, backgroundColor: '#999',
+                width: 100, height: 100, borderRadius: 50, backgroundColor: '#999',
               }}
             />
           </View>
@@ -211,20 +231,20 @@ class SettingsContainer extends React.Component {
 function mapStateToProps(state) {
   return {
     settings: state.settingsReducers.settings,
-    user: getUser() || state.authReducers.user.user,
-    isFetching: state.settingsReducers.isFetching,
+    isLoading: state.settingsReducers.isLoading,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     onFetchSettings: data => dispatch(actions.settingsActions.fetchSettings(data)),
+    onSignOut: () => dispatch(actions.authActions.logout()),
   };
 }
 
 SettingsContainer.propTypes = {
   onFetchSettings: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   settings: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     label: PropTypes.string,
@@ -271,7 +291,6 @@ SettingsContainer.propTypes = {
       })),
     }),
   })).isRequired,
-  user: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(SettingsContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsContainer);
