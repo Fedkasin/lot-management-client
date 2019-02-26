@@ -7,6 +7,7 @@ import {
 
 import SettingSectionItem from '../components/settings/SettingSectionItem';
 import actions from '../actions/index';
+import { getUser } from '../helpers/authHelpers';
 
 const DEFAULT_ADDR = '0e40c705.ngrok.io';
 
@@ -209,6 +210,7 @@ class SettingsContainer extends React.Component {
 function mapStateToProps(state) {
   return {
     settings: state.settingsReducers.settings,
+    user: getUser(),
     isFetching: state.settingsReducers.isFetching,
   };
 }

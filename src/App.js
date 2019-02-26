@@ -8,14 +8,17 @@ import {
 import {
   Platform, StatusBar, StyleSheet, View, AsyncStorage,
 } from 'react-native';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
+import firebase from 'firebase';
 
 import actions from './actions/index';
 import AppNavigator from './navigation/AppNavigator';
 import reducers from './reducers/index';
 import rootSaga from './sagas/root';
+import NavigatorService from './services/navigator';
+import { firebaseConfig } from './constants/Config';
 
 const styles = StyleSheet.create({
   container: {
@@ -24,12 +27,16 @@ const styles = StyleSheet.create({
   },
 });
 
+firebase.initializeApp(firebaseConfig);
+
 const sagaMiddleware = createSagaMiddleware();
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   reducers,
-  applyMiddleware(sagaMiddleware)
+  composeEnhancers(applyMiddleware(sagaMiddleware)),
 );
+
 
 const getPushToken = async () => {
   const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
@@ -85,7 +92,9 @@ class App extends React.Component {
           {assetsLoaded && (
           <View style={styles.container}>
             {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-            <AppNavigator />
+            <AppNavigator
+              ref={navigatorRef => NavigatorService.setContainer(navigatorRef)}
+            />
           </View>
           )}
         </View>

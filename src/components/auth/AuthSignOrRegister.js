@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 import {
   StyleSheet, Text, View, Alert,
 } from 'react-native';
@@ -7,6 +6,8 @@ import { withNavigation } from 'react-navigation';
 import { DangerZone } from 'expo';
 import IcoButton from '../core/IcoButton';
 import { AUTH_FORM_SCREEN } from '../../constants/Routes';
+import PropTypes from 'prop-types';
+import ErrorContainer from '../core/ErrorContainer';
 
 const { Lottie } = DangerZone;
 
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class AuthSignOrRegister extends React.Component {
+class AuthSignOrRegister extends PureComponent {
   constructor(props) {
     super(props);
     this.login = this.login.bind(this);
@@ -81,6 +82,7 @@ class AuthSignOrRegister extends React.Component {
   }
 
   render() {
+    const { onSignIn, onSignUp, authError } = this.props;
     return (
       <View style={styles.container}>
         <Lottie
@@ -111,13 +113,27 @@ class AuthSignOrRegister extends React.Component {
           iosIcon="ios-create"
           otherIcon="md-create"
         />
+        <View style={styles.bgButton}>
+          <Button title="Sign In With Google" onPress={onSignIn} />
+        </View>
+        <Text style={styles.text}>OR</Text>
+        <View style={styles.bgButton}>
+          <Button title="Sign Up" onPress={onSignUp} />
+        </View>
+        { authError && <ErrorContainer error={authError} /> }
       </View>
     );
   }
 }
 
 AuthSignOrRegister.propTypes = {
-  navigation: PropTypes.objectOf(PropTypes.any).isRequired,
+  onSignIn: PropTypes.func.isRequired,
+  onSignUp: PropTypes.func.isRequired,
+  authError: PropTypes.string,
 };
 
-export default withNavigation(AuthSignOrRegister);
+AuthSignOrRegister.defaultProps = {
+  authError: null,
+};
+
+export default AuthSignOrRegister;

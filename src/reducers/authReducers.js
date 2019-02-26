@@ -1,35 +1,54 @@
-import { FETCH_AUTH_KEY, FETCH_AUTH_KEY_SUCCESS, FETCH_AUTH_KEY_FAIL } from '../constants/Actions';
+import {
+  LOGIN,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAIL,
+} from '../constants/Actions';
 
 const initialState = {
-  isFetching: false,
-  authKey: null,
-  login: null,
-  password: null,
+  isLogging: false,
+  user: null,
   error: null,
 };
 
 const authReducers = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_AUTH_KEY:
+    case LOGIN:
       return {
         ...state,
-        isFetching: true,
-        login: action.payload.login,
-        password: action.payload.password,
+        isLogging: true,
       };
-    case FETCH_AUTH_KEY_SUCCESS:
+    case LOGIN_SUCCESS:
       return {
         ...state,
         error: null,
-        authKey: action.payload.data.token,
-        isFetching: false,
+        user: action.payload,
+        isLogging: false,
       };
-    case FETCH_AUTH_KEY_FAIL:
+    case LOGIN_FAIL:
       return {
         ...state,
-        error: action.error.response.data.error,
-        authKey: null,
-        isFetching: false,
+        error: action.error,
+        user: null,
+        isLogging: false,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+      };
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        user: null,
+        err: null,
+      };
+    case LOGOUT_FAIL:
+      return {
+        ...state,
+        user: null,
+        err: action.error,
       };
     default:
       return state;
