@@ -20,7 +20,6 @@
     "expo": "^31.0.2",
     "expo-cli": "^2.9.0",
     "lodash": "^4.17.11",
-    "lottie-react-native": "^2.5.11",
     "moment": "^2.24.0",
     "pre-commit": "^1.2.2",
     "prop-types": "^15.7.1",

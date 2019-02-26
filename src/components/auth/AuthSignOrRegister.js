@@ -4,9 +4,11 @@ import {
   StyleSheet, Text, View, Alert,
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import LottieView from 'lottie-react-native';
+import { DangerZone } from 'expo';
 import IcoButton from '../core/IcoButton';
 import { AUTH_FORM_SCREEN } from '../../constants/Routes';
+
+const { Lottie } = DangerZone;
 
 const styles = StyleSheet.create({
   container: {
@@ -54,8 +56,8 @@ const styles = StyleSheet.create({
   },
   lottieLogo: {
     width: '100%',
-    marginTop: -60,
-    marginBottom: -30,
+    height: '40%',
+    marginTop: 10,
   },
 });
 
@@ -63,6 +65,10 @@ class AuthSignOrRegister extends React.Component {
   constructor(props) {
     super(props);
     this.login = this.login.bind(this);
+  }
+
+  componentDidMount() {
+    this.animation.play();
   }
 
   login() {
@@ -77,11 +83,14 @@ class AuthSignOrRegister extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <LottieView
+        <Lottie
+          ref={animation => {
+            this.animation = animation;
+          }}
           source={require('../../../assets/animation/house.json')}
-          style={styles.lottieLogo}
           autoPlay
           loop={false}
+          style={styles.lottieLogo}
         />
         <IcoButton
           text="Sign in"
