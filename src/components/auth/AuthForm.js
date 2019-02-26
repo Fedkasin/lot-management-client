@@ -1,15 +1,12 @@
 /* eslint-disable no-undef */
 import React, { PureComponent } from 'react';
 import {
-  StyleSheet, Text, View, TextInput, ActivityIndicator,
+  StyleSheet, Text, View, TextInput,
 } from 'react-native';
 import {
   compose, withHandlers, withState,
 } from 'recompose';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import actions from '../../actions/index';
-import { APP_STACK } from '../../constants/Routes';
 import ErrorContainer from '../core/ErrorContainer';
 import IcoButton from '../core/IcoButton';
 
