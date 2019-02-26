@@ -13,7 +13,6 @@ const initialState = {
   page: 0,
   itemsPerPage: 10,
   error: null,
-  filters: null,
 };
 
 const houseLotsReducer = (state = initialState, action) => {
@@ -40,7 +39,6 @@ const houseLotsReducer = (state = initialState, action) => {
     case FETCH_HOUSE_LOTS:
       return {
         ...state,
-        filters: action.payload.filters,
         isFetching: true,
       };
     case FETCH_HOUSE_LOTS_SUCCESS:
@@ -55,7 +53,6 @@ const houseLotsReducer = (state = initialState, action) => {
         ...state,
         error: action.error,
         houseLots: [],
-        filters: {},
         isFetching: false,
       };
     default:

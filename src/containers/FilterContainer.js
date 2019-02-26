@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
 import { ScrollView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
@@ -7,7 +6,8 @@ import SettingSectionItem from '../components/settings/SettingSectionItem';
 
 class FilterContainer extends PureComponent {
   render() {
-    const { filters } = this.props;
+    const { navigation } = this.props;
+    const filters = navigation.getParam('filters', 'null');
     return (
       <ScrollView style={{ backgroundColor: '#fff' }}>
         {filters.map((value, key) => (
@@ -23,13 +23,7 @@ class FilterContainer extends PureComponent {
 }
 
 FilterContainer.propTypes = {
-  filters: PropTypes.arrayOf(PropTypes.any).isRequired,
+  navigation: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
-function mapStateToProps(state) {
-  return {
-    filters: state.carLotsReducers.filters,
-  };
-}
-
-export default connect(mapStateToProps)(withNavigation(FilterContainer));
+export default withNavigation(FilterContainer);

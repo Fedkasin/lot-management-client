@@ -8,7 +8,7 @@ import IonIcon from './IonIcon';
 import { FILTER_SCREEN } from '../../constants/Routes';
 
 function TopBarButton({
-  iconColor, iosIcon, otherIcon, navigation,
+  iconColor, iosIcon, otherIcon, filters, navigation,
 }) {
   const styles = StyleSheet.create({
     button: {
@@ -20,7 +20,7 @@ function TopBarButton({
     },
   });
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(FILTER_SCREEN)} style={styles.button}>
+    <TouchableOpacity onPress={() => navigation.navigate(FILTER_SCREEN, { filters })} style={styles.button}>
       <IonIcon
         name={Platform.OS === 'ios' ? iosIcon : otherIcon}
         color={iconColor}
@@ -30,6 +30,7 @@ function TopBarButton({
 }
 
 TopBarButton.propTypes = {
+  filters: PropTypes.arrayOf(PropTypes.any).isRequired,
   navigation: PropTypes.objectOf(PropTypes.any).isRequired,
   iconColor: PropTypes.string.isRequired,
   iosIcon: PropTypes.string.isRequired,
