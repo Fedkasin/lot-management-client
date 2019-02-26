@@ -11,7 +11,6 @@ import actions from '../actions';
 class AuthSignOrRegisterContainer extends PureComponent {
   constructor(props) {
     super(props);
-
     this.onSignIn = this.onSignIn.bind(this);
   }
 
@@ -26,7 +25,6 @@ class AuthSignOrRegisterContainer extends PureComponent {
 
   render() {
     const { error, isLogging } = this.props;
-    /* console.log(isLogging); */
     if (isLogging) {
       return <ActivityIndicator size="large" color="#0000ff" style={{ flex: 1 }} />;
     }
