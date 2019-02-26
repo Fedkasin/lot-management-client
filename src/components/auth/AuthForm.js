@@ -1,12 +1,15 @@
 import React, { PureComponent } from 'react';
 import {
+  StyleSheet, Text, View, TextInput, ActivityIndicator,
+} from 'react-native';
+import {
   compose, withHandlers, withState,
 } from 'recompose';
-import {
-  StyleSheet, Text, View, Button, TextInput,
-} from 'react-native';
 import PropTypes from 'prop-types';
-
+import { connect } from 'react-redux';
+import actions from '../../actions/index';
+import IcoButton from '../core/IcoButton';
+import { APP_STACK } from '../../constants/Routes';
 import ErrorContainer from '../core/ErrorContainer';
 
 const styles = StyleSheet.create({
@@ -16,24 +19,37 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: '100%',
     width: '100%',
+    backgroundColor: '#fff',
   },
-  bgButton: {
-    textAlign: 'center',
-    width: '75%',
-    margin: 10,
+  bgContainer: {
+    width: '100%',
+    alignItems: 'center',
+  },
+  textLight: {
+    color: '#f8f9fa',
+  },
+  textDark: {
+    color: '#343a40',
   },
   text: {
     fontSize: 26,
+    textAlign: 'center',
+    marginTop: 9,
   },
   error: {
     color: '#f00',
   },
   input: {
-    height: 35,
-    width: '100%',
+    height: 40,
+    width: '90%',
     borderColor: '#000',
     borderWidth: 1,
+    borderRadius: 5,
+    opacity: 0.5,
     padding: 5,
+    fontSize: 20,
+    marginTop: 0,
+    marginBottom: 20,
   },
 });
 
@@ -45,7 +61,7 @@ class AuthForm extends PureComponent {
 
     return (
       <View style={styles.container}>
-        <View style={styles.bgButton}>
+        <View style={styles.bgContainer}>
           <Text style={styles.text}>E-mail</Text>
           <TextInput
             autoFocus
@@ -53,20 +69,31 @@ class AuthForm extends PureComponent {
             placeholder="your e-mail"
             maxLength={20}
             textContentType="emailAddress"
-            style={styles.input}
+            style={[styles.input, styles.colorLight]}
           />
         </View>
-        <View style={styles.bgButton}>
+        <View style={styles.bgContainer}>
           <Text style={styles.text}>Password</Text>
           <TextInput
             secureTextEntry
             onEndEditing={handlePassword}
             placeholder="8 symbols at least"
-            style={styles.input}
+            style={[styles.input, styles.colorLight]}
           />
         </View>
+        <Text style={styles.error}>
+          { error }
+        </Text>
+        <IcoButton
+          text="Log In"
+          color="#28a745"
+          onPress={handleClick}
+          textColor="#f8f9fa"
+          iconColor="#f8f9fa"
+          iosIcon="ios-checkmark"
+          otherIcon="md-checkmark"
+        />
         { authError && <ErrorContainer error={authError} /> }
-        <Button title="Log In" onPress={handleClick} />
       </View>
     );
   }

@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ScrollView, ActivityIndicator, AsyncStorage } from 'react-native';
+import {
+  ScrollView, ActivityIndicator, AsyncStorage, View, Image, Text, StyleSheet,
+} from 'react-native';
 
 import SettingSectionItem from '../components/settings/SettingSectionItem';
 import actions from '../actions/index';
@@ -157,12 +159,42 @@ class SettingsContainer extends React.Component {
 
   render() {
     const { isFetching, settings } = this.props;
+    const styles = StyleSheet.create({
+      shadow: {
+        width: 110,
+        height: 110,
+        zIndex: 2,
+        borderRadius: 200,
+        marginTop: -150,
+      },
+    });
 
     if (isFetching) {
       return <ActivityIndicator />;
     }
     return (
-      <ScrollView>
+      <ScrollView style={{ backgroundColor: '#fff' }}>
+        <View style={{ alignItems: 'center', marginTop: -550, marginBottom: 110 }}>
+          <View
+            style={{
+              zIndex: 1, width: '200%', height: 800, backgroundColor: '#efefef', borderRadius: 100000,
+            }}
+          />
+          <Text style={{
+            zIndex: 2, fontSize: 24, color: '#131313', marginTop: -80,
+          }}
+          >
+          Hello, User Name!
+          </Text>
+          <View style={styles.shadow}>
+            <Image
+              source={{ uri: 'https://st.peopletalk.ru/wp-content/uploads/2016/11/1480331127.jpg' }}
+              style={{
+                width: 100, height: 100, borderRadius: 100, backgroundColor: '#999',
+              }}
+            />
+          </View>
+        </View>
         {settings.map((value, key) => (
           <SettingSectionItem
             key={value.id}
