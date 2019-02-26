@@ -1,9 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import {
-  StyleSheet, Text, View,
+  StyleSheet, Text, View, Alert,
 } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import { DangerZone } from 'expo';
+import { AUTH_FORM_SCREEN } from '../../constants/Routes';
+import PropTypes from 'prop-types';
 import ErrorContainer from '../core/ErrorContainer';
 import IcoButton from '../core/IcoButton';
 
@@ -21,6 +24,11 @@ const styles = StyleSheet.create({
     fontSize: 21,
     textAlign: 'center',
     marginBottom: 20,
+  },
+  lottieLogo: {
+    width: '100%',
+    height: '40%',
+    marginTop: 10,
   },
   lottieLogo: {
     width: '100%',

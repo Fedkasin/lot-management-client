@@ -29,6 +29,10 @@ class SettingChildButton extends React.PureComponent {
           buttons={child.options}
           selectedIndex={child.options.indexOf(child.value)}
         />
+        <ButtonGroup
+          buttons={child.options}
+          selectedIndex={child.options.indexOf(child.value)}
+        />
       </View>
     );
   }
