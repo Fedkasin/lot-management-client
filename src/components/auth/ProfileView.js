@@ -22,7 +22,7 @@ class ProfileView extends React.PureComponent {
       <View style={{ alignItems: 'center', marginTop: -550, marginBottom: 110 }}>
         <View
           style={{
-            zIndex: 1, width: '200%', height: 800, backgroundColor: '#efefef', borderRadius: 100000,
+            zIndex: 0, width: '200%', height: 800, backgroundColor: '#efefef', borderRadius: 100000,
           }}
         />
         <Text style={{

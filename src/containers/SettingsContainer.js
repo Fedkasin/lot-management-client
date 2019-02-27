@@ -29,7 +29,7 @@ class SettingsContainer extends PureComponent {
     }
 
     user = JSON.parse(await AsyncStorage.getItem('@UserStore:USER')) || getUser();
-    /* console.log(user); */
+    // console.log(user);
     const settingsMock = [
       {
         id: 'Api',

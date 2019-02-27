@@ -13,8 +13,7 @@ class AuthLoadingScreen extends PureComponent {
     const { navigation } = this.props;
     isLoggedIn(user => {
       navigation.navigate(user ? APP_TAB : AUTH_STACK);
-      /* console.log('user updated', user && user.displayName);
-      console.log('navigate APP_TAB'); */
+      // console.log('user updated', user); <==
     });
   }
 
