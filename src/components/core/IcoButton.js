@@ -22,6 +22,7 @@ function IcoButton({
       height: 45,
       backgroundColor: [color],
       marginTop: 9,
+      zIndex: 1,
     },
     text: {
       fontSize: 18,

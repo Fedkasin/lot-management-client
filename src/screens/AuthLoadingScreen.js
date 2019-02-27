@@ -5,7 +5,7 @@ import {
 import PropTypes from 'prop-types';
 
 import { APP_TAB, AUTH_STACK } from '../constants/Routes';
-import { isLoggedIn /* signOut */ } from '../helpers/authHelpers';
+import { isLoggedIn } from '../helpers/authHelpers';
 
 class AuthLoadingScreen extends PureComponent {
   // Fetch the token from storage then navigate to our appropriate place
@@ -13,6 +13,8 @@ class AuthLoadingScreen extends PureComponent {
     const { navigation } = this.props;
     isLoggedIn(user => {
       navigation.navigate(user ? APP_TAB : AUTH_STACK);
+      /* console.log('user updated', user && user.displayName);
+      console.log('navigate APP_TAB'); */
     });
   }
 

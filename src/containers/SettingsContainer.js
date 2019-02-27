@@ -2,12 +2,13 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  ScrollView, ActivityIndicator, AsyncStorage, View, Image, Text, StyleSheet, TouchableOpacity,
+  ScrollView, ActivityIndicator, AsyncStorage,
 } from 'react-native';
 
 import SettingSectionItem from '../components/settings/SettingSectionItem';
 import actions from '../actions/index';
 import { getUser } from '../helpers/authHelpers';
+import ProfileView from '../components/auth/ProfileView';
 
 const DEFAULT_ADDR = '0e40c705.ngrok.io';
 
@@ -173,15 +174,6 @@ class SettingsContainer extends PureComponent {
 
   render() {
     const { isLoading, settings } = this.props;
-    const styles = StyleSheet.create({
-      shadow: {
-        width: 110,
-        height: 110,
-        zIndex: 2,
-        borderRadius: 200,
-        marginTop: -150,
-      },
-    });
 
     if (isLoading || !user) {
       return <ActivityIndicator size="large" color="#0000ff" />;
@@ -192,30 +184,11 @@ class SettingsContainer extends PureComponent {
 
     return (
       <ScrollView style={{ backgroundColor: '#fff' }}>
-        <View style={{ alignItems: 'center', marginTop: -550, marginBottom: 110 }}>
-          <View
-            style={{
-              zIndex: 1, width: '200%', height: 800, backgroundColor: '#efefef', borderRadius: 100000,
-            }}
-          />
-          <TouchableOpacity onPress={this.handleClick}>
-            <Text>LOGOUT</Text>
-          </TouchableOpacity>
-          <Text style={{
-            zIndex: 2, fontSize: 24, color: '#131313', marginTop: -80,
-          }}
-          >
-            { userName }
-          </Text>
-          <View style={styles.shadow}>
-            <Image
-              source={{ uri: userAvatar }}
-              style={{
-                width: 100, height: 100, borderRadius: 50, backgroundColor: '#999',
-              }}
-            />
-          </View>
-        </View>
+        <ProfileView
+          name={userName}
+          avatar={userAvatar}
+          onClick={this.handleClick}
+        />
         {settings.map((value, key) => (
           <SettingSectionItem
             key={value.id}
