@@ -36,7 +36,6 @@ const authReducers = (state = initialState, action) => {
         isLoading: false,
       };
     case LOGOUT:
-      /* console.log(state); */
       return {
         ...state,
         isLoggedIn: true,

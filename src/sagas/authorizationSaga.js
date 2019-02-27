@@ -6,19 +6,13 @@ import {
   LOGOUT,
 } from '../constants/Actions';
 import { signInWithGoogleAsync, signOut } from '../helpers/authHelpers';
-import { /* AUTH_LOADING, */ AUTH_STACK } from '../constants/Routes';
+import { AUTH_STACK } from '../constants/Routes';
 import NavigatorService from '../services/navigator';
 
 function* login(action) {
   try {
-    /* console.log('signIn With GoogleAsync...'); */
     yield call(signInWithGoogleAsync, action.payload);
-    /* console.log('Firebase sign in complete'); */
-    /* yield put(actions.authActions.loginSuccess());
-    console.log('login success');
-    yield NavigatorService.navigate(AUTH_LOADING); */
   } catch (err) {
-    /* console.log('login failed'); */
     yield put(actions.authActions.loginFail(err.message));
     yield NavigatorService.navigate(AUTH_STACK);
   }
@@ -27,10 +21,7 @@ function* login(action) {
 function* logout() {
   try {
     yield call(signOut);
-    /* console.log('Firebase sign out complete'); */
     yield put(actions.authActions.logoutSuccess());
-    /* console.log('logout success'); */
-    // yield NavigatorService.navigate(AUTH_STACK);
   } catch (err) {
     yield put(actions.authActions.logoutFail(err));
   }

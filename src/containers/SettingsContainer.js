@@ -29,7 +29,6 @@ class SettingsContainer extends PureComponent {
     }
 
     user = JSON.parse(await AsyncStorage.getItem('@UserStore:USER')) || getUser();
-    // console.log(user);
     const settingsMock = [
       {
         id: 'Api',
@@ -168,7 +167,6 @@ class SettingsContainer extends PureComponent {
 
   handleClick() {
     const onSignOut = this.props;
-    /* console.log('HEREE'); */
     onSignOut.onSignOut();
   }
 
