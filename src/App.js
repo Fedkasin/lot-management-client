@@ -65,7 +65,6 @@ class App extends React.Component {
     });
 
     const TOKEN = await getPushToken();
-
     await AsyncStorage.setItem('@RootStore:NOTIFICATIONS_TOKEN', TOKEN);
 
     this._notificationSubscription = Notifications.addListener(this._handleNotification);

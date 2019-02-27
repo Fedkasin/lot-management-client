@@ -6,14 +6,12 @@ import {
   LOGOUT,
 } from '../constants/Actions';
 import { signInWithGoogleAsync, signOut } from '../helpers/authHelpers';
-import { APP_TAB, AUTH_STACK } from '../constants/Routes';
+import { AUTH_STACK } from '../constants/Routes';
 import NavigatorService from '../services/navigator';
 
 function* login(action) {
   try {
-    const user = yield call(signInWithGoogleAsync, action.payload);
-    yield put(actions.authActions.loginSuccess(user));
-    yield NavigatorService.navigate(APP_TAB);
+    yield call(signInWithGoogleAsync, action.payload);
   } catch (err) {
     yield put(actions.authActions.loginFail(err.message));
     yield NavigatorService.navigate(AUTH_STACK);

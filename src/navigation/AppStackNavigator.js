@@ -15,7 +15,6 @@ import FilterScreen from '../screens/FilterScreen';
 
 const SettingsStack = createStackNavigator({
   [SETTINGS_SCREEN]: SettingsScreen,
-  [FILTER_SCREEN]: FilterScreen,
 });
 
 SettingsStack.navigationOptions = {
@@ -73,9 +72,14 @@ HouseWatchLotsStack.navigationOptions = {
   ),
 };
 
-export default createBottomTabNavigator({
-  SettingsStack,
-  CarLotsStack,
-  HouseLotsStack,
-  HouseWatchLotsStack,
-});
+export default createBottomTabNavigator(
+  {
+    SettingsStack,
+    CarLotsStack,
+    HouseLotsStack,
+    HouseWatchLotsStack,
+  },
+  {
+    initialRouteName: 'SettingsStack',
+  },
+);

@@ -4,7 +4,7 @@ import {
 
 const initialState = {
   settings: [],
-  isFetching: false,
+  isLoading: false,
   error: null,
 };
 
@@ -22,13 +22,13 @@ const settingsReducer = (state = initialState, action) => {
     case FETCH_SETTINGS:
       return {
         ...state,
-        isFetching: true,
+        isLoading: true,
       };
     case FETCH_SETTINGS_SUCCESS: {
       return {
         ...state,
         settings: action.payload,
-        isFetching: false,
+        isLoading: false,
       };
     }
     case FETCH_SETTINGS_FAIL:
@@ -36,7 +36,7 @@ const settingsReducer = (state = initialState, action) => {
         ...state,
         error: action.error,
         settings: [],
-        isFetching: false,
+        isLoading: false,
       };
     default:
       return state;
