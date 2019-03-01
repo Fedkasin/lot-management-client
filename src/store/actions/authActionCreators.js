@@ -1,5 +1,5 @@
 import {
-  LOGIN, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL,
+  LOGIN, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL, CHECK_IF_LOGGED_IN,
 } from '../constants/Actions';
 
 export const login = config => ({
@@ -28,4 +28,8 @@ export const logoutSuccess = () => ({
 export const logoutFail = err => ({
   type: LOGOUT_FAIL,
   error: err,
+});
+
+export const checkIfLoggedIn = () => ({
+  type: CHECK_IF_LOGGED_IN,
 });

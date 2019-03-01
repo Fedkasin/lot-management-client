@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import {
   Permissions,
   Notifications,
@@ -8,17 +8,14 @@ import {
 import {
   Platform, StatusBar, StyleSheet, View, AsyncStorage,
 } from 'react-native';
-import { createStore, applyMiddleware, compose } from 'redux';
-import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
 import firebase from 'firebase';
 
-import actions from './actions/index';
-import AppNavigator from './navigation/AppNavigator';
-import reducers from './reducers/index';
-import rootSaga from './sagas/root';
-import NavigatorService from './services/navigator';
-import { firebaseConfig } from './constants/Config';
+import actions from './src/store/actions/index';
+import RootSwitchNavigator from './src/router/index';
+import { firebaseConfig } from './src/constants/Config';
+import initStore from './src/store/index';
+import sagaService from './src/services/sagaService';
 
 const styles = StyleSheet.create({
   container: {
@@ -27,16 +24,9 @@ const styles = StyleSheet.create({
   },
 });
 
+const store = initStore();
+
 firebase.initializeApp(firebaseConfig);
-
-const sagaMiddleware = createSagaMiddleware();
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(
-  reducers,
-  composeEnhancers(applyMiddleware(sagaMiddleware)),
-);
-
 
 const getPushToken = async () => {
   const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
@@ -51,17 +41,20 @@ const getPushToken = async () => {
   return Notifications.getExpoPushTokenAsync();
 };
 
-sagaMiddleware.run(rootSaga);
+class App extends PureComponent {
+  static attatchNavigatorService(rootSwitchNavigatorRef) {
+    console.log('Attached nav ', rootSwitchNavigatorRef);
+    sagaService.setNavigatorContainer(rootSwitchNavigatorRef);
+  };
 
-class App extends React.Component {
   state = {
     assetsLoaded: false,
   };
 
   async componentDidMount() {
     await Font.loadAsync({
-      sans: require('../assets/fonts/NotoSansTC-Regular.otf'),
-      'sans-bold': require('../assets/fonts/NotoSansTC-Black.otf'),
+      sans: require('./assets/fonts/NotoSansTC-Regular.otf'),
+      'sans-bold': require('./assets/fonts/NotoSansTC-Black.otf'),
     });
 
     const TOKEN = await getPushToken();
@@ -91,8 +84,11 @@ class App extends React.Component {
           {assetsLoaded && (
           <View style={styles.container}>
             {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-            <AppNavigator
-              ref={navigatorRef => NavigatorService.setContainer(navigatorRef)}
+            <RootSwitchNavigator
+              ref={nav => {
+                console.log('NNAAAAVV ', nav);
+                // App.attatchNavigatorService(nav)
+              }}
             />
           </View>
           )}
@@ -102,4 +98,4 @@ class App extends React.Component {
   }
 }
 
-export default registerRootComponent(App);
+export default App;

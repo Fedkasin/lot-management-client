@@ -1,17 +1,17 @@
-import { createAppContainer, createStackNavigator } from 'react-navigation';
+import { createSwitchNavigator, createAppContainer } from 'react-navigation';
+
 import AppStackNavigator from './AppStackNavigator';
 import AuthStackNavigatior from './AuthStackNavigator';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 
 import { AUTH_LOADING, AUTH_STACK, APP_TAB } from '../constants/Routes';
 
-export default createAppContainer(createStackNavigator(
+const AppNavigator = createAppContainer(createSwitchNavigator(
   {
     [APP_TAB]: AppStackNavigator,
     [AUTH_STACK]: AuthStackNavigatior,
     [AUTH_LOADING]: AuthLoadingScreen,
-  },
-  {
+  }, {
     initialRouteName: AUTH_LOADING,
     headerMode: 'none',
     navigationOptions: {
@@ -19,3 +19,5 @@ export default createAppContainer(createStackNavigator(
     },
   }
 ));
+
+export default AppNavigator;

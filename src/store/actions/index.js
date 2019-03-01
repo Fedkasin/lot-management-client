@@ -1,4 +1,9 @@
 import {
+  navigate,
+  navigateDeep
+} from './navigationActionCreators';
+
+import {
   fetchCarLots,
   fetchCarLotsSuccess,
   fetchCarLotsFail,
@@ -27,10 +32,15 @@ import {
   logout,
   logoutSuccess,
   logoutFail,
+  checkIfLoggedIn,
 } from './authActionCreators';
 
 export default {
   rootActions: {
+  },
+  navigationActions: {
+    navigate,
+    navigateDeep,
   },
   carLotsActions: {
     fetchCarLots,
@@ -58,5 +68,6 @@ export default {
     logout,
     logoutSuccess,
     logoutFail,
+    checkIfLoggedIn,
   },
 };
