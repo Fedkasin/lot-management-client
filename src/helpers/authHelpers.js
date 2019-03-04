@@ -1,6 +1,5 @@
 import firebase from 'firebase';
 import { Google } from 'expo';
-import { AsyncStorage } from 'react-native';
 
 export const getUser = () => {
   const user = firebase.auth().currentUser;
@@ -10,13 +9,11 @@ export const getUser = () => {
   } : null;
 };
 
-export const isLoggedIn = () => new Promise((resolve, reject) => {
-  firebase.auth().onAuthStateChanged(user => {
-    return user ? resolve({
-      name: user.displayName,
-      photoUrl: user.photoURL,
-    }) : resolve(null);
-  });
+export const isLoggedIn = () => new Promise((resolve) => {
+  firebase.auth().onAuthStateChanged(user => (user ? resolve({
+    name: user.displayName,
+    photoUrl: user.photoURL,
+  }) : resolve(null)));
 });
 
 export const isUserEqual = (googleUser, firebaseUser) => {

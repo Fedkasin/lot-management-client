@@ -1,5 +1,5 @@
 import {
-  appIsReady
+  appIsReady,
 } from './rootActionCreators';
 
 import {
