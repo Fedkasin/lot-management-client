@@ -1,4 +1,4 @@
-import { NAVIGATE, NAVIGATE_DEEP } from '../constants/Actions';
+import { NAVIGATE, NAVIGATE_DEEP, RESET } from '../../constants/Actions';
 
 export const navigate = (routeName = null, params = null, key = null) => ({
   type: NAVIGATE,
@@ -7,5 +7,10 @@ export const navigate = (routeName = null, params = null, key = null) => ({
 
 export const navigateDeep = (routeName = null, params = null) => ({
   type: NAVIGATE_DEEP,
+  payload: { routeName, params },
+});
+
+export const reset = (routeName = null, params = null) => ({
+  type: RESET,
   payload: { routeName, params },
 });

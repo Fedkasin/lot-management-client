@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { FlatList, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 
-import actions from '../actions/index';
+import actions from '../store/actions/index';
 import HouseLotCard from '../components/house/HouseLotCard';
 import BgMessage from '../components/bgmessage/BackgroundMessage';
 

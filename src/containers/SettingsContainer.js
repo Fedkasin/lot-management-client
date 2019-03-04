@@ -6,13 +6,11 @@ import {
 } from 'react-native';
 
 import SettingSectionItem from '../components/settings/SettingSectionItem';
-import actions from '../actions/index';
+import actions from '../store/actions/index';
 import { getUser } from '../helpers/authHelpers';
 import ProfileView from '../components/auth/ProfileView';
 
 const DEFAULT_ADDR = '0e40c705.ngrok.io';
-
-let user = null;
 
 class SettingsContainer extends PureComponent {
   constructor(props) {
@@ -28,7 +26,6 @@ class SettingsContainer extends PureComponent {
       addr = await AsyncStorage.getItem('@InputStore:Address');
     }
 
-    user = JSON.parse(await AsyncStorage.getItem('@UserStore:USER')) || getUser();
     const settingsMock = [
       {
         id: 'Api',
@@ -166,12 +163,12 @@ class SettingsContainer extends PureComponent {
   }
 
   handleClick() {
-    const onSignOut = this.props;
-    onSignOut.onSignOut();
+    const { onSignOut } = this.props;
+    onSignOut();
   }
 
   render() {
-    const { isLoading, settings } = this.props;
+    const { isLoading, settings, user } = this.props;
 
     if (isLoading || !user) {
       return <ActivityIndicator size="large" color="#0000ff" />;
@@ -203,6 +200,7 @@ function mapStateToProps(state) {
   return {
     settings: state.settingsReducers.settings,
     isLoading: state.settingsReducers.isLoading,
+    user: getUser() || state.authReducers.user,
   };
 }
 
@@ -214,7 +212,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 SettingsContainer.propTypes = {
+  user: PropTypes.objectOf(PropTypes.any).isRequired,
   onFetchSettings: PropTypes.func.isRequired,
+  onSignOut: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   settings: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,

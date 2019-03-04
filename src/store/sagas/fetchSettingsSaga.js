@@ -3,7 +3,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 import actions from '../actions/index';
 import {
   FETCH_SETTINGS,
-} from '../constants/Actions';
+} from '../../constants/Actions';
 
 function* fetchSettings(action) {
   try {

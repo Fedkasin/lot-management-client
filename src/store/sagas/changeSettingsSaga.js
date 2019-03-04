@@ -3,7 +3,7 @@ import { AsyncStorage } from 'react-native';
 
 import {
   CHANGE_SETTING,
-} from '../constants/Actions';
+} from '../../constants/Actions';
 
 function* changeSetting(action) {
   try {

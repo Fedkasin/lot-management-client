@@ -1,42 +1,47 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 import actions from '../actions/index';
+import { navigate } from '../actions/navigationActionCreators';
 import {
   LOGIN,
   LOGOUT,
   CHECK_IF_LOGGED_IN,
-} from '../constants/Actions';
-import { signInWithGoogleAsync, signOut, getUser } from '../helpers/authHelpers';
-import { APP_TAB, AUTH_STACK } from '../constants/Routes';
-import NavigatorService from '../services/navigator';
+} from '../../constants/Actions';
+import { signInWithGoogleAsync, signOut, isLoggedIn } from '../../helpers/authHelpers';
+import { APP_TAB, AUTH_STACK } from '../../constants/Routes';
 
 function* login(action) {
   try {
-    yield call(signInWithGoogleAsync, action.payload);
+    const data = yield call(signInWithGoogleAsync, action.payload);
+    yield put(actions.authActions.loginSuccess(data.user));
+    yield put(navigate(APP_TAB));
   } catch (err) {
     yield put(actions.authActions.loginFail(err.message));
+    yield put(navigate(AUTH_STACK));
   }
 }
 
 function* logout() {
   try {
+    yield put(navigate(AUTH_STACK));
     yield call(signOut);
     yield put(actions.authActions.logoutSuccess());
   } catch (err) {
     yield put(actions.authActions.logoutFail(err));
+    yield put(navigate(APP_TAB));
   }
 }
 
 function* checkIfLoggedIn() {
   try {
-    const user = yield call(getUser);
+    const user = yield call(isLoggedIn);
     if (user) {
-      yield NavigatorService.navigate(APP_TAB);
+      yield put(navigate(APP_TAB));
     } else {
-      yield NavigatorService.navigate(AUTH_STACK);
+      yield put(navigate(AUTH_STACK));
     }
   } catch (err) {
-    yield NavigatorService.navigate(AUTH_STACK);
+    yield put(navigate(AUTH_STACK));
   }
 }
 
@@ -49,6 +54,5 @@ export function* logoutSaga() {
 }
 
 export function* loggedInSaga() {
-  console.log('loged in saga');
   yield takeLatest(CHECK_IF_LOGGED_IN, checkIfLoggedIn);
 }

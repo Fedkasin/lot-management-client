@@ -5,7 +5,7 @@ import {
   UPDATE_HOUSE_WATCH_LOTS,
   UPDATE_HOUSE_WATCH_LOTS_SUCCESS,
   UPDATE_HOUSE_WATCH_LOTS_FAIL,
-} from '../constants/Actions';
+} from '../../constants/Actions';
 
 const initialState = {
   isFetching: false,

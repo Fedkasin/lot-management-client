@@ -1,6 +1,11 @@
 import {
+  appIsReady
+} from './rootActionCreators';
+
+import {
   navigate,
-  navigateDeep
+  navigateDeep,
+  reset,
 } from './navigationActionCreators';
 
 import {
@@ -33,14 +38,17 @@ import {
   logoutSuccess,
   logoutFail,
   checkIfLoggedIn,
+  showFirstSplashScreen,
 } from './authActionCreators';
 
 export default {
   rootActions: {
+    appIsReady,
   },
   navigationActions: {
     navigate,
     navigateDeep,
+    reset,
   },
   carLotsActions: {
     fetchCarLots,
@@ -69,5 +77,6 @@ export default {
     logoutSuccess,
     logoutFail,
     checkIfLoggedIn,
+    showFirstSplashScreen,
   },
 };
