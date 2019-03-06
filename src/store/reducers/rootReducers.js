@@ -1,9 +1,16 @@
+import { APP_READY } from '../../constants/Actions';
+
 const initialState = {
-  addr: null,
+  isAppReady: false,
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case APP_READY:
+      return {
+        ...state,
+        isAppReady: true,
+      };
     default:
       return state;
   }

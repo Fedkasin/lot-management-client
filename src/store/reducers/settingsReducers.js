@@ -1,6 +1,6 @@
 import {
   FETCH_SETTINGS, FETCH_SETTINGS_SUCCESS, FETCH_SETTINGS_FAIL, CHANGE_SETTING,
-} from '../constants/Actions';
+} from '../../constants/Actions';
 
 const initialState = {
   settings: [],

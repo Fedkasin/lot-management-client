@@ -1,4 +1,4 @@
-import { FETCH_CAR_LOTS, FETCH_CAR_LOTS_SUCCESS, FETCH_CAR_LOTS_FAIL } from '../constants/Actions';
+import { FETCH_CAR_LOTS, FETCH_CAR_LOTS_SUCCESS, FETCH_CAR_LOTS_FAIL } from '../../constants/Actions';
 
 const initialState = {
   isFetching: false,

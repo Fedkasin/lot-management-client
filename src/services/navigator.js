@@ -6,14 +6,34 @@ function setContainer(routerContainer) {
   container = routerContainer;
 }
 
-function navigate(routeName, params) {
+function reset(routeName, params) {
   container.dispatch(
-    NavigationActions.navigate({
-      type: 'Navigation/NAVIGATE',
-      routeName,
-      params,
+    NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({
+          type: 'Navigation/NAVIGATE',
+          routeName,
+          params,
+        }),
+      ],
     }),
   );
+}
+
+function navigate(routeName, params, key) {
+  try {
+    container.dispatch(
+      NavigationActions.navigate({
+        type: 'Navigation/NAVIGATE',
+        routeName,
+        params,
+        key,
+      }),
+    );
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 function navigateDeep(actions) {
@@ -46,10 +66,30 @@ function getCurrentRouteName(route = getCurrentRoute()) {
   return routeName;
 }
 
+function getCurrentRouteParams(route = getCurrentRoute()) {
+  const { routes, index, params } = route;
+
+  if (routes) return getCurrentRouteParams(routes[index]);
+
+  return params;
+}
+
+function getCurrentRouteTitle(route = getCurrentRoute()) {
+  const { routes, index, params } = route;
+
+  if (routes) return getCurrentRouteTitle(routes[index]);
+
+  return params.item.title;
+}
+
+
 export default {
   setContainer,
   navigateDeep,
   navigate,
+  reset,
   getCurrentRoute,
   getCurrentRouteName,
+  getCurrentRouteParams,
+  getCurrentRouteTitle,
 };

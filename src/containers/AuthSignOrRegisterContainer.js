@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import { DangerZone } from 'expo';
 import { googleAuthorizationConfig } from '../constants/Config';
-import actions from '../actions';
+import actions from '../store/actions';
 import ErrorContainer from '../components/core/ErrorContainer';
 import IcoButton from '../components/core/IcoButton';
 
