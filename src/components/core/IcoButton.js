@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  StyleSheet, Text, View, TouchableOpacity, Platform,
+  StyleSheet, Text, TouchableOpacity, Platform,
 } from 'react-native';
 import IonIcon from './IonIcon';
 
@@ -18,10 +18,11 @@ function IcoButton({
       alignItems: 'center',
       justifyContent: 'center',
       flexDirection: 'row',
-      width: '90%',
-      height: 50,
+      width: '100%',
+      height: 45,
       backgroundColor: [color],
       marginTop: 9,
+      zIndex: 1,
     },
     text: {
       fontSize: 18,
@@ -31,15 +32,13 @@ function IcoButton({
     },
   });
   return (
-    <View style={styles.bgButton}>
-      <TouchableOpacity onPress={onPress} style={[styles.button, styles.colorSuccess, styles.textLight]}>
-        <IonIcon
-          name={Platform.OS === 'ios' ? iosIcon : otherIcon}
-          color={iconColor}
-        />
-        <Text style={[styles.text, styles.textLight]}>{text}</Text>
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity onPress={onPress} style={[styles.button, styles.colorSuccess, styles.textLight]}>
+      <IonIcon
+        name={Platform.OS === 'ios' ? iosIcon : otherIcon}
+        color={iconColor}
+      />
+      <Text style={[styles.text, styles.textLight]}>{text}</Text>
+    </TouchableOpacity>
   );
 }
 

@@ -5,7 +5,7 @@ import axios from 'axios';
 import actions from '../actions/index';
 import {
   FETCH_HOUSE_LOTS,
-} from '../constants/Actions';
+} from '../../constants/Actions';
 
 function* fetchHouseLots() {
   try {

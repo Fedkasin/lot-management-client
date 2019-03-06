@@ -1,12 +1,37 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Alert, ActivityIndicator } from 'react-native';
-import { withNavigation } from 'react-navigation';
-
-import AuthSignOrRegister from '../components/auth/AuthSignOrRegister';
+import {
+  Alert, ActivityIndicator, StyleSheet, Text, View,
+} from 'react-native';
+import { DangerZone } from 'expo';
 import { googleAuthorizationConfig } from '../constants/Config';
-import actions from '../actions';
+import actions from '../store/actions';
+import ErrorContainer from '../components/core/ErrorContainer';
+import IcoButton from '../components/core/IcoButton';
+
+const { Lottie } = DangerZone;
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    marginTop: 20,
+    backgroundColor: '#fff',
+  },
+  text: {
+    fontSize: 21,
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  lottieLogo: {
+    width: '100%',
+    height: '40%',
+    marginTop: 10,
+    marginBottom: 20,
+  },
+});
 
 class AuthSignOrRegisterContainer extends PureComponent {
   constructor(props) {
@@ -24,17 +49,62 @@ class AuthSignOrRegisterContainer extends PureComponent {
   }
 
   render() {
-    const { error, isLogging } = this.props;
-    if (isLogging) {
+    const {
+      error, isLoading,
+    } = this.props;
+    if (isLoading) {
       return <ActivityIndicator size="large" color="#0000ff" style={{ flex: 1 }} />;
     }
-    return <AuthSignOrRegister onSignIn={this.onSignIn} onSignUp={this.onSignUp} authError={error} />;
+    return (
+      <View style={styles.container}>
+        <Lottie
+          ref={animation => {
+            if (animation) animation.play();
+          }}
+          source={require('../../assets/animation/house.json')}
+          autoPlay
+          loop={false}
+          style={styles.lottieLogo}
+        />
+        <Text style={[styles.text]}>Please log in using one of your existing accounts:</Text>
+        <View style={styles.container}>
+          <IcoButton
+            text="Google"
+            color="#fff"
+            onPress={this.onSignIn}
+            textColor="#131313"
+            iconColor="#131313"
+            iosIcon="logo-google"
+            otherIcon="logo-google"
+          />
+          <IcoButton
+            text="Github"
+            color="#fff"
+            onPress={this.onSignUp}
+            textColor="#131313"
+            iconColor="#131313"
+            iosIcon="logo-github"
+            otherIcon="logo-github"
+          />
+          <IcoButton
+            text="Facebook"
+            color="#fff"
+            onPress={this.onSignUp}
+            textColor="#131313"
+            iconColor="#131313"
+            iosIcon="logo-facebook"
+            otherIcon="logo-facebook"
+          />
+          { error && <ErrorContainer error={error} /> }
+        </View>
+      </View>
+    );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    isLogging: state.authReducers.isLogging,
+    isLoading: state.authReducers.isLoading,
     authToken: state.authReducers.authToken,
     error: state.authReducers.error ? state.authReducers.error : null,
   };
@@ -47,13 +117,14 @@ function mapDispatchToProps(dispatch) {
 }
 
 AuthSignOrRegisterContainer.propTypes = {
-  onSignIn: PropTypes.func.isRequired,
-  isLogging: PropTypes.bool.isRequired,
+  onSignIn: PropTypes.func,
+  isLoading: PropTypes.bool.isRequired,
   error: PropTypes.string,
 };
 
 AuthSignOrRegisterContainer.defaultProps = {
   error: null,
+  onSignIn: null,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(AuthSignOrRegisterContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(AuthSignOrRegisterContainer);

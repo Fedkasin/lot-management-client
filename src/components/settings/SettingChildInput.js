@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {
   View, StyleSheet, Text, TextInput,
 } from 'react-native';
-import actions from '../../actions/index';
+import actions from '../../store/actions/index';
 
 const styles = StyleSheet.create({
   container: {

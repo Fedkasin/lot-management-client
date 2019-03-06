@@ -1,42 +1,23 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import {
   Permissions,
   Notifications,
-  Font,
   registerRootComponent,
 } from 'expo';
-import {
-  Platform, StatusBar, StyleSheet, View, AsyncStorage,
-} from 'react-native';
-import { createStore, applyMiddleware, compose } from 'redux';
-import createSagaMiddleware from 'redux-saga';
+import { AsyncStorage } from 'react-native';
 import { Provider } from 'react-redux';
 import firebase from 'firebase';
 
-import actions from './actions/index';
-import AppNavigator from './navigation/AppNavigator';
-import reducers from './reducers/index';
-import rootSaga from './sagas/root';
-import NavigatorService from './services/navigator';
+import actions from './store/actions/index';
+import AppContainer from './router';
 import { firebaseConfig } from './constants/Config';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});
+import initStore from './store';
+import sagaService from './services/sagaService';
+import AssetsLoader from './containers/AssetsLoaderContainer';
 
 firebase.initializeApp(firebaseConfig);
 
-const sagaMiddleware = createSagaMiddleware();
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(
-  reducers,
-  composeEnhancers(applyMiddleware(sagaMiddleware)),
-);
-
+const store = initStore();
 
 const getPushToken = async () => {
   const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
@@ -51,30 +32,16 @@ const getPushToken = async () => {
   return Notifications.getExpoPushTokenAsync();
 };
 
-sagaMiddleware.run(rootSaga);
-
-class App extends React.Component {
-  state = {
-    assetsLoaded: false,
-  };
-
+class App extends PureComponent {
   async componentDidMount() {
-    await Font.loadAsync({
-      sans: require('../assets/fonts/NotoSansTC-Regular.otf'),
-      'sans-bold': require('../assets/fonts/NotoSansTC-Black.otf'),
-    });
-
     const TOKEN = await getPushToken();
-
     await AsyncStorage.setItem('@RootStore:NOTIFICATIONS_TOKEN', TOKEN);
 
     this._notificationSubscription = Notifications.addListener(this._handleNotification);
-
-    this.setState({ assetsLoaded: true });
   }
 
-  async componentWillUnmount() {
-    await AsyncStorage.clear();
+  attachNavigatorService(rootSwitchNavigatorRef) {
+    sagaService.setNavigatorContainer(rootSwitchNavigatorRef);
   }
 
   _handleNotification(notification) {
@@ -85,19 +52,11 @@ class App extends React.Component {
   }
 
   render() {
-    const { assetsLoaded } = this.state;
     return (
       <Provider store={store}>
-        <View style={styles.container}>
-          {assetsLoaded && (
-          <View style={styles.container}>
-            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-            <AppNavigator
-              ref={navigatorRef => NavigatorService.setContainer(navigatorRef)}
-            />
-          </View>
-          )}
-        </View>
+        <AssetsLoader>
+          <AppContainer ref={this.attachNavigatorService} />
+        </AssetsLoader>
       </Provider>
     );
   }

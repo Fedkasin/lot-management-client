@@ -5,10 +5,11 @@ import {
   LOGOUT,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
-} from '../constants/Actions';
+} from '../../constants/Actions';
 
 const initialState = {
-  isLogging: false,
+  isLoading: false,
+  isLoggedIn: false,
   user: null,
   error: null,
 };
@@ -18,36 +19,43 @@ const authReducers = (state = initialState, action) => {
     case LOGIN:
       return {
         ...state,
-        isLogging: true,
+        isLoggedIn: false,
+        isLoading: true,
       };
     case LOGIN_SUCCESS:
       return {
         ...state,
         error: null,
         user: action.payload,
-        isLogging: false,
+        isLoggedIn: true,
+        isLoading: false,
       };
     case LOGIN_FAIL:
       return {
         ...state,
         error: action.error,
         user: null,
-        isLogging: false,
+        isLoggedIn: false,
+        isLoading: false,
       };
     case LOGOUT:
       return {
         ...state,
+        isLoading: true,
       };
     case LOGOUT_SUCCESS:
       return {
         ...state,
         user: null,
         err: null,
+        isLoggedIn: false,
+        isLoading: false,
       };
     case LOGOUT_FAIL:
       return {
         ...state,
-        user: null,
+        isLoading: false,
+        isLoggedIn: true,
         err: action.error,
       };
     default:

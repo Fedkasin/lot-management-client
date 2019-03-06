@@ -3,7 +3,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 import actions from '../actions/index';
 import {
   UPDATE_HOUSE_WATCH_LOTS,
-} from '../constants/Actions';
+} from '../../constants/Actions';
 
 function* updateWatchHouseLots(action) {
   try {

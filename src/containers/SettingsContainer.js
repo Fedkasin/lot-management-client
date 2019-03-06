@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  ScrollView, ActivityIndicator, AsyncStorage, View, Image, Text, StyleSheet,
+  ScrollView, ActivityIndicator, AsyncStorage,
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
 
 import SettingSectionItem from '../components/settings/SettingSectionItem';
-import actions from '../actions/index';
+import actions from '../store/actions/index';
 import { getUser } from '../helpers/authHelpers';
+import ProfileView from '../components/auth/ProfileView';
 
 const DEFAULT_ADDR = '0e40c705.ngrok.io';
 
-class SettingsContainer extends React.Component {
+class SettingsContainer extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
   async componentDidMount() {
     const { onFetchSettings } = this.props;
     let addr = await AsyncStorage.getItem('@InputsStore:Address');
@@ -157,45 +162,28 @@ class SettingsContainer extends React.Component {
     onFetchSettings(settingsMock);
   }
 
+  handleClick() {
+    const { onSignOut } = this.props;
+    onSignOut();
+  }
+
   render() {
-    const { isFetching, settings, user } = this.props;
-    const styles = StyleSheet.create({
-      shadow: {
-        width: 110,
-        height: 110,
-        zIndex: 2,
-        borderRadius: 200,
-        marginTop: -150,
-      },
-    });
+    const { isLoading, settings, user } = this.props;
+
+    if (isLoading || !user) {
+      return <ActivityIndicator size="large" color="#0000ff" />;
+    }
+
     const userName = user.name || user.displayName;
     const userAvatar = user.photoUrl || user.photoURL;
-    if (isFetching) {
-      return <ActivityIndicator />;
-    }
+
     return (
       <ScrollView style={{ backgroundColor: '#fff' }}>
-        <View style={{ alignItems: 'center', marginTop: -550, marginBottom: 110 }}>
-          <View
-            style={{
-              zIndex: 1, width: '200%', height: 800, backgroundColor: '#efefef', borderRadius: 100000,
-            }}
-          />
-          <Text style={{
-            zIndex: 2, fontSize: 24, color: '#131313', marginTop: -80,
-          }}
-          >
-            { userName }
-          </Text>
-          <View style={styles.shadow}>
-            <Image
-              source={{ uri: userAvatar }}
-              style={{
-                width: 100, height: 100, borderRadius: 100, backgroundColor: '#999',
-              }}
-            />
-          </View>
-        </View>
+        <ProfileView
+          name={userName}
+          avatar={userAvatar}
+          onClick={this.handleClick}
+        />
         {settings.map((value, key) => (
           <SettingSectionItem
             key={value.id}
@@ -211,20 +199,23 @@ class SettingsContainer extends React.Component {
 function mapStateToProps(state) {
   return {
     settings: state.settingsReducers.settings,
-    user: getUser() || state.authReducers.user.user,
-    isFetching: state.settingsReducers.isFetching,
+    isLoading: state.settingsReducers.isLoading,
+    user: getUser() || state.authReducers.user,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     onFetchSettings: data => dispatch(actions.settingsActions.fetchSettings(data)),
+    onSignOut: () => dispatch(actions.authActions.logout()),
   };
 }
 
 SettingsContainer.propTypes = {
+  user: PropTypes.objectOf(PropTypes.any).isRequired,
   onFetchSettings: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
+  onSignOut: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   settings: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     label: PropTypes.string,
@@ -271,7 +262,6 @@ SettingsContainer.propTypes = {
       })),
     }),
   })).isRequired,
-  user: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(SettingsContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsContainer);

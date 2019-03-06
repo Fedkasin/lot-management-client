@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { ScrollView } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { withNavigation, NavigationEvents } from 'react-navigation';
 import PropTypes from 'prop-types';
 import SettingSectionItem from '../components/settings/SettingSectionItem';
 
@@ -17,6 +17,9 @@ class FilterContainer extends PureComponent {
             setting={value}
           />
         ))}
+        <NavigationEvents
+          onDidBlur={() => navigation.pop(null)}
+        />
       </ScrollView>
     );
   }

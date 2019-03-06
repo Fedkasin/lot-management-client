@@ -4,7 +4,7 @@ import axios from 'axios';
 import actions from '../actions/index';
 import {
   FETCH_CAR_LOTS,
-} from '../constants/Actions';
+} from '../../constants/Actions';
 
 function* fetchCarLots(action) {
   try {

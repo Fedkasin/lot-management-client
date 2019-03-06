@@ -1,6 +1,6 @@
 import {
   FETCH_SETTINGS, FETCH_SETTINGS_FAIL, FETCH_SETTINGS_SUCCESS, CHANGE_SETTING,
-} from '../constants/Actions';
+} from '../../constants/Actions';
 
 export const fetchSettings = data => ({
   type: FETCH_SETTINGS,
