@@ -1,3 +1,5 @@
+import axios from 'axios';
+import { AsyncStorage } from 'react-native';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 import actions from '../actions/index';
@@ -14,6 +16,28 @@ function* login(action) {
   try {
     const data = yield call(signInWithGoogleAsync, action.payload);
     yield put(actions.authActions.loginSuccess(data.user));
+    const {
+      accessToken,
+      refreshToken,
+      user: { id },
+    } = data;
+    const expo = {
+      pushToken: yield call(AsyncStorage.getItem, '@RootStore:NOTIFICATIONS_TOKEN'),
+      uniqueId: 'TOP',
+      deviceId: 'BATYA',
+      systemName: 'YOBA OS 1.0',
+    };
+
+    const body = {
+      auth: {
+        access_token: accessToken,
+        refresh_token: refreshToken,
+        uid: id,
+      },
+      expo,
+    };
+    const API_ADDRESS = yield call(AsyncStorage.getItem, '@InputStore:Address');
+    yield call(axios.post, `https://${API_ADDRESS}/users`, body);
     yield put(navigate(APP_TAB));
   } catch (err) {
     yield put(actions.authActions.loginFail(err.message));
