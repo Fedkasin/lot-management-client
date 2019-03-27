@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { FlatList, ActivityIndicator } from 'react-native';
+import { FlatList, ActivityIndicator, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 import HouseLotCard from '../components/house/HouseLotCard';
@@ -10,17 +10,18 @@ class HouseWatchLotsContainer extends React.Component {
   render() {
     const { isFetching, houseWatchLots } = this.props;
     if (!houseWatchLots.length && isFetching) return <ActivityIndicator size="large" color="#0000ff" />;
-    if (!houseWatchLots.length && !isFetching) return <BgMessage text="There are no new houses" />;
     return (
-      <FlatList
-        data={houseWatchLots}
-        renderItem={({ item }) => <HouseLotCard item={item} />}
-        keyExtractor={item => item.id.toString()}
-        onRefresh={this.handleRefresh}
-        onEndReached={this.handleScrollEnd}
-        onEndReachedThreshold={0}
-        refreshing={isFetching}
-      />
+      <View>
+        <FlatList
+          data={houseWatchLots}
+          renderItem={({ item }) => <HouseLotCard item={item} />}
+          keyExtractor={item => item.id.toString()}
+          onEndReached={this.handleScrollEnd}
+          onEndReachedThreshold={0}
+          refreshing={isFetching}
+          ListEmptyComponent={() => <BgMessage text="There are no new houses" />}
+        />
+      </View>
     );
   }
 }

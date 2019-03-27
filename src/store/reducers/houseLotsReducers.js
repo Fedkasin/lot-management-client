@@ -27,14 +27,14 @@ const houseLotsReducer = (state = initialState, action) => {
       return {
         ...state,
         error: null,
-        houseWatchLots: [...action.payload],
+        houseWatchLots: [...state.houseWatchLots, ...action.payload],
         isFetching: false,
       };
     case UPDATE_HOUSE_WATCH_LOTS_FAIL:
       return {
         ...state,
         error: action.error,
-        houseWatchLots: [],
+        houseWatchLots: [...state.houseWatchLots],
         isFetching: false,
       };
     case FETCH_HOUSE_LOTS:
@@ -53,7 +53,7 @@ const houseLotsReducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.error,
-        houseLots: [],
+        houseLots: [...state.houseLots],
         isFetching: false,
       };
     default:

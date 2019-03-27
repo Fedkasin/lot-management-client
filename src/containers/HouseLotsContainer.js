@@ -26,7 +26,6 @@ class HouseLotsContainer extends PureComponent {
   render() {
     const { houseLots, isFetching } = this.props;
     if (!houseLots.length && isFetching) return <ActivityIndicator size="large" color="#0000ff" />;
-    if (!houseLots.length && !isFetching) return <BgMessage text="There are no houses" />;
     return (
       <FlatList
         data={houseLots}
@@ -36,6 +35,7 @@ class HouseLotsContainer extends PureComponent {
         onEndReached={this.handleScrollEnd}
         onEndReachedThreshold={0}
         refreshing={isFetching}
+        ListEmptyComponent={() => <BgMessage text="There are no houses" />}
       />
     );
   }

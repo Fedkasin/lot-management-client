@@ -9,6 +9,7 @@ import SettingChildSelect from './SettingChildSelect';
 import SettingChildButton from './SettingChildButton';
 import SettingChildCheckbox from './SettingChildCheckbox';
 import SettingChildInput from './SettingChildInput';
+import SettingChildSlider from './SettingChildSlider';
 
 const styles = StyleSheet.create({
   container: {
@@ -75,6 +76,16 @@ class SettingSectionItem extends React.PureComponent {
             {setting.children.buttons
                         && setting.children.buttons.map(value => (
                           <SettingChildButton
+                            key={value.id}
+                            child={value}
+                          />
+                        ))}
+          </View>
+
+          <View style={styles.settingButtonsContainer}>
+            {setting.children.sliders
+                        && setting.children.sliders.map(value => (
+                          <SettingChildSlider
                             key={value.id}
                             child={value}
                           />

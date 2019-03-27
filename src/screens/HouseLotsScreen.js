@@ -13,28 +13,16 @@ class HouseLotsScreen extends React.Component {
         filters={[
           {
             id: 'Placeholder',
-            label: 'Местонахождение',
+            label: 'Комнаты',
             children: {
               selects: {
                 fromToSelects: [],
                 nestedSelects: [
                   {
                     id: 'Country',
-                    options: ['Все страны', 'Беларусь (жыве!)', 'Россия (слава руси!)', 'Украина (слава героям!)', 'Казахстан(уважайте)', 'США (fuck yeah!)'],
-                    value: 'Все страны',
-                    label: 'Страна',
-                  },
-                  {
-                    id: 'Region',
-                    options: ['Все области', 'Пока все одинаковые', 'Пока все одинаковые', 'Пока все одинаковые', 'Пока все одинаковые', 'Пока все одинаковые'],
-                    value: 'Все области',
-                    label: 'Область',
-                  },
-                  {
-                    id: 'Town',
-                    options: ['Все области', 'Пока все одинаковые', 'Пока все одинаковые', 'Пока все одинаковые', 'Пока все одинаковые'],
-                    value: 'Все области',
-                    label: 'Город',
+                    options: ['1', '2', '3', '4+'],
+                    value: 'Любое',
+                    label: 'Количество',
                   },
                 ],
                 singleSelects: [],
@@ -52,7 +40,7 @@ class HouseLotsScreen extends React.Component {
                 fromToSelects: [
                   {
                     id: 'PriceFrom',
-                    options: ['Любая', '1000', '2000', '3000', '4000', '5000', '10000'],
+                    options: ['50', '1000', '2000', '3000', '4000', '5000', '5500'],
                     value: 'Любая',
                     label: 'От',
                   },
@@ -66,29 +54,12 @@ class HouseLotsScreen extends React.Component {
                 nestedSelects: [],
                 singleSelects: [],
               },
-              buttons: [
+              sliders: [
                 {
-                  id: 'Exchange',
-                  options: ['BYN', 'USD', 'EUR'],
-                  value: 'BYN',
-                  label: 'Валюта',
+                  id: 'priceFromSlider',
+                  text: 'PriceFrom',
                 },
               ],
-              checkboxes: [
-                {
-                  id: 'IsExchangeble',
-                  options: null,
-                  value: false,
-                  label: 'Обмен',
-                },
-                {
-                  id: 'WithDiagnostic',
-                  options: null,
-                  value: false,
-                  label: 'С диагностикой',
-                },
-              ],
-              inputs: [],
             },
           },
         ]}

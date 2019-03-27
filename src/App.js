@@ -36,7 +36,6 @@ class App extends PureComponent {
   async componentDidMount() {
     const TOKEN = await getPushToken();
     await AsyncStorage.setItem('@RootStore:NOTIFICATIONS_TOKEN', TOKEN);
-
     this._notificationSubscription = Notifications.addListener(this._handleNotification);
   }
 
@@ -45,6 +44,7 @@ class App extends PureComponent {
   }
 
   _handleNotification(notification) {
+    store.dispatch(actions.navigate('HOUSE_WATCH_LOTS_SCREEN'));
     const splitted = notification.data.type.split('-');
     if (splitted[0] === 'update') {
       store.dispatch(actions.houseLotsActions.updateHouseWatchLots(notification.data.apartments));

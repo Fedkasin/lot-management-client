@@ -10,7 +10,7 @@ import actions from '../store/actions/index';
 import { getUser } from '../helpers/authHelpers';
 import ProfileView from '../components/auth/ProfileView';
 
-const DEFAULT_ADDR = '0e40c705.ngrok.io';
+const DEFAULT_ADDR = 'a1a26ef2.ngrok.i';
 
 class SettingsContainer extends PureComponent {
   constructor(props) {
@@ -25,7 +25,6 @@ class SettingsContainer extends PureComponent {
       await AsyncStorage.setItem('@InputStore:Address', DEFAULT_ADDR);
       addr = await AsyncStorage.getItem('@InputStore:Address');
     }
-
     const settingsMock = [
       {
         id: 'Api',
@@ -48,113 +47,6 @@ class SettingsContainer extends PureComponent {
               type: 'text',
             },
           ],
-        },
-      },
-      {
-        id: 'Price',
-        label: 'Цена',
-        children: {
-          selects: {
-            fromToSelects: [
-              {
-                id: 'PriceFrom',
-                options: ['Любая', '1000', '2000', '3000', '4000', '5000', '10000'],
-                value: 'Любая',
-                label: 'От',
-              },
-              {
-                id: 'PriceTo',
-                options: ['Любая', '1000', '2000', '3000', '4000', '5000', '10000'],
-                value: 'Любая',
-                label: 'До',
-              },
-            ],
-            nestedSelects: [],
-            singleSelects: [],
-          },
-          buttons: [
-            {
-              id: 'Exchange',
-              options: ['BYN', 'USD', 'EUR'],
-              value: 'BYN',
-              label: 'Валюта',
-            },
-          ],
-          checkboxes: [
-            {
-              id: 'IsExchangeble',
-              options: null,
-              value: false,
-              label: 'Обмен',
-            },
-            {
-              id: 'WithDiagnostic',
-              options: null,
-              value: false,
-              label: 'С диагностикой',
-            },
-          ],
-          inputs: [],
-        },
-      },
-      {
-        id: 'Placeholder',
-        label: 'Местонахождение',
-        children: {
-          selects: {
-            fromToSelects: [],
-            nestedSelects: [
-              {
-                id: 'Country',
-                options: ['Все страны', 'Беларусь (жыве!)', 'Россия (слава руси!)', 'Украина (слава героям!)', 'Казахстан(уважайте)', 'США (fuck yeah!)'],
-                value: 'Все страны',
-                label: 'Страна',
-              },
-              {
-                id: 'Region',
-                options: ['Все области', 'Пока все одинаковые', 'Пока все одинаковые', 'Пока все одинаковые', 'Пока все одинаковые', 'Пока все одинаковые'],
-                value: 'Все области',
-                label: 'Область',
-              },
-              {
-                id: 'Town',
-                options: ['Все области', 'Пока все одинаковые', 'Пока все одинаковые', 'Пока все одинаковые', 'Пока все одинаковые'],
-                value: 'Все области',
-                label: 'Город',
-              },
-            ],
-            singleSelects: [],
-          },
-          buttons: [],
-          checkboxes: [],
-          inputs: [],
-        },
-      },
-      {
-        id: 'Model',
-        label: 'Марка',
-        children: {
-          selects: {
-            fromToSelects: [],
-            nestedSelects: [
-              {
-                id: 'Mark',
-                options: ['Все марки', 'Toyota', 'Audi', 'Mercedes', 'BMW', 'Honda', 'VAZ', 'Valve'],
-                value: 'Все марки',
-                label: '',
-              },
-              {
-                id: 'PriceTo',
-                options: ['Все модели', 'Модель1', 'Модель2', 'Модель3', 'Модель4', 'Модель5'],
-                value: 'Все модели',
-                label: '',
-              },
-            ],
-            singleSelects: [],
-          },
-          buttons: [],
-          checkboxes: [],
-          inputs: [],
         },
       },
     ];
