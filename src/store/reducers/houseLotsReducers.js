@@ -10,6 +10,7 @@ import {
 const initialState = {
   isFetching: false,
   houseLots: [],
+  houseWatchLots: [],
   page: 0,
   itemsPerPage: 10,
   error: null,
@@ -26,14 +27,14 @@ const houseLotsReducer = (state = initialState, action) => {
       return {
         ...state,
         error: null,
-        houseLots: [...action.payload],
+        houseWatchLots: [...action.payload],
         isFetching: false,
       };
     case UPDATE_HOUSE_WATCH_LOTS_FAIL:
       return {
         ...state,
         error: action.error,
-        houseLots: [],
+        houseWatchLots: [],
         isFetching: false,
       };
     case FETCH_HOUSE_LOTS:
