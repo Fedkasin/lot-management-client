@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import HouseFilter from '../components/house/HouseFilter';
 import actions from '../store/actions';
+import getEnvVars from '../constants/environment';
 
 class HouseWatchFilterContainer extends PureComponent {
   constructor(props) {
@@ -20,20 +21,25 @@ class HouseWatchFilterContainer extends PureComponent {
   }
 
   async onApplyFilter() {
-    const { applyFilter, filters, navigation } = this.props;
+    const { /* applyFilter, filters, */ navigation } = this.props;
     const userId = await AsyncStorage.getItem('@UserStore:USER_ID');
-    const url = '3063426e.ngrok.io';
     navigation.pop(null);
-    applyFilter(filters);
-    console.log('userId', userId);
-    console.log(`http://${url}/v1/watch`);
-    axios({
+    // applyFilter(filters);
+    const res = await axios({
       method: 'post',
-      url: `http://${url}/v1/watch`,
+      url: `http://${getEnvVars.apiUrl}/v1/watch`,
       data: {
-        'userId': userId,
+        userId,
+      },
+      params: {
+        /* add params
+        rooms: [1, 2],
+        max: 500,
+        min: 50, */
       },
     });
+    // eslint-disable-next-line no-console
+    console.log('jobId', res.data.message);
   }
 
   onChangeHouseFilterRoomsFrom(value) {
@@ -105,7 +111,7 @@ HouseWatchFilterContainer.propTypes = {
   changeRoomsFrom: PropTypes.func.isRequired,
   changePriceTo: PropTypes.func.isRequired,
   changePriceFrom: PropTypes.func.isRequired,
-  applyFilter: PropTypes.func.isRequired,
+  /* applyFilter: PropTypes.func.isRequired, */
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(HouseWatchFilterContainer));

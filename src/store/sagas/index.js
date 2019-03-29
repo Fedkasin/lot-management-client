@@ -6,8 +6,8 @@ import changeSettingSaga from './changeSettingsSaga';
 import fetchSettingsSaga from './fetchSettingsSaga';
 import { loginSaga, logoutSaga, loggedInSaga } from './authorizationSaga';
 import fetchCarLotsSaga from './fetchCarLotsSaga';
-import { fetchHouseLotsSaga, updateHouseWatchLotsSaga } from './fetchHouseLotsSaga';
-import udateWatchHouseLotsSaga from './udateWatchHouseLotsSaga';
+import fetchHouseLotsSaga from './fetchHouseLotsSaga';
+import updateHouseWatchLotsSaga from './udateWatchHouseLotsSaga';
 
 export default function* (service) {
   const rootSagas = [
@@ -21,7 +21,6 @@ export default function* (service) {
     fetchCarLotsSaga(),
     fetchHouseLotsSaga(),
     updateHouseWatchLotsSaga(),
-    udateWatchHouseLotsSaga(),
   ];
 
   yield all(rootSagas, service);

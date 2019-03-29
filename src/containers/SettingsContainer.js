@@ -2,15 +2,14 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  ScrollView, ActivityIndicator, AsyncStorage,
+  ScrollView, ActivityIndicator,
 } from 'react-native';
 
 import SettingSectionItem from '../components/settings/SettingSectionItem';
 import actions from '../store/actions/index';
 import { getUser } from '../helpers/authHelpers';
 import ProfileView from '../components/auth/ProfileView';
-
-const DEFAULT_ADDR = '3063426e.ngrok.io';
+import getEnvVars from '../constants/environment';
 
 class SettingsContainer extends PureComponent {
   constructor(props) {
@@ -20,12 +19,6 @@ class SettingsContainer extends PureComponent {
 
   async componentDidMount() {
     const { onFetchSettings } = this.props;
-    let addr = await AsyncStorage.getItem('@InputsStore:Address');
-    if (!addr) {
-      await AsyncStorage.setItem('@InputStore:Address', DEFAULT_ADDR);
-      addr = await AsyncStorage.getItem('@InputStore:Address');
-    }
-
     const settingsMock = [
       {
         id: 'Api',
@@ -42,7 +35,7 @@ class SettingsContainer extends PureComponent {
             {
               id: 'Address',
               parentId: 'Api',
-              value: addr || '',
+              value: getEnvVars.apiUrl || '',
               placeholder: 'Address',
               label: 'Адрес',
               type: 'text',

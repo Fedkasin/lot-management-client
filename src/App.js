@@ -14,7 +14,6 @@ import { firebaseConfig } from './constants/Config';
 import initStore from './store';
 import sagaService from './services/sagaService';
 import AssetsLoader from './containers/AssetsLoaderContainer';
-import {HOUSE_WATCH_LOTS_SCREEN} from './constants/Routes';
 
 firebase.initializeApp(firebaseConfig);
 

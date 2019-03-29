@@ -15,7 +15,7 @@ const houseFilterLiveReducers = (state = initialState, action) => {
     case UPDATE_HOUSE_FILTER_LIVE_ROOMS:
       return {
         ...state,
-        
+
       };
     case UPDATE_HOUSE_FILTER_LIVE_PRICE_TO:
       return {

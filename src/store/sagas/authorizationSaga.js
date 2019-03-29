@@ -12,6 +12,7 @@ import {
 } from '../../constants/Actions';
 import { signInWithGoogleAsync, signOut, isLoggedIn } from '../../helpers/authHelpers';
 import { APP_TAB, AUTH_STACK } from '../../constants/Routes';
+import getEnvVars from '../../constants/environment';
 
 function* login(action) {
   try {
@@ -37,9 +38,7 @@ function* login(action) {
       },
       expo,
     };
-    const API_ADDRESS = yield call(AsyncStorage.getItem, '@InputStore:Address');
-    const response = yield call(axios.post, `https://${API_ADDRESS}/users`, body);
-    console.log('userId', response.data.message.userId);
+    const response = yield call(axios.post, `https://${getEnvVars.apiUrl}/users`, body);
     AsyncStorage.setItem('@UserStore:USER_ID', response.data.message.userId);
     yield put(navigate(APP_TAB));
   } catch (err) {

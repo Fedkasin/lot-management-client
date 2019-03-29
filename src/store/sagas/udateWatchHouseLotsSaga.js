@@ -1,19 +1,23 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
+
+import axios from 'axios';
 
 import actions from '../actions/index';
 import {
   UPDATE_HOUSE_WATCH_LOTS,
 } from '../../constants/Actions';
+import getEnvVars from '../../constants/environment';
 
-function* updateWatchHouseLots(action) {
+function* updateHouseWatchLots(action) {
   try {
-    // MIN-MAX -number ROOMS - array (spec). example: ?min=10&max=20&rooms[]=1&rooms[]=2
-    yield put(actions.houseLotsActions.updateHouseWatchLotsSuccess(action.payload));
+    const { jobId } = action.payload;
+    const response = yield call(axios.get, `https://${getEnvVars.apiUrl}/watch/${jobId}`);
+    yield put(actions.houseLotsActions.updateHouseWatchLotsSuccess(response.data));
   } catch (err) {
     yield put(actions.houseLotsActions.updateHouseWatchLotsFail(err));
   }
 }
 
-export default function* udateWatchHouseLotsSaga() {
-  yield takeLatest(UPDATE_HOUSE_WATCH_LOTS, updateWatchHouseLots);
+export default function* updateHouseWatchLotsSaga() {
+  yield takeLatest(UPDATE_HOUSE_WATCH_LOTS, updateHouseWatchLots);
 }

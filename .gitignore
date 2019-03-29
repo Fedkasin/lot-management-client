@@ -7,3 +7,5 @@ npm-debug.*
 *.key
 *.mobileprovision
 .env
+app.json
+src/constants/environment.js
