@@ -7,6 +7,7 @@ import { Divider } from 'react-native-elements';
 
 import SettingChildSelect from './SettingChildSelect';
 import SettingChildButton from './SettingChildButton';
+import SettingChildSingleButton from './SettingChildSingleButton';
 import SettingChildCheckbox from './SettingChildCheckbox';
 import SettingChildInput from './SettingChildInput';
 import SettingChildSlider from './SettingChildSlider';
@@ -82,7 +83,7 @@ class SettingSectionItem extends React.PureComponent {
                         ))}
           </View>
 
-          <View style={styles.settingButtonsContainer}>
+          <View style={styles.settingFromToSelectsContainer}>
             {setting.children.sliders
                         && setting.children.sliders.map(value => (
                           <SettingChildSlider
@@ -111,6 +112,15 @@ class SettingSectionItem extends React.PureComponent {
             {setting.children.checkboxes
                         && setting.children.checkboxes.map(value => <SettingChildCheckbox key={value.id} child={value} />)}
           </View>
+        </View>
+        <View style={styles.settingButtonsContainer}>
+          {setting.children.button
+                        && setting.children.button.map(value => (
+                          <SettingChildSingleButton
+                            key={value.id}
+                            child={value}
+                          />
+                        ))}
         </View>
       </View>
     );

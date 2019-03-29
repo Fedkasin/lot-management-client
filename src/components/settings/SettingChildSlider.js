@@ -7,30 +7,39 @@ import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 5,
+    padding: 9,
     flex: 1,
+    width: '50%',
   },
   label: {
-    fontFamily: 'sans',
     fontSize: 20,
-    padding: 5,
-    textAlign: 'center',
+  },
+  value: {
+    fontSize: 15,
+  },
+  slider: {
+    justifyContent: 'center',
   },
 });
 
 class SettingChildSlider extends React.PureComponent {
   render() {
     const { child } = this.props;
-
     return (
       <View style={styles.container}>
-        <Text style={styles.label}>{child.label}</Text>
+        <Text style={styles.label}>{child.text}</Text>
         <Slider
-          minimumValue={50}
-          maximumValue={5500}
+          style={styles.slider}
+          minimumValue={child.from}
+          maximumValue={child.to}
+          step={10}
           value={child.value}
-          onValueChange={child.onChange}
+          onValueChange={(e) => {
+            child.value = e;
+            this.forceUpdate();
+          }}
         />
+        <Text style={styles.value}>{child.value}</Text>
       </View>
     );
   }

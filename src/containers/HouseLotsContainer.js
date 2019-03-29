@@ -10,17 +10,21 @@ import BgMessage from '../components/bgmessage/BackgroundMessage';
 class HouseLotsContainer extends PureComponent {
   constructor(props) {
     super(props);
+    this.fetchHouses = this.fetchHouses.bind(this);
     this.handleRefresh = this.handleRefresh.bind(this);
   }
 
   componentDidMount() {
-    const { onFetchHouseLots } = this.props;
-    onFetchHouseLots();
+    this.fetchHouses();
+  }
+
+  fetchHouses() {
+    const { onFetchHouseLots, filters } = this.props;
+    onFetchHouseLots(filters);
   }
 
   handleRefresh() {
-    const { onFetchHouseLots } = this.props;
-    onFetchHouseLots();
+    this.fetchHouses();
   }
 
   render() {
@@ -45,6 +49,12 @@ function mapStateToProps(state) {
   return {
     isFetching: state.houseLotsReducers.isFetching,
     houseLots: state.houseLotsReducers.houseLots,
+    filters: state.houseFilterReducers || {
+      priceFrom: '50',
+      priceTo: '500',
+      roomsFrom: '1',
+      roomsTo: '3',
+    },
     page: state.houseLotsReducers.page,
     itemsPerPage: state.houseLotsReducers.itemsPerPage,
     error: state.houseLotsReducers.error ? state.houseLotsReducers.error : null,
@@ -53,13 +63,14 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onFetchHouseLots: () => dispatch(actions.houseLotsActions.fetchHouseLots()),
+    onFetchHouseLots: filters => dispatch(actions.houseLotsActions.fetchHouseLots(filters)),
   };
 }
 
 HouseLotsContainer.propTypes = {
   onFetchHouseLots: PropTypes.func.isRequired,
   houseLots: PropTypes.arrayOf(PropTypes.any).isRequired,
+  filters: PropTypes.objectOf(PropTypes.any).isRequired,
   isFetching: PropTypes.bool.isRequired,
 };
 

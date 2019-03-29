@@ -128,7 +128,7 @@ export default compose(
       const { rooms, priceFrom, priceTo } = props;
       onSubmitHouseWatchFilters(rooms, priceFrom, priceTo);
     },
-    handleRoomsSelected: props => (itemValue, itemIndex) => {
+    handleRoomsSelected: props => (itemValue) => {
       props.setRooms(itemValue);
     },
     handlePassword: props => e => {

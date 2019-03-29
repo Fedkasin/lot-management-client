@@ -6,7 +6,7 @@ import changeSettingSaga from './changeSettingsSaga';
 import fetchSettingsSaga from './fetchSettingsSaga';
 import { loginSaga, logoutSaga, loggedInSaga } from './authorizationSaga';
 import fetchCarLotsSaga from './fetchCarLotsSaga';
-import fetchHouseLotsSaga from './fetchHouseLotsSaga';
+import { fetchHouseLotsSaga, updateHouseWatchLotsSaga } from './fetchHouseLotsSaga';
 import udateWatchHouseLotsSaga from './udateWatchHouseLotsSaga';
 
 export default function* (service) {
@@ -20,6 +20,7 @@ export default function* (service) {
     logoutSaga(),
     fetchCarLotsSaga(),
     fetchHouseLotsSaga(),
+    updateHouseWatchLotsSaga(),
     udateWatchHouseLotsSaga(),
   ];
 

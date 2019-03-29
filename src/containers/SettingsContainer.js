@@ -10,7 +10,7 @@ import actions from '../store/actions/index';
 import { getUser } from '../helpers/authHelpers';
 import ProfileView from '../components/auth/ProfileView';
 
-const DEFAULT_ADDR = 'a1a26ef2.ngrok.i';
+const DEFAULT_ADDR = '3063426e.ngrok.io';
 
 class SettingsContainer extends PureComponent {
   constructor(props) {
@@ -25,6 +25,7 @@ class SettingsContainer extends PureComponent {
       await AsyncStorage.setItem('@InputStore:Address', DEFAULT_ADDR);
       addr = await AsyncStorage.getItem('@InputStore:Address');
     }
+
     const settingsMock = [
       {
         id: 'Api',
