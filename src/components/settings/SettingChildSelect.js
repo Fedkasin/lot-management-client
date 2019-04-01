@@ -50,20 +50,25 @@ const pickerStyle = {
 
 class SettingChildSelect extends React.PureComponent {
   render() {
-    const { child } = this.props;
+    const {
+      value,
+      items,
+      label,
+      handler,
+    } = this.props;
     return (
       <View style={styles.container}>
-        <Text style={styles.label}>{child.label}</Text>
+        <Text style={styles.label}>{label}</Text>
         <View style={{
           height: 40, borderWidth: 1, borderColor: '#999', borderRadius: 5, marginBottom: 9, justifyContent: 'center',
         }}
         >
           <RNPickerSelect
             placeholder={{}}
-            onValueChange={() => {}}
-            items={child.options.map(opt => ({ label: opt, value: opt }))}
+            onValueChange={itemValue => handler(itemValue)}
+            items={items.map(opt => ({ label: opt, value: opt }))}
             style={pickerStyle}
-            value={child.value}
+            value={value}
           />
         </View>
       </View>
@@ -72,11 +77,10 @@ class SettingChildSelect extends React.PureComponent {
 }
 
 SettingChildSelect.propTypes = {
-  child: PropTypes.shape({
-    label: PropTypes.string.isRequired,
-    options: PropTypes.arrayOf(PropTypes.string).isRequired,
-    value: PropTypes.string,
-  }).isRequired,
+  label: PropTypes.string.isRequired,
+  items: PropTypes.arrayOf(PropTypes.string).isRequired,
+  value: PropTypes.string.isRequired,
+  handler: PropTypes.func.isRequired,
 };
 
 export default SettingChildSelect;

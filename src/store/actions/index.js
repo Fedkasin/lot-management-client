@@ -24,6 +24,13 @@ import {
 } from './houseLotsActionCreators';
 
 import {
+  updateHouseFilterRoomsTo,
+  updateHouseFilterRoomsFrom,
+  updateHouseFilterPriceTo,
+  updateHouseFilterPriceFrom,
+} from './houseLotsFilterActionCreators';
+
+import {
   fetchSettings,
   fetchSettingsSuccess,
   fetchSettingsFail,
@@ -62,6 +69,12 @@ export default {
     fetchHouseLots,
     fetchHouseLotsSuccess,
     fetchHouseLotsFail,
+  },
+  houseLotsFilterActions: {
+    updateHouseFilterRoomsTo,
+    updateHouseFilterRoomsFrom,
+    updateHouseFilterPriceTo,
+    updateHouseFilterPriceFrom,
   },
   settingsActions: {
     fetchSettings,
