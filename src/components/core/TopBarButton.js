@@ -5,10 +5,9 @@ import {
   StyleSheet, TouchableOpacity, Platform,
 } from 'react-native';
 import IonIcon from './IonIcon';
-import { FILTER_SCREEN } from '../../constants/Routes';
 
 function TopBarButton({
-  iconColor, iosIcon, otherIcon, filters, navigation,
+  iconColor, iosIcon, otherIcon, navigation, routeName,
 }) {
   const styles = StyleSheet.create({
     button: {
@@ -20,7 +19,12 @@ function TopBarButton({
     },
   });
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(FILTER_SCREEN, { filters })} style={styles.button}>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate(routeName);
+      }}
+      style={styles.button}
+    >
       <IonIcon
         name={Platform.OS === 'ios' ? iosIcon : otherIcon}
         color={iconColor}
@@ -30,11 +34,11 @@ function TopBarButton({
 }
 
 TopBarButton.propTypes = {
-  filters: PropTypes.arrayOf(PropTypes.any).isRequired,
   navigation: PropTypes.objectOf(PropTypes.any).isRequired,
   iconColor: PropTypes.string.isRequired,
   iosIcon: PropTypes.string.isRequired,
   otherIcon: PropTypes.string.isRequired,
+  routeName: PropTypes.string.isRequired,
 };
 
 export default withNavigation(TopBarButton);

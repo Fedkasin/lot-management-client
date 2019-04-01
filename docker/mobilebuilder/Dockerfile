@@ -17,6 +17,5 @@ COPY . /usr/src/app
 WORKDIR /usr/src/app
 
 RUN yarn install
-RUN yarn run login -u $EXPO_USER -p $EXPO_PASSWORD
 
 ENTRYPOINT [ "yarn", "start" ]

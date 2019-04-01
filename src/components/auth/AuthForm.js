@@ -121,15 +121,15 @@ AuthForm.defaultProps = {
 };
 
 export default compose(
-  withState('login', 'setLogin', ''),
+  withState('rooms', 'setRooms', ''),
   withState('password', 'setPassword', ''),
   withHandlers({
     handleClick: props => () => {
-      const { onSignIn, login, password } = props;
-      onSignIn(login, password);
+      const { rooms, priceFrom, priceTo } = props;
+      onSubmitHouseWatchFilters(rooms, priceFrom, priceTo);
     },
-    handleLogin: props => e => {
-      props.setLogin(e.nativeEvent.text);
+    handleRoomsSelected: props => (itemValue) => {
+      props.setRooms(itemValue);
     },
     handlePassword: props => e => {
       props.setPassword(e.nativeEvent.text);

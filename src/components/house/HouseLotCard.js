@@ -99,7 +99,7 @@ class HouseLotCard extends React.PureComponent {
                   { item.rent_type }
                 </Text>
                 <Text numberOfLines={1} style={styles.itemDescriptionText}>
-                  {item.price.amount}
+                  {`${item.price.amount} ${item.price.currency}`}
                 </Text>
               </View>
             </LinearGradient>

@@ -4,14 +4,21 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import {
-  SETTINGS_SCREEN, CAR_LOTS_SCREEN, HOUSE_LOTS_SCREEN, HOUSE_WATCH_LOTS_SCREEN, FILTER_SCREEN,
+  SETTINGS_SCREEN,
+  CAR_LOTS_SCREEN,
+  HOUSE_LOTS_SCREEN,
+  HOUSE_WATCH_LOTS_SCREEN,
+  HOUSE_FILTER_SCREEN,
+  HOUSE_WATCH_FILTER_SCREEN,
 } from '../constants/Routes';
 import TabBarIcon from '../components/core/TabBarIcon';
 import CarLotsScreen from '../screens/CarLotsScreen';
 import HouseLotsScreen from '../screens/HouseLotsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import HouseWatchLotsScreen from '../screens/HouseWatchLotsScreen';
-import FilterScreen from '../screens/FilterScreen';
+
+import HouseFilterScreen from '../screens/HouseFilterScreen';
+import HouseWatchFilterScreen from '../screens/HouseWatchFilterScreen';
 
 const SettingsStack = createStackNavigator({
   [SETTINGS_SCREEN]: SettingsScreen,
@@ -29,7 +36,7 @@ SettingsStack.navigationOptions = {
 
 const CarLotsStack = createStackNavigator({
   [CAR_LOTS_SCREEN]: CarLotsScreen,
-  [FILTER_SCREEN]: FilterScreen,
+  // [FILTER_SCREEN]: FilterScreen,
 });
 
 CarLotsStack.navigationOptions = {
@@ -44,7 +51,7 @@ CarLotsStack.navigationOptions = {
 
 const HouseLotsStack = createStackNavigator({
   [HOUSE_LOTS_SCREEN]: HouseLotsScreen,
-  [FILTER_SCREEN]: FilterScreen,
+  [HOUSE_FILTER_SCREEN]: HouseFilterScreen,
 });
 
 HouseLotsStack.navigationOptions = {
@@ -59,7 +66,7 @@ HouseLotsStack.navigationOptions = {
 
 const HouseWatchLotsStack = createStackNavigator({
   [HOUSE_WATCH_LOTS_SCREEN]: HouseWatchLotsScreen,
-  [FILTER_SCREEN]: FilterScreen,
+  [HOUSE_WATCH_FILTER_SCREEN]: HouseWatchFilterScreen,
 });
 
 HouseWatchLotsStack.navigationOptions = {

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { AsyncStorage } from 'react-native';
 import { call, put, takeLatest } from 'redux-saga/effects';
+import { Constants } from 'expo';
 
 import actions from '../actions/index';
 import { navigate } from '../actions/navigationActionCreators';
@@ -11,6 +12,7 @@ import {
 } from '../../constants/Actions';
 import { signInWithGoogleAsync, signOut, isLoggedIn } from '../../helpers/authHelpers';
 import { APP_TAB, AUTH_STACK } from '../../constants/Routes';
+import getEnvVars from '../../constants/environment';
 
 function* login(action) {
   try {
@@ -23,9 +25,9 @@ function* login(action) {
     } = data;
     const expo = {
       pushToken: yield call(AsyncStorage.getItem, '@RootStore:NOTIFICATIONS_TOKEN'),
-      uniqueId: 'TOP',
-      deviceId: 'BATYA',
-      systemName: 'YOBA OS 1.0',
+      uniqueId: Constants.installationId,
+      deviceId: Constants.deviceName,
+      systemName: Constants.platform.android ? 'android' : 'ios',
     };
 
     const body = {
@@ -36,8 +38,8 @@ function* login(action) {
       },
       expo,
     };
-    const API_ADDRESS = yield call(AsyncStorage.getItem, '@InputStore:Address');
-    yield call(axios.post, `https://${API_ADDRESS}/users`, body);
+    const response = yield call(axios.post, `https://${getEnvVars.apiUrl}/users`, body);
+    yield call([AsyncStorage, 'setItem'], '@UserStore:USER_ID', response.data.message.userId);
     yield put(navigate(APP_TAB));
   } catch (err) {
     yield put(actions.authActions.loginFail(err.message));

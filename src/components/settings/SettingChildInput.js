@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
 class SettingChildInput extends React.PureComponent {
   constructor(props) {
     super(props);
-
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 

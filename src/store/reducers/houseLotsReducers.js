@@ -27,7 +27,7 @@ const houseLotsReducer = (state = initialState, action) => {
       return {
         ...state,
         error: null,
-        houseWatchLots: [...action.payload],
+        houseWatchLots: [...action.payload.message.apartments.onliner.apartments],
         isFetching: false,
       };
     case UPDATE_HOUSE_WATCH_LOTS_FAIL:
@@ -40,6 +40,7 @@ const houseLotsReducer = (state = initialState, action) => {
     case FETCH_HOUSE_LOTS:
       return {
         ...state,
+        houseLots: [],
         isFetching: true,
       };
     case FETCH_HOUSE_LOTS_SUCCESS:
