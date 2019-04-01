@@ -34,7 +34,6 @@ function TopBarButton({
 }
 
 TopBarButton.propTypes = {
-/*   filters: PropTypes.arrayOf(PropTypes.any).isRequired, */
   navigation: PropTypes.objectOf(PropTypes.any).isRequired,
   iconColor: PropTypes.string.isRequired,
   iosIcon: PropTypes.string.isRequired,

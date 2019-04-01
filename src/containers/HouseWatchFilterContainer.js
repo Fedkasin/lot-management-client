@@ -21,10 +21,9 @@ class HouseWatchFilterContainer extends PureComponent {
   }
 
   async onApplyFilter() {
-    const { /* applyFilter, filters, */ navigation } = this.props;
+    const { navigation } = this.props;
     const userId = await AsyncStorage.getItem('@UserStore:USER_ID');
     navigation.pop(null);
-    // applyFilter(filters);
     const res = await axios({
       method: 'post',
       url: `http://${getEnvVars.apiUrl}/v1/watch`,

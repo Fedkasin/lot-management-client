@@ -39,7 +39,7 @@ function* login(action) {
       expo,
     };
     const response = yield call(axios.post, `https://${getEnvVars.apiUrl}/users`, body);
-    AsyncStorage.setItem('@UserStore:USER_ID', response.data.message.userId);
+    yield call([AsyncStorage, 'setItem'], '@UserStore:USER_ID', response.data.message.userId);
     yield put(navigate(APP_TAB));
   } catch (err) {
     yield put(actions.authActions.loginFail(err.message));

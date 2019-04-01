@@ -35,7 +35,7 @@ class SettingsContainer extends PureComponent {
             {
               id: 'Address',
               parentId: 'Api',
-              value: getEnvVars.apiUrl || '',
+              value: (getEnvVars && getEnvVars.apiUrl) || '',
               placeholder: 'Address',
               label: 'Адрес',
               type: 'text',

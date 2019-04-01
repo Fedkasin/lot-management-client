@@ -3,8 +3,7 @@
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
-    "start": "expo start",
-    "login": "expo login",
+    "start": "./bin/start.sh",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
@@ -51,7 +50,7 @@
   "engines": {
     "node": ">=8.11.3 <=11.9.0",
     "npm": "<=6.7.0",
-    "yarn": "<=1.15"
+    "yarn": "<2"
   },
   "pre-commit": {
     "run": "lint"
