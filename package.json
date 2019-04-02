@@ -50,7 +50,7 @@
   "engines": {
     "node": ">=8.11.3 <=11.9.0",
     "npm": "<=6.7.0",
-    "yarn": "<2"
+    "yarn": "<=2.0.0"
   },
   "pre-commit": {
     "run": "lint"

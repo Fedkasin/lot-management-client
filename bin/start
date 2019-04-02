@@ -1,0 +1,4 @@
+#!/bin/bash
+
+yarn run login -u $(echo $EXPO_USER) -p $(echo $EXPO_PASSWORD)
+yarn start
