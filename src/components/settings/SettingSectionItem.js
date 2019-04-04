@@ -7,19 +7,22 @@ import { Divider } from 'react-native-elements';
 
 import SettingChildSelect from './SettingChildSelect';
 import SettingChildButton from './SettingChildButton';
+import SettingChildSingleButton from './SettingChildSingleButton';
 import SettingChildCheckbox from './SettingChildCheckbox';
 import SettingChildInput from './SettingChildInput';
+import SettingChildSlider from './SettingChildSlider';
+import * as Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: Colors.white,
     paddingBottom: 24,
   },
   settingHeader: {
     flex: 1,
     height: 45,
-    backgroundColor: '#efefef',
+    backgroundColor: Colors.white,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -54,11 +57,11 @@ class SettingSectionItem extends React.PureComponent {
     const { setting, sectionIndex } = this.props;
     return (
       <View style={styles.container}>
-        <Divider style={{ backgroundColor: 'gray' }} />
+        <Divider style={{ backgroundColor: Colors.gray }} />
         <View style={styles.settingHeader}>
           <Text style={styles.settingHeaderText}>{setting.label}</Text>
         </View>
-        <Divider style={{ backgroundColor: 'gray' }} />
+        <Divider style={{ backgroundColor: Colors.gray }} />
         <View style={styles.settingBody}>
           <View style={styles.settingButtonsContainer}>
             {setting.children.inputs
@@ -75,6 +78,16 @@ class SettingSectionItem extends React.PureComponent {
             {setting.children.buttons
                         && setting.children.buttons.map(value => (
                           <SettingChildButton
+                            key={value.id}
+                            child={value}
+                          />
+                        ))}
+          </View>
+
+          <View style={styles.settingFromToSelectsContainer}>
+            {setting.children.sliders
+                        && setting.children.sliders.map(value => (
+                          <SettingChildSlider
                             key={value.id}
                             child={value}
                           />
@@ -100,6 +113,15 @@ class SettingSectionItem extends React.PureComponent {
             {setting.children.checkboxes
                         && setting.children.checkboxes.map(value => <SettingChildCheckbox key={value.id} child={value} />)}
           </View>
+        </View>
+        <View style={styles.settingButtonsContainer}>
+          {setting.children.button
+                        && setting.children.button.map(value => (
+                          <SettingChildSingleButton
+                            key={value.id}
+                            child={value}
+                          />
+                        ))}
         </View>
       </View>
     );

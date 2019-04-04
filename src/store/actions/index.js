@@ -24,6 +24,13 @@ import {
 } from './houseLotsActionCreators';
 
 import {
+  updateHouseFilterRoomsTo,
+  updateHouseFilterRoomsFrom,
+  updateHouseFilterPriceTo,
+  updateHouseFilterPriceFrom,
+} from './houseLotsFilterActionCreators';
+
+import {
   fetchSettings,
   fetchSettingsSuccess,
   fetchSettingsFail,
@@ -40,6 +47,13 @@ import {
   checkIfLoggedIn,
   showFirstSplashScreen,
 } from './authActionCreators';
+
+import {
+  updateHouseWatchFilterRoomsTo,
+  updateHouseWatchFilterRoomsFrom,
+  updateHouseWatchFilterPriceTo,
+  updateHouseWatchFilterPriceFrom,
+} from './houseWatchLotsFilterActionCreators';
 
 export default {
   rootActions: {
@@ -62,6 +76,18 @@ export default {
     fetchHouseLots,
     fetchHouseLotsSuccess,
     fetchHouseLotsFail,
+  },
+  houseLotsFilterActions: {
+    updateHouseFilterRoomsTo,
+    updateHouseFilterRoomsFrom,
+    updateHouseFilterPriceTo,
+    updateHouseFilterPriceFrom,
+  },
+  houseWatchLotsFilterActions: {
+    updateHouseWatchFilterRoomsTo,
+    updateHouseWatchFilterRoomsFrom,
+    updateHouseWatchFilterPriceTo,
+    updateHouseWatchFilterPriceFrom,
   },
   settingsActions: {
     fetchSettings,

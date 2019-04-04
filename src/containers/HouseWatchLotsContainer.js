@@ -5,21 +5,21 @@ import PropTypes from 'prop-types';
 
 import HouseLotCard from '../components/house/HouseLotCard';
 import BgMessage from '../components/bgmessage/BackgroundMessage';
+import * as Colors from '../constants/Colors';
 
 class HouseWatchLotsContainer extends React.Component {
   render() {
-    const { isFetching, houseLots } = this.props;
-    if (!houseLots.length && isFetching) return <ActivityIndicator size="large" color="#0000ff" />;
-    if (!houseLots.length && !isFetching) return <BgMessage text="There are no new houses" />;
+    const { isFetching, houseWatchLots } = this.props;
+    if (!houseWatchLots.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
     return (
       <FlatList
-        data={houseLots}
+        data={houseWatchLots}
         renderItem={({ item }) => <HouseLotCard item={item} />}
         keyExtractor={item => item.id.toString()}
-        onRefresh={this.handleRefresh}
         onEndReached={this.handleScrollEnd}
         onEndReachedThreshold={0}
         refreshing={isFetching}
+        ListEmptyComponent={() => <BgMessage text="There are no new houses" />}
       />
     );
   }
@@ -28,7 +28,7 @@ class HouseWatchLotsContainer extends React.Component {
 function mapStateToProps(state) {
   return {
     isFetching: state.houseLotsReducers.isFetching,
-    houseLots: state.houseLotsReducers.houseLots,
+    houseWatchLots: state.houseLotsReducers.houseWatchLots,
     page: state.houseLotsReducers.page,
     itemsPerPage: state.houseLotsReducers.itemsPerPage,
     error: state.houseLotsReducers.error ? state.houseLotsReducers.error : null,
@@ -37,7 +37,7 @@ function mapStateToProps(state) {
 
 HouseWatchLotsContainer.propTypes = {
   isFetching: PropTypes.bool.isRequired,
-  houseLots: PropTypes.arrayOf(PropTypes.any).isRequired,
+  houseWatchLots: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
 export default connect(mapStateToProps)(HouseWatchLotsContainer);

@@ -6,27 +6,31 @@ import PropTypes from 'prop-types';
 import actions from '../store/actions/index';
 import HouseLotCard from '../components/house/HouseLotCard';
 import BgMessage from '../components/bgmessage/BackgroundMessage';
+import * as Colors from '../constants/Colors';
 
 class HouseLotsContainer extends PureComponent {
   constructor(props) {
     super(props);
+    this.fetchHouses = this.fetchHouses.bind(this);
     this.handleRefresh = this.handleRefresh.bind(this);
   }
 
   componentDidMount() {
-    const { onFetchHouseLots } = this.props;
-    onFetchHouseLots();
+    this.fetchHouses();
+  }
+
+  fetchHouses() {
+    const { onFetchHouseLots, filters } = this.props;
+    onFetchHouseLots(filters);
   }
 
   handleRefresh() {
-    const { onFetchHouseLots } = this.props;
-    onFetchHouseLots();
+    this.fetchHouses();
   }
 
   render() {
     const { houseLots, isFetching } = this.props;
-    if (!houseLots.length && isFetching) return <ActivityIndicator size="large" color="#0000ff" />;
-    if (!houseLots.length && !isFetching) return <BgMessage text="There are no houses" />;
+    if (!houseLots.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
     return (
       <FlatList
         data={houseLots}
@@ -36,6 +40,7 @@ class HouseLotsContainer extends PureComponent {
         onEndReached={this.handleScrollEnd}
         onEndReachedThreshold={0}
         refreshing={isFetching}
+        ListEmptyComponent={() => <BgMessage text="There are no houses" />}
       />
     );
   }
@@ -45,6 +50,12 @@ function mapStateToProps(state) {
   return {
     isFetching: state.houseLotsReducers.isFetching,
     houseLots: state.houseLotsReducers.houseLots,
+    filters: state.houseFilterReducers || {
+      priceFrom: '50',
+      priceTo: '500',
+      roomsFrom: '1',
+      roomsTo: '3',
+    },
     page: state.houseLotsReducers.page,
     itemsPerPage: state.houseLotsReducers.itemsPerPage,
     error: state.houseLotsReducers.error ? state.houseLotsReducers.error : null,
@@ -53,13 +64,14 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onFetchHouseLots: () => dispatch(actions.houseLotsActions.fetchHouseLots()),
+    onFetchHouseLots: filters => dispatch(actions.houseLotsActions.fetchHouseLots(filters)),
   };
 }
 
 HouseLotsContainer.propTypes = {
   onFetchHouseLots: PropTypes.func.isRequired,
   houseLots: PropTypes.arrayOf(PropTypes.any).isRequired,
+  filters: PropTypes.objectOf(PropTypes.any).isRequired,
   isFetching: PropTypes.bool.isRequired,
 };
 

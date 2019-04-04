@@ -4,14 +4,15 @@ import { LinearGradient } from 'expo';
 import {
   Text, View, StyleSheet, ImageBackground,
 } from 'react-native';
+import * as Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
   item: {
     marginBottom: 20,
     paddingBottom: 30,
     marginTop: 10,
-    backgroundColor: '#fefff9',
-    color: '#363636',
+    backgroundColor: Colors.white,
+    color: Colors.gray,
     borderRadius: 4,
   },
   innerImage: {
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   itemTitleText: {
-    color: '#e8ffff',
+    color: Colors.white,
     fontSize: 24,
     fontWeight: '500',
   },
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   itemDescriptionText: {
-    color: '#e8ffff',
+    color: Colors.white,
     fontSize: 16,
   },
 });

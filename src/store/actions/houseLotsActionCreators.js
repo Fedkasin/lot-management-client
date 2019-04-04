@@ -7,8 +7,11 @@ import {
   UPDATE_HOUSE_WATCH_LOTS_FAIL,
 } from '../../constants/Actions';
 
-export const fetchHouseLots = () => ({
+export const fetchHouseLots = filters => ({
   type: FETCH_HOUSE_LOTS,
+  payload: {
+    filters,
+  },
 });
 
 export const fetchHouseLotsSuccess = data => ({
@@ -21,9 +24,9 @@ export const fetchHouseLotsFail = err => ({
   error: err,
 });
 
-export const updateHouseWatchLots = data => ({
+export const updateHouseWatchLots = jobId => ({
   type: UPDATE_HOUSE_WATCH_LOTS,
-  payload: data,
+  payload: { jobId },
 });
 
 export const updateHouseWatchLotsSuccess = data => ({

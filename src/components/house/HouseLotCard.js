@@ -5,14 +5,15 @@ import {
   Text, View, StyleSheet, ImageBackground, TouchableOpacity, Linking,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import * as Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
   item: {
     marginBottom: 20,
     paddingBottom: 30,
     marginTop: 10,
-    backgroundColor: '#fefff9',
-    color: '#363636',
+    backgroundColor: Colors.white,
+    color: Colors.gray,
     borderRadius: 4,
   },
   innerImage: {
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   itemTitleText: {
-    color: '#e8ffff',
+    color: Colors.white,
     fontWeight: '500',
   },
   itemDescription: {
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   itemDescriptionText: {
-    color: '#e8ffff',
+    color: Colors.white,
     fontSize: 16,
   },
 });
@@ -99,7 +100,7 @@ class HouseLotCard extends React.PureComponent {
                   { item.rent_type }
                 </Text>
                 <Text numberOfLines={1} style={styles.itemDescriptionText}>
-                  {item.price.amount}
+                  {`${item.price.amount} ${item.price.currency}`}
                 </Text>
               </View>
             </LinearGradient>

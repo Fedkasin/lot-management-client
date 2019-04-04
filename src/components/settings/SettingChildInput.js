@@ -5,12 +5,13 @@ import {
   View, StyleSheet, Text, TextInput,
 } from 'react-native';
 import actions from '../../store/actions/index';
+import * as Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
   container: {
     paddingTop: 30,
     paddingBottom: 30,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.white,
     justifyContent: 'center',
     paddingHorizontal: 10,
     flex: 1,
@@ -24,13 +25,13 @@ const styles = StyleSheet.create({
   },
   textInputStyle: {
     flex: 1,
-    borderColor: 'black',
+    borderColor: Colors.black,
     borderWidth: 1,
     height: 40,
   },
   input: {
     height: 40,
-    borderColor: '#999',
+    borderColor: Colors.lightGray,
     borderWidth: 1,
     borderRadius: 5,
     padding: 5,
@@ -41,7 +42,6 @@ const styles = StyleSheet.create({
 class SettingChildInput extends React.PureComponent {
   constructor(props) {
     super(props);
-
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
