@@ -16,7 +16,7 @@ function* fetchHouseLots(action) {
     const rooms = roomsArray.length > 1 ? `&rooms[]=${roomsArray.join('&rooms[]=')}` : `&rooms[]=${roomsArray[0]}`;
     const price = `min=${action.payload.filters.priceFrom}&max=${action.payload.filters.priceTo}`;
     const query = `${price}${rooms}`;
-    const response = yield call(axios.get, `http://${getEnvVars.apiUrl}/onliner?${query}`);
+    const response = yield call(axios.get, `${getEnvVars.apiUrl}/onliner?${query}`);
     yield put(actions.houseLotsActions.fetchHouseLotsSuccess(response.data));
   } catch (err) {
     yield put(actions.houseLotsActions.fetchHouseLotsFail(err));

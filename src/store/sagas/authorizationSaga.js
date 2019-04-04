@@ -38,7 +38,7 @@ function* login(action) {
       },
       expo,
     };
-    const response = yield call(axios.post, `http://${getEnvVars.apiUrl}/v1/users`, body);
+    const response = yield call(axios.post, `${getEnvVars.apiUrl}/v1/users`, body);
     AsyncStorage.setItem('@UserStore:USER_ID', response.data.message.userId);
     yield put(navigate(APP_TAB));
   } catch (err) {

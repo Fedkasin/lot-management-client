@@ -32,7 +32,7 @@ class HouseWatchFilterContainer extends PureComponent {
       navigation.pop(null);
       await axios({
         method: 'post',
-        url: `http://${getEnvVars.apiUrl}/v1/watch`,
+        url: `${getEnvVars.apiUrl}/v1/watch`,
         headers: { Authorization: '0xdf0g9undf89ry9eg38rder3g9example' },
         data: {
           userId,
