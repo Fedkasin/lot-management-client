@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import actions from '../store/actions/index';
 import HouseLotCard from '../components/house/HouseLotCard';
 import BgMessage from '../components/bgmessage/BackgroundMessage';
+import * as Colors from '../constants/Colors';
 
 class HouseLotsContainer extends PureComponent {
   constructor(props) {
@@ -29,7 +30,7 @@ class HouseLotsContainer extends PureComponent {
 
   render() {
     const { houseLots, isFetching } = this.props;
-    if (!houseLots.length && isFetching) return <ActivityIndicator size="large" color="#0000ff" />;
+    if (!houseLots.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
     return (
       <FlatList
         data={houseLots}
