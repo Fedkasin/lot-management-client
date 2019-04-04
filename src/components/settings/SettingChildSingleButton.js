@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 import IcoButton from '../core/IcoButton';
-import * as Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -20,10 +19,10 @@ class SettingChildSingleButton extends React.PureComponent {
         <IcoButton
           style={styles.button}
           text={child.label}
-          color={Colors.white}
+          color="#efefef"
           onPress={child.onPress}
-          textColor={Colors.black}
-          iconColor={Colors.black}
+          textColor="#131313"
+          iconColor="#131313"
           iosIcon={child.iosicon}
           otherIcon={child.othericon}
         />

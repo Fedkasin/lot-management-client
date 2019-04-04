@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 
 import HouseFilter from '../components/house/HouseFilter';
 import actions from '../store/actions';
-import * as Colors from '../constants/Colors';
 
 class HouseFilterContainer extends PureComponent {
   constructor(props) {
@@ -56,7 +55,7 @@ class HouseFilterContainer extends PureComponent {
     const { navigation, filters } = this.props;
 
     return (
-      <ScrollView style={{ backgroundColor: Colors.white }}>
+      <ScrollView style={{ backgroundColor: '#fff' }}>
         <HouseFilter filters={filters} handlers={handlers} />
         <NavigationEvents
           onDidBlur={() => navigation.pop(null)}

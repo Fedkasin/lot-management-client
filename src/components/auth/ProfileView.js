@@ -4,7 +4,6 @@ import {
   View, Image, Text, StyleSheet,
 } from 'react-native';
 import IcoButton from '../core/IcoButton';
-import * as Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
   shadow: {
@@ -23,11 +22,11 @@ class ProfileView extends React.PureComponent {
       <View style={{ alignItems: 'center', marginTop: -550, marginBottom: 110 }}>
         <View
           style={{
-            zIndex: 0, width: '200%', height: 800, backgroundColor: Colors.white, borderRadius: 100000,
+            zIndex: 0, width: '200%', height: 800, backgroundColor: '#efefef', borderRadius: 100000,
           }}
         />
         <Text style={{
-          zIndex: 2, fontSize: 24, color: Colors.black, marginTop: -95,
+          zIndex: 2, fontSize: 24, color: '#131313', marginTop: -95,
         }}
         >
           { name }
@@ -35,10 +34,10 @@ class ProfileView extends React.PureComponent {
         <View style={{ width: 120 }}>
           <IcoButton
             text="Log out"
-            color={Colors.white}
+            color="#efefef"
             onPress={onClick}
-            textColor={Colors.black}
-            iconColor={Colors.black}
+            textColor="#131313"
+            iconColor="#131313"
             iosIcon="ios-log-out"
             otherIcon="md-log-out"
           />
@@ -47,7 +46,7 @@ class ProfileView extends React.PureComponent {
           <Image
             source={{ uri: avatar }}
             style={{
-              width: 100, height: 100, borderRadius: 50, backgroundColor: Colors.lightGray, marginTop: -60,
+              width: 100, height: 100, borderRadius: 50, backgroundColor: '#999', marginTop: -60,
             }}
           />
         </View>

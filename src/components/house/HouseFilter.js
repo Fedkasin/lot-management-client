@@ -1,17 +1,14 @@
 import React from 'react';
 import {
-  View, StyleSheet,
+  View, StyleSheet, Button,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
 import SettingChildSelect from '../settings/SettingChildSelect';
-import IcoButton from '../core/IcoButton';
-import * as filtersConst from '../../constants/Filters';
-import * as Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.white,
+    backgroundColor: '#fff',
     justifyContent: 'center',
     paddingHorizontal: 10,
     flex: 1,
@@ -30,39 +27,11 @@ class HouseFilter extends React.PureComponent {
     const { filters, handlers } = this.props;
     return (
       <View style={styles.container}>
-        <SettingChildSelect
-          value={filters.roomsFrom}
-          items={filtersConst.roomCount}
-          label="Rooms From"
-          handler={handlers.roomsFromHandler}
-        />
-        <SettingChildSelect
-          value={filters.roomsTo}
-          items={filtersConst.roomCount}
-          label="Rooms To"
-          handler={handlers.roomsToHandler}
-        />
-        <SettingChildSelect
-          value={filters.priceFrom}
-          items={filtersConst.pricing}
-          label="Price From"
-          handler={handlers.priceFromHandler}
-        />
-        <SettingChildSelect
-          value={filters.priceTo}
-          items={filtersConst.pricing}
-          label="Price To"
-          handler={handlers.priceToHandler}
-        />
-        <IcoButton
-          text="Accept"
-          color={Colors.green}
-          onPress={handlers.applyFilter}
-          textColor={Colors.white}
-          iconColor={Colors.white}
-          iosIcon="ios-checkmark"
-          otherIcon="md-checkmark"
-        />
+        <SettingChildSelect value={filters.roomsFrom} items={['1', '2', '3']} label="Rooms From" handler={handlers.roomsFromHandler} />
+        <SettingChildSelect value={filters.roomsTo} items={['1', '2', '3']} label="Rooms To" handler={handlers.roomsToHandler} />
+        <SettingChildSelect value={filters.priceFrom} items={['100', '200', '300', '400', '500']} label="Price From" handler={handlers.priceFromHandler} />
+        <SettingChildSelect value={filters.priceTo} items={['100', '200', '300', '400', '500']} label="Price To" handler={handlers.priceToHandler} />
+        <Button title="Accept" onPress={handlers.applyFilter} />
       </View>
     );
   }
