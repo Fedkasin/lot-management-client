@@ -11,17 +11,18 @@ import SettingChildSingleButton from './SettingChildSingleButton';
 import SettingChildCheckbox from './SettingChildCheckbox';
 import SettingChildInput from './SettingChildInput';
 import SettingChildSlider from './SettingChildSlider';
+import * as Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: Colors.white,
     paddingBottom: 24,
   },
   settingHeader: {
     flex: 1,
     height: 45,
-    backgroundColor: '#efefef',
+    backgroundColor: Colors.white,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -56,11 +57,11 @@ class SettingSectionItem extends React.PureComponent {
     const { setting, sectionIndex } = this.props;
     return (
       <View style={styles.container}>
-        <Divider style={{ backgroundColor: 'gray' }} />
+        <Divider style={{ backgroundColor: Colors.gray }} />
         <View style={styles.settingHeader}>
           <Text style={styles.settingHeaderText}>{setting.label}</Text>
         </View>
-        <Divider style={{ backgroundColor: 'gray' }} />
+        <Divider style={{ backgroundColor: Colors.gray }} />
         <View style={styles.settingBody}>
           <View style={styles.settingButtonsContainer}>
             {setting.children.inputs

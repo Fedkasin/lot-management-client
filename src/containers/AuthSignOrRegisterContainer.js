@@ -9,6 +9,7 @@ import { googleAuthorizationConfig } from '../constants/Config';
 import actions from '../store/actions';
 import ErrorContainer from '../components/core/ErrorContainer';
 import IcoButton from '../components/core/IcoButton';
+import * as Colors from '../constants/Colors';
 
 const { Lottie } = DangerZone;
 
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     marginTop: 20,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.white,
   },
   text: {
     fontSize: 21,
@@ -53,7 +54,7 @@ class AuthSignOrRegisterContainer extends PureComponent {
       error, isLoading,
     } = this.props;
     if (isLoading) {
-      return <ActivityIndicator size="large" color="#0000ff" style={{ flex: 1 }} />;
+      return <ActivityIndicator size="large" color={Colors.lightGray} style={{ flex: 1 }} />;
     }
     return (
       <View style={styles.container}>
@@ -70,28 +71,28 @@ class AuthSignOrRegisterContainer extends PureComponent {
         <View style={styles.container}>
           <IcoButton
             text="Google"
-            color="#fff"
+            color={Colors.white}
             onPress={this.onSignIn}
-            textColor="#131313"
-            iconColor="#131313"
+            textColor={Colors.black}
+            iconColor={Colors.black}
             iosIcon="logo-google"
             otherIcon="logo-google"
           />
           <IcoButton
             text="Github"
-            color="#fff"
+            color={Colors.white}
             onPress={this.onSignUp}
-            textColor="#131313"
-            iconColor="#131313"
+            textColor={Colors.black}
+            iconColor={Colors.black}
             iosIcon="logo-github"
             otherIcon="logo-github"
           />
           <IcoButton
             text="Facebook"
-            color="#fff"
+            color={Colors.white}
             onPress={this.onSignUp}
-            textColor="#131313"
-            iconColor="#131313"
+            textColor={Colors.black}
+            iconColor={Colors.black}
             iosIcon="logo-facebook"
             otherIcon="logo-facebook"
           />

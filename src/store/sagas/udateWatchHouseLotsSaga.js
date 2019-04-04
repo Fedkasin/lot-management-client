@@ -11,7 +11,7 @@ import getEnvVars from '../../constants/environment';
 function* updateHouseWatchLots(action) {
   try {
     const { jobId } = action.payload;
-    const response = yield call(axios.get, `https://${getEnvVars.apiUrl}/watch/${jobId}`);
+    const response = yield call(axios.get, `${getEnvVars.apiUrl}/watch/${jobId}`);
     yield put(actions.houseLotsActions.updateHouseWatchLotsSuccess(response.data));
   } catch (err) {
     yield put(actions.houseLotsActions.updateHouseWatchLotsFail(err));

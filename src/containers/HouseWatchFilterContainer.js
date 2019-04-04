@@ -8,71 +8,79 @@ import axios from 'axios';
 import HouseFilter from '../components/house/HouseFilter';
 import actions from '../store/actions';
 import getEnvVars from '../constants/environment';
+import * as Colors from '../constants/Colors';
 
 class HouseWatchFilterContainer extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.onChangeHouseFilterRoomsTo = this.onChangeHouseFilterRoomsTo.bind(this);
-    this.onChangeHouseFilterRoomsFrom = this.onChangeHouseFilterRoomsFrom.bind(this);
-    this.onChangeHouseFilterPriceTo = this.onChangeHouseFilterPriceTo.bind(this);
-    this.onChangeHouseFilterPriceFrom = this.onChangeHouseFilterPriceFrom.bind(this);
+    this.onChangeHouseWatchFilterRoomsTo = this.onChangeHouseWatchFilterRoomsTo.bind(this);
+    this.onChangeHouseWatchFilterRoomsFrom = this.onChangeHouseWatchFilterRoomsFrom.bind(this);
+    this.onChangeHouseWatchFilterPriceTo = this.onChangeHouseWatchFilterPriceTo.bind(this);
+    this.onChangeHouseWatchFilterPriceFrom = this.onChangeHouseWatchFilterPriceFrom.bind(this);
     this.onApplyFilter = this.onApplyFilter.bind(this);
   }
 
   async onApplyFilter() {
-    const { navigation } = this.props;
-    const userId = await AsyncStorage.getItem('@UserStore:USER_ID');
-    navigation.pop(null);
-    const res = await axios({
-      method: 'post',
-      url: `http://${getEnvVars.apiUrl}/v1/watch`,
-      data: {
-        userId,
-      },
-      params: {
-        /* add params
-        rooms: [1, 2],
-        max: 500,
-        min: 50, */
-      },
-    });
-    // eslint-disable-next-line no-console
-    console.log('jobId', res.data.message);
+    try {
+      const { navigation, filters } = this.props;
+      const userId = await AsyncStorage.getItem('@UserStore:USER_ID');
+      const rooms = [];
+      for (let i = parseInt(filters.roomsFrom, 10); i < parseInt(filters.roomsTo, 10) + 1; i += 1) {
+        rooms.push(i);
+      }
+      navigation.pop(null);
+      await axios({
+        method: 'post',
+        url: `${getEnvVars.apiUrl}/v1/watch`,
+        headers: { Authorization: '0xdf0g9undf89ry9eg38rder3g9example' },
+        data: {
+          userId,
+        },
+        params: {
+          rooms,
+          max: parseInt(filters.priceTo, 10),
+          min: parseInt(filters.priceFrom, 10),
+        },
+      });
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(err);
+    }
   }
 
-  onChangeHouseFilterRoomsFrom(value) {
+  onChangeHouseWatchFilterRoomsFrom(value) {
     const { changeRoomsFrom } = this.props;
     changeRoomsFrom(value);
   }
 
-  onChangeHouseFilterRoomsTo(value) {
+  onChangeHouseWatchFilterRoomsTo(value) {
     const { changeRoomsTo } = this.props;
     changeRoomsTo(value);
   }
 
-  onChangeHouseFilterPriceFrom(value) {
+  onChangeHouseWatchFilterPriceFrom(value) {
     const { changePriceFrom } = this.props;
     changePriceFrom(value);
   }
 
-  onChangeHouseFilterPriceTo(value) {
+  onChangeHouseWatchFilterPriceTo(value) {
     const { changePriceTo } = this.props;
     changePriceTo(value);
   }
 
   render() {
     const handlers = {
-      roomsToHandler: this.onChangeHouseFilterRoomsTo,
-      roomsFromHandler: this.onChangeHouseFilterRoomsFrom,
-      priceToHandler: this.onChangeHouseFilterPriceTo,
-      priceFromHandler: this.onChangeHouseFilterPriceFrom,
+      roomsToHandler: this.onChangeHouseWatchFilterRoomsTo,
+      roomsFromHandler: this.onChangeHouseWatchFilterRoomsFrom,
+      priceToHandler: this.onChangeHouseWatchFilterPriceTo,
+      priceFromHandler: this.onChangeHouseWatchFilterPriceFrom,
       applyFilter: this.onApplyFilter,
     };
     const { navigation, filters } = this.props;
 
     return (
-      <ScrollView style={{ backgroundColor: '#fff' }}>
+      <ScrollView style={{ backgroundColor: Colors.white }}>
         <HouseFilter filters={filters} handlers={handlers} />
         <NavigationEvents
           onDidBlur={() => navigation.pop(null)}
@@ -85,21 +93,21 @@ class HouseWatchFilterContainer extends PureComponent {
 function mapStateToProps(state) {
   return {
     filters: {
-      roomsTo: state.houseFilterReducers.roomsTo,
-      roomsFrom: state.houseFilterReducers.roomsFrom,
-      priceTo: state.houseFilterReducers.priceTo,
-      priceFrom: state.houseFilterReducers.priceFrom,
+      roomsTo: state.houseFilterLiveReducers.roomsTo,
+      roomsFrom: state.houseFilterLiveReducers.roomsFrom,
+      priceTo: state.houseFilterLiveReducers.priceTo,
+      priceFrom: state.houseFilterLiveReducers.priceFrom,
     },
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    changeRoomsFrom: value => dispatch(actions.houseLotsFilterActions.updateHouseFilterRoomsFrom(value)),
-    changeRoomsTo: value => dispatch(actions.houseLotsFilterActions.updateHouseFilterRoomsTo(value)),
-    changePriceFrom: value => dispatch(actions.houseLotsFilterActions.updateHouseFilterPriceFrom(value)),
-    changePriceTo: value => dispatch(actions.houseLotsFilterActions.updateHouseFilterPriceTo(value)),
-    applyFilter: filters => dispatch(actions.houseLotsActions.fetchHouseLots(filters)),
+    changeRoomsFrom: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterRoomsFrom(value)),
+    changeRoomsTo: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterRoomsTo(value)),
+    changePriceFrom: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterPriceFrom(value)),
+    changePriceTo: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterPriceTo(value)),
+    applyFilter: filters => dispatch(actions.houseWatchLotsActions.fetchHouseLots(filters)),
   };
 }
 
@@ -110,7 +118,6 @@ HouseWatchFilterContainer.propTypes = {
   changeRoomsFrom: PropTypes.func.isRequired,
   changePriceTo: PropTypes.func.isRequired,
   changePriceFrom: PropTypes.func.isRequired,
-  /* applyFilter: PropTypes.func.isRequired, */
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(HouseWatchFilterContainer));
