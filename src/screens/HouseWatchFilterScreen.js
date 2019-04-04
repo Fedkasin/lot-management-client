@@ -7,7 +7,7 @@ class HouseWatchFilterScreen extends React.Component {
   };
 
   render() {
-    return <HouseWatchFilterContainer />;
+    return <HouseWatchFilterContainer />; // temp
   }
 }
 

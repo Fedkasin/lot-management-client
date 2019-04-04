@@ -4,11 +4,10 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import RNPickerSelect from 'react-native-picker-select';
-import * as Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.white,
+    backgroundColor: '#fff',
     justifyContent: 'center',
     paddingHorizontal: 10,
     flex: 1,
@@ -25,27 +24,27 @@ const styles = StyleSheet.create({
     paddingTop: 9,
     paddingHorizontal: 10,
     paddingBottom: 12,
-    backgroundColor: Colors.white,
-    color: Colors.black,
+    backgroundColor: 'white',
+    color: 'black',
   },
   pickerButtonStyle: {
     borderWidth: 1,
-    borderColor: Colors.red,
-    backgroundColor: Colors.white,
+    borderColor: 'red',
+    backgroundColor: 'white',
   },
 });
 
 const pickerStyle = {
   inputIOS: {
-    color: Colors.black,
+    color: '#131313',
     paddingTop: 9,
     paddingHorizontal: 10,
     paddingBottom: 9,
   },
   inputAndroid: {
-    color: Colors.black,
+    color: '#131313',
   },
-  placeholderColor: Colors.black,
+  placeholderColor: '#131313',
   underline: { borderTopWidth: 0 },
 };
 
@@ -61,7 +60,7 @@ class SettingChildSelect extends React.PureComponent {
       <View style={styles.container}>
         <Text style={styles.label}>{label}</Text>
         <View style={{
-          height: 40, borderWidth: 1, borderColor: Colors.gray, borderRadius: 5, marginBottom: 9, justifyContent: 'center',
+          height: 40, borderWidth: 1, borderColor: '#999', borderRadius: 5, marginBottom: 9, justifyContent: 'center',
         }}
         >
           <RNPickerSelect

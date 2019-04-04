@@ -48,13 +48,6 @@ import {
   showFirstSplashScreen,
 } from './authActionCreators';
 
-import {
-  updateHouseWatchFilterRoomsTo,
-  updateHouseWatchFilterRoomsFrom,
-  updateHouseWatchFilterPriceTo,
-  updateHouseWatchFilterPriceFrom,
-} from './houseWatchLotsFilterActionCreators';
-
 export default {
   rootActions: {
     appIsReady,
@@ -82,12 +75,6 @@ export default {
     updateHouseFilterRoomsFrom,
     updateHouseFilterPriceTo,
     updateHouseFilterPriceFrom,
-  },
-  houseWatchLotsFilterActions: {
-    updateHouseWatchFilterRoomsTo,
-    updateHouseWatchFilterRoomsFrom,
-    updateHouseWatchFilterPriceTo,
-    updateHouseWatchFilterPriceFrom,
   },
   settingsActions: {
     fetchSettings,

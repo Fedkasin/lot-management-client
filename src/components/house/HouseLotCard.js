@@ -5,15 +5,14 @@ import {
   Text, View, StyleSheet, ImageBackground, TouchableOpacity, Linking,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import * as Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
   item: {
     marginBottom: 20,
     paddingBottom: 30,
     marginTop: 10,
-    backgroundColor: Colors.white,
-    color: Colors.gray,
+    backgroundColor: '#fefff9',
+    color: '#363636',
     borderRadius: 4,
   },
   innerImage: {
@@ -41,7 +40,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   itemTitleText: {
-    color: Colors.white,
+    color: '#e8ffff',
     fontWeight: '500',
   },
   itemDescription: {
@@ -50,7 +49,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   itemDescriptionText: {
-    color: Colors.white,
+    color: '#e8ffff',
     fontSize: 16,
   },
 });

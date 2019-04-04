@@ -5,12 +5,11 @@ import PropTypes from 'prop-types';
 
 import HouseLotCard from '../components/house/HouseLotCard';
 import BgMessage from '../components/bgmessage/BackgroundMessage';
-import * as Colors from '../constants/Colors';
 
 class HouseWatchLotsContainer extends React.Component {
   render() {
     const { isFetching, houseWatchLots } = this.props;
-    if (!houseWatchLots.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
+    if (!houseWatchLots.length && isFetching) return <ActivityIndicator size="large" color="#0000ff" />;
     return (
       <FlatList
         data={houseWatchLots}

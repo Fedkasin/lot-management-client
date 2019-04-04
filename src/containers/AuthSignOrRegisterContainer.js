@@ -9,7 +9,6 @@ import { googleAuthorizationConfig } from '../constants/Config';
 import actions from '../store/actions';
 import ErrorContainer from '../components/core/ErrorContainer';
 import IcoButton from '../components/core/IcoButton';
-import * as Colors from '../constants/Colors';
 
 const { Lottie } = DangerZone;
 
@@ -19,7 +18,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     marginTop: 20,
-    backgroundColor: Colors.white,
+    backgroundColor: '#fff',
   },
   text: {
     fontSize: 21,
@@ -54,7 +53,7 @@ class AuthSignOrRegisterContainer extends PureComponent {
       error, isLoading,
     } = this.props;
     if (isLoading) {
-      return <ActivityIndicator size="large" color={Colors.lightGray} style={{ flex: 1 }} />;
+      return <ActivityIndicator size="large" color="#0000ff" style={{ flex: 1 }} />;
     }
     return (
       <View style={styles.container}>
@@ -71,28 +70,28 @@ class AuthSignOrRegisterContainer extends PureComponent {
         <View style={styles.container}>
           <IcoButton
             text="Google"
-            color={Colors.white}
+            color="#fff"
             onPress={this.onSignIn}
-            textColor={Colors.black}
-            iconColor={Colors.black}
+            textColor="#131313"
+            iconColor="#131313"
             iosIcon="logo-google"
             otherIcon="logo-google"
           />
           <IcoButton
             text="Github"
-            color={Colors.white}
+            color="#fff"
             onPress={this.onSignUp}
-            textColor={Colors.black}
-            iconColor={Colors.black}
+            textColor="#131313"
+            iconColor="#131313"
             iosIcon="logo-github"
             otherIcon="logo-github"
           />
           <IcoButton
             text="Facebook"
-            color={Colors.white}
+            color="#fff"
             onPress={this.onSignUp}
-            textColor={Colors.black}
-            iconColor={Colors.black}
+            textColor="#131313"
+            iconColor="#131313"
             iosIcon="logo-facebook"
             otherIcon="logo-facebook"
           />
