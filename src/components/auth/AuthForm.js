@@ -9,6 +9,7 @@ import {
 import PropTypes from 'prop-types';
 import ErrorContainer from '../core/ErrorContainer';
 import IcoButton from '../core/IcoButton';
+import * as Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -17,17 +18,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: '100%',
     width: '100%',
-    backgroundColor: '#fff',
+    backgroundColor: Colors.white,
   },
   bgContainer: {
     width: '100%',
     alignItems: 'center',
   },
   textLight: {
-    color: '#f8f9fa',
+    color: Colors.white,
   },
   textDark: {
-    color: '#343a40',
+    color: Colors.gray,
   },
   text: {
     fontSize: 26,
@@ -35,12 +36,12 @@ const styles = StyleSheet.create({
     marginTop: 9,
   },
   error: {
-    color: '#f00',
+    color: Colors.red,
   },
   input: {
     height: 40,
     width: '90%',
-    borderColor: '#000',
+    borderColor: Colors.black,
     borderWidth: 1,
     borderRadius: 5,
     opacity: 0.5,
@@ -84,10 +85,10 @@ class AuthForm extends PureComponent {
         </Text>
         <IcoButton
           text="Log In"
-          color="#28a745"
+          color={Colors.green}
           onPress={handleClick}
-          textColor="#f8f9fa"
-          iconColor="#f8f9fa"
+          textColor={Colors.white}
+          iconColor={Colors.white}
           iosIcon="ios-checkmark"
           otherIcon="md-checkmark"
         />
@@ -97,10 +98,10 @@ class AuthForm extends PureComponent {
         </Text>
         <IcoButton
           text="Log In"
-          color="#28a745"
+          color={Colors.green}
           onPress={handleClick}
-          textColor="#f8f9fa"
-          iconColor="#f8f9fa"
+          textColor={Colors.white}
+          iconColor={Colors.white}
           iosIcon="ios-checkmark"
           otherIcon="md-checkmark"
         />
