@@ -3,13 +3,14 @@ import React, { PureComponent } from 'react';
 import { AppLoading, Font } from 'expo';
 import { StyleSheet, Alert, View } from 'react-native';
 import PropTypes from 'prop-types';
+import * as Colors from '../constants/Colors';
 
 import actions from '../store/actions';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.white,
   },
 });
 

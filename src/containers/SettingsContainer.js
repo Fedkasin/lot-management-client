@@ -10,6 +10,7 @@ import actions from '../store/actions/index';
 import { getUser } from '../helpers/authHelpers';
 import ProfileView from '../components/auth/ProfileView';
 import getEnvVars from '../constants/environment';
+import * as Colors from '../constants/Colors';
 
 class SettingsContainer extends PureComponent {
   constructor(props) {
@@ -57,14 +58,14 @@ class SettingsContainer extends PureComponent {
     const { isLoading, settings, user } = this.props;
 
     if (isLoading || !user) {
-      return <ActivityIndicator size="large" color="#0000ff" />;
+      return <ActivityIndicator size="large" color={Colors.lightGray} />;
     }
 
     const userName = user.name || user.displayName;
     const userAvatar = user.photoUrl || user.photoURL;
 
     return (
-      <ScrollView style={{ backgroundColor: '#fff' }}>
+      <ScrollView style={{ backgroundColor: Colors.white }}>
         <ProfileView
           name={userName}
           avatar={userAvatar}

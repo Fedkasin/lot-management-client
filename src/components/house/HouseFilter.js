@@ -6,10 +6,12 @@ import PropTypes from 'prop-types';
 
 import SettingChildSelect from '../settings/SettingChildSelect';
 import IcoButton from '../core/IcoButton';
+import * as filtersConst from '../../constants/Filters';
+import * as Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: Colors.white,
     justifyContent: 'center',
     paddingHorizontal: 10,
     flex: 1,
@@ -25,40 +27,39 @@ const styles = StyleSheet.create({
 
 class HouseFilter extends React.PureComponent {
   render() {
-    console.log('house filter props', this.props);
     const { filters, handlers } = this.props;
     return (
       <View style={styles.container}>
         <SettingChildSelect
           value={filters.roomsFrom}
-          items={['1', '2', '3', '4']}
+          items={filtersConst.roomCount}
           label="Rooms From"
           handler={handlers.roomsFromHandler}
         />
         <SettingChildSelect
           value={filters.roomsTo}
-          items={['1', '2', '3', '4']}
+          items={filtersConst.roomCount}
           label="Rooms To"
           handler={handlers.roomsToHandler}
         />
         <SettingChildSelect
           value={filters.priceFrom}
-          items={['50', '100', '150', '200', '250', '300', '400', '500', '600', '700', '800', '900']}
+          items={filtersConst.pricing}
           label="Price From"
           handler={handlers.priceFromHandler}
         />
         <SettingChildSelect
           value={filters.priceTo}
-          items={['50', '100', '150', '200', '250', '300', '400', '500', '600', '700', '800', '900']}
+          items={filtersConst.pricing}
           label="Price To"
           handler={handlers.priceToHandler}
         />
         <IcoButton
           text="Accept"
-          color="#28a745"
+          color={Colors.green}
           onPress={handlers.applyFilter}
-          textColor="#f8f9fa"
-          iconColor="#f8f9fa"
+          textColor={Colors.white}
+          iconColor={Colors.white}
           iosIcon="ios-checkmark"
           otherIcon="md-checkmark"
         />

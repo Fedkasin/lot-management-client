@@ -8,6 +8,7 @@ import axios from 'axios';
 import HouseFilter from '../components/house/HouseFilter';
 import actions from '../store/actions';
 import getEnvVars from '../constants/environment';
+import * as Colors from '../constants/Colors';
 
 class HouseWatchFilterContainer extends PureComponent {
   constructor(props) {
@@ -29,10 +30,10 @@ class HouseWatchFilterContainer extends PureComponent {
         rooms.push(i);
       }
       navigation.pop(null);
-      const res = await axios({
+      await axios({
         method: 'post',
         url: `http://${getEnvVars.apiUrl}/v1/watch`,
-        headers: { Token: '0xdf0g9undf89ry9eg38rder3g9example' },
+        headers: { Authorization: '0xdf0g9undf89ry9eg38rder3g9example' },
         data: {
           userId,
         },
@@ -42,9 +43,9 @@ class HouseWatchFilterContainer extends PureComponent {
           min: parseInt(filters.priceFrom, 10),
         },
       });
-      console.log('jobId', res.data.message);
-    } catch (e) {
-      console.log('Server not responding', e);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(err);
     }
   }
 
@@ -79,7 +80,7 @@ class HouseWatchFilterContainer extends PureComponent {
     const { navigation, filters } = this.props;
 
     return (
-      <ScrollView style={{ backgroundColor: '#fff' }}>
+      <ScrollView style={{ backgroundColor: Colors.white }}>
         <HouseFilter filters={filters} handlers={handlers} />
         <NavigationEvents
           onDidBlur={() => navigation.pop(null)}
