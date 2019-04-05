@@ -50,18 +50,23 @@ class HouseFilter extends React.PureComponent {
             handler={handlers.roomsToHandler}
           />
         </View>
-        <SettingChildSelect
-          value={filters.priceFrom}
-          items={filtersConst.pricing}
-          label="Price From"
-          handler={handlers.priceFromHandler}
-        />
-        <SettingChildSelect
-          value={filters.priceTo}
-          items={filtersConst.pricing}
-          label="Price To"
-          handler={handlers.priceToHandler}
-        />
+        <Text style={{ fontSize: 24 }}>Price</Text>
+        <View style={{ display: 'flex', flexDirection: 'row' }}>
+          <SettingChildSelect
+            style={{ height: 50, width: '50%' }}
+            value={filters.priceFrom}
+            items={filtersConst.pricing}
+            label="from"
+            handler={handlers.priceFromHandler}
+          />
+          <SettingChildSelect
+            style={{ height: 50, width: '50%' }}
+            value={filters.priceTo}
+            items={filtersConst.pricing}
+            label="to"
+            handler={handlers.priceToHandler}
+          />
+        </View>
         <IcoButton
           text="Accept"
           color={Colors.green}

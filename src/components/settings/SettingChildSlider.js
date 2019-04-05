@@ -1,8 +1,7 @@
 import React from 'react';
 import {
-  View, StyleSheet, Text,
+  View, StyleSheet, Text, Slider,
 } from 'react-native';
-import { Slider } from 'react-native-elements';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({

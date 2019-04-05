@@ -3,7 +3,6 @@ import {
   Text, View, StyleSheet,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { Divider } from 'react-native-elements';
 
 import SettingChildSelect from './SettingChildSelect';
 import SettingChildButton from './SettingChildButton';
@@ -50,6 +49,10 @@ const styles = StyleSheet.create({
   settingCheckboxesContainer: {
     flex: 1,
   },
+  divider: {
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
+  },
 });
 
 class SettingSectionItem extends React.PureComponent {
@@ -57,11 +60,11 @@ class SettingSectionItem extends React.PureComponent {
     const { setting, sectionIndex } = this.props;
     return (
       <View style={styles.container}>
-        <Divider style={{ backgroundColor: Colors.gray }} />
+        <View style={styles.divider} />
         <View style={styles.settingHeader}>
           <Text style={styles.settingHeaderText}>{setting.label}</Text>
         </View>
-        <Divider style={{ backgroundColor: Colors.gray }} />
+        <View style={styles.divider} />
         <View style={styles.settingBody}>
           <View style={styles.settingButtonsContainer}>
             {setting.children.inputs
