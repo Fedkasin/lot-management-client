@@ -1,11 +1,12 @@
 import React from 'react';
 import {
-  View, StyleSheet,
+  View, StyleSheet, Text,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
 import SettingChildSelect from '../settings/SettingChildSelect';
 import IcoButton from '../core/IcoButton';
+import SettingChildSlider from '../settings/SettingChildSlider';
 import * as filtersConst from '../../constants/Filters';
 import * as Colors from '../../constants/Colors';
 
@@ -30,18 +31,25 @@ class HouseFilter extends React.PureComponent {
     const { filters, handlers } = this.props;
     return (
       <View style={styles.container}>
-        <SettingChildSelect
-          value={filters.roomsFrom}
-          items={filtersConst.roomCount}
-          label="Rooms From"
-          handler={handlers.roomsFromHandler}
-        />
-        <SettingChildSelect
-          value={filters.roomsTo}
-          items={filtersConst.roomCount}
-          label="Rooms To"
-          handler={handlers.roomsToHandler}
-        />
+        <Text style={{ fontSize: 24 }}>Rooms count</Text>
+        <View style={{ display: 'flex', flexDirection: 'row' }}>
+          <SettingChildSlider
+            text="from"
+            from={1}
+            to={4}
+            value={parseInt(filters.roomsFrom, 10)}
+            step={1}
+            handler={handlers.roomsFromHandler}
+          />
+          <SettingChildSlider
+            text="to"
+            from={parseInt(filters.roomsFrom, 10)}
+            to={4}
+            value={parseInt(filters.roomsTo, 10)}
+            step={1}
+            handler={handlers.roomsToHandler}
+          />
+        </View>
         <SettingChildSelect
           value={filters.priceFrom}
           items={filtersConst.pricing}

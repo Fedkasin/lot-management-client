@@ -27,12 +27,12 @@ class HouseFilterContainer extends PureComponent {
 
   onChangeHouseFilterRoomsFrom(value) {
     const { changeRoomsFrom } = this.props;
-    changeRoomsFrom(value);
+    changeRoomsFrom(value.toString());
   }
 
   onChangeHouseFilterRoomsTo(value) {
     const { changeRoomsTo } = this.props;
-    changeRoomsTo(value);
+    changeRoomsTo(value.toString());
   }
 
   onChangeHouseFilterPriceFrom(value) {

@@ -15,10 +15,19 @@ const initialState = {
 const houseFilterReducers = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_HOUSE_FILTER_ROOMS_FROM:
-      return {
-        ...state,
-        roomsFrom: action.payload.roomsFrom,
-      };
+      if (action.payload.roomsFrom > state.roomsTo) {
+        return {
+          ...state,
+          roomsFrom: action.payload.roomsFrom,
+          roomsTo: action.payload.roomsFrom,
+        };
+      } else {
+        return {
+          ...state,
+          roomsFrom: action.payload.roomsFrom,
+        };
+      }
+
     case UPDATE_HOUSE_FILTER_ROOMS_TO:
       return {
         ...state,

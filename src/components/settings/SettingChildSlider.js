@@ -24,29 +24,38 @@ const styles = StyleSheet.create({
 
 class SettingChildSlider extends React.PureComponent {
   render() {
-    const { child } = this.props;
+    const {
+      text,
+      from,
+      to,
+      step,
+      value,
+      handler,
+    } = this.props;
     return (
       <View style={styles.container}>
-        <Text style={styles.label}>{child.text}</Text>
+        <Text style={styles.label}>{text}</Text>
         <Slider
           style={styles.slider}
-          minimumValue={child.from}
-          maximumValue={child.to}
-          step={10}
-          value={child.value}
-          onValueChange={(e) => {
-            child.value = e;
-            this.forceUpdate();
-          }}
+          minimumValue={from}
+          maximumValue={to}
+          step={step}
+          value={value}
+          onValueChange={handler}
         />
-        <Text style={styles.value}>{child.value}</Text>
+        <Text style={styles.value}>{value}</Text>
       </View>
     );
   }
 }
 
 SettingChildSlider.propTypes = {
-  child: PropTypes.objectOf(PropTypes.any).isRequired,
+  text: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+  from: PropTypes.number.isRequired,
+  to: PropTypes.number.isRequired,
+  step: PropTypes.number.isRequired,
+  handler: PropTypes.func.isRequired,
 };
 
 export default SettingChildSlider;
