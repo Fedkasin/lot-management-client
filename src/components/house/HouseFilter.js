@@ -45,7 +45,7 @@ class HouseFilter extends React.PureComponent {
           <SettingChildSlider
             text="from"
             from={1}
-            to={4}
+            to={parseInt(filters.roomsTo, 10)}
             value={parseInt(filters.roomsFrom, 10)}
             step={1}
             handler={handlers.roomsFromHandler}

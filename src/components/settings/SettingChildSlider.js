@@ -39,7 +39,7 @@ class SettingChildSlider extends React.PureComponent {
           minimumValue={from}
           maximumValue={to}
           step={step}
-          value={value}
+          value={from > value ? from : value}
           onValueChange={handler}
         />
         <Text style={styles.value}>{value}</Text>
