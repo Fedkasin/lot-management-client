@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   divider: {
-    borderBottomColor: 'black',
+    borderBottomColor: Colors.lightGray,
     borderBottomWidth: 1,
   },
 });

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import superagent from 'superagent';
 import { AsyncStorage } from 'react-native';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { Constants } from 'expo';
@@ -17,7 +17,6 @@ import getEnvVars from '../../constants/environment';
 function* login(action) {
   try {
     const data = yield call(signInWithGoogleAsync, action.payload);
-    yield put(actions.authActions.loginSuccess(data.user));
     const {
       accessToken,
       refreshToken,
@@ -29,7 +28,8 @@ function* login(action) {
       deviceId: Constants.deviceName,
       systemName: Constants.platform.android ? 'android' : 'ios',
     };
-
+    /* console.log('Data:', data);
+    console.log('Expo:', expo); */
     const body = {
       auth: {
         access_token: accessToken,
@@ -38,8 +38,11 @@ function* login(action) {
       },
       expo,
     };
-    const response = yield call(axios.post, `${getEnvVars.apiUrl}/v1/users`, body);
-    AsyncStorage.setItem('@UserStore:USER_ID', response.data.message.userId);
+    const req = superagent.post(`${getEnvVars.apiUrl}/v1/users`, body);
+    req.timeout({ response: 2500 });
+    const res = yield req;
+    AsyncStorage.setItem('@UserStore:USER_ID', res.body.message.userId);
+    yield put(actions.authActions.loginSuccess(data.user));
     yield put(navigate(APP_TAB));
   } catch (err) {
     yield put(actions.authActions.loginFail(err.message));
