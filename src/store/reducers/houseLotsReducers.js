@@ -5,10 +5,12 @@ import {
   UPDATE_HOUSE_WATCH_LOTS,
   UPDATE_HOUSE_WATCH_LOTS_SUCCESS,
   UPDATE_HOUSE_WATCH_LOTS_FAIL,
+  UPDATE_WATCH_STATE,
 } from '../../constants/Actions';
 
 const initialState = {
   isFetching: false,
+  isWatching: false,
   houseLots: [],
   houseWatchLots: [],
   page: 0,
@@ -56,6 +58,11 @@ const houseLotsReducer = (state = initialState, action) => {
         error: action.error,
         houseLots: [],
         isFetching: false,
+      };
+    case UPDATE_WATCH_STATE:
+      return {
+        ...state,
+        isWatching: state.isWatching === false,
       };
     default:
       return state;

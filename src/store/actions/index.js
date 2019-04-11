@@ -21,6 +21,7 @@ import {
   fetchHouseLots,
   fetchHouseLotsSuccess,
   fetchHouseLotsFail,
+  updateWatchState,
 } from './houseLotsActionCreators';
 
 import {
@@ -76,6 +77,7 @@ export default {
     fetchHouseLots,
     fetchHouseLotsSuccess,
     fetchHouseLotsFail,
+    updateWatchState,
   },
   houseLotsFilterActions: {
     updateHouseFilterRoomsTo,

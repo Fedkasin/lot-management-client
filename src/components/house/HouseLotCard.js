@@ -10,8 +10,6 @@ import * as Colors from '../../constants/Colors';
 const styles = StyleSheet.create({
   item: {
     marginBottom: 20,
-    paddingBottom: 30,
-    marginTop: 10,
     backgroundColor: Colors.white,
     color: Colors.gray,
     borderRadius: 4,

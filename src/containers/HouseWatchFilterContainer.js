@@ -1,14 +1,15 @@
 import React, { PureComponent } from 'react';
-import { AsyncStorage, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import { withNavigation, NavigationEvents } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import axios from 'axios';
 
 import HouseFilter from '../components/house/HouseFilter';
 import actions from '../store/actions';
-import getEnvVars from '../constants/environment';
 import * as Colors from '../constants/Colors';
+import LMapi from '../helpers/lmapi';
+
+const lmapi = new LMapi();
 
 class HouseWatchFilterContainer extends PureComponent {
   constructor(props) {
@@ -24,25 +25,17 @@ class HouseWatchFilterContainer extends PureComponent {
   async onApplyFilter() {
     try {
       const { navigation, filters } = this.props;
-      const userId = await AsyncStorage.getItem('@UserStore:USER_ID');
       const rooms = [];
       for (let i = parseInt(filters.roomsFrom, 10); i < parseInt(filters.roomsTo, 10) + 1; i += 1) {
         rooms.push(i);
       }
+      const params = {
+        rooms,
+        max: parseInt(filters.priceTo, 10),
+        min: parseInt(filters.priceFrom, 10),
+      };
+      await lmapi.startCurrentUserJob(params);
       navigation.pop(null);
-      await axios({
-        method: 'post',
-        url: `${getEnvVars.apiUrl}/v1/watch`,
-        headers: { Authorization: '0xdf0g9undf89ry9eg38rder3g9example' },
-        data: {
-          userId,
-        },
-        params: {
-          rooms,
-          max: parseInt(filters.priceTo, 10),
-          min: parseInt(filters.priceFrom, 10),
-        },
-      });
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error(err);

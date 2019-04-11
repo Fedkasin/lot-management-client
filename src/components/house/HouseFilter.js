@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, StyleSheet, Text, Switch,
+  View, StyleSheet, Text,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -35,11 +35,6 @@ class HouseFilter extends React.PureComponent {
     const { filters, handlers } = this.props;
     return (
       <View style={styles.container}>
-        <View style={{ display: 'flex', flexDirection: 'row', padding: 10 }}>
-          <Text style={{ fontSize: 24 }}>Notifications activity</Text>
-          <Switch style={{ marginLeft: 'auto' }} onValueChange={() => console.log('switch change')} />
-        </View>
-        <View style={styles.divider} />
         <Text style={{ fontSize: 24, padding: 10 }}>Rooms count</Text>
         <View style={{ display: 'flex', flexDirection: 'row' }}>
           <SettingChildSlider
