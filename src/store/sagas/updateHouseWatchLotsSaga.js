@@ -10,7 +10,6 @@ import getEnvVars from '../../constants/environment';
 
 function* updateHouseWatchLots(action) {
   try {
-    console.log('updateHouseWatchLots');
     const { jobId } = action.payload;
     const response = yield call(axios.get, `${getEnvVars.apiUrl}/watch/${jobId}`);
     yield put(actions.houseLotsActions.updateHouseWatchLotsSuccess(response.data));
@@ -20,6 +19,5 @@ function* updateHouseWatchLots(action) {
 }
 
 export default function* updateHouseWatchLotsSaga() {
-  console.log('updateHouseWatchLots saga');
   yield takeLatest(UPDATE_HOUSE_WATCH_LOTS, updateHouseWatchLots);
 }

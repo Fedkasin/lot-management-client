@@ -2,7 +2,7 @@ import superagent from 'superagent';
 import { AsyncStorage } from 'react-native';
 import getEnvVars from '../constants/environment';
 
-export default class LMapi {
+class LMapi {
   constructor(jobs) {
     this.jobs = jobs;
   }
@@ -25,12 +25,20 @@ export default class LMapi {
 
   stopAllCurrentUserJobs = async () => {
     const jobs = await this.getCurrentUserJobs();
-    const requests = [];
-    for (let i = 0; i < jobs.length; i += 1) {
-      const req = superagent.delete(`${getEnvVars.apiUrl}/v1/watch/${jobs[i]}`);
-      requests.push(req);
+    if (jobs) {
+      const requests = [];
+      for (let i = 0; i < jobs.length; i += 1) {
+        const req = superagent.delete(`${getEnvVars.apiUrl}/v1/watch/${jobs[i]}`);
+        requests.push(req);
+      }
+      await Promise.all(requests).then(values => {
+        for (let i = 0; i < values.length; i += 1) {
+          console.log(values[i].body.message.jobId, 'has stopped');
+        }
+      });
+    } else {
+      console.log('[null] There\'s notning to stop');
     }
-    await Promise.all(requests);
   };
 
   startCurrentUserJob = async (params) => {
@@ -39,6 +47,9 @@ export default class LMapi {
     const req = superagent.post(`${getEnvVars.apiUrl}/v1/watch`, data);
     req.timeout({ response: 2500 });
     req.set('Authorization', 'Bearer 0x4815162342');
-    await req;
+    const res = await req;
+    console.log(res.body.message.jobId, 'just started!');
   }
 }
+
+export default new LMapi();

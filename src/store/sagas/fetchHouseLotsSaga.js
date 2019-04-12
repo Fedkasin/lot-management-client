@@ -10,7 +10,6 @@ import getEnvVars from '../../constants/environment';
 
 function* fetchHouseLots(action) {
   try {
-    console.log('fetchHouseLots');
     // MIN-MAX -number ROOMS - array (spec). example: ?min=10&max=20&rooms[]=1&rooms[]=2
     // const TOKEN = yield call(AsyncStorage.getItem, '@RootStore:NOTIFICATIONS_TOKEN');
     const roomsArray = Array.from(new Set([action.payload.filters.roomsFrom, action.payload.filters.roomsTo]));
@@ -25,6 +24,5 @@ function* fetchHouseLots(action) {
 }
 
 export default function* fetchHouseLotsSaga() {
-  console.log('fetchHouseLots saga');
   yield takeLatest(FETCH_HOUSE_LOTS, fetchHouseLots);
 }

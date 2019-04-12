@@ -5,7 +5,10 @@ import {
   UPDATE_HOUSE_WATCH_LOTS,
   UPDATE_HOUSE_WATCH_LOTS_SUCCESS,
   UPDATE_HOUSE_WATCH_LOTS_FAIL,
-  UPDATE_WATCH_STATE,
+  UPDATE_HOUSE_WATCH_STATE,
+  CHECK_HOUSE_WATCH_STATE,
+  CHECK_HOUSE_WATCH_STATE_TRUE,
+  CHECK_HOUSE_WATCH_STATE_FALSE,
 } from '../../constants/Actions';
 
 export const fetchHouseLots = filters => ({
@@ -40,7 +43,22 @@ export const updateHouseWatchLotsFail = err => ({
   error: err,
 });
 
-export const updateWatchState = data => ({
-  type: UPDATE_WATCH_STATE,
+export const watchHouseLots = data => ({
+  type: UPDATE_HOUSE_WATCH_STATE,
+  payload: data,
+});
+
+export const checkWatchHouseLotsState = data => ({
+  type: CHECK_HOUSE_WATCH_STATE,
+  payload: data,
+});
+
+export const watchHouseLotsTrue = data => ({
+  type: CHECK_HOUSE_WATCH_STATE_TRUE,
+  payload: data,
+});
+
+export const watchHouseLotsFalse = data => ({
+  type: CHECK_HOUSE_WATCH_STATE_FALSE,
   payload: data,
 });

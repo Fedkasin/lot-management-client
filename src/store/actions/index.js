@@ -21,7 +21,10 @@ import {
   fetchHouseLots,
   fetchHouseLotsSuccess,
   fetchHouseLotsFail,
-  updateWatchState,
+  watchHouseLots,
+  checkWatchHouseLotsState,
+  watchHouseLotsTrue,
+  watchHouseLotsFalse,
 } from './houseLotsActionCreators';
 
 import {
@@ -54,6 +57,7 @@ import {
   updateHouseWatchFilterRoomsFrom,
   updateHouseWatchFilterPriceTo,
   updateHouseWatchFilterPriceFrom,
+  updateHouseWatchFilterApply,
 } from './houseWatchLotsFilterActionCreators';
 
 export default {
@@ -77,7 +81,10 @@ export default {
     fetchHouseLots,
     fetchHouseLotsSuccess,
     fetchHouseLotsFail,
-    updateWatchState,
+    watchHouseLots,
+    checkWatchHouseLotsState,
+    watchHouseLotsTrue,
+    watchHouseLotsFalse,
   },
   houseLotsFilterActions: {
     updateHouseFilterRoomsTo,
@@ -90,6 +97,7 @@ export default {
     updateHouseWatchFilterRoomsFrom,
     updateHouseWatchFilterPriceTo,
     updateHouseWatchFilterPriceFrom,
+    updateHouseWatchFilterApply,
   },
   settingsActions: {
     fetchSettings,

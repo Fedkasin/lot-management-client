@@ -15,23 +15,30 @@ import BgMessage from '../components/bgmessage/BackgroundMessage';
 import * as Colors from '../constants/Colors';
 
 class HouseWatchLotsContainer extends React.Component {
+  componentDidMount() {
+    console.log('componentDidMount');
+    const { onCheckHouseWatchState } = this.props;
+    onCheckHouseWatchState();
+  }
+
   render() {
-    console.log('this.props', this.props);
     const {
       isFetching,
       houseWatchLots,
       isWatching,
-      updateWatchState,
+      onUpdateHouseWatchState,
     } = this.props;
+    console.log('HouseWatchLotsContainer render');
     if (!houseWatchLots.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
     return (
       <View>
         <View style={{ display: 'flex', flexDirection: 'row', padding: 10 }}>
-          <Text style={{ fontSize: 24 }}>Tracking</Text>
+          <Text style={{ fontSize: 24, color: Colors.gray, marginLeft: 9 }}>Live tracking</Text>
           <Switch
             value={isWatching}
+            disabled={!isWatching}
             style={{ marginLeft: 'auto' }}
-            onValueChange={updateWatchState}
+            onValueChange={onUpdateHouseWatchState}
           />
         </View>
         <FlatList
@@ -62,7 +69,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    updateWatchState: value => dispatch(actions.houseLotsActions.updateWatchState(value)),
+    onUpdateHouseWatchState: value => dispatch(actions.houseLotsActions.watchHouseLots(value)),
+    onCheckHouseWatchState: value => dispatch(actions.houseLotsActions.checkWatchHouseLotsState(value)),
   };
 }
 
@@ -70,7 +78,8 @@ HouseWatchLotsContainer.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   isWatching: PropTypes.bool.isRequired,
   houseWatchLots: PropTypes.arrayOf(PropTypes.any).isRequired,
-  updateWatchState: PropTypes.func.isRequired,
+  onUpdateHouseWatchState: PropTypes.func.isRequired,
+  onCheckHouseWatchState: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HouseWatchLotsContainer);

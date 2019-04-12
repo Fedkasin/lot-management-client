@@ -5,7 +5,10 @@ import {
   UPDATE_HOUSE_WATCH_LOTS,
   UPDATE_HOUSE_WATCH_LOTS_SUCCESS,
   UPDATE_HOUSE_WATCH_LOTS_FAIL,
-  UPDATE_WATCH_STATE,
+  UPDATE_HOUSE_WATCH_STATE,
+  CHECK_HOUSE_WATCH_STATE,
+  CHECK_HOUSE_WATCH_STATE_TRUE,
+  CHECK_HOUSE_WATCH_STATE_FALSE,
 } from '../../constants/Actions';
 
 const initialState = {
@@ -19,6 +22,7 @@ const initialState = {
 };
 
 const houseLotsReducer = (state = initialState, action) => {
+  console.log(action.type);
   switch (action.type) {
     case UPDATE_HOUSE_WATCH_LOTS:
       return {
@@ -59,10 +63,25 @@ const houseLotsReducer = (state = initialState, action) => {
         houseLots: [],
         isFetching: false,
       };
-    case UPDATE_WATCH_STATE:
+    case UPDATE_HOUSE_WATCH_STATE:
       return {
         ...state,
-        isWatching: state.isWatching === false,
+        isWatching: action.payload,
+      };
+    case CHECK_HOUSE_WATCH_STATE:
+      return {
+        ...state,
+      };
+    case CHECK_HOUSE_WATCH_STATE_TRUE:
+      return {
+        ...state,
+        isWatching: true,
+      };
+    case CHECK_HOUSE_WATCH_STATE_FALSE:
+      return {
+        ...state,
+        isWatching: false,
+        houseWatchLots: [],
       };
     default:
       return state;

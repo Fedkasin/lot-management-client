@@ -3,6 +3,7 @@ import {
   UPDATE_HOUSE_WATCH_FILTER_ROOMS_TO,
   UPDATE_HOUSE_WATCH_FILTER_PRICE_FROM,
   UPDATE_HOUSE_WATCH_FILTER_PRICE_TO,
+  UPDATE_HOUSE_WATCH_FILTER_APPLY,
 } from '../../constants/Actions';
 
 const initialState = {
@@ -33,6 +34,12 @@ const houseFilterLiveReducers = (state = initialState, action) => {
       return {
         ...state,
         priceTo: action.payload.priceTo,
+      };
+    case UPDATE_HOUSE_WATCH_FILTER_APPLY:
+      console.log('--UPDATE_HOUSE_WATCH_FILTER_APPLY');
+      return {
+        ...state,
+        filters: action.payload.filters,
       };
     default:
       return state;
