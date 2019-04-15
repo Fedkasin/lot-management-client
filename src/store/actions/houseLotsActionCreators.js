@@ -43,13 +43,13 @@ export const updateHouseWatchLotsFail = err => ({
   error: err,
 });
 
-export const watchHouseLots = data => ({
-  type: UPDATE_HOUSE_WATCH_STATE,
+export const checkWatchHouseLotsState = data => ({
+  type: CHECK_HOUSE_WATCH_STATE,
   payload: data,
 });
 
-export const checkWatchHouseLotsState = data => ({
-  type: CHECK_HOUSE_WATCH_STATE,
+export const watchHouseLots = data => ({
+  type: UPDATE_HOUSE_WATCH_STATE,
   payload: data,
 });
 

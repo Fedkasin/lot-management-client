@@ -31,13 +31,7 @@ class LMapi {
         const req = superagent.delete(`${getEnvVars.apiUrl}/v1/watch/${jobs[i]}`);
         requests.push(req);
       }
-      await Promise.all(requests).then(values => {
-        for (let i = 0; i < values.length; i += 1) {
-          console.log(values[i].body.message.jobId, 'has stopped');
-        }
-      });
-    } else {
-      console.log('[null] There\'s notning to stop');
+      await Promise.all(requests);
     }
   };
 
@@ -47,8 +41,7 @@ class LMapi {
     const req = superagent.post(`${getEnvVars.apiUrl}/v1/watch`, data);
     req.timeout({ response: 2500 });
     req.set('Authorization', 'Bearer 0x4815162342');
-    const res = await req;
-    console.log(res.body.message.jobId, 'just started!');
+    await req;
   }
 }
 

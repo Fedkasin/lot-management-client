@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import HouseFilter from '../components/house/HouseFilter';
 import actions from '../store/actions';
 import * as Colors from '../constants/Colors';
-/* import LMapi from '../helpers/lmapi'; */
 
 class HouseWatchFilterContainer extends PureComponent {
   constructor(props) {
@@ -17,29 +16,12 @@ class HouseWatchFilterContainer extends PureComponent {
     this.onChangeHouseWatchFilterRoomsFrom = this.onChangeHouseWatchFilterRoomsFrom.bind(this);
     this.onChangeHouseWatchFilterPriceTo = this.onChangeHouseWatchFilterPriceTo.bind(this);
     this.onChangeHouseWatchFilterPriceFrom = this.onChangeHouseWatchFilterPriceFrom.bind(this);
-    this.onApplyFilter = this.onApplyFilter.bind(this);
+    this.onApplyHouseWatchFilter = this.onApplyHouseWatchFilter.bind(this);
   }
 
-  async onApplyFilter() {
-    try {
-      const { navigation, filters } = this.props;
-      navigation.pop(null);
-      const rooms = [];
-      for (let i = parseInt(filters.roomsFrom, 10); i < parseInt(filters.roomsTo, 10) + 1; i += 1) {
-        rooms.push(i);
-      }
-      /* const params = {
-        rooms,
-        max: parseInt(filters.priceTo, 10),
-        min: parseInt(filters.priceFrom, 10),
-      }; */
-      // await LMapi.startCurrentUserJob(params);
-      /* const { applyFilter } = this.props;
-      applyFilter(params); */
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error(err);
-    }
+  onApplyHouseWatchFilter() {
+    const { applyFilter, filters } = this.props;
+    applyFilter(filters);
   }
 
   onChangeHouseWatchFilterRoomsFrom(value) {
@@ -68,7 +50,7 @@ class HouseWatchFilterContainer extends PureComponent {
       roomsFromHandler: this.onChangeHouseWatchFilterRoomsFrom,
       priceToHandler: this.onChangeHouseWatchFilterPriceTo,
       priceFromHandler: this.onChangeHouseWatchFilterPriceFrom,
-      applyFilter: this.onApplyFilter,
+      applyFilter: this.onApplyHouseWatchFilter,
     };
     const { navigation, filters } = this.props;
 
@@ -100,7 +82,7 @@ function mapDispatchToProps(dispatch) {
     changeRoomsTo: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterRoomsTo(value)),
     changePriceFrom: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterPriceFrom(value)),
     changePriceTo: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterPriceTo(value)),
-    applyFilter: params => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterApply(params)),
+    applyFilter: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterApply(value)),
   };
 }
 
@@ -111,6 +93,7 @@ HouseWatchFilterContainer.propTypes = {
   changeRoomsFrom: PropTypes.func.isRequired,
   changePriceTo: PropTypes.func.isRequired,
   changePriceFrom: PropTypes.func.isRequired,
+  applyFilter: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(HouseWatchFilterContainer));

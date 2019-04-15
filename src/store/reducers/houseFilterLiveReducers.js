@@ -36,7 +36,6 @@ const houseFilterLiveReducers = (state = initialState, action) => {
         priceTo: action.payload.priceTo,
       };
     case UPDATE_HOUSE_WATCH_FILTER_APPLY:
-      console.log('--UPDATE_HOUSE_WATCH_FILTER_APPLY');
       return {
         ...state,
         filters: action.payload.filters,

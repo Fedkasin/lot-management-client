@@ -22,7 +22,6 @@ const initialState = {
 };
 
 const houseLotsReducer = (state = initialState, action) => {
-  console.log(action.type);
   switch (action.type) {
     case UPDATE_HOUSE_WATCH_LOTS:
       return {

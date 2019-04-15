@@ -16,7 +16,6 @@ import * as Colors from '../constants/Colors';
 
 class HouseWatchLotsContainer extends React.Component {
   componentDidMount() {
-    console.log('componentDidMount');
     const { onCheckHouseWatchState } = this.props;
     onCheckHouseWatchState();
   }
@@ -28,7 +27,6 @@ class HouseWatchLotsContainer extends React.Component {
       isWatching,
       onUpdateHouseWatchState,
     } = this.props;
-    console.log('HouseWatchLotsContainer render');
     if (!houseWatchLots.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
     return (
       <View>
