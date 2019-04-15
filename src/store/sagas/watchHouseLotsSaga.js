@@ -14,9 +14,9 @@ function* checkWatchHouseLotsState() {
   try {
     const res = yield call(LMapi.getCurrentUserJobs);
     if (res && res.length > 0) {
-      yield put(actions.houseLotsActions.watchHouseLotsTrue());
+      yield put(actions.houseWatchLotsActions.watchHouseLotsTrue());
     } else {
-      yield put(actions.houseLotsActions.watchHouseLotsFalse());
+      yield put(actions.houseWatchLotsActions.watchHouseLotsFalse());
     }
   } catch (err) {
     // eslint-disable-next-line no-console
@@ -30,7 +30,7 @@ function* watchHouseLots(action) {
       yield call(LMapi.stopAllCurrentUserJobs);
       yield call(checkWatchHouseLotsState);
     } else {
-      yield put(actions.houseLotsActions.watchHouseLotsTrue());
+      yield put(actions.houseWatchLotsActions.watchHouseLotsTrue());
     }
   } catch (err) {
     // eslint-disable-next-line no-console

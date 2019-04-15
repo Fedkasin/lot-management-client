@@ -12,9 +12,9 @@ function* updateHouseWatchLots(action) {
   try {
     const { jobId } = action.payload;
     const response = yield call(axios.get, `${getEnvVars.apiUrl}/watch/${jobId}`);
-    yield put(actions.houseLotsActions.updateHouseWatchLotsSuccess(response.data));
+    yield put(actions.houseWatchLotsActions.updateHouseWatchLotsSuccess(response.data));
   } catch (err) {
-    yield put(actions.houseLotsActions.updateHouseWatchLotsFail(err));
+    yield put(actions.houseWatchLotsActions.updateHouseWatchLotsFail(err));
   }
 }
 

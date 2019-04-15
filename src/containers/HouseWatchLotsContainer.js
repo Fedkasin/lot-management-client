@@ -56,19 +56,19 @@ class HouseWatchLotsContainer extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    isFetching: state.houseLotsReducers.isFetching,
-    isWatching: state.houseLotsReducers.isWatching,
-    houseWatchLots: state.houseLotsReducers.houseWatchLots,
-    page: state.houseLotsReducers.page,
-    itemsPerPage: state.houseLotsReducers.itemsPerPage,
-    error: state.houseLotsReducers.error ? state.houseLotsReducers.error : null,
+    isFetching: state.houseWatchLotsReducers.isFetching,
+    isWatching: state.houseWatchLotsReducers.isWatching,
+    houseWatchLots: state.houseWatchLotsReducers.houseWatchLots,
+    page: state.houseWatchLotsReducers.page,
+    itemsPerPage: state.houseWatchLotsReducers.itemsPerPage,
+    error: state.houseWatchLotsReducers.error ? state.houseWatchLotsReducers.error : null,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    onUpdateHouseWatchState: value => dispatch(actions.houseLotsActions.watchHouseLots(value)),
-    onCheckHouseWatchState: value => dispatch(actions.houseLotsActions.checkWatchHouseLotsState(value)),
+    onUpdateHouseWatchState: value => dispatch(actions.houseWatchLotsActions.watchHouseLots(value)),
+    onCheckHouseWatchState: value => dispatch(actions.houseWatchLotsActions.checkWatchHouseLotsState(value)),
   };
 }
 

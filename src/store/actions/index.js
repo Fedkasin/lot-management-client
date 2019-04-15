@@ -15,17 +15,20 @@ import {
 } from './carLotsActionCreators';
 
 import {
-  updateHouseWatchLots,
-  updateHouseWatchLotsSuccess,
-  updateHouseWatchLotsFail,
   fetchHouseLots,
   fetchHouseLotsSuccess,
   fetchHouseLotsFail,
+} from './houseLotsActionCreators';
+
+import {
+  updateHouseWatchLots,
+  updateHouseWatchLotsSuccess,
+  updateHouseWatchLotsFail,
   watchHouseLots,
   checkWatchHouseLotsState,
   watchHouseLotsTrue,
   watchHouseLotsFalse,
-} from './houseLotsActionCreators';
+} from './houseWatchLotsActionCreators';
 
 import {
   updateHouseFilterRoomsTo,
@@ -75,12 +78,14 @@ export default {
     fetchCarLotsFail,
   },
   houseLotsActions: {
-    updateHouseWatchLots,
-    updateHouseWatchLotsSuccess,
-    updateHouseWatchLotsFail,
     fetchHouseLots,
     fetchHouseLotsSuccess,
     fetchHouseLotsFail,
+  },
+  houseWatchLotsActions: {
+    updateHouseWatchLots,
+    updateHouseWatchLotsSuccess,
+    updateHouseWatchLotsFail,
     watchHouseLots,
     checkWatchHouseLotsState,
     watchHouseLotsTrue,
