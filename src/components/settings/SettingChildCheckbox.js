@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { CheckBox } from 'react-native-elements';
+import { View, StyleSheet, CheckBox } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({

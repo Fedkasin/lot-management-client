@@ -1,11 +1,12 @@
 import React from 'react';
 import {
-  View, StyleSheet,
+  View, StyleSheet, Text,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
 import SettingChildSelect from '../settings/SettingChildSelect';
 import IcoButton from '../core/IcoButton';
+import SettingChildSlider from '../settings/SettingChildSlider';
 import * as filtersConst from '../../constants/Filters';
 import * as Colors from '../../constants/Colors';
 
@@ -23,6 +24,10 @@ const styles = StyleSheet.create({
     paddingLeft: 9,
     textAlign: 'left',
   },
+  divider: {
+    borderBottomColor: Colors.lightGray,
+    borderBottomWidth: 1,
+  },
 });
 
 class HouseFilter extends React.PureComponent {
@@ -30,30 +35,43 @@ class HouseFilter extends React.PureComponent {
     const { filters, handlers } = this.props;
     return (
       <View style={styles.container}>
-        <SettingChildSelect
-          value={filters.roomsFrom}
-          items={filtersConst.roomCount}
-          label="Rooms From"
-          handler={handlers.roomsFromHandler}
-        />
-        <SettingChildSelect
-          value={filters.roomsTo}
-          items={filtersConst.roomCount}
-          label="Rooms To"
-          handler={handlers.roomsToHandler}
-        />
-        <SettingChildSelect
-          value={filters.priceFrom}
-          items={filtersConst.pricing}
-          label="Price From"
-          handler={handlers.priceFromHandler}
-        />
-        <SettingChildSelect
-          value={filters.priceTo}
-          items={filtersConst.pricing}
-          label="Price To"
-          handler={handlers.priceToHandler}
-        />
+        <Text style={{ fontSize: 24, padding: 10 }}>Rooms count</Text>
+        <View style={{ display: 'flex', flexDirection: 'row' }}>
+          <SettingChildSlider
+            text="from"
+            from={1}
+            to={parseInt(filters.roomsTo, 10)}
+            value={parseInt(filters.roomsFrom, 10)}
+            step={1}
+            handler={handlers.roomsFromHandler}
+          />
+          <SettingChildSlider
+            text="to"
+            from={parseInt(filters.roomsFrom, 10)}
+            to={4}
+            value={parseInt(filters.roomsTo, 10)}
+            step={1}
+            handler={handlers.roomsToHandler}
+          />
+        </View>
+        <View style={styles.divider} />
+        <Text style={{ fontSize: 24, padding: 10 }}>Price</Text>
+        <View style={{ display: 'flex', flexDirection: 'row' }}>
+          <SettingChildSelect
+            style={{ height: 50, width: '50%' }}
+            value={filters.priceFrom}
+            items={filtersConst.pricing}
+            label="from"
+            handler={handlers.priceFromHandler}
+          />
+          <SettingChildSelect
+            style={{ height: 50, width: '50%' }}
+            value={filters.priceTo}
+            items={filtersConst.pricing}
+            label="to"
+            handler={handlers.priceToHandler}
+          />
+        </View>
         <IcoButton
           text="Accept"
           color={Colors.green}

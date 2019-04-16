@@ -1,13 +1,11 @@
 import React, { PureComponent } from 'react';
-import { AsyncStorage, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import { withNavigation, NavigationEvents } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import axios from 'axios';
 
 import HouseFilter from '../components/house/HouseFilter';
 import actions from '../store/actions';
-import getEnvVars from '../constants/environment';
 import * as Colors from '../constants/Colors';
 
 class HouseWatchFilterContainer extends PureComponent {
@@ -18,35 +16,12 @@ class HouseWatchFilterContainer extends PureComponent {
     this.onChangeHouseWatchFilterRoomsFrom = this.onChangeHouseWatchFilterRoomsFrom.bind(this);
     this.onChangeHouseWatchFilterPriceTo = this.onChangeHouseWatchFilterPriceTo.bind(this);
     this.onChangeHouseWatchFilterPriceFrom = this.onChangeHouseWatchFilterPriceFrom.bind(this);
-    this.onApplyFilter = this.onApplyFilter.bind(this);
+    this.onApplyHouseWatchFilter = this.onApplyHouseWatchFilter.bind(this);
   }
 
-  async onApplyFilter() {
-    try {
-      const { navigation, filters } = this.props;
-      const userId = await AsyncStorage.getItem('@UserStore:USER_ID');
-      const rooms = [];
-      for (let i = parseInt(filters.roomsFrom, 10); i < parseInt(filters.roomsTo, 10) + 1; i += 1) {
-        rooms.push(i);
-      }
-      navigation.pop(null);
-      await axios({
-        method: 'post',
-        url: `${getEnvVars.apiUrl}/v1/watch`,
-        headers: { Authorization: '0xdf0g9undf89ry9eg38rder3g9example' },
-        data: {
-          userId,
-        },
-        params: {
-          rooms,
-          max: parseInt(filters.priceTo, 10),
-          min: parseInt(filters.priceFrom, 10),
-        },
-      });
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error(err);
-    }
+  onApplyHouseWatchFilter() {
+    const { applyFilter, filters } = this.props;
+    applyFilter(filters);
   }
 
   onChangeHouseWatchFilterRoomsFrom(value) {
@@ -75,7 +50,7 @@ class HouseWatchFilterContainer extends PureComponent {
       roomsFromHandler: this.onChangeHouseWatchFilterRoomsFrom,
       priceToHandler: this.onChangeHouseWatchFilterPriceTo,
       priceFromHandler: this.onChangeHouseWatchFilterPriceFrom,
-      applyFilter: this.onApplyFilter,
+      applyFilter: this.onApplyHouseWatchFilter,
     };
     const { navigation, filters } = this.props;
 
@@ -107,7 +82,7 @@ function mapDispatchToProps(dispatch) {
     changeRoomsTo: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterRoomsTo(value)),
     changePriceFrom: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterPriceFrom(value)),
     changePriceTo: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterPriceTo(value)),
-    applyFilter: filters => dispatch(actions.houseWatchLotsActions.fetchHouseLots(filters)),
+    applyFilter: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterApply(value)),
   };
 }
 
@@ -118,6 +93,7 @@ HouseWatchFilterContainer.propTypes = {
   changeRoomsFrom: PropTypes.func.isRequired,
   changePriceTo: PropTypes.func.isRequired,
   changePriceFrom: PropTypes.func.isRequired,
+  applyFilter: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(HouseWatchFilterContainer));

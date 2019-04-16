@@ -7,6 +7,7 @@ import houseFilterReducers from './houseFilterReducers';
 import houseFilterLiveReducers from './houseFilterLiveReducers';
 import settingsReducers from './settingsReducers';
 import authReducers from './authReducers';
+import houseWatchLotsReducers from './houseWatchLotsReducers';
 
 export default combineReducers({
   rootReducers,
@@ -16,4 +17,5 @@ export default combineReducers({
   houseFilterLiveReducers,
   settingsReducers,
   authReducers,
+  houseWatchLotsReducers,
 });

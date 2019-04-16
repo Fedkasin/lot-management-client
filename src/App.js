@@ -48,7 +48,7 @@ class App extends PureComponent {
     store.dispatch(actions.navigationActions.navigate('HOUSE_WATCH_LOTS_SCREEN'));
     const splitted = notification.data.type.split('-');
     if (splitted[0] === 'update') {
-      store.dispatch(actions.houseLotsActions.updateHouseWatchLots(notification.data.jobId));
+      store.dispatch(actions.houseWatchLotsActions.updateHouseWatchLots(notification.data.jobId));
     }
   }
 

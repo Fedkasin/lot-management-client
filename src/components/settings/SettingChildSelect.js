@@ -1,9 +1,8 @@
 import React from 'react';
 import {
-  View, StyleSheet, Text,
+  View, StyleSheet, Text, Picker, Platform, ActionSheetIOS,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import RNPickerSelect from 'react-native-picker-select';
 import * as Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
@@ -20,36 +19,25 @@ const styles = StyleSheet.create({
     paddingLeft: 9,
     textAlign: 'left',
   },
-  pickerSelectStyle: {
-    fontSize: 16,
-    paddingTop: 9,
-    paddingHorizontal: 10,
-    paddingBottom: 12,
-    backgroundColor: Colors.white,
-    color: Colors.black,
-  },
-  pickerButtonStyle: {
-    borderWidth: 1,
-    borderColor: Colors.red,
-    backgroundColor: Colors.white,
+  divider: {
+    borderBottomColor: Colors.lightGray,
+    borderBottomWidth: 1,
   },
 });
 
-const pickerStyle = {
-  inputIOS: {
-    color: Colors.black,
-    paddingTop: 9,
-    paddingHorizontal: 10,
-    paddingBottom: 9,
-  },
-  inputAndroid: {
-    color: Colors.black,
-  },
-  placeholderColor: Colors.black,
-  underline: { borderTopWidth: 0 },
-};
-
 class SettingChildSelect extends React.PureComponent {
+  handleClick() {
+    const { items, handler } = this.props;
+    ActionSheetIOS.showActionSheetWithOptions(
+      {
+        options: items,
+      },
+      (buttonIndex) => {
+        handler(items[buttonIndex]);
+      },
+    );
+  }
+
   render() {
     const {
       value,
@@ -57,21 +45,29 @@ class SettingChildSelect extends React.PureComponent {
       label,
       handler,
     } = this.props;
+    if (Platform.OS === 'ios') {
+      return (
+        <View style={styles.container}>
+          <Text style={styles.label}>{label}</Text>
+          <Text style={{ fontSize: 20, margin: 10, color: Colors.lightGray }} onPress={() => { this.handleClick(); }}>{value}</Text>
+          <View style={styles.divider} />
+        </View>
+      );
+    }
     return (
       <View style={styles.container}>
         <Text style={styles.label}>{label}</Text>
-        <View style={{
-          height: 40, borderWidth: 1, borderColor: Colors.gray, borderRadius: 5, marginBottom: 9, justifyContent: 'center',
-        }}
+        <Picker
+          placeholder={{}}
+          style={{ width: 150, height: 40 }}
+          onValueChange={itemValue => handler(itemValue)}
+          items={items.map(opt => ({ label: opt, value: opt }))}
+          selectedValue={value}
+          collapsable
         >
-          <RNPickerSelect
-            placeholder={{}}
-            onValueChange={itemValue => handler(itemValue)}
-            items={items.map(opt => ({ label: opt, value: opt }))}
-            style={pickerStyle}
-            value={value}
-          />
-        </View>
+          {items.map((opt, index) => (
+            <Picker.Item key={`item-${index + 1}`} label={opt} value={opt} />))}
+        </Picker>
       </View>
     );
   }

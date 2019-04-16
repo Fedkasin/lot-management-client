@@ -1,12 +1,10 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import axios from 'axios';
-
+import LMapi from '../../helpers/lmapi';
 import actions from '../actions/index';
 import {
   FETCH_HOUSE_LOTS,
 } from '../../constants/Actions';
-import getEnvVars from '../../constants/environment';
 
 function* fetchHouseLots(action) {
   try {
@@ -16,8 +14,8 @@ function* fetchHouseLots(action) {
     const rooms = roomsArray.length > 1 ? `&rooms[]=${roomsArray.join('&rooms[]=')}` : `&rooms[]=${roomsArray[0]}`;
     const price = `min=${action.payload.filters.priceFrom}&max=${action.payload.filters.priceTo}`;
     const query = `${price}${rooms}`;
-    const response = yield call(axios.get, `${getEnvVars.apiUrl}/onliner?${query}`);
-    yield put(actions.houseLotsActions.fetchHouseLotsSuccess(response.data));
+    const response = yield call(LMapi.getHouses, query);
+    yield put(actions.houseLotsActions.fetchHouseLotsSuccess(response));
   } catch (err) {
     yield put(actions.houseLotsActions.fetchHouseLotsFail(err));
   }

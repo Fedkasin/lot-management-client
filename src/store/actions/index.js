@@ -15,13 +15,20 @@ import {
 } from './carLotsActionCreators';
 
 import {
-  updateHouseWatchLots,
-  updateHouseWatchLotsSuccess,
-  updateHouseWatchLotsFail,
   fetchHouseLots,
   fetchHouseLotsSuccess,
   fetchHouseLotsFail,
 } from './houseLotsActionCreators';
+
+import {
+  updateHouseWatchLots,
+  updateHouseWatchLotsSuccess,
+  updateHouseWatchLotsFail,
+  watchHouseLots,
+  checkWatchHouseLotsState,
+  watchHouseLotsTrue,
+  watchHouseLotsFalse,
+} from './houseWatchLotsActionCreators';
 
 import {
   updateHouseFilterRoomsTo,
@@ -53,6 +60,7 @@ import {
   updateHouseWatchFilterRoomsFrom,
   updateHouseWatchFilterPriceTo,
   updateHouseWatchFilterPriceFrom,
+  updateHouseWatchFilterApply,
 } from './houseWatchLotsFilterActionCreators';
 
 export default {
@@ -70,12 +78,18 @@ export default {
     fetchCarLotsFail,
   },
   houseLotsActions: {
-    updateHouseWatchLots,
-    updateHouseWatchLotsSuccess,
-    updateHouseWatchLotsFail,
     fetchHouseLots,
     fetchHouseLotsSuccess,
     fetchHouseLotsFail,
+  },
+  houseWatchLotsActions: {
+    updateHouseWatchLots,
+    updateHouseWatchLotsSuccess,
+    updateHouseWatchLotsFail,
+    watchHouseLots,
+    checkWatchHouseLotsState,
+    watchHouseLotsTrue,
+    watchHouseLotsFalse,
   },
   houseLotsFilterActions: {
     updateHouseFilterRoomsTo,
@@ -88,6 +102,7 @@ export default {
     updateHouseWatchFilterRoomsFrom,
     updateHouseWatchFilterPriceTo,
     updateHouseWatchFilterPriceFrom,
+    updateHouseWatchFilterApply,
   },
   settingsActions: {
     fetchSettings,
