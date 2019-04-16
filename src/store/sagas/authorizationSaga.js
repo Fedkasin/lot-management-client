@@ -1,7 +1,7 @@
-import superagent from 'superagent';
 import { AsyncStorage } from 'react-native';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { Constants } from 'expo';
+import LMapi from '../../helpers/lmapi';
 
 import actions from '../actions/index';
 import { navigate } from '../actions/navigationActionCreators';
@@ -12,7 +12,6 @@ import {
 } from '../../constants/Actions';
 import { signInWithGoogleAsync, signOut, isLoggedIn } from '../../helpers/authHelpers';
 import { APP_TAB, AUTH_STACK } from '../../constants/Routes';
-import getEnvVars from '../../constants/environment';
 
 function* login(action) {
   try {
@@ -28,8 +27,6 @@ function* login(action) {
       deviceId: Constants.deviceName,
       systemName: Constants.platform.android ? 'android' : 'ios',
     };
-    /* console.log('Data:', data);
-    console.log('Expo:', expo); */
     const body = {
       auth: {
         access_token: accessToken,
@@ -38,10 +35,7 @@ function* login(action) {
       },
       expo,
     };
-    const req = superagent.post(`${getEnvVars.apiUrl}/v1/users`, body);
-    req.timeout({ response: 2500 });
-    const res = yield req;
-    AsyncStorage.setItem('@UserStore:USER_ID', res.body.message.userId);
+    yield call(LMapi.logIn, body);
     yield put(actions.authActions.loginSuccess(data.user));
     yield put(navigate(APP_TAB));
   } catch (err) {

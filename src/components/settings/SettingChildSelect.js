@@ -53,24 +53,23 @@ class SettingChildSelect extends React.PureComponent {
           <View style={styles.divider} />
         </View>
       );
-    } else {
-      return (
-        <View style={styles.container}>
-          <Text style={styles.label}>{label}</Text>
-          <Picker
-            placeholder={{}}
-            style={{ width: 150, height: 40 }}
-            onValueChange={itemValue => handler(itemValue)}
-            items={items.map(opt => ({ label: opt, value: opt }))}
-            selectedValue={value}
-            collapsable
-          >
-            {items.map((opt, index) => (
-              <Picker.Item key={`item-${index + 1}`} label={opt} value={opt} />))}
-          </Picker>
-        </View>
-      );
     }
+    return (
+      <View style={styles.container}>
+        <Text style={styles.label}>{label}</Text>
+        <Picker
+          placeholder={{}}
+          style={{ width: 150, height: 40 }}
+          onValueChange={itemValue => handler(itemValue)}
+          items={items.map(opt => ({ label: opt, value: opt }))}
+          selectedValue={value}
+          collapsable
+        >
+          {items.map((opt, index) => (
+            <Picker.Item key={`item-${index + 1}`} label={opt} value={opt} />))}
+        </Picker>
+      </View>
+    );
   }
 }
 
