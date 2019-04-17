@@ -1,5 +1,10 @@
-import React, { PureComponent } from 'react';
-import { ScrollView } from 'react-native';
+import React from 'react';
+import {
+  ScrollView,
+  View,
+  Text,
+  StyleSheet,
+} from 'react-native';
 import { withNavigation, NavigationEvents } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -7,8 +12,28 @@ import { connect } from 'react-redux';
 import HouseFilter from '../components/house/HouseFilter';
 import actions from '../store/actions';
 import * as Colors from '../constants/Colors';
+import HouseJob from '../components/house/houseJob';
 
-class HouseWatchFilterContainer extends PureComponent {
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.white,
+    justifyContent: 'center',
+    paddingHorizontal: 10,
+    flex: 1,
+  },
+  job: {
+    fontSize: 18,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 5,
+  },
+  divider: {
+    borderBottomColor: Colors.lightGray,
+    borderBottomWidth: 1,
+  },
+});
+
+class HouseWatchFilterContainer extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -44,6 +69,14 @@ class HouseWatchFilterContainer extends PureComponent {
     changePriceTo(value);
   }
 
+  onCloseJob() {
+    console.log('onCloseJob');
+  }
+
+  onPlayPauseJob() {
+    console.log('onPlayPauseJob');
+  }
+
   render() {
     const handlers = {
       roomsToHandler: this.onChangeHouseWatchFilterRoomsTo,
@@ -52,10 +85,23 @@ class HouseWatchFilterContainer extends PureComponent {
       priceFromHandler: this.onChangeHouseWatchFilterPriceFrom,
       applyFilter: this.onApplyHouseWatchFilter,
     };
-    const { navigation, filters } = this.props;
-
+    const { navigation, filters, jobs } = this.props;
     return (
       <ScrollView style={{ backgroundColor: Colors.white }}>
+        <Text style={{ fontSize: 20, padding: 10, backgroundColor: Colors.silver }}>Started tasks:</Text>
+        <View style={styles.container}>
+          {jobs.map((value, index) => (
+            <HouseJob
+              key={`job-${index + 1}`}
+              text={`${index + 1}. ${value.jobId} [${value.params.rooms}] - $[${value.params.min}-${value.params.max}]`}
+              iosIcon={value.state === 'RUNNING' ? 'ios-pause' : 'ios-play'}
+              otherIcon={value.state === 'RUNNING' ? 'md-pause' : 'md-play'}
+              onPlayPause={this.onPlayPauseJob}
+              onClose={this.onCloseJob}
+            />
+          ))}
+        </View>
+        <Text style={{ fontSize: 20, padding: 10, backgroundColor: Colors.silver }}>Create new task:</Text>
         <HouseFilter filters={filters} handlers={handlers} />
         <NavigationEvents
           onDidBlur={() => navigation.pop(null)}
@@ -73,6 +119,7 @@ function mapStateToProps(state) {
       priceTo: state.houseFilterLiveReducers.priceTo,
       priceFrom: state.houseFilterLiveReducers.priceFrom,
     },
+    jobs: state.houseWatchLotsReducers.houseWatchJobs,
   };
 }
 
@@ -89,6 +136,7 @@ function mapDispatchToProps(dispatch) {
 HouseWatchFilterContainer.propTypes = {
   navigation: PropTypes.objectOf(PropTypes.any).isRequired,
   filters: PropTypes.objectOf(PropTypes.any).isRequired,
+  jobs: PropTypes.arrayOf(PropTypes.any).isRequired,
   changeRoomsTo: PropTypes.func.isRequired,
   changeRoomsFrom: PropTypes.func.isRequired,
   changePriceTo: PropTypes.func.isRequired,

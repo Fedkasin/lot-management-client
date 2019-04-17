@@ -12,6 +12,57 @@ const initialState = {
   isFetching: false,
   isWatching: false,
   houseWatchLots: [],
+  houseWatchJobs: [
+    {
+      jobId: 'HataWatch2342',
+      params: {
+        max: 350,
+        min: 250,
+        rooms: [
+          1,
+          2,
+        ],
+      },
+      state: 'RUNNING',
+    },
+    {
+      jobId: 'HataWatch4815',
+      params: {
+        max: 450,
+        min: 350,
+        rooms: [
+          1,
+          2,
+        ],
+      },
+      state: 'PAUSED',
+    },
+    {
+      jobId: 'HataWatch1313',
+      params: {
+        max: 50,
+        min: 300,
+        rooms: [
+          1,
+        ],
+      },
+      state: 'RUNNING',
+    },
+    {
+      jobId: 'HataWatch4444',
+      params: {
+        max: 500,
+        min: 600,
+        rooms: [
+          1,
+          2,
+          3,
+          4,
+        ],
+      },
+      state: 'RUNNING',
+    },
+  ],
   page: 0,
   itemsPerPage: 10,
   error: null,
