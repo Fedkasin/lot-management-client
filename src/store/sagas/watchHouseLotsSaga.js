@@ -13,8 +13,8 @@ import {
 function* checkWatchHouseLotsState() {
   try {
     const res = yield call(LMapi.getCurrentUserJobs);
-    if (res && res.length > 0) {
-      yield put(actions.houseWatchLotsActions.watchHouseLotsTrue());
+    if (res && res.message && res.message.length > 0) {
+      yield put(actions.houseWatchLotsActions.watchHouseLotsTrue(res.message));
     } else {
       yield put(actions.houseWatchLotsActions.watchHouseLotsFalse());
     }

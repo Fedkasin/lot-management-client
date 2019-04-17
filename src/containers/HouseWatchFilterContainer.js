@@ -69,12 +69,12 @@ class HouseWatchFilterContainer extends React.PureComponent {
     changePriceTo(value);
   }
 
-  onCloseJob() {
-    console.log('onCloseJob');
+  onCloseJob(value) {
+    console.log('onCloseJob', value);
   }
 
-  onPlayPauseJob() {
-    console.log('onPlayPauseJob');
+  onPlayPauseJob(value) {
+    console.log('onPlayPauseJob', value);
   }
 
   render() {
@@ -96,8 +96,8 @@ class HouseWatchFilterContainer extends React.PureComponent {
               text={`${index + 1}. ${value.jobId} [${value.params.rooms}] - $[${value.params.min}-${value.params.max}]`}
               iosIcon={value.state === 'RUNNING' ? 'ios-pause' : 'ios-play'}
               otherIcon={value.state === 'RUNNING' ? 'md-pause' : 'md-play'}
-              onPlayPause={this.onPlayPauseJob}
-              onClose={this.onCloseJob}
+              onPlayPause={() => this.onPlayPauseJob(value.jobId)}
+              onClose={() => this.onCloseJob(value.jobId)}
             />
           ))}
         </View>

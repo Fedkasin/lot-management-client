@@ -12,16 +12,12 @@ class LMapi {
   getCurrentUserJobs = async () => {
     const userId = await AsyncStorage.getItem('@UserStore:USER_ID');
     // const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
-    const jobs = [];
     const req = superagent.get(`${getEnvVars.apiUrl}/v1/users/${userId}/jobs`);
     req.timeout(respTime);
     // req.set('Authorization', token);
     const res = await req;
     if (res.body && res.body.message && res.body.message.length && res.body.message.length !== 0) {
-      for (let i = 0; i < res.body.message.length; i += 1) {
-        jobs.push(res.body.message[i].jobId);
-      }
-      return jobs;
+      return res.body;
     } else {
       return null;
     }
