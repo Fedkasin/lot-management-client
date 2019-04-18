@@ -13,6 +13,8 @@ import {
   checkWatchHouseLotsStateSaga,
   updateHouseWatchFilterApplySaga,
   removeHouseWatchJobSaga,
+  pauseHouseWatchJobSaga,
+  resumeHouseWatchJobSaga,
 } from './watchHouseLotsSaga';
 
 export default function* (service) {
@@ -31,6 +33,8 @@ export default function* (service) {
     checkWatchHouseLotsStateSaga(),
     updateHouseWatchFilterApplySaga(),
     removeHouseWatchJobSaga(),
+    pauseHouseWatchJobSaga(),
+    resumeHouseWatchJobSaga(),
   ];
 
   yield all(rootSagas, service);

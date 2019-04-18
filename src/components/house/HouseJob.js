@@ -17,13 +17,13 @@ function houseJob({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'space-between',
-      borderBottomColor: Colors.lightGray,
+      borderBottomColor: Colors.silver,
       borderBottomWidth: 1,
     },
     job: {
       fontSize: 16,
-      paddingTop: 10,
-      paddingBottom: 10,
+      paddingTop: 15,
+      paddingBottom: 15,
       paddingLeft: 5,
     },
     jobButtons: {
@@ -36,7 +36,7 @@ function houseJob({
       <Text style={styles.job}>{text}</Text>
       <View style={styles.jobButtons}>
         <TouchableOpacity
-          style={{ padding: 5, marginRight: 9 }}
+          style={{ padding: 5, marginRight: 5 }}
           onPress={onPlayPause}
         >
           <IonIcon

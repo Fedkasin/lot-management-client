@@ -4,6 +4,7 @@ import {
   View,
   Text,
   StyleSheet,
+  Alert,
 } from 'react-native';
 import { withNavigation, NavigationEvents } from 'react-navigation';
 import PropTypes from 'prop-types';
@@ -12,7 +13,7 @@ import { connect } from 'react-redux';
 import HouseFilter from '../components/house/HouseFilter';
 import actions from '../store/actions';
 import * as Colors from '../constants/Colors';
-import HouseJob from '../components/house/houseJob';
+import HouseJob from '../components/house/HouseJob';
 
 const styles = StyleSheet.create({
   container: {
@@ -71,11 +72,32 @@ class HouseWatchFilterContainer extends React.PureComponent {
 
   onCloseJob(value) {
     const { removeJob } = this.props;
-    removeJob(value);
+    Alert.alert(
+      'Remove task',
+      'Are you sure about that?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => removeJob(value),
+        },
+      ],
+      { cancelable: false },
+    );
   }
 
   onPlayPauseJob(value) {
-    console.log('onPlayPauseJob', value);
+    const { pauseJob, resumeJob } = this.props;
+    if (value.state && value.state === 'RUNNING') {
+      console.log('{event} => PAUSE', value.id);
+      pauseJob(value.id);
+    } else {
+      console.log('{event} => PLAY', value.id);
+      resumeJob(value.id);
+    }
   }
 
   render() {
@@ -87,28 +109,46 @@ class HouseWatchFilterContainer extends React.PureComponent {
       applyFilter: this.onApplyHouseWatchFilter,
     };
     const { navigation, filters, jobs } = this.props;
-    return (
-      <ScrollView style={{ backgroundColor: Colors.white }}>
-        <Text style={{ fontSize: 20, padding: 10, backgroundColor: Colors.silver }}>Started tasks:</Text>
-        <View style={styles.container}>
-          {jobs.map((value, index) => (
-            <HouseJob
-              key={`job-${index + 1}`}
-              text={`${index + 1}. ${value.jobId} [${value.params.rooms}] - $[${value.params.min}-${value.params.max}]`}
-              iosIcon={value.state === 'RUNNING' ? 'ios-pause' : 'ios-play'}
-              otherIcon={value.state === 'RUNNING' ? 'md-pause' : 'md-play'}
-              onPlayPause={() => this.onPlayPauseJob(value.jobId)}
-              onClose={() => this.onCloseJob(value.jobId)}
-            />
-          ))}
-        </View>
-        <Text style={{ fontSize: 20, padding: 10, backgroundColor: Colors.silver }}>Create new task:</Text>
-        <HouseFilter filters={filters} handlers={handlers} />
-        <NavigationEvents
-          onDidBlur={() => navigation.pop(null)}
-        />
-      </ScrollView>
-    );
+    if (jobs.length !== 0) {
+      return (
+        <ScrollView style={{ backgroundColor: Colors.white }}>
+          <Text style={{ fontSize: 20, padding: 10, backgroundColor: Colors.silver }}>Active tasks:</Text>
+          <View style={styles.container}>
+            {jobs.map((value, index) => (
+              <HouseJob
+                key={`job-${index + 1}`}
+                text={`${index + 1}. ${value.jobId} [${value.params.rooms}] - $[${value.params.min}-${value.params.max}]`}
+                iosIcon={value.state === 'RUNNING' ? 'ios-pause' : 'ios-play'}
+                otherIcon={value.state === 'RUNNING' ? 'md-pause' : 'md-play'}
+                onPlayPause={() => this.onPlayPauseJob({ id: value.jobId, state: value.state })}
+                onClose={() => this.onCloseJob(value.jobId)}
+              />
+            ))}
+          </View>
+          <Text style={{ fontSize: 20, padding: 10, backgroundColor: Colors.silver }}>Create new task:</Text>
+          <HouseFilter filters={filters} handlers={handlers} />
+          <NavigationEvents
+            onDidBlur={() => navigation.pop(null)}
+          />
+        </ScrollView>
+      );
+    } else {
+      return (
+        <ScrollView style={{ backgroundColor: Colors.white }}>
+          <Text style={{ fontSize: 20, padding: 10, backgroundColor: Colors.silver }}>Started tasks:</Text>
+          <View style={styles.container}>
+            <Text style={styles.job}>
+              no active tasks
+            </Text>
+          </View>
+          <Text style={{ fontSize: 20, padding: 10, backgroundColor: Colors.silver }}>Create new task:</Text>
+          <HouseFilter filters={filters} handlers={handlers} />
+          <NavigationEvents
+            onDidBlur={() => navigation.pop(null)}
+          />
+        </ScrollView>
+      );
+    }
   }
 }
 
@@ -132,6 +172,8 @@ function mapDispatchToProps(dispatch) {
     changePriceTo: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterPriceTo(value)),
     applyFilter: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterApply(value)),
     removeJob: value => dispatch(actions.houseWatchLotsActions.removeHouseWatchJob(value)),
+    pauseJob: value => dispatch(actions.houseWatchLotsActions.pauseHouseWatchJob(value)),
+    resumeJob: value => dispatch(actions.houseWatchLotsActions.resumeHouseWatchJob(value)),
   };
 }
 
@@ -145,6 +187,8 @@ HouseWatchFilterContainer.propTypes = {
   changePriceFrom: PropTypes.func.isRequired,
   applyFilter: PropTypes.func.isRequired,
   removeJob: PropTypes.func.isRequired,
+  pauseJob: PropTypes.func.isRequired,
+  resumeJob: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(HouseWatchFilterContainer));

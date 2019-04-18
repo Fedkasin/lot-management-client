@@ -7,6 +7,8 @@ import {
   CHECK_HOUSE_WATCH_STATE_TRUE,
   CHECK_HOUSE_WATCH_STATE_FALSE,
   REMOVE_HOUSE_WATCH_JOB,
+  PAUSE_HOUSE_WATCH_JOB,
+  RESUME_HOUSE_WATCH_JOB,
 } from '../../constants/Actions';
 
 const initialState = {
@@ -65,6 +67,14 @@ const houseWatchLotsReducer = (state = initialState, action) => {
         houseWatchJobs: [],
       };
     case REMOVE_HOUSE_WATCH_JOB:
+      return {
+        ...state,
+      };
+    case PAUSE_HOUSE_WATCH_JOB:
+      return {
+        ...state,
+      };
+    case RESUME_HOUSE_WATCH_JOB:
       return {
         ...state,
       };

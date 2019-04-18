@@ -29,6 +29,8 @@ import {
   watchHouseLotsTrue,
   watchHouseLotsFalse,
   removeHouseWatchJob,
+  pauseHouseWatchJob,
+  resumeHouseWatchJob,
 } from './houseWatchLotsActionCreators';
 
 import {
@@ -92,6 +94,8 @@ export default {
     watchHouseLotsTrue,
     watchHouseLotsFalse,
     removeHouseWatchJob,
+    pauseHouseWatchJob,
+    resumeHouseWatchJob,
   },
   houseLotsFilterActions: {
     updateHouseFilterRoomsTo,

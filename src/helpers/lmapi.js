@@ -55,6 +55,24 @@ class LMapi {
     await req;
   }
 
+  pauseCurrentUserJob = async (jobId) => {
+    console.log('[API] => Pause');
+    // const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+    const req = superagent.post(`${getEnvVars.apiUrl}/v1/watch/${jobId}/pause`);
+    req.timeout(respTime);
+    // req.set('Authorization', token);
+    await req;
+  }
+
+  resumeCurrentUserJob = async (jobId) => {
+    console.log('[API] => Resume');
+    // const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+    const req = superagent.post(`${getEnvVars.apiUrl}/v1/watch/${jobId}/resume`);
+    req.timeout(respTime);
+    // req.set('Authorization', token);
+    await req;
+  }
+
   logIn = async (body) => {
     const req = superagent.post(`${getEnvVars.apiUrl}/v1/users`, body);
     req.timeout(respTime);
@@ -67,7 +85,7 @@ class LMapi {
 
   getHouses = async (query) => {
     // const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
-    const req = superagent.get(`${getEnvVars.apiUrl}/onliner?${query}`);
+    const req = superagent.get(`${getEnvVars.apiUrl}/v1/onliner?${query}`);
     req.timeout(respTime);
     // req.set('Authorization', token);
     const res = await req;
