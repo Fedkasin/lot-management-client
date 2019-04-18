@@ -92,10 +92,8 @@ class HouseWatchFilterContainer extends React.PureComponent {
   onPlayPauseJob(value) {
     const { pauseJob, resumeJob } = this.props;
     if (value.state && value.state === 'RUNNING') {
-      console.log('{event} => PAUSE', value.id);
       pauseJob(value.id);
     } else {
-      console.log('{event} => PLAY', value.id);
       resumeJob(value.id);
     }
   }

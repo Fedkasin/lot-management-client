@@ -56,7 +56,6 @@ class LMapi {
   }
 
   pauseCurrentUserJob = async (jobId) => {
-    console.log('[API] => Pause');
     // const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
     const req = superagent.post(`${getEnvVars.apiUrl}/v1/watch/${jobId}/pause`);
     req.timeout(respTime);
@@ -65,7 +64,6 @@ class LMapi {
   }
 
   resumeCurrentUserJob = async (jobId) => {
-    console.log('[API] => Resume');
     // const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
     const req = superagent.post(`${getEnvVars.apiUrl}/v1/watch/${jobId}/resume`);
     req.timeout(respTime);
