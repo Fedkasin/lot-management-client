@@ -19,8 +19,6 @@ function houseJob({
       justifyContent: 'space-between',
       borderBottomColor: Colors.lightGray,
       borderBottomWidth: 1,
-      borderTopColor: Colors.lightGray,
-      borderTopWidth: 1,
     },
     job: {
       fontSize: 16,

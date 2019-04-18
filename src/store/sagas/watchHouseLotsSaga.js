@@ -8,6 +8,7 @@ import {
   UPDATE_HOUSE_WATCH_STATE,
   CHECK_HOUSE_WATCH_STATE,
   UPDATE_HOUSE_WATCH_FILTER_APPLY,
+  REMOVE_HOUSE_WATCH_JOB,
 } from '../../constants/Actions';
 
 function* checkWatchHouseLotsState() {
@@ -59,6 +60,16 @@ function* updateHouseWatchFilterApply(action) {
   }
 }
 
+function* removeHouseWatchJob(action) {
+  try {
+    yield call(LMapi.removeCurrentUserJob, action.payload);
+    yield call(checkWatchHouseLotsState);
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error(err);
+  }
+}
+
 export function* watchHouseLotsSaga() {
   yield takeLatest(UPDATE_HOUSE_WATCH_STATE, watchHouseLots);
 }
@@ -69,4 +80,8 @@ export function* checkWatchHouseLotsStateSaga() {
 
 export function* updateHouseWatchFilterApplySaga() {
   yield takeLatest(UPDATE_HOUSE_WATCH_FILTER_APPLY, updateHouseWatchFilterApply);
+}
+
+export function* removeHouseWatchJobSaga() {
+  yield takeLatest(REMOVE_HOUSE_WATCH_JOB, removeHouseWatchJob);
 }

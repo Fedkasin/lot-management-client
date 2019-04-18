@@ -47,6 +47,14 @@ class LMapi {
     await req;
   }
 
+  removeCurrentUserJob = async (jobId) => {
+    // const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+    const req = superagent.delete(`${getEnvVars.apiUrl}/v1/watch/${jobId}`);
+    req.timeout(respTime);
+    // req.set('Authorization', token);
+    await req;
+  }
+
   logIn = async (body) => {
     const req = superagent.post(`${getEnvVars.apiUrl}/v1/users`, body);
     req.timeout(respTime);

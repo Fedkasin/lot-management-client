@@ -70,7 +70,8 @@ class HouseWatchFilterContainer extends React.PureComponent {
   }
 
   onCloseJob(value) {
-    console.log('onCloseJob', value);
+    const { removeJob } = this.props;
+    removeJob(value);
   }
 
   onPlayPauseJob(value) {
@@ -130,6 +131,7 @@ function mapDispatchToProps(dispatch) {
     changePriceFrom: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterPriceFrom(value)),
     changePriceTo: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterPriceTo(value)),
     applyFilter: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterApply(value)),
+    removeJob: value => dispatch(actions.houseWatchLotsActions.removeHouseWatchJob(value)),
   };
 }
 
@@ -142,6 +144,7 @@ HouseWatchFilterContainer.propTypes = {
   changePriceTo: PropTypes.func.isRequired,
   changePriceFrom: PropTypes.func.isRequired,
   applyFilter: PropTypes.func.isRequired,
+  removeJob: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(HouseWatchFilterContainer));

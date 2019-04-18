@@ -6,6 +6,7 @@ import {
   CHECK_HOUSE_WATCH_STATE,
   CHECK_HOUSE_WATCH_STATE_TRUE,
   CHECK_HOUSE_WATCH_STATE_FALSE,
+  REMOVE_HOUSE_WATCH_JOB,
 } from '../../constants/Actions';
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
 };
 
 const houseWatchLotsReducer = (state = initialState, action) => {
+  console.log('[REDUX] =>', action.type);
   switch (action.type) {
     case UPDATE_HOUSE_WATCH_LOTS:
       return {
@@ -61,6 +63,10 @@ const houseWatchLotsReducer = (state = initialState, action) => {
         isWatching: false,
         houseWatchLots: [],
         houseWatchJobs: [],
+      };
+    case REMOVE_HOUSE_WATCH_JOB:
+      return {
+        ...state,
       };
     default:
       return state;
