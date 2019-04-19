@@ -1,6 +1,8 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import LMapi from '../../helpers/lmapi';
 import actions from '../actions/index';
+import { navigate } from '../actions/navigationActionCreators';
+import { HOUSE_WATCH_LOTS_SCREEN } from '../../constants/Routes';
 import {
   UPDATE_HOUSE_WATCH_STATE,
   CHECK_HOUSE_WATCH_STATE,
@@ -52,6 +54,7 @@ function* updateHouseWatchFilterApply(action) {
     };
     LMapi.startCurrentUserJob(params);
     yield call(checkWatchHouseLotsState);
+    yield put(navigate(HOUSE_WATCH_LOTS_SCREEN));
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error(err);

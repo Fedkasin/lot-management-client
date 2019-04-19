@@ -24,14 +24,15 @@ class LMapi {
   };
 
   stopAllCurrentUserJobs = async () => {
-    const jobs = await this.getCurrentUserJobs();
+    const req = await this.getCurrentUserJobs();
     // const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+    const jobs = req.message.slice();
     if (jobs) {
       const requests = [];
       for (let i = 0; i < jobs.length; i += 1) {
-        const req = superagent.delete(`${getEnvVars.apiUrl}/v1/watch/${jobs[i]}`);
+        const request = superagent.delete(`${getEnvVars.apiUrl}/v1/watch/${jobs[i].jobId}`);
         // req.set('Authorization', token);
-        requests.push(req);
+        requests.push(request);
       }
       await Promise.all(requests);
     }

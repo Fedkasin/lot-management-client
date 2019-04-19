@@ -8,7 +8,7 @@ import IonIcon from '../core/IonIcon';
 import * as Colors from '../../constants/Colors';
 
 function houseJob({
-  text, onPlayPause, onClose, iosIcon, otherIcon,
+  text, onPlayPause, onClose, iosIcon, otherIcon, isEditing,
 }) {
   const styles = StyleSheet.create({
     container: {
@@ -45,7 +45,7 @@ function houseJob({
           />
         </TouchableOpacity>
         <TouchableOpacity
-          style={{ padding: 5 }}
+          style={{ padding: 5, display: isEditing ? 'flex' : 'none' }}
           onPress={onClose}
         >
           <IonIcon
@@ -59,6 +59,7 @@ function houseJob({
 }
 
 houseJob.propTypes = {
+  isEditing: PropTypes.bool.isRequired,
   text: PropTypes.string.isRequired,
   iosIcon: PropTypes.string.isRequired,
   otherIcon: PropTypes.string.isRequired,

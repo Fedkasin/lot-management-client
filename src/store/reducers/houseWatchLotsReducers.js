@@ -14,6 +14,7 @@ import {
 const initialState = {
   isFetching: false,
   isWatching: false,
+  isEditing: false,
   houseWatchLots: [],
   houseWatchJobs: [],
   page: 0,
