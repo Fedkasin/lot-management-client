@@ -94,7 +94,8 @@ class HouseWatchLotsContainer extends React.Component {
             {jobs.map((value, index) => (
               <HouseJob
                 key={`job-${index + 1}`}
-                text={`${index + 1}. ${value.jobId} [${value.params.rooms}] - $[${value.params.min}-${value.params.max}]`}
+                index={index + 1}
+                item={value}
                 iosIcon={value.state === 'RUNNING' ? 'ios-pause' : 'ios-play'}
                 otherIcon={value.state === 'RUNNING' ? 'md-pause' : 'md-play'}
                 onPlayPause={() => this.onPlayPauseJob({ id: value.jobId, state: value.state })}
