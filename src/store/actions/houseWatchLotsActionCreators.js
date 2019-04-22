@@ -9,6 +9,7 @@ import {
   REMOVE_HOUSE_WATCH_JOB,
   PAUSE_HOUSE_WATCH_JOB,
   RESUME_HOUSE_WATCH_JOB,
+  EDIT_HOUSE_WATCH_JOB_LIST,
 } from '../../constants/Actions';
 
 export const updateHouseWatchLots = jobId => ({
@@ -58,5 +59,10 @@ export const pauseHouseWatchJob = data => ({
 
 export const resumeHouseWatchJob = data => ({
   type: RESUME_HOUSE_WATCH_JOB,
+  payload: data,
+});
+
+export const editHouseWatchJobList = data => ({
+  type: EDIT_HOUSE_WATCH_JOB_LIST,
   payload: data,
 });

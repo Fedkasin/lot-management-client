@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {
   Alert,
-  FlatList,
   ScrollView,
   ActivityIndicator,
   View,
@@ -13,8 +12,6 @@ import {
 import PropTypes from 'prop-types';
 import actions from '../store/actions';
 
-import HouseLotCard from '../components/house/HouseLotCard';
-import BgMessage from '../components/bgmessage/BackgroundMessage';
 import HouseJob from '../components/house/HouseJob';
 import * as Colors from '../constants/Colors';
 

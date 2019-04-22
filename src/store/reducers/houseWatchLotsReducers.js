@@ -9,6 +9,7 @@ import {
   REMOVE_HOUSE_WATCH_JOB,
   PAUSE_HOUSE_WATCH_JOB,
   RESUME_HOUSE_WATCH_JOB,
+  EDIT_HOUSE_WATCH_JOB_LIST,
 } from '../../constants/Actions';
 
 const initialState = {
@@ -77,6 +78,11 @@ const houseWatchLotsReducer = (state = initialState, action) => {
     case RESUME_HOUSE_WATCH_JOB:
       return {
         ...state,
+      };
+    case EDIT_HOUSE_WATCH_JOB_LIST:
+      return {
+        ...state,
+        isEditing: !state.isEditing,
       };
     default:
       return state;

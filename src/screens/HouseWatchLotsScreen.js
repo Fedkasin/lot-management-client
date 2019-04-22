@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Platform,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import actions from '../store/actions';
 import HouseWatchLotsContainer from '../containers/HouseWatchLotsContainer';
 import TopBarButton from '../components/core/TopBarButton';
@@ -46,17 +47,24 @@ class HouseWatchScreen extends React.Component {
   });
 
   componentDidMount() {
-    this.props.navigation.setParams({ handleClick: this.handleClick });
+    const { navigation } = this.props;
+    navigation.setParams({ handleClick: this.handleClick });
   }
 
   handleClick = () => {
-    console.log('ed', this.props.isEditing);
+    const { onEditWatch } = this.props;
+    onEditWatch();
   };
 
   render() {
     return <HouseWatchLotsContainer />;
   }
 }
+
+HouseWatchScreen.propTypes = {
+  navigation: PropTypes.objectOf(PropTypes.any).isRequired,
+  onEditWatch: PropTypes.func.isRequired,
+};
 
 function mapStateToProps(state) {
   return {
@@ -66,7 +74,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onUpdateHouseWatchState: value => dispatch(actions.houseWatchLotsActions.watchHouseLots(value)),
+    onEditWatch: () => dispatch(actions.houseWatchLotsActions.editHouseWatchJobList()),
   };
 }
 
