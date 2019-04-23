@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import actions from '../store/actions';
+import BgMessage from '../components/bgmessage/BackgroundMessage';
 
 import HouseJob from '../components/house/HouseJob';
 import * as Colors from '../constants/Colors';
@@ -68,12 +69,30 @@ class HouseWatchLotsContainer extends React.Component {
     }
   }
 
+  onStopAllJobs() {
+    const { onUpdateHouseWatchState } = this.props;
+    Alert.alert(
+      'Remove all tasks',
+      'Are you sure about that?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => onUpdateHouseWatchState(),
+        },
+      ],
+      { cancelable: false },
+    );
+  }
+
   render() {
     const {
       isFetching,
       houseWatchLots,
       isWatching,
-      onUpdateHouseWatchState,
       jobs,
       isEditing,
     } = this.props;
@@ -86,12 +105,12 @@ class HouseWatchLotsContainer extends React.Component {
             value={isWatching}
             disabled={!isWatching}
             style={{ marginLeft: 'auto' }}
-            onValueChange={onUpdateHouseWatchState}
+            onValueChange={() => this.onStopAllJobs()}
           />
         </View>
         <ScrollView style={{ backgroundColor: Colors.white, marginBottom: 50 }}>
           <View style={styles.container}>
-            {jobs.map((value, index) => (
+            { (jobs && jobs.length) ? jobs.map((value, index) => (
               <HouseJob
                 key={`job-${index + 1}`}
                 index={index + 1}
@@ -102,7 +121,7 @@ class HouseWatchLotsContainer extends React.Component {
                 onClose={() => this.onCloseJob(value.jobId)}
                 isEditing={isEditing}
               />
-            ))}
+            )) : <BgMessage text="There are no trackers" />}
           </View>
         </ScrollView>
         {/* <FlatList

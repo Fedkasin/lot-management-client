@@ -48,7 +48,6 @@ const houseWatchLotsReducer = (state = initialState, action) => {
     case UPDATE_HOUSE_WATCH_STATE:
       return {
         ...state,
-        isWatching: action.payload,
       };
     case CHECK_HOUSE_WATCH_STATE:
       return {

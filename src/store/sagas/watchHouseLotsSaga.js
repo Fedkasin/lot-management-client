@@ -52,7 +52,7 @@ function* updateHouseWatchFilterApply(action) {
       max: parseInt(filters.priceTo, 10),
       min: parseInt(filters.priceFrom, 10),
     };
-    LMapi.startCurrentUserJob(params);
+    yield call(() => LMapi.startCurrentUserJob(params));
     yield call(checkWatchHouseLotsState);
     yield put(navigate(HOUSE_WATCH_LOTS_SCREEN));
   } catch (err) {

@@ -20,9 +20,9 @@ function houseJob({
       borderBottomColor: Colors.silver,
       borderBottomWidth: 1,
       backgroundColor: Colors.silver,
-      marginBottom: 20,
+      marginBottom: 9,
       borderRadius: 9,
-      height: 150,
+      height: 120,
     },
     job: {
       fontSize: 16,
@@ -33,7 +33,7 @@ function houseJob({
     },
     jobButtons: {
       display: 'flex',
-      flexDirection: 'row',
+      flexDirection: 'column',
     },
   });
   return (
@@ -42,21 +42,97 @@ function houseJob({
         <View style={{
           flexDirection: 'column',
           justifyContent: 'center',
+          alignItems: 'center',
           borderRightColor: Colors.lightGray,
           borderRightWidth: 1,
-          padding: 6,
-          height: 120,
+          height: 100,
           width: 120,
         }}
         >
-          <Image
-            style={{ width: 100, height: 30 }}
-            source={require('../../../assets/images/onlinerby.png')}
-          />
-          <Text style={{ fontWeight: '500', marginTop: 10, color: Colors.gray }}>
-            #
-            { index }
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={{
+              color: Colors.gray,
+              fontSize: 16,
+              fontWeight: '500',
+              marginRight: 6,
+            }}
+            >
+              {`#${index}`}
+            </Text>
+            <Image
+              style={{ width: 80, height: 25 }}
+              source={require('../../../assets/images/onlinerby.png')}
+            />
+          </View>
+          <View style={{
+            marginTop: 12,
+            flexDirection: 'row',
+          }}
+          >
+            <IonIcon
+              name={Platform.OS === 'ios' ? 'ios-search' : 'md-search'}
+              color={Colors.gray}
+            />
+            <Text style={{ color: Colors.gray, fontSize: 16, fontWeight: '500' }}>
+              { item.apartments && item.apartments.onliner && item.apartments.onliner.apartments ? item.apartments.onliner.apartments.length : '-0'}
+            </Text>
+          </View>
+        </View>
+        <View style={{ flexDirection: 'column', height: 80 }}>
+          <Text style={{
+            fontSize: 16,
+            fontWeight: '500',
+            color: Colors.gray,
+            marginLeft: 9,
+          }}
+          >
+            PRICE
           </Text>
+          <View style={{
+            width: 110,
+            height: 35,
+            marginLeft: 9,
+            alignItems: 'center',
+            flexDirection: 'row',
+          }}
+          >
+            <IonIcon
+              name={Platform.OS === 'ios' ? 'ios-cash' : 'md-cash'}
+              color={Colors.gray}
+            />
+            <Text style={{ color: Colors.gray, fontSize: 16, fontWeight: '500' }}>
+              { item.params.min }
+              -
+              { item.params.max }
+            </Text>
+          </View>
+        </View>
+        <View style={{ flexDirection: 'column', height: 80 }}>
+          <Text style={{
+            fontSize: 16,
+            fontWeight: '500',
+            color: Colors.gray,
+            marginLeft: 9,
+          }}
+          >
+            ROOMS
+          </Text>
+          <View style={{
+            width: 70,
+            height: 35,
+            marginLeft: 9,
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}
+          >
+            <IonIcon
+              name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
+              color={Colors.gray}
+            />
+            <Text style={{ color: Colors.gray, fontSize: 16, fontWeight: '500' }}>
+              { item.params.rooms.toString() }
+            </Text>
+          </View>
           <TouchableOpacity
             onPress={() => console.log('heyy')}
             style={{
@@ -77,106 +153,23 @@ function houseJob({
             <Text style={{ fontSize: 14, fontWeight: '500', color: Colors.white }}>See all</Text>
           </TouchableOpacity>
         </View>
-        <View style={{ flexDirection: 'column', height: 80 }}>
-          <Text style={{
-            fontSize: 16,
-            fontWeight: '500',
-            color: Colors.gray,
-            marginLeft: 9,
-          }}
-          >
-            PRICE
-          </Text>
-          <View style={{
-            width: 110,
-            height: 35,
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'row',
-          }}
-          >
-            <IonIcon
-              name={Platform.OS === 'ios' ? 'ios-cash' : 'md-cash'}
-              color={Colors.gray}
-            />
-            <Text style={{ color: Colors.gray, fontSize: 16, fontWeight: '500' }}>
-              { item.params.min }
-              -
-              { item.params.max }
-            </Text>
-          </View>
-          <View style={{ flexDirection: 'column', marginTop: 9 }}>
-            <Text style={{
-              color: Colors.gray,
-              fontSize: 16,
-              fontWeight: '500',
-              paddingLeft: 9,
-            }}
-            >
-              FOUND
-            </Text>
-            <View style={{
-              width: 110,
-              height: 35,
-              marginLeft: 9,
-              marginTop: 6,
-              flexDirection: 'row',
-            }}
-            >
-              <IonIcon
-                name={Platform.OS === 'ios' ? 'ios-search' : 'md-search'}
-                color={Colors.gray}
-              />
-              <Text style={{ color: Colors.gray, fontSize: 16, fontWeight: '500' }}>
-                { item.apartments.onliner.apartments.length }
-              </Text>
-            </View>
-          </View>
-        </View>
-        <View style={{ flexDirection: 'column', height: 80 }}>
-          <Text style={{
-            fontSize: 16,
-            fontWeight: '500',
-            color: Colors.gray,
-            marginLeft: 9,
-          }}
-          >
-            ROOMS
-          </Text>
-          <View style={{
-            width: 70,
-            height: 35,
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'row',
-          }}
-          >
-            <IonIcon
-              name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
-              color={Colors.gray}
-            />
-            <Text style={{ color: Colors.gray, fontSize: 16, fontWeight: '500' }}>
-              { item.params.rooms.toString() }
-            </Text>
-          </View>
-        </View>
       </View>
       <View style={styles.jobButtons}>
-        <TouchableOpacity
-          style={{ padding: 5, marginRight: 5 }}
-          onPress={onPlayPause}
-        >
-          <IonIcon
-            name={Platform.OS === 'ios' ? iosIcon : otherIcon}
-            color={Colors.gray}
-          />
-        </TouchableOpacity>
         <TouchableOpacity
           style={{ padding: 5, display: isEditing ? 'flex' : 'none' }}
           onPress={onClose}
         >
           <IonIcon
             name={Platform.OS === 'ios' ? 'ios-close' : 'md-close'}
+            color={Colors.gray}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{ padding: 5, marginRight: 5 }}
+          onPress={onPlayPause}
+        >
+          <IonIcon
+            name={Platform.OS === 'ios' ? iosIcon : otherIcon}
             color={Colors.gray}
           />
         </TouchableOpacity>
