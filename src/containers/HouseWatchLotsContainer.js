@@ -124,16 +124,6 @@ class HouseWatchLotsContainer extends React.Component {
             )) : <BgMessage text="There are no trackers" />}
           </View>
         </ScrollView>
-        {/* <FlatList
-          style={{ marginBottom: 30 }}
-          data={houseWatchLots}
-          renderItem={({ item }) => <HouseLotCard item={item} />}
-          keyExtractor={item => item.id.toString()}
-          onEndReached={this.handleScrollEnd}
-          onEndReachedThreshold={0}
-          refreshing={isFetching}
-          ListEmptyComponent={() => <BgMessage text="There are no new houses" />}
-        /> */}
       </View>
     );
   }
