@@ -20,9 +20,8 @@ class LMapi {
       const { body } = res || { body: { message: [] } };
       if (body.message.length !== 0) {
         return res.body;
-      } else {
-        return null;
       }
+      return null;
     } catch (err) {
       throw err;
     }
@@ -122,9 +121,8 @@ class LMapi {
       const { body } = res || { body: { status: [] } };
       if (body.status === 'success') {
         return res.body;
-      } else {
-        return null;
       }
+      return null;
     } catch (err) {
       throw err;
     }
@@ -140,9 +138,8 @@ class LMapi {
       const { body } = res || { body: { status: [] } };
       if (body.status === 'success') {
         return res.body;
-      } else {
-        return null;
       }
+      return null;
     } catch (err) {
       throw err;
     }
@@ -158,9 +155,8 @@ class LMapi {
       const { status } = res || null;
       if (status === 200) {
         return res.body;
-      } else {
-        return null;
       }
+      return null;
     } catch (err) {
       throw err;
     }

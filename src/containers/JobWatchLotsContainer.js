@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {
   FlatList,
@@ -11,12 +11,7 @@ import HouseLotCard from '../components/house/HouseLotCard';
 import BgMessage from '../components/bgmessage/BackgroundMessage';
 import * as Colors from '../constants/Colors';
 
-class JobWatchLotsContainer extends React.Component {
-  componentDidMount() {
-    const { onCheckHouseWatchState } = this.props;
-    onCheckHouseWatchState();
-  }
-
+class JobWatchLotsContainer extends PureComponent {
   render() {
     const {
       isFetching,
@@ -52,14 +47,12 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     onUpdateHouseWatchState: value => dispatch(actions.houseWatchLotsActions.watchHouseLots(value)),
-    onCheckHouseWatchState: value => dispatch(actions.houseWatchLotsActions.checkWatchHouseLotsState(value)),
   };
 }
 
 JobWatchLotsContainer.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   houseWatchLots: PropTypes.arrayOf(PropTypes.any).isRequired,
-  onCheckHouseWatchState: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(JobWatchLotsContainer);

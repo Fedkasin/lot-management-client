@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {
   Alert,
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class HouseWatchLotsContainer extends React.Component {
+class HouseWatchLotsContainer extends PureComponent {
   componentDidMount() {
     const { onCheckHouseWatchState } = this.props;
     onCheckHouseWatchState();

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import {
   ScrollView,
 } from 'react-native';
@@ -10,7 +10,7 @@ import HouseFilter from '../components/house/HouseFilter';
 import actions from '../store/actions';
 import * as Colors from '../constants/Colors';
 
-class HouseWatchFilterContainer extends React.PureComponent {
+class HouseWatchFilterContainer extends PureComponent {
   constructor(props) {
     super(props);
 

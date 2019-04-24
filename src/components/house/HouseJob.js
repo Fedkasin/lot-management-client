@@ -31,9 +31,64 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     flexDirection: 'row',
   },
-  jobButtons: {
-    display: 'flex',
+  jobCard: {
     flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRightColor: Colors.lightGray,
+    borderRightWidth: 1,
+    height: 100,
+    width: 110,
+  },
+  jobButtons: { display: 'flex', flexDirection: 'column' },
+  countLabel: {
+    color: Colors.gray,
+    fontSize: 16,
+    fontWeight: '500',
+    marginRight: 2,
+  },
+  fetcherLogo: { width: 80, height: 25 },
+  foundCountCard: {
+    marginTop: 12,
+    flexDirection: 'row',
+  },
+  cardLabelMl9: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: Colors.gray,
+    marginLeft: 9,
+  },
+  cardLabel: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: Colors.gray,
+  },
+  priceCard: {
+    width: 90,
+    height: 35,
+    marginLeft: 9,
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  priceLabel: { color: Colors.gray, fontSize: 14, fontWeight: '500' },
+  seeAllButton: {
+    backgroundColor: Colors.lightGray,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 85,
+    height: 30,
+    borderRadius: 6,
+    marginTop: 12,
+    marginLeft: 'auto',
+    marginRight: 0,
+  },
+  seeAllButtonLabel: { fontSize: 14, fontWeight: '500', color: Colors.white },
+  roomsCountCard: {
+    width: 70,
+    height: 35,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 
@@ -47,71 +102,40 @@ class HouseJob extends React.PureComponent {
     const {
       index, item, onPlayPause, onClose, iosIcon, otherIcon, isEditing, navigation, onUpdateHouseWatchLots,
     } = this.props;
+    const { apartments } = item.apartments.onliner ? item : { apartments: { onliner: { apartments: [] } } };
     return (
       <View style={styles.container}>
         <View style={styles.job}>
-          <View style={{
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRightColor: Colors.lightGray,
-            borderRightWidth: 1,
-            height: 100,
-            width: 110,
-          }}
-          >
+          <View style={styles.jobCard}>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={{
-                color: Colors.gray,
-                fontSize: 16,
-                fontWeight: '500',
-                marginRight: 2,
-              }}
-              >
+              <Text style={styles.countLabel}>
                 {`#${index}`}
               </Text>
               <Image
-                style={{ width: 80, height: 25 }}
+                style={styles.fetcherLogo}
                 source={require('../../../assets/images/onlinerby.png')}
               />
             </View>
-            <View style={{
-              marginTop: 12,
-              flexDirection: 'row',
-            }}
-            >
+            <View style={styles.foundCountCard}>
               <IonIcon
                 name={Platform.OS === 'ios' ? 'ios-search' : 'md-search'}
                 color={Colors.gray}
               />
-              <Text style={{ color: Colors.gray, fontSize: 14, fontWeight: '500' }}>
-                { item.apartments && item.apartments.onliner && item.apartments.onliner.apartments ? item.apartments.onliner.apartments.length : '-0' }
+              <Text style={styles.countLabel}>
+                { apartments.onliner.apartments.length }
               </Text>
             </View>
           </View>
           <View style={{ flexDirection: 'column', height: 80 }}>
-            <Text style={{
-              fontSize: 14,
-              fontWeight: '500',
-              color: Colors.gray,
-              marginLeft: 9,
-            }}
-            >
+            <Text style={styles.cardLabelMl9}>
             PRICE
             </Text>
-            <View style={{
-              width: 90,
-              height: 35,
-              marginLeft: 9,
-              alignItems: 'center',
-              flexDirection: 'row',
-            }}
-            >
+            <View style={styles.priceCard}>
               <IonIcon
                 name={Platform.OS === 'ios' ? 'ios-cash' : 'md-cash'}
                 color={Colors.gray}
               />
-              <Text style={{ color: Colors.gray, fontSize: 14, fontWeight: '500' }}>
+              <Text style={styles.priceLabel}>
                 { item.params.min }
               -
                 { item.params.max }
@@ -119,47 +143,25 @@ class HouseJob extends React.PureComponent {
             </View>
             <TouchableOpacity
               onPress={() => this.onClickViewJob(navigation, onUpdateHouseWatchLots, item)}
-              style={{
-                backgroundColor: Colors.lightGray,
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: 85,
-                height: 30,
-                borderRadius: 6,
-                marginTop: 12,
-                marginLeft: 'auto',
-                marginRight: 0,
-              }}
+              style={styles.seeAllButton}
             >
               <IonIcon
                 name={Platform.OS === 'ios' ? 'ios-eye' : 'md-eye'}
                 color={Colors.gray}
               />
-              <Text style={{ fontSize: 14, fontWeight: '500', color: Colors.white }}>See all</Text>
+              <Text style={styles.seeAllButtonLabel}>See all</Text>
             </TouchableOpacity>
           </View>
           <View style={{ flexDirection: 'column', height: 80, marginLeft: 2 }}>
-            <Text style={{
-              fontSize: 14,
-              fontWeight: '500',
-              color: Colors.gray,
-            }}
-            >
+            <Text style={styles.cardLabel}>
             ROOMS
             </Text>
-            <View style={{
-              width: 70,
-              height: 35,
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
-            >
+            <View style={styles.roomsCountCard}>
               <IonIcon
                 name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
                 color={Colors.gray}
               />
-              <Text style={{ color: Colors.gray, fontSize: 14, fontWeight: '500' }}>
+              <Text style={styles.cardLabel}>
                 { item.params.rooms.toString() }
               </Text>
             </View>

@@ -30,7 +30,7 @@ const houseWatchLotsReducer = (state = initialState, action) => {
       return {
         ...state,
         error: null,
-        houseWatchLots: [...action.payload.message.apartments.onliner.apartments],
+        houseWatchLots: action.payload.message.apartments.onliner ? [...action.payload.message.apartments.onliner.apartments] : [],
         isFetching: false,
       };
     case UPDATE_HOUSE_WATCH_LOTS_FAIL:
