@@ -62,7 +62,8 @@ class HouseWatchLotsContainer extends React.Component {
 
   onPlayPauseJob(value) {
     const { pauseJob, resumeJob } = this.props;
-    if (value.state && value.state === 'RUNNING') {
+    const { state } = value || { value: [] };
+    if (state === 'RUNNING') {
       pauseJob(value.id);
     } else {
       resumeJob(value.id);

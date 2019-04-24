@@ -4,7 +4,7 @@ import TopBarButton from '../components/core/TopBarButton';
 import { CAR_LOTS_FILTER_SCREEN } from '../constants/Routes';
 import * as Colors from '../constants/Colors';
 
-class CarLotsScreen extends React.Component {
+class CarLotsScreen extends React.PureComponent {
   static navigationOptions = {
     title: 'Cars',
     headerRight: (

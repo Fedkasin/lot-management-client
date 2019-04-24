@@ -25,6 +25,10 @@ const styles = StyleSheet.create({
     paddingLeft: 9,
     textAlign: 'left',
   },
+  bigLabel: {
+    fontSize: 20,
+    padding: 10,
+  },
 });
 
 class HouseFilter extends React.PureComponent {
@@ -32,7 +36,7 @@ class HouseFilter extends React.PureComponent {
     const { filters, handlers } = this.props;
     return (
       <View style={styles.container}>
-        <Text style={{ fontSize: 20, padding: 10 }}>Rooms count</Text>
+        <Text style={styles.bigLabel}>Rooms count</Text>
         <View style={{ display: 'flex', flexDirection: 'row' }}>
           <SettingChildSlider
             text="from"
@@ -52,7 +56,7 @@ class HouseFilter extends React.PureComponent {
           />
         </View>
         <View style={styles.divider} />
-        <Text style={{ fontSize: 20, padding: 10 }}>Price</Text>
+        <Text style={styles.bigLabel}>Price</Text>
         <View style={{ display: 'flex', flexDirection: 'row' }}>
           <SettingChildSelect
             style={{ height: 50, width: '50%' }}

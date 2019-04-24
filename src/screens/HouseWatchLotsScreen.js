@@ -13,7 +13,7 @@ import IonIcon from '../components/core/IonIcon';
 import { HOUSE_WATCH_FILTER_SCREEN } from '../constants/Routes';
 import * as Colors from '../constants/Colors';
 
-class HouseWatchScreen extends React.Component {
+class HouseWatchScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => ({
     title: 'Houses (Live)',
     headerRight: (

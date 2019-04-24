@@ -1,7 +1,7 @@
 import React from 'react';
 import JobWatchLotsContainer from '../containers/JobWatchLotsContainer';
 
-class JobWatchLotsScreen extends React.Component {
+class JobWatchLotsScreen extends React.PureComponent {
   static navigationOptions = {
     title: 'Search results',
   };

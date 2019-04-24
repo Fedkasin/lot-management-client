@@ -2,13 +2,8 @@ import {
   UPDATE_HOUSE_WATCH_LOTS,
   UPDATE_HOUSE_WATCH_LOTS_SUCCESS,
   UPDATE_HOUSE_WATCH_LOTS_FAIL,
-  UPDATE_HOUSE_WATCH_STATE,
-  CHECK_HOUSE_WATCH_STATE,
   CHECK_HOUSE_WATCH_STATE_TRUE,
   CHECK_HOUSE_WATCH_STATE_FALSE,
-  REMOVE_HOUSE_WATCH_JOB,
-  PAUSE_HOUSE_WATCH_JOB,
-  RESUME_HOUSE_WATCH_JOB,
   EDIT_HOUSE_WATCH_JOB_LIST,
 } from '../../constants/Actions';
 
@@ -45,14 +40,6 @@ const houseWatchLotsReducer = (state = initialState, action) => {
         houseWatchJobs: [],
         isFetching: false,
       };
-    case UPDATE_HOUSE_WATCH_STATE:
-      return {
-        ...state,
-      };
-    case CHECK_HOUSE_WATCH_STATE:
-      return {
-        ...state,
-      };
     case CHECK_HOUSE_WATCH_STATE_TRUE:
       return {
         ...state,
@@ -65,18 +52,6 @@ const houseWatchLotsReducer = (state = initialState, action) => {
         isWatching: false,
         houseWatchLots: [],
         houseWatchJobs: [],
-      };
-    case REMOVE_HOUSE_WATCH_JOB:
-      return {
-        ...state,
-      };
-    case PAUSE_HOUSE_WATCH_JOB:
-      return {
-        ...state,
-      };
-    case RESUME_HOUSE_WATCH_JOB:
-      return {
-        ...state,
       };
     case EDIT_HOUSE_WATCH_JOB_LIST:
       return {

@@ -15,7 +15,8 @@ import {
 function* checkWatchHouseLotsState() {
   try {
     const res = yield call(LMapi.getCurrentUserJobs);
-    if (res && res.message && res.message.length > 0) {
+    const { message } = res || { message: [] };
+    if (message.length > 0) {
       yield put(actions.houseWatchLotsActions.watchHouseLotsTrue(res.message));
     } else {
       yield put(actions.houseWatchLotsActions.watchHouseLotsFalse());
@@ -52,7 +53,7 @@ function* updateHouseWatchFilterApply(action) {
       max: parseInt(filters.priceTo, 10),
       min: parseInt(filters.priceFrom, 10),
     };
-    yield call(() => LMapi.startCurrentUserJob(params));
+    yield call(LMapi.startCurrentUserJob, params);
     yield call(checkWatchHouseLotsState);
     yield put(navigate(HOUSE_WATCH_LOTS_SCREEN));
   } catch (err) {

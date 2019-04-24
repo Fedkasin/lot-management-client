@@ -10,37 +10,43 @@ import IonIcon from '../core/IonIcon';
 import { JOB_WATCH_SCREEN } from '../../constants/Routes';
 import * as Colors from '../../constants/Colors';
 
-class houseJob extends React.PureComponent {
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'row',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderBottomColor: Colors.silver,
+    borderBottomWidth: 1,
+    backgroundColor: Colors.silver,
+    marginBottom: 9,
+    borderRadius: 9,
+    height: 120,
+  },
+  job: {
+    fontSize: 16,
+    paddingTop: 15,
+    paddingBottom: 15,
+    paddingLeft: 5,
+    flexDirection: 'row',
+  },
+  jobButtons: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+});
+
+class HouseJob extends React.PureComponent {
+  onClickViewJob(navigation, onUpdateHouseWatchLots, item) {
+    onUpdateHouseWatchLots(item.jobId);
+    navigation.navigate(JOB_WATCH_SCREEN);
+  }
+
   render() {
     const {
-      index, item, onPlayPause, onClose, iosIcon, otherIcon, isEditing, navigation,
+      index, item, onPlayPause, onClose, iosIcon, otherIcon, isEditing, navigation, onUpdateHouseWatchLots,
     } = this.props;
-    const styles = StyleSheet.create({
-      container: {
-        display: 'flex',
-        flexDirection: 'row',
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        borderBottomColor: Colors.silver,
-        borderBottomWidth: 1,
-        backgroundColor: Colors.silver,
-        marginBottom: 9,
-        borderRadius: 9,
-        height: 120,
-      },
-      job: {
-        fontSize: 16,
-        paddingTop: 15,
-        paddingBottom: 15,
-        paddingLeft: 5,
-        flexDirection: 'row',
-      },
-      jobButtons: {
-        display: 'flex',
-        flexDirection: 'column',
-      },
-    });
     return (
       <View style={styles.container}>
         <View style={styles.job}>
@@ -79,7 +85,7 @@ class houseJob extends React.PureComponent {
                 color={Colors.gray}
               />
               <Text style={{ color: Colors.gray, fontSize: 16, fontWeight: '500' }}>
-                { item.apartments && item.apartments.onliner && item.apartments.onliner.apartments ? item.apartments.onliner.apartments.length : '-0'}
+                { item.apartments && item.apartments.onliner && item.apartments.onliner.apartments ? item.apartments.onliner.apartments.length : '-0' }
               </Text>
             </View>
           </View>
@@ -139,11 +145,7 @@ class houseJob extends React.PureComponent {
               </Text>
             </View>
             <TouchableOpacity
-              onPress={() => {
-                const { onUpdateHouseWatchLots } = this.props;
-                onUpdateHouseWatchLots(item.jobId);
-                navigation.navigate(JOB_WATCH_SCREEN);
-              }}
+              onPress={() => this.onClickViewJob(navigation, onUpdateHouseWatchLots, item)}
               style={{
                 backgroundColor: Colors.lightGray,
                 flexDirection: 'row',
@@ -201,7 +203,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-houseJob.propTypes = {
+HouseJob.propTypes = {
   isEditing: PropTypes.bool.isRequired,
   index: PropTypes.number.isRequired,
   item: PropTypes.objectOf(PropTypes.any).isRequired,
@@ -213,4 +215,4 @@ houseJob.propTypes = {
   onUpdateHouseWatchLots: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(houseJob));
+export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(HouseJob));
