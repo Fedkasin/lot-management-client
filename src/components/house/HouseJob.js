@@ -57,7 +57,7 @@ class HouseJob extends React.PureComponent {
             borderRightColor: Colors.lightGray,
             borderRightWidth: 1,
             height: 100,
-            width: 120,
+            width: 110,
           }}
           >
             <View style={{ flexDirection: 'row' }}>
@@ -65,7 +65,7 @@ class HouseJob extends React.PureComponent {
                 color: Colors.gray,
                 fontSize: 16,
                 fontWeight: '500',
-                marginRight: 6,
+                marginRight: 2,
               }}
               >
                 {`#${index}`}
@@ -84,14 +84,14 @@ class HouseJob extends React.PureComponent {
                 name={Platform.OS === 'ios' ? 'ios-search' : 'md-search'}
                 color={Colors.gray}
               />
-              <Text style={{ color: Colors.gray, fontSize: 16, fontWeight: '500' }}>
+              <Text style={{ color: Colors.gray, fontSize: 14, fontWeight: '500' }}>
                 { item.apartments && item.apartments.onliner && item.apartments.onliner.apartments ? item.apartments.onliner.apartments.length : '-0' }
               </Text>
             </View>
           </View>
           <View style={{ flexDirection: 'column', height: 80 }}>
             <Text style={{
-              fontSize: 16,
+              fontSize: 14,
               fontWeight: '500',
               color: Colors.gray,
               marginLeft: 9,
@@ -100,7 +100,7 @@ class HouseJob extends React.PureComponent {
             PRICE
             </Text>
             <View style={{
-              width: 110,
+              width: 90,
               height: 35,
               marginLeft: 9,
               alignItems: 'center',
@@ -111,37 +111,10 @@ class HouseJob extends React.PureComponent {
                 name={Platform.OS === 'ios' ? 'ios-cash' : 'md-cash'}
                 color={Colors.gray}
               />
-              <Text style={{ color: Colors.gray, fontSize: 16, fontWeight: '500' }}>
+              <Text style={{ color: Colors.gray, fontSize: 14, fontWeight: '500' }}>
                 { item.params.min }
               -
                 { item.params.max }
-              </Text>
-            </View>
-          </View>
-          <View style={{ flexDirection: 'column', height: 80 }}>
-            <Text style={{
-              fontSize: 16,
-              fontWeight: '500',
-              color: Colors.gray,
-              marginLeft: 9,
-            }}
-            >
-            ROOMS
-            </Text>
-            <View style={{
-              width: 70,
-              height: 35,
-              marginLeft: 9,
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
-            >
-              <IonIcon
-                name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
-                color={Colors.gray}
-              />
-              <Text style={{ color: Colors.gray, fontSize: 16, fontWeight: '500' }}>
-                { item.params.rooms.toString() }
               </Text>
             </View>
             <TouchableOpacity
@@ -155,6 +128,8 @@ class HouseJob extends React.PureComponent {
                 height: 30,
                 borderRadius: 6,
                 marginTop: 12,
+                marginLeft: 'auto',
+                marginRight: 0,
               }}
             >
               <IonIcon
@@ -163,6 +138,31 @@ class HouseJob extends React.PureComponent {
               />
               <Text style={{ fontSize: 14, fontWeight: '500', color: Colors.white }}>See all</Text>
             </TouchableOpacity>
+          </View>
+          <View style={{ flexDirection: 'column', height: 80, marginLeft: 2 }}>
+            <Text style={{
+              fontSize: 14,
+              fontWeight: '500',
+              color: Colors.gray,
+            }}
+            >
+            ROOMS
+            </Text>
+            <View style={{
+              width: 70,
+              height: 35,
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+            >
+              <IonIcon
+                name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
+                color={Colors.gray}
+              />
+              <Text style={{ color: Colors.gray, fontSize: 14, fontWeight: '500' }}>
+                { item.params.rooms.toString() }
+              </Text>
+            </View>
           </View>
         </View>
         <View style={styles.jobButtons}>

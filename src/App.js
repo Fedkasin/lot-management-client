@@ -35,7 +35,7 @@ const getPushToken = async () => {
 class App extends PureComponent {
   async componentDidMount() {
     const TOKEN = await getPushToken();
-    await AsyncStorage.setItem('@RootStore:NOTIFICATIONS_TOKEN', TOKEN);
+    await AsyncStorage.setItem('@RootStore:NOTIFICATIONS_TOKEN', TOKEN || '[NOTIFICATIONS_FORBIDDEN]');
 
     this._notificationSubscription = Notifications.addListener(this._handleNotification);
   }
