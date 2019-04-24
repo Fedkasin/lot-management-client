@@ -9,11 +9,6 @@ function IcoButton({
   text, color, onPress, textColor, iconColor, iosIcon, otherIcon,
 }) {
   const styles = StyleSheet.create({
-    bgButton: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: '100%',
-    },
     button: {
       alignItems: 'center',
       justifyContent: 'center',

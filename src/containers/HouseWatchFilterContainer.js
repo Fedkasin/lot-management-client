@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
-import { ScrollView } from 'react-native';
+import {
+  ScrollView,
+} from 'react-native';
 import { withNavigation, NavigationEvents } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -53,7 +55,6 @@ class HouseWatchFilterContainer extends PureComponent {
       applyFilter: this.onApplyHouseWatchFilter,
     };
     const { navigation, filters } = this.props;
-
     return (
       <ScrollView style={{ backgroundColor: Colors.white }}>
         <HouseFilter filters={filters} handlers={handlers} />

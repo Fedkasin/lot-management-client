@@ -2,16 +2,18 @@ import {
   UPDATE_HOUSE_WATCH_LOTS,
   UPDATE_HOUSE_WATCH_LOTS_SUCCESS,
   UPDATE_HOUSE_WATCH_LOTS_FAIL,
-  UPDATE_HOUSE_WATCH_STATE,
   CHECK_HOUSE_WATCH_STATE,
   CHECK_HOUSE_WATCH_STATE_TRUE,
   CHECK_HOUSE_WATCH_STATE_FALSE,
+  EDIT_HOUSE_WATCH_JOB_LIST,
 } from '../../constants/Actions';
 
 const initialState = {
   isFetching: false,
   isWatching: false,
+  isEditing: false,
   houseWatchLots: [],
+  houseWatchJobs: [],
   page: 0,
   itemsPerPage: 10,
   error: null,
@@ -28,7 +30,7 @@ const houseWatchLotsReducer = (state = initialState, action) => {
       return {
         ...state,
         error: null,
-        houseWatchLots: [...action.payload.message.apartments.onliner.apartments],
+        houseWatchLots: action.payload.message.apartments.onliner ? [...action.payload.message.apartments.onliner.apartments] : [],
         isFetching: false,
       };
     case UPDATE_HOUSE_WATCH_LOTS_FAIL:
@@ -36,27 +38,33 @@ const houseWatchLotsReducer = (state = initialState, action) => {
         ...state,
         error: action.error,
         houseWatchLots: [],
+        houseWatchJobs: [],
         isFetching: false,
-      };
-    case UPDATE_HOUSE_WATCH_STATE:
-      return {
-        ...state,
-        isWatching: action.payload,
       };
     case CHECK_HOUSE_WATCH_STATE:
       return {
         ...state,
+        isFetching: true,
       };
     case CHECK_HOUSE_WATCH_STATE_TRUE:
       return {
         ...state,
+        houseWatchJobs: [...action.payload],
         isWatching: true,
+        isFetching: false,
       };
     case CHECK_HOUSE_WATCH_STATE_FALSE:
       return {
         ...state,
         isWatching: false,
+        isFetching: false,
         houseWatchLots: [],
+        houseWatchJobs: [],
+      };
+    case EDIT_HOUSE_WATCH_JOB_LIST:
+      return {
+        ...state,
+        isEditing: !state.isEditing,
       };
     default:
       return state;

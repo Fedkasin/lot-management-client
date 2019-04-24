@@ -6,6 +6,10 @@ import {
   CHECK_HOUSE_WATCH_STATE,
   CHECK_HOUSE_WATCH_STATE_TRUE,
   CHECK_HOUSE_WATCH_STATE_FALSE,
+  REMOVE_HOUSE_WATCH_JOB,
+  PAUSE_HOUSE_WATCH_JOB,
+  RESUME_HOUSE_WATCH_JOB,
+  EDIT_HOUSE_WATCH_JOB_LIST,
 } from '../../constants/Actions';
 
 export const updateHouseWatchLots = jobId => ({
@@ -40,5 +44,25 @@ export const watchHouseLotsTrue = data => ({
 
 export const watchHouseLotsFalse = data => ({
   type: CHECK_HOUSE_WATCH_STATE_FALSE,
+  payload: data,
+});
+
+export const removeHouseWatchJob = data => ({
+  type: REMOVE_HOUSE_WATCH_JOB,
+  payload: data,
+});
+
+export const pauseHouseWatchJob = data => ({
+  type: PAUSE_HOUSE_WATCH_JOB,
+  payload: data,
+});
+
+export const resumeHouseWatchJob = data => ({
+  type: RESUME_HOUSE_WATCH_JOB,
+  payload: data,
+});
+
+export const editHouseWatchJobList = data => ({
+  type: EDIT_HOUSE_WATCH_JOB_LIST,
   payload: data,
 });

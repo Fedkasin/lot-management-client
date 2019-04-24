@@ -1,7 +1,7 @@
 import React from 'react';
 import AuthSignOrRegisterContainer from '../containers/AuthSignOrRegisterContainer';
 
-class AuthSignOrRegisterScreen extends React.Component {
+class AuthSignOrRegisterScreen extends React.PureComponent {
   static navigationOptions = {
     title: 'Welcome',
   };

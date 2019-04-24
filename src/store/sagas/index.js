@@ -8,7 +8,14 @@ import { loginSaga, logoutSaga, loggedInSaga } from './authorizationSaga';
 import fetchCarLotsSaga from './fetchCarLotsSaga';
 import fetchHouseLotsSaga from './fetchHouseLotsSaga';
 import updateHouseWatchLotsSaga from './updateHouseWatchLotsSaga';
-import { watchHouseLotsSaga, checkWatchHouseLotsStateSaga, updateHouseWatchFilterApplySaga } from './watchHouseLotsSaga';
+import {
+  watchHouseLotsSaga,
+  checkWatchHouseLotsStateSaga,
+  updateHouseWatchFilterApplySaga,
+  removeHouseWatchJobSaga,
+  pauseHouseWatchJobSaga,
+  resumeHouseWatchJobSaga,
+} from './watchHouseLotsSaga';
 
 export default function* (service) {
   const rootSagas = [
@@ -25,6 +32,9 @@ export default function* (service) {
     watchHouseLotsSaga(),
     checkWatchHouseLotsStateSaga(),
     updateHouseWatchFilterApplySaga(),
+    removeHouseWatchJobSaga(),
+    pauseHouseWatchJobSaga(),
+    resumeHouseWatchJobSaga(),
   ];
 
   yield all(rootSagas, service);

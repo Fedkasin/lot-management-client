@@ -4,7 +4,7 @@ import TopBarButton from '../components/core/TopBarButton';
 import { HOUSE_FILTER_SCREEN } from '../constants/Routes';
 import * as Colors from '../constants/Colors';
 
-class HouseLotsScreen extends React.Component {
+class HouseLotsScreen extends React.PureComponent {
   static navigationOptions = {
     title: 'Houses',
     headerRight: (

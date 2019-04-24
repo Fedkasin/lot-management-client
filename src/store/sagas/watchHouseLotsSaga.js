@@ -2,19 +2,22 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import LMapi from '../../helpers/lmapi';
 import actions from '../actions/index';
 import { navigate } from '../actions/navigationActionCreators';
-
 import { HOUSE_WATCH_LOTS_SCREEN } from '../../constants/Routes';
 import {
   UPDATE_HOUSE_WATCH_STATE,
   CHECK_HOUSE_WATCH_STATE,
   UPDATE_HOUSE_WATCH_FILTER_APPLY,
+  REMOVE_HOUSE_WATCH_JOB,
+  PAUSE_HOUSE_WATCH_JOB,
+  RESUME_HOUSE_WATCH_JOB,
 } from '../../constants/Actions';
 
 function* checkWatchHouseLotsState() {
   try {
     const res = yield call(LMapi.getCurrentUserJobs);
-    if (res && res.length > 0) {
-      yield put(actions.houseWatchLotsActions.watchHouseLotsTrue());
+    const { message } = res || { message: [] };
+    if (message.length > 0) {
+      yield put(actions.houseWatchLotsActions.watchHouseLotsTrue(res.message));
     } else {
       yield put(actions.houseWatchLotsActions.watchHouseLotsFalse());
     }
@@ -50,9 +53,39 @@ function* updateHouseWatchFilterApply(action) {
       max: parseInt(filters.priceTo, 10),
       min: parseInt(filters.priceFrom, 10),
     };
-    LMapi.startCurrentUserJob(params);
+    yield call(LMapi.startCurrentUserJob, params);
     yield call(checkWatchHouseLotsState);
     yield put(navigate(HOUSE_WATCH_LOTS_SCREEN));
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error(err);
+  }
+}
+
+function* removeHouseWatchJob(action) {
+  try {
+    yield call(LMapi.removeCurrentUserJob, action.payload);
+    yield call(checkWatchHouseLotsState);
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error(err);
+  }
+}
+
+function* pauseHouseWatchJob(action) {
+  try {
+    yield call(LMapi.pauseCurrentUserJob, action.payload);
+    yield call(checkWatchHouseLotsState);
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error(err);
+  }
+}
+
+function* resumeHouseWatchJob(action) {
+  try {
+    yield call(LMapi.resumeCurrentUserJob, action.payload);
+    yield call(checkWatchHouseLotsState);
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error(err);
@@ -69,4 +102,15 @@ export function* checkWatchHouseLotsStateSaga() {
 
 export function* updateHouseWatchFilterApplySaga() {
   yield takeLatest(UPDATE_HOUSE_WATCH_FILTER_APPLY, updateHouseWatchFilterApply);
+}
+
+export function* removeHouseWatchJobSaga() {
+  yield takeLatest(REMOVE_HOUSE_WATCH_JOB, removeHouseWatchJob);
+}
+
+export function* pauseHouseWatchJobSaga() {
+  yield takeLatest(PAUSE_HOUSE_WATCH_JOB, pauseHouseWatchJob);
+}
+export function* resumeHouseWatchJobSaga() {
+  yield takeLatest(RESUME_HOUSE_WATCH_JOB, resumeHouseWatchJob);
 }

@@ -28,6 +28,10 @@ import {
   checkWatchHouseLotsState,
   watchHouseLotsTrue,
   watchHouseLotsFalse,
+  removeHouseWatchJob,
+  pauseHouseWatchJob,
+  resumeHouseWatchJob,
+  editHouseWatchJobList,
 } from './houseWatchLotsActionCreators';
 
 import {
@@ -90,6 +94,10 @@ export default {
     checkWatchHouseLotsState,
     watchHouseLotsTrue,
     watchHouseLotsFalse,
+    removeHouseWatchJob,
+    pauseHouseWatchJob,
+    resumeHouseWatchJob,
+    editHouseWatchJobList,
   },
   houseLotsFilterActions: {
     updateHouseFilterRoomsTo,
