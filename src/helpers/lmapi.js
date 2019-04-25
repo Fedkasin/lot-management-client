@@ -11,11 +11,10 @@ class LMapi {
 
   getCurrentUserJobs = async () => {
     try {
-      const userId = await AsyncStorage.getItem('@UserStore:USER_ID');
-      // const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
-      const req = superagent.get(`${getEnvVars.apiUrl}/v1/users/${userId}/jobs`);
+      const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+      const req = superagent.get(`${getEnvVars.apiUrl}/v1/users/jobs`);
       req.timeout(respTime);
-      // req.set('Authorization', token);
+      req.set('Authorization', token);
       const res = await req;
       const { body } = res || { body: { message: [] } };
       if (body.message.length !== 0) {
@@ -30,13 +29,13 @@ class LMapi {
   stopAllCurrentUserJobs = async () => {
     try {
       const req = await this.getCurrentUserJobs();
-      // const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+      const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
       const jobs = req.message.slice();
       if (jobs) {
         const requests = [];
         for (let i = 0; i < jobs.length; i += 1) {
           const request = superagent.delete(`${getEnvVars.apiUrl}/v1/watch/${jobs[i].jobId}`);
-          // req.set('Authorization', token);
+          req.set('Authorization', token);
           requests.push(request);
         }
         await Promise.all(requests);
@@ -48,12 +47,11 @@ class LMapi {
 
   startCurrentUserJob = async (params) => {
     try {
-      const userId = await AsyncStorage.getItem('@UserStore:USER_ID');
-      // const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
-      const data = { userId, params };
-      const req = superagent.post(`${getEnvVars.apiUrl}/v1/watch`, data);
+      const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+      const data = { params };
+      const req = superagent.post(`${getEnvVars.apiUrl}/v1/users/watch`, data);
       req.timeout(respTime);
-      // req.set('Authorization', token);
+      req.set('Authorization', token);
       await req;
     } catch (err) {
       throw err;
@@ -62,10 +60,10 @@ class LMapi {
 
   removeCurrentUserJob = async (jobId) => {
     try {
-    // const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
-      const req = superagent.delete(`${getEnvVars.apiUrl}/v1/watch/${jobId}`);
+      const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+      const req = superagent.delete(`${getEnvVars.apiUrl}/v1/users/watch/${jobId}`);
       req.timeout(respTime);
-      // req.set('Authorization', token);
+      req.set('Authorization', token);
       await req;
     } catch (err) {
       throw err;
@@ -74,10 +72,10 @@ class LMapi {
 
   pauseCurrentUserJob = async (jobId) => {
     try {
-    // const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
-      const req = superagent.post(`${getEnvVars.apiUrl}/v1/watch/${jobId}/pause`);
+      const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+      const req = superagent.post(`${getEnvVars.apiUrl}/v1/users/watch/${jobId}/pause`);
       req.timeout(respTime);
-      // req.set('Authorization', token);
+      req.set('Authorization', token);
       await req;
     } catch (err) {
       throw err;
@@ -86,10 +84,10 @@ class LMapi {
 
   resumeCurrentUserJob = async (jobId) => {
     try {
-    // const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
-      const req = superagent.post(`${getEnvVars.apiUrl}/v1/watch/${jobId}/resume`);
+      const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+      const req = superagent.post(`${getEnvVars.apiUrl}/v1/users/watch/${jobId}/resume`);
       req.timeout(respTime);
-      // req.set('Authorization', token);
+      req.set('Authorization', token);
       await req;
     } catch (err) {
       throw err;
@@ -103,8 +101,7 @@ class LMapi {
       const res = await req;
       const { body } = res || { body: { status: [] } };
       if (body.status === 'success') {
-        await AsyncStorage.setItem('@UserStore:USER_ID', res.body.message.userId);
-        await AsyncStorage.setItem('@UserStore:API_TOKEN', res.body.message.token);
+        await AsyncStorage.setItem('@UserStore:API_TOKEN', res.body.message.bearerToken);
       }
     } catch (err) {
       throw err;
@@ -113,10 +110,10 @@ class LMapi {
 
   getHouses = async (query) => {
     try {
-    // const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+      const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
       const req = superagent.get(`${getEnvVars.apiUrl}/v1/onliner?${query}`);
       req.timeout(respTime);
-      // req.set('Authorization', token);
+      req.set('Authorization', token);
       const res = await req;
       const { body } = res || { body: { status: [] } };
       if (body.status === 'success') {
@@ -130,10 +127,10 @@ class LMapi {
 
   getHousesWatch = async (jobId) => {
     try {
-    // const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
-      const req = superagent.get(`${getEnvVars.apiUrl}/watch/${jobId}`);
+      const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+      const req = superagent.get(`${getEnvVars.apiUrl}/v1/users/watch/${jobId}`);
       req.timeout(respTime);
-      // req.set('Authorization', token);
+      req.set('Authorization', token);
       const res = await req;
       const { body } = res || { body: { status: [] } };
       if (body.status === 'success') {
@@ -147,10 +144,10 @@ class LMapi {
 
   getCars = async (start, limit) => {
     try {
-    // const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+      const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
       const req = superagent.get(`https://jsonplaceholder.typicode.com/photos?_start=${start}&_limit=${limit}`);
       req.timeout(respTime);
-      // req.set('Authorization', token);
+      req.set('Authorization', token);
       const res = await req;
       const { status } = res || null;
       if (status === 200) {
