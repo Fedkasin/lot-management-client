@@ -49,6 +49,7 @@ function* logout() {
     yield put(navigate(AUTH_STACK));
     yield call(signOut);
     yield put(actions.authActions.logoutSuccess());
+    yield call(LMapi.logOut);
   } catch (err) {
     yield put(actions.authActions.logoutFail(err));
     yield put(navigate(APP_TAB));

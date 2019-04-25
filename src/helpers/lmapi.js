@@ -34,8 +34,8 @@ class LMapi {
       if (jobs) {
         const requests = [];
         for (let i = 0; i < jobs.length; i += 1) {
-          const request = superagent.delete(`${getEnvVars.apiUrl}/v1/watch/${jobs[i].jobId}`);
-          req.set('Authorization', token);
+          const request = superagent.delete(`${getEnvVars.apiUrl}/v1/users/watch/${jobs[i].jobId}`);
+          request.set('Authorization', token);
           requests.push(request);
         }
         await Promise.all(requests);
@@ -48,8 +48,7 @@ class LMapi {
   startCurrentUserJob = async (params) => {
     try {
       const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
-      const data = { params };
-      const req = superagent.post(`${getEnvVars.apiUrl}/v1/users/watch`, data);
+      const req = superagent.post(`${getEnvVars.apiUrl}/v1/users/watch`, params);
       req.timeout(respTime);
       req.set('Authorization', token);
       await req;
@@ -102,6 +101,22 @@ class LMapi {
       const { body } = res || { body: { status: [] } };
       if (body.status === 'success') {
         await AsyncStorage.setItem('@UserStore:API_TOKEN', res.body.message.bearerToken);
+      }
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  logOut = async () => {
+    try {
+      const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+      const req = superagent.delete(`${getEnvVars.apiUrl}/v1/users/logout`);
+      req.timeout(respTime);
+      req.set('Authorization', token);
+      const res = await req;
+      const { body } = res || { body: { status: [] } };
+      if (body.status === 'success') {
+        await AsyncStorage.removeItem('@UserStore:API_TOKEN');
       }
     } catch (err) {
       throw err;
