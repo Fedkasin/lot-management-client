@@ -5,7 +5,6 @@ import {
 import PropTypes from 'prop-types';
 
 import SettingChildSelect from '../settings/SettingChildSelect';
-import IcoButton from '../core/IcoButton';
 import SettingChildSlider from '../settings/SettingChildSlider';
 import * as filtersConst from '../../constants/Filters';
 import * as Colors from '../../constants/Colors';
@@ -73,15 +72,6 @@ class HouseFilter extends React.PureComponent {
             handler={handlers.priceToHandler}
           />
         </View>
-        <IcoButton
-          text="Accept"
-          color={Colors.green}
-          onPress={handlers.applyFilter}
-          textColor={Colors.white}
-          iconColor={Colors.white}
-          iosIcon="ios-checkmark"
-          otherIcon="md-checkmark"
-        />
       </View>
     );
   }
