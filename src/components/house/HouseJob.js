@@ -12,83 +12,119 @@ import * as Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'row',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
-    borderBottomColor: Colors.silver,
-    borderBottomWidth: 1,
     backgroundColor: Colors.silver,
     marginBottom: 9,
     borderRadius: 9,
-    height: 120,
   },
   job: {
     fontSize: 16,
-    paddingTop: 15,
-    paddingBottom: 15,
-    paddingLeft: 5,
     flexDirection: 'row',
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    /* borderWidth: 1,
+    borderColor: Colors.black, */
   },
   jobCard: {
-    flexDirection: 'column',
-    justifyContent: 'center',
+    flexDirection: 'row',
     alignItems: 'center',
+    paddingLeft: 6,
+    width: 60,
+    height: 50,
     borderRightColor: Colors.lightGray,
     borderRightWidth: 1,
-    height: 100,
-    width: 110,
   },
-  jobButtons: { display: 'flex', flexDirection: 'column' },
-  countLabel: {
-    color: Colors.gray,
-    fontSize: 16,
-    fontWeight: '500',
-    marginRight: 2,
-  },
-  fetcherLogo: { width: 80, height: 25 },
-  foundCountCard: {
-    marginTop: 12,
+  jobButtons: {
+    borderTopRightRadius: 9,
+    borderBottomRightRadius: 9,
     flexDirection: 'row',
+    width: 70,
+    height: '100%',
+    /* backgroundColor: Colors.blue, */
   },
-  cardLabelMl9: {
+  buttonRemove: {
+    flex: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.red,
+    borderTopRightRadius: 9,
+    borderBottomRightRadius: 9,
+  },
+  buttonPlayPause: {
+    flex: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  rightArrow: {
+    marginRight: 4,
+    marginLeft: 'auto',
+    alignItems: 'center',
+    flexDirection: 'row',
+    /* borderWidth: 1,
+    borderColor: Colors.black, */
+  },
+  jobBody: {
+    flexDirection: 'row',
+    /* backgroundColor: Colors.blue, */
+    flex: 1,
+  },
+  countLabel: {
+    color: Colors.white,
     fontSize: 14,
     fontWeight: '500',
-    color: Colors.gray,
-    marginLeft: 9,
+  },
+  fetcherLogo: {
+    width: 21,
+    height: 21,
   },
   cardLabel: {
     fontSize: 14,
+    marginLeft: 3,
     fontWeight: '500',
     color: Colors.gray,
   },
-  priceCard: {
-    width: 90,
-    height: 35,
-    marginLeft: 9,
-    alignItems: 'center',
+  cardItem: {
     flexDirection: 'row',
-  },
-  priceLabel: { color: Colors.gray, fontSize: 14, fontWeight: '500' },
-  seeAllButton: {
-    backgroundColor: Colors.lightGray,
-    flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    flex: 2,
+    paddingTop: 6,
+    paddingBottom: 6,
+    /* backgroundColor: Colors.green,
+    borderColor: Colors.black,
+    borderWidth: 1, */
+  },
+  cardItemInner: {
+    textAlign: 'left',
+    /* borderColor: Colors.black,
+    borderWidth: 1,
+    backgroundColor: Colors.blue, */
+  },
+  priceCard: {
     width: 85,
     height: 30,
-    borderRadius: 6,
-    marginTop: 12,
-    marginLeft: 'auto',
-    marginRight: 0,
-  },
-  seeAllButtonLabel: { fontSize: 14, fontWeight: '500', color: Colors.white },
-  roomsCountCard: {
-    width: 70,
-    height: 35,
-    flexDirection: 'row',
     alignItems: 'center',
+    flexDirection: 'row',
+  },
+  roundSpot: {
+    backgroundColor: Colors.red,
+    width: 22,
+    height: 22,
+    borderRadius: 11,
+    paddingBottom: Platform.OS === 'ios' ? 0 : 1,
+    paddingLeft: Platform.OS === 'ios' ? 1 : 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  activityIndicator: {
+    backgroundColor: Colors.white,
+    width: 16,
+    height: 16,
+    borderRadius: 8,
   },
 });
 
@@ -100,93 +136,93 @@ class HouseJob extends React.PureComponent {
 
   render() {
     const {
-      index, item, onPlayPause, onClose, iosIcon, otherIcon, isEditing, navigation, onUpdateHouseWatchLots,
+      item, onPlayPause, onClose, iosIcon, otherIcon, isEditing, navigation, onUpdateHouseWatchLots,
     } = this.props;
     const { apartments } = item.apartments.onliner ? item : { apartments: { onliner: { apartments: [] } } };
     return (
       <View style={styles.container}>
-        <View style={styles.job}>
+        <TouchableOpacity
+          onPress={() => this.onClickViewJob(navigation, onUpdateHouseWatchLots, item)}
+          style={styles.job}
+        >
           <View style={styles.jobCard}>
-            <View style={{ flexDirection: 'row' }}>
+            <Image
+              style={styles.fetcherLogo}
+              source={require('../../../assets/images/onlinerby.png')}
+            />
+            <View style={[styles.roundSpot, { marginLeft: 4 }]}>
               <Text style={styles.countLabel}>
-                {`#${index}`}
-              </Text>
-              <Image
-                style={styles.fetcherLogo}
-                source={require('../../../assets/images/onlinerby.png')}
-              />
-            </View>
-            <View style={styles.foundCountCard}>
-              <IonIcon
-                name={Platform.OS === 'ios' ? 'ios-search' : 'md-search'}
-                color={Colors.gray}
-              />
-              <Text style={styles.countLabel}>
-                { apartments.onliner.apartments.length }
+                {`${apartments.onliner.apartments.length}`}
               </Text>
             </View>
           </View>
-          <View style={{ flexDirection: 'column', height: 80 }}>
-            <Text style={styles.cardLabelMl9}>
-            PRICE
-            </Text>
-            <View style={styles.priceCard}>
-              <IonIcon
-                name={Platform.OS === 'ios' ? 'ios-cash' : 'md-cash'}
-                color={Colors.gray}
-              />
-              <Text style={styles.priceLabel}>
-                { item.params.min }
-              -
-                { item.params.max }
-              </Text>
+          <View style={styles.jobBody}>
+            <View style={styles.cardItem}>
+              <View style={styles.cardItemInner}>
+                <Text style={styles.cardLabel}>
+                PRICE
+                </Text>
+                <View style={styles.priceCard}>
+                  <Text style={styles.cardLabel}>
+                    {`$${item.params.min}`}
+                  -
+                    { item.params.max }
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.cardItemInner}>
+                <Text style={styles.cardLabel}>
+                ROOMS
+                </Text>
+                <View style={styles.priceCard}>
+                  <IonIcon
+                    name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
+                    color={Colors.gray}
+                  />
+                  <Text style={styles.cardLabel}>
+                    { item.params.rooms.toString() }
+                  </Text>
+                </View>
+              </View>
             </View>
+          </View>
+          <View style={styles.jobButtons}>
             <TouchableOpacity
-              onPress={() => this.onClickViewJob(navigation, onUpdateHouseWatchLots, item)}
-              style={styles.seeAllButton}
+              style={[styles.buttonPlayPause, { display: isEditing ? 'flex' : 'none' }]}
+              onPress={onPlayPause}
             >
               <IonIcon
-                name={Platform.OS === 'ios' ? 'ios-eye' : 'md-eye'}
+                name={Platform.OS === 'ios' ? iosIcon : otherIcon}
                 color={Colors.gray}
               />
-              <Text style={styles.seeAllButtonLabel}>See all</Text>
             </TouchableOpacity>
-          </View>
-          <View style={{ flexDirection: 'column', height: 80, marginLeft: 2 }}>
-            <Text style={styles.cardLabel}>
-            ROOMS
-            </Text>
-            <View style={styles.roomsCountCard}>
+            <TouchableOpacity
+              style={[styles.buttonRemove, { display: isEditing ? 'flex' : 'none' }]}
+              onPress={onClose}
+            >
               <IonIcon
-                name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
+                name={Platform.OS === 'ios' ? 'ios-close' : 'md-close'}
                 color={Colors.gray}
               />
-              <Text style={styles.cardLabel}>
-                { item.params.rooms.toString() }
-              </Text>
+            </TouchableOpacity>
+            <View style={[styles.rightArrow, { display: isEditing ? 'none' : 'flex' }]}>
+              <View style={
+                [styles.activityIndicator,
+                  {
+                    marginRight: 4,
+                    marginBottom: Platform.OS === 'ios' ? 2 : 0,
+                    backgroundColor: item.state === 'RUNNING' ? Colors.green : Colors.yellow,
+                  },
+                ]
+              }
+              />
+              <IonIcon
+                name={Platform.OS === 'ios' ? 'ios-arrow-forward' : 'md-arrow-forward'}
+                color={Colors.gray}
+              />
             </View>
           </View>
-        </View>
-        <View style={styles.jobButtons}>
-          <TouchableOpacity
-            style={{ padding: 5, display: isEditing ? 'flex' : 'none' }}
-            onPress={onClose}
-          >
-            <IonIcon
-              name={Platform.OS === 'ios' ? 'ios-close' : 'md-close'}
-              color={Colors.gray}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{ padding: 5, marginRight: 5 }}
-            onPress={onPlayPause}
-          >
-            <IonIcon
-              name={Platform.OS === 'ios' ? iosIcon : otherIcon}
-              color={Colors.gray}
-            />
-          </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -207,7 +243,6 @@ function mapDispatchToProps(dispatch) {
 
 HouseJob.propTypes = {
   isEditing: PropTypes.bool.isRequired,
-  index: PropTypes.number.isRequired,
   item: PropTypes.objectOf(PropTypes.any).isRequired,
   iosIcon: PropTypes.string.isRequired,
   otherIcon: PropTypes.string.isRequired,
