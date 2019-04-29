@@ -100,7 +100,7 @@ class HouseWatchLotsContainer extends PureComponent {
     if (!houseWatchLots.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
     return (
       <View style={{ flexDirection: 'column' }}>
-        <View style={{ display: 'flex', flexDirection: 'row', padding: 10 }}>
+        <View style={{ display: isWatching ? 'flex' : 'none', flexDirection: 'row', padding: 10 }}>
           <Text style={{ fontSize: 24, color: Colors.gray, marginLeft: 9 }}>Live tracking</Text>
           <Switch
             value={isWatching}

@@ -69,6 +69,7 @@ HouseWatchScreen.propTypes = {
 function mapStateToProps(state) {
   return {
     isEditing: state.houseWatchLotsReducers.isEditing,
+    isWatching: state.houseWatchLotsReducers.isWatching,
   };
 }
 

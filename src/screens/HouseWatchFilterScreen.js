@@ -3,7 +3,7 @@ import HouseWatchFilterContainer from '../containers/HouseWatchFilterContainer';
 
 class HouseWatchFilterScreen extends React.PureComponent {
   static navigationOptions = {
-    title: 'Live Houses Filter',
+    title: 'Create houses watcher',
   };
 
   render() {

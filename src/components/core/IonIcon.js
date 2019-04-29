@@ -8,7 +8,7 @@ function IonIcon({ name, color }) {
       name={name}
       color={color}
       size={26}
-      style={{ marginBottom: -3, paddingRight: 9 }}
+      style={{ padding: 3 }}
     />
   );
 }

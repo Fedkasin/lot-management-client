@@ -38,7 +38,6 @@ const houseWatchLotsReducer = (state = initialState, action) => {
         ...state,
         error: action.error,
         houseWatchLots: [],
-        houseWatchJobs: [],
         isFetching: false,
       };
     case CHECK_HOUSE_WATCH_STATE:
