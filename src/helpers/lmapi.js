@@ -164,7 +164,7 @@ class LMapi {
       req.timeout(respTime);
       req.set('Authorization', token);
       const res = await req;
-      const { status } = res || null;
+      const { status = null } = res;
       if (status === 200) {
         return res.body;
       }
