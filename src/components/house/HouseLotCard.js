@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { LinearGradient } from 'expo';
 import {
-  Text, View, StyleSheet, ImageBackground, TouchableOpacity, Linking,
+  Text, View, StyleSheet, ImageBackground, TouchableOpacity, Linking, Image,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import * as Colors from '../../constants/Colors';
@@ -51,6 +51,10 @@ const styles = StyleSheet.create({
     color: Colors.white,
     fontSize: 16,
   },
+  fetcherLogo: {
+    width: 21,
+    height: 21,
+  },
 });
 
 class HouseLotCard extends React.PureComponent {
@@ -65,9 +69,10 @@ class HouseLotCard extends React.PureComponent {
               style={styles.imageHeadingBlock}
             >
               <View style={styles.itemDescription}>
-                <Text numberOfLines={1} style={styles.itemDescriptionText}>
-                                    ANALner
-                </Text>
+                <Image
+                  style={styles.fetcherLogo}
+                  source={require('../../../assets/images/onlinerby.png')}
+                />
                 <Text numberOfLines={1} style={styles.itemDescriptionText}>
                                     Created:
                   {' '}

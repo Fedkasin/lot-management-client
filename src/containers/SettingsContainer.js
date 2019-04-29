@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  ScrollView, ActivityIndicator,
+  ScrollView, ActivityIndicator, View,
 } from 'react-native';
 
 import SettingSectionItem from '../components/settings/SettingSectionItem';
@@ -78,6 +78,7 @@ class SettingsContainer extends PureComponent {
             setting={value}
           />
         ))}
+        <View style={{ height: 170 }} />
       </ScrollView>
     );
   }
