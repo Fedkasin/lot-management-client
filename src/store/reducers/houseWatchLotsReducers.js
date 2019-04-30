@@ -6,12 +6,15 @@ import {
   CHECK_HOUSE_WATCH_STATE_TRUE,
   CHECK_HOUSE_WATCH_STATE_FALSE,
   EDIT_HOUSE_WATCH_JOB_LIST,
+  PAUSED_HOUSE_WATCH_JOBS_TRUE,
+  PAUSED_HOUSE_WATCH_JOBS_FALSE,
 } from '../../constants/Actions';
 
 const initialState = {
   isFetching: false,
   isWatching: false,
   isEditing: false,
+  isAnyPaused: false,
   houseWatchLots: [],
   houseWatchJobs: [],
   page: 0,
@@ -64,6 +67,16 @@ const houseWatchLotsReducer = (state = initialState, action) => {
       return {
         ...state,
         isEditing: !state.isEditing,
+      };
+    case PAUSED_HOUSE_WATCH_JOBS_TRUE:
+      return {
+        ...state,
+        isAnyPaused: true,
+      };
+    case PAUSED_HOUSE_WATCH_JOBS_FALSE:
+      return {
+        ...state,
+        isAnyPaused: false,
       };
     default:
       return state;

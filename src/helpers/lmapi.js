@@ -45,6 +45,44 @@ class LMapi {
     }
   };
 
+  pauseAllCurrentUserJobs = async () => {
+    try {
+      const req = await this.getCurrentUserJobs();
+      const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+      const jobs = req.message.slice();
+      if (jobs) {
+        const requests = [];
+        for (let i = 0; i < jobs.length; i += 1) {
+          const request = superagent.post(`${getEnvVars.apiUrl}/v1/users/watch/${jobs[i].jobId}/pause`);
+          request.set('Authorization', token);
+          requests.push(request);
+        }
+        await Promise.all(requests);
+      }
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  resumeAllCurrentUserJobs = async () => {
+    try {
+      const req = await this.getCurrentUserJobs();
+      const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+      const jobs = req.message.slice();
+      if (jobs) {
+        const requests = [];
+        for (let i = 0; i < jobs.length; i += 1) {
+          const request = superagent.post(`${getEnvVars.apiUrl}/v1/users/watch/${jobs[i].jobId}/resume`);
+          request.set('Authorization', token);
+          requests.push(request);
+        }
+        await Promise.all(requests);
+      }
+    } catch (err) {
+      throw err;
+    }
+  };
+
   startCurrentUserJob = async (params) => {
     try {
       const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');

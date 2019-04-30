@@ -24,7 +24,7 @@ import {
   updateHouseWatchLots,
   updateHouseWatchLotsSuccess,
   updateHouseWatchLotsFail,
-  watchHouseLots,
+  pauseAllJobs,
   checkWatchHouseLotsState,
   watchHouseLotsTrue,
   watchHouseLotsFalse,
@@ -32,6 +32,8 @@ import {
   pauseHouseWatchJob,
   resumeHouseWatchJob,
   editHouseWatchJobList,
+  checkPausedHouseLotsTrue,
+  checkPausedHouseLotsFalse,
 } from './houseWatchLotsActionCreators';
 
 import {
@@ -88,7 +90,7 @@ export default {
     updateHouseWatchLots,
     updateHouseWatchLotsSuccess,
     updateHouseWatchLotsFail,
-    watchHouseLots,
+    pauseAllJobs,
     checkWatchHouseLotsState,
     watchHouseLotsTrue,
     watchHouseLotsFalse,
@@ -96,6 +98,8 @@ export default {
     pauseHouseWatchJob,
     resumeHouseWatchJob,
     editHouseWatchJobList,
+    checkPausedHouseLotsTrue,
+    checkPausedHouseLotsFalse,
   },
   houseLotsFilterActions: {
     updateHouseFilterRoomsTo,

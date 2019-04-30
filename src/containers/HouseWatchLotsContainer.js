@@ -70,23 +70,9 @@ class HouseWatchLotsContainer extends PureComponent {
     }
   }
 
-  onStopAllJobs() {
-    const { onUpdateHouseWatchState } = this.props;
-    Alert.alert(
-      'Remove all tasks',
-      'Are you sure about that?',
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-        {
-          text: 'OK',
-          onPress: () => onUpdateHouseWatchState(),
-        },
-      ],
-      { cancelable: false },
-    );
+  onPauseAllJobs(value) {
+    const { onPauseAllJobs } = this.props;
+    onPauseAllJobs(value);
   }
 
   render() {
@@ -94,6 +80,7 @@ class HouseWatchLotsContainer extends PureComponent {
       isFetching,
       houseWatchLots,
       isWatching,
+      isAnyPaused,
       jobs,
       isEditing,
     } = this.props;
@@ -103,10 +90,9 @@ class HouseWatchLotsContainer extends PureComponent {
         <View style={{ display: isWatching ? 'flex' : 'none', flexDirection: 'row', padding: 10 }}>
           <Text style={{ fontSize: 24, color: Colors.gray, marginLeft: 9 }}>Live tracking</Text>
           <Switch
-            value={isWatching}
-            disabled={!isWatching}
+            value={isAnyPaused}
             style={{ marginLeft: 'auto' }}
-            onValueChange={() => this.onStopAllJobs()}
+            onValueChange={() => this.onPauseAllJobs(isAnyPaused)}
           />
         </View>
         <ScrollView style={{ backgroundColor: Colors.white, marginBottom: 50 }}>
@@ -135,6 +121,7 @@ function mapStateToProps(state) {
     isFetching: state.houseWatchLotsReducers.isFetching,
     isWatching: state.houseWatchLotsReducers.isWatching,
     isEditing: state.houseWatchLotsReducers.isEditing,
+    isAnyPaused: state.houseWatchLotsReducers.isAnyPaused,
     houseWatchLots: state.houseWatchLotsReducers.houseWatchLots,
     page: state.houseWatchLotsReducers.page,
     itemsPerPage: state.houseWatchLotsReducers.itemsPerPage,
@@ -145,7 +132,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onUpdateHouseWatchState: value => dispatch(actions.houseWatchLotsActions.watchHouseLots(value)),
+    onPauseAllJobs: value => dispatch(actions.houseWatchLotsActions.pauseAllJobs(value)),
     onCheckHouseWatchState: value => dispatch(actions.houseWatchLotsActions.checkWatchHouseLotsState(value)),
     removeJob: value => dispatch(actions.houseWatchLotsActions.removeHouseWatchJob(value)),
     pauseJob: value => dispatch(actions.houseWatchLotsActions.pauseHouseWatchJob(value)),
@@ -157,9 +144,10 @@ HouseWatchLotsContainer.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   isWatching: PropTypes.bool.isRequired,
   isEditing: PropTypes.bool.isRequired,
+  isAnyPaused: PropTypes.bool.isRequired,
   houseWatchLots: PropTypes.arrayOf(PropTypes.any).isRequired,
   jobs: PropTypes.arrayOf(PropTypes.any).isRequired,
-  onUpdateHouseWatchState: PropTypes.func.isRequired,
+  onPauseAllJobs: PropTypes.func.isRequired,
   onCheckHouseWatchState: PropTypes.func.isRequired,
   removeJob: PropTypes.func.isRequired,
   pauseJob: PropTypes.func.isRequired,

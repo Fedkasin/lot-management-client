@@ -10,6 +10,7 @@ import {
   REMOVE_HOUSE_WATCH_JOB,
   PAUSE_HOUSE_WATCH_JOB,
   RESUME_HOUSE_WATCH_JOB,
+  CHECK_PAUSED_HOUSE_WATCH_JOBS,
 } from '../../constants/Actions';
 
 function* checkWatchHouseLotsState() {
@@ -17,9 +18,20 @@ function* checkWatchHouseLotsState() {
     const res = yield call(LMapi.getCurrentUserJobs);
     const { message } = res || { message: [] };
     if (message.length > 0) {
-      yield put(actions.houseWatchLotsActions.watchHouseLotsTrue(res.message));
+      yield put(actions.houseWatchLotsActions.watchHouseLotsTrue(message));
     } else {
       yield put(actions.houseWatchLotsActions.watchHouseLotsFalse());
+    }
+    let paused = 0;
+    message.forEach((value) => {
+      if (value.state === 'PAUSED') {
+        paused += 1;
+      }
+    });
+    if (paused !== message.length) {
+      yield put(actions.houseWatchLotsActions.checkPausedHouseLotsTrue());
+    } else {
+      yield put(actions.houseWatchLotsActions.checkPausedHouseLotsFalse());
     }
   } catch (err) {
     // eslint-disable-next-line no-console
@@ -30,11 +42,24 @@ function* checkWatchHouseLotsState() {
 function* watchHouseLots(action) {
   try {
     if (!action.payload) {
-      yield call(LMapi.stopAllCurrentUserJobs);
       yield call(checkWatchHouseLotsState);
     } else {
       yield put(actions.houseWatchLotsActions.watchHouseLotsTrue());
     }
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error(err);
+  }
+}
+
+function* pauseAllJobs(action) {
+  try {
+    if (action.payload) {
+      yield call(LMapi.pauseAllCurrentUserJobs);
+    } else {
+      yield call(LMapi.resumeAllCurrentUserJobs);
+    }
+    yield call(checkWatchHouseLotsState);
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error(err);
@@ -111,6 +136,11 @@ export function* removeHouseWatchJobSaga() {
 export function* pauseHouseWatchJobSaga() {
   yield takeLatest(PAUSE_HOUSE_WATCH_JOB, pauseHouseWatchJob);
 }
+
 export function* resumeHouseWatchJobSaga() {
   yield takeLatest(RESUME_HOUSE_WATCH_JOB, resumeHouseWatchJob);
+}
+
+export function* pauseAllJobsSaga() {
+  yield takeLatest(CHECK_PAUSED_HOUSE_WATCH_JOBS, pauseAllJobs);
 }
