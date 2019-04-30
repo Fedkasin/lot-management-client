@@ -18,7 +18,7 @@ class HouseWatchScreen extends React.PureComponent {
           iconColor={Colors.black}
           iosIcon="ios-create"
           otherIcon="md-create"
-          onTap={navigation.getParam('handleClick')}
+          onTap={() => navigation.getParam('handleClick')}
         />
         <TopBarButton
           iconColor={Colors.black}

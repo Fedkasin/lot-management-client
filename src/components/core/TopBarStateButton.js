@@ -24,7 +24,7 @@ class TopBarStateButton extends React.PureComponent {
     });
     return (
       <TouchableOpacity
-        onPress={onTap}
+        onPress={onTap()}
         style={styles.button}
       >
         <IonIcon
@@ -40,12 +40,8 @@ TopBarStateButton.propTypes = {
   iconColor: PropTypes.string.isRequired,
   iosIcon: PropTypes.string.isRequired,
   otherIcon: PropTypes.string.isRequired,
-  onTap: PropTypes.func,
+  onTap: PropTypes.func.isRequired,
   isWatching: PropTypes.bool.isRequired,
-};
-
-TopBarStateButton.defaultProps = {
-  onTap() {},
 };
 
 function mapStateToProps(state) {
