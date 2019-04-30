@@ -7,7 +7,7 @@ echo "${SCRIPTPATH}"
 API_DEFAULT_PATH="localhost"
 API_URL=${API_URL/%":$1"/}
 
-if [ -z API_URL ]; then
+if [ -z $API_URL ]; then
   echo "API set to default (${API_DEFAULT_PATH})..."
   API_URL=$API_DEFAULT_PATH
 else
