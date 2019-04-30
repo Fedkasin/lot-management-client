@@ -8,6 +8,9 @@ import {
   EDIT_HOUSE_WATCH_JOB_LIST,
   PAUSED_HOUSE_WATCH_JOBS_TRUE,
   PAUSED_HOUSE_WATCH_JOBS_FALSE,
+  REMOVE_HOUSE_WATCH_JOB,
+  UPDATE_HOUSE_WATCH_FILTER_APPLY,
+  CHECK_PAUSED_HOUSE_WATCH_JOBS,
 } from '../../constants/Actions';
 
 const initialState = {
@@ -77,6 +80,21 @@ const houseWatchLotsReducer = (state = initialState, action) => {
       return {
         ...state,
         isAnyPaused: false,
+      };
+    case REMOVE_HOUSE_WATCH_JOB:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case UPDATE_HOUSE_WATCH_FILTER_APPLY:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case CHECK_PAUSED_HOUSE_WATCH_JOBS:
+      return {
+        ...state,
+        isFetching: true,
       };
     default:
       return state;

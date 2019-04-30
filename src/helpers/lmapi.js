@@ -2,7 +2,7 @@ import superagent from 'superagent';
 import { AsyncStorage } from 'react-native';
 import getEnvVars from '../constants/environment';
 
-const respTime = { response: 10000 };
+const respTime = { response: 4500 };
 
 class LMapi {
   constructor(jobs) {
