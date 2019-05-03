@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Alert } from 'react-native';
 import { withNavigation, NavigationEvents } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -26,23 +26,79 @@ class HouseFilterContainer extends PureComponent {
   }
 
   onChangeHouseFilterRoomsFrom(value) {
-    const { changeRoomsFrom } = this.props;
-    changeRoomsFrom(value.toString());
+    const { changeRoomsFrom, filters } = this.props;
+    if (value > filters.roomsTo) {
+      Alert.alert(
+        'You shouldn`t do this',
+        'FROM should be less or equal TO',
+        [
+          {
+            text: 'okay',
+            onPress: () => { },
+          },
+        ],
+        { cancelable: false },
+      );
+    } else {
+      changeRoomsFrom(value.toString());
+    }
   }
 
   onChangeHouseFilterRoomsTo(value) {
-    const { changeRoomsTo } = this.props;
-    changeRoomsTo(value.toString());
+    const { changeRoomsTo, filters } = this.props;
+    if (value < filters.roomsFrom) {
+      Alert.alert(
+        'You shouldn`t do this',
+        'TO should be more or equal FROM',
+        [
+          {
+            text: 'okay',
+            onPress: () => { },
+          },
+        ],
+        { cancelable: false },
+      );
+    } else {
+      changeRoomsTo(value.toString());
+    }
   }
 
   onChangeHouseFilterPriceFrom(value) {
-    const { changePriceFrom } = this.props;
-    changePriceFrom(value);
+    const { changePriceFrom, filters } = this.props;
+    if (parseInt(value, 10) > parseInt(filters.priceTo, 10)) {
+      Alert.alert(
+        'You shouldn`t do this',
+        'FROM should be less or equal TO',
+        [
+          {
+            text: 'okay',
+            onPress: () => { },
+          },
+        ],
+        { cancelable: false },
+      );
+    } else {
+      changePriceFrom(value);
+    }
   }
 
   onChangeHouseFilterPriceTo(value) {
-    const { changePriceTo } = this.props;
-    changePriceTo(value);
+    const { changePriceTo, filters } = this.props;
+    if (parseInt(value, 10) < parseInt(filters.priceFrom, 10)) {
+      Alert.alert(
+        'You shouldn`t do this',
+        'TO should be more or equal FROM',
+        [
+          {
+            text: 'okay',
+            onPress: () => { },
+          },
+        ],
+        { cancelable: false },
+      );
+    } else {
+      changePriceTo(value);
+    }
   }
 
   render() {
