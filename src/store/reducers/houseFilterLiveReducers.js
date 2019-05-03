@@ -11,6 +11,8 @@ const initialState = {
   roomsTo: '3',
   priceFrom: '400',
   priceTo: '500',
+  roomFilters: ['1', '2', '3', '4'],
+  priceFilters: ['500', '600', '700'],
 };
 
 const houseFilterLiveReducers = (state = initialState, action) => {
@@ -19,11 +21,13 @@ const houseFilterLiveReducers = (state = initialState, action) => {
       return {
         ...state,
         roomsFrom: action.payload.roomsFrom,
+        roomFilters: action.payload.roomFilters,
       };
     case UPDATE_HOUSE_WATCH_FILTER_ROOMS_TO:
       return {
         ...state,
         roomsTo: action.payload.roomsTo,
+        roomFilters: action.payload.roomFilters,
       };
     case UPDATE_HOUSE_WATCH_FILTER_PRICE_FROM:
       return {

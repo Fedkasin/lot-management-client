@@ -5,7 +5,6 @@ import {
 import PropTypes from 'prop-types';
 
 import SettingChildSelect from '../settings/SettingChildSelect';
-import SettingChildSlider from '../settings/SettingChildSlider';
 import * as filtersConst from '../../constants/Filters';
 import * as Colors from '../../constants/Colors';
 
@@ -33,24 +32,23 @@ const styles = StyleSheet.create({
 class HouseFilter extends React.PureComponent {
   render() {
     const { filters, handlers } = this.props;
+    // console.log('filters:', filters);
     return (
       <View style={styles.container}>
         <Text style={styles.bigLabel}>Rooms count</Text>
         <View style={{ display: 'flex', flexDirection: 'row' }}>
-          <SettingChildSlider
-            text="from"
-            from={1}
-            to={parseInt(filters.roomsTo, 10)}
-            value={parseInt(filters.roomsFrom, 10)}
-            step={1}
+          <SettingChildSelect
+            style={{ height: 50, width: '50%' }}
+            value={filters.roomsFrom}
+            items={filtersConst.roomCount}
+            label="from"
             handler={handlers.roomsFromHandler}
           />
-          <SettingChildSlider
-            text="to"
-            from={parseInt(filters.roomsFrom, 10)}
-            to={4}
-            value={parseInt(filters.roomsTo, 10)}
-            step={1}
+          <SettingChildSelect
+            style={{ height: 50, width: '50%' }}
+            value={filters.roomsTo}
+            items={filtersConst.roomCount}
+            label="to"
             handler={handlers.roomsToHandler}
           />
         </View>
