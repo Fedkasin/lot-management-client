@@ -28,10 +28,10 @@ class HouseWatchFilterContainer extends PureComponent {
     applyFilter(filters);
   }
 
-  onAddRoomCount(value) {
-    const { addRoomCount, filters } = this.props;
-    addRoomCount(value);
-    console.log('[onAddRoomCount]', filters);
+  onAddRoomCount(value, label) {
+    const { addRoomCount } = this.props;
+    addRoomCount(label); // send array of rooms
+    console.log('[onAddRoomCount]', value, label);
   }
 
   onChangeHouseWatchFilterRoomsFrom(value) {
@@ -116,6 +116,7 @@ class HouseWatchFilterContainer extends PureComponent {
 
   render() {
     const { navigation, filters } = this.props;
+    console.log(filters);
     const handlers = {
       roomsToHandler: this.onChangeHouseWatchFilterRoomsTo,
       roomsFromHandler: this.onChangeHouseWatchFilterRoomsFrom,
@@ -154,7 +155,7 @@ function mapDispatchToProps(dispatch) {
     changeRoomsTo: (value, changeRoomsTo) => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterRoomsTo(value, changeRoomsTo)),
     changePriceFrom: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterPriceFrom(value)),
     changePriceTo: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterPriceTo(value)),
-    addRoomCount: value => dispatch(actions.houseWatchLotsFilterActions.addRoomCount(value)),
+    addRoomCount: (value) => dispatch(actions.houseWatchLotsFilterActions.addRoomCount(value)),
     applyFilter: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterApply(value)),
   };
 }

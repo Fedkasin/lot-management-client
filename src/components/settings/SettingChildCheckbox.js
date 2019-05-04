@@ -25,7 +25,7 @@ class SettingChildCheckbox extends React.PureComponent {
         >
           {label}
         </Text>
-        <CheckBox checked={value} onValueChange={handler} />
+        <CheckBox checked={value} onValueChange={() => handler(value, label)} />
       </View>
     );
   }

@@ -11,7 +11,6 @@ import {
   REMOVE_HOUSE_WATCH_JOB,
   UPDATE_HOUSE_WATCH_FILTER_APPLY,
   CHECK_PAUSED_HOUSE_WATCH_JOBS,
-  ADD_ROOM_COUNT,
 } from '../../constants/Actions';
 
 const initialState = {
@@ -93,11 +92,6 @@ const houseWatchLotsReducer = (state = initialState, action) => {
         isFetching: true,
       };
     case CHECK_PAUSED_HOUSE_WATCH_JOBS:
-      return {
-        ...state,
-        isFetching: true,
-      };
-    case ADD_ROOM_COUNT:
       return {
         ...state,
         isFetching: true,

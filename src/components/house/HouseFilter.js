@@ -30,20 +30,6 @@ class HouseFilter extends React.PureComponent {
       <View style={styles.container}>
         <Text style={styles.bigLabel}>Rooms count</Text>
         <View style={{ flexDirection: 'row' }}>
-          {/* <SettingChildSelect
-            style={{ height: 50, width: '50%' }}
-            value={filters.roomsFrom}
-            items={filtersConst.roomCount}
-            label="from"
-            handler={handlers.roomsFromHandler}
-          />
-          <SettingChildSelect
-            style={{ height: 50, width: '50%' }}
-            value={filters.roomsTo}
-            items={filtersConst.roomCount}
-            label="to"
-            handler={handlers.roomsToHandler}
-          /> */}
           <SettingChildCheckbox
             value={false}
             label="1"

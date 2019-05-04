@@ -4,6 +4,7 @@ import {
   UPDATE_HOUSE_WATCH_FILTER_PRICE_FROM,
   UPDATE_HOUSE_WATCH_FILTER_PRICE_TO,
   UPDATE_HOUSE_WATCH_FILTER_APPLY,
+  ADD_ROOM_COUNT,
 } from '../../constants/Actions';
 
 const initialState = {
@@ -11,8 +12,6 @@ const initialState = {
   roomsTo: '3',
   priceFrom: '400',
   priceTo: '500',
-  roomFilters: ['1', '2', '3', '4'],
-  priceFilters: ['500', '600', '700'],
 };
 
 const houseFilterLiveReducers = (state = initialState, action) => {
@@ -43,6 +42,11 @@ const houseFilterLiveReducers = (state = initialState, action) => {
       return {
         ...state,
         filters: action.payload.filters,
+      };
+    case ADD_ROOM_COUNT:
+      return {
+        ...state,
+        roomFilters: action.payload.roomFilters,
       };
     default:
       return state;

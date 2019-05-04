@@ -44,7 +44,7 @@ export const updateHouseWatchFilterApply = filters => ({
   },
 });
 
-export const addRoomCount = value => ({
+export const addRoomCount = (value) => ({
   type: ADD_ROOM_COUNT,
   payload: {
     roomFilters: value,
