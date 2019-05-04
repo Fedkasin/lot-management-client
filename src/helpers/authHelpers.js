@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 import { Google } from 'expo';
+import { AsyncStorage } from 'react-native';
 
 export const getUser = () => {
   const user = firebase.auth().currentUser;
@@ -44,6 +45,10 @@ export const onSignIn = googleUser => {
         // Sign in with credential from the Google user.
         firebase.auth()
           .signInAndRetrieveDataWithCredential(credential)
+          .then(async () => {
+            const token = await firebase.auth().currentUser.getIdToken();
+            await AsyncStorage.setItem('@UserStore:TOKEN', token);
+          })
           .catch(error => {
             throw error;
             // Handle Errors here.
