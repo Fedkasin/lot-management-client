@@ -32,10 +32,10 @@ function* login(action) {
     };
     const body = {
       auth: {
-        id_token: idToken,
         access_token: accessToken,
         refresh_token: refreshToken,
         uid: id,
+        id_token: idToken,
       },
       expo,
     };

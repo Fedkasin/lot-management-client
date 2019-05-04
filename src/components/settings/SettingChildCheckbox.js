@@ -1,35 +1,40 @@
 import React from 'react';
-import { View, StyleSheet, CheckBox } from 'react-native';
+import { View, Text, CheckBox } from 'react-native';
 import PropTypes from 'prop-types';
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 10,
-    flex: 1,
-  },
-  checkboxContainer: {
-    backgroundColor: 'transparent',
-    borderWidth: 0,
-  },
-});
 
 class SettingChildCheckbox extends React.PureComponent {
   render() {
-    const { child } = this.props;
+    const { label, value, handler } = this.props;
     return (
-      <View style={styles.container}>
-        <CheckBox
-          containerStyle={styles.checkboxContainer}
-          title={child.label}
-          checked={child.value}
-        />
+      <View style={{
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 50,
+        width: 60,
+        marginRight: 10,
+      }}
+      >
+        <Text style={{
+          flex: 1,
+          fontFamily: 'sans',
+          fontSize: 20,
+          paddingLeft: 9,
+          textAlign: 'left',
+        }}
+        >
+          {label}
+        </Text>
+        <CheckBox checked={value} onValueChange={handler} />
       </View>
     );
   }
 }
 
 SettingChildCheckbox.propTypes = {
-  child: PropTypes.objectOf(PropTypes.any).isRequired,
+  label: PropTypes.string.isRequired,
+  value: PropTypes.bool.isRequired,
+  handler: PropTypes.func.isRequired,
 };
 
 export default SettingChildCheckbox;

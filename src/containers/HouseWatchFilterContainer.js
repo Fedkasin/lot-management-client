@@ -20,11 +20,18 @@ class HouseWatchFilterContainer extends PureComponent {
     this.onChangeHouseWatchFilterPriceTo = this.onChangeHouseWatchFilterPriceTo.bind(this);
     this.onChangeHouseWatchFilterPriceFrom = this.onChangeHouseWatchFilterPriceFrom.bind(this);
     this.onApplyHouseWatchFilter = this.onApplyHouseWatchFilter.bind(this);
+    this.onAddRoomCount = this.onAddRoomCount.bind(this);
   }
 
   onApplyHouseWatchFilter() {
     const { applyFilter, filters } = this.props;
     applyFilter(filters);
+  }
+
+  onAddRoomCount(value) {
+    const { addRoomCount, filters } = this.props;
+    addRoomCount(value);
+    console.log('[onAddRoomCount]', filters);
   }
 
   onChangeHouseWatchFilterRoomsFrom(value) {
@@ -115,6 +122,7 @@ class HouseWatchFilterContainer extends PureComponent {
       priceToHandler: this.onChangeHouseWatchFilterPriceTo,
       priceFromHandler: this.onChangeHouseWatchFilterPriceFrom,
       applyFilter: this.onApplyHouseWatchFilter,
+      addRoomCount: this.onAddRoomCount,
     };
     return (
       <ScrollView style={{ backgroundColor: Colors.white }}>
@@ -146,6 +154,7 @@ function mapDispatchToProps(dispatch) {
     changeRoomsTo: (value, changeRoomsTo) => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterRoomsTo(value, changeRoomsTo)),
     changePriceFrom: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterPriceFrom(value)),
     changePriceTo: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterPriceTo(value)),
+    addRoomCount: value => dispatch(actions.houseWatchLotsFilterActions.addRoomCount(value)),
     applyFilter: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterApply(value)),
   };
 }
@@ -157,6 +166,7 @@ HouseWatchFilterContainer.propTypes = {
   changeRoomsFrom: PropTypes.func.isRequired,
   changePriceTo: PropTypes.func.isRequired,
   changePriceFrom: PropTypes.func.isRequired,
+  addRoomCount: PropTypes.func.isRequired,
   applyFilter: PropTypes.func.isRequired,
 };
 

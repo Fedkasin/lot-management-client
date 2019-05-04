@@ -5,6 +5,7 @@ import {
 import PropTypes from 'prop-types';
 
 import SettingChildSelect from '../settings/SettingChildSelect';
+import SettingChildCheckbox from '../settings/SettingChildCheckbox';
 import * as filtersConst from '../../constants/Filters';
 import * as Colors from '../../constants/Colors';
 
@@ -16,13 +17,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     flex: 1,
   },
-  label: {
-    flex: 1,
-    fontFamily: 'sans',
-    fontSize: 20,
-    paddingLeft: 9,
-    textAlign: 'left',
-  },
   bigLabel: {
     fontSize: 20,
     padding: 10,
@@ -32,12 +26,11 @@ const styles = StyleSheet.create({
 class HouseFilter extends React.PureComponent {
   render() {
     const { filters, handlers } = this.props;
-    // console.log('filters:', filters);
     return (
       <View style={styles.container}>
         <Text style={styles.bigLabel}>Rooms count</Text>
-        <View style={{ display: 'flex', flexDirection: 'row' }}>
-          <SettingChildSelect
+        <View style={{ flexDirection: 'row' }}>
+          {/* <SettingChildSelect
             style={{ height: 50, width: '50%' }}
             value={filters.roomsFrom}
             items={filtersConst.roomCount}
@@ -50,11 +43,30 @@ class HouseFilter extends React.PureComponent {
             items={filtersConst.roomCount}
             label="to"
             handler={handlers.roomsToHandler}
+          /> */}
+          <SettingChildCheckbox
+            value={false}
+            label="1"
+            handler={handlers.addRoomCount}
+          />
+          <SettingChildCheckbox
+            value={false}
+            label="2"
+            handler={handlers.addRoomCount}
+          />
+          <SettingChildCheckbox
+            value={false}
+            label="3"
+            handler={handlers.addRoomCount}
+          />
+          <SettingChildCheckbox
+            value={false}
+            label="4"
+            handler={handlers.addRoomCount}
           />
         </View>
-        <View style={styles.divider} />
         <Text style={styles.bigLabel}>Price</Text>
-        <View style={{ display: 'flex', flexDirection: 'row' }}>
+        <View style={{ flexDirection: 'row' }}>
           <SettingChildSelect
             style={{ height: 50, width: '50%' }}
             value={filters.priceFrom}

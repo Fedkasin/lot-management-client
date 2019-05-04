@@ -4,6 +4,7 @@ import {
   UPDATE_HOUSE_WATCH_FILTER_PRICE_FROM,
   UPDATE_HOUSE_WATCH_FILTER_PRICE_TO,
   UPDATE_HOUSE_WATCH_FILTER_APPLY,
+  ADD_ROOM_COUNT,
 } from '../../constants/Actions';
 
 export const updateHouseWatchFilterRoomsTo = (value, newRoomFilters) => ({
@@ -40,5 +41,12 @@ export const updateHouseWatchFilterApply = filters => ({
   type: UPDATE_HOUSE_WATCH_FILTER_APPLY,
   payload: {
     filters,
+  },
+});
+
+export const addRoomCount = value => ({
+  type: ADD_ROOM_COUNT,
+  payload: {
+    roomFilters: value,
   },
 });
