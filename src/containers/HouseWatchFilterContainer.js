@@ -28,10 +28,15 @@ class HouseWatchFilterContainer extends PureComponent {
     applyFilter(filters);
   }
 
-  onAddRoomCount(value, label) {
-    const { addRoomCount } = this.props;
-    addRoomCount(label); // send array of rooms
-    console.log('[onAddRoomCount]', value, label);
+  onAddRoomCount(label) {
+    const { addRoomCount, filters } = this.props;
+    const roomsArray = filters.roomFilters.slice() || null;
+    if (roomsArray.indexOf(label) === -1) {
+      roomsArray.push(label);
+    } else {
+      roomsArray.splice(roomsArray.indexOf(label), 1);
+    }
+    addRoomCount(roomsArray); // send array of rooms
   }
 
   onChangeHouseWatchFilterRoomsFrom(value) {
@@ -116,7 +121,7 @@ class HouseWatchFilterContainer extends PureComponent {
 
   render() {
     const { navigation, filters } = this.props;
-    console.log(filters);
+    // console.log(filters);
     const handlers = {
       roomsToHandler: this.onChangeHouseWatchFilterRoomsTo,
       roomsFromHandler: this.onChangeHouseWatchFilterRoomsFrom,
@@ -139,12 +144,9 @@ class HouseWatchFilterContainer extends PureComponent {
 function mapStateToProps(state) {
   return {
     filters: {
-      roomsTo: state.houseFilterLiveReducers.roomsTo,
-      roomsFrom: state.houseFilterLiveReducers.roomsFrom,
       priceTo: state.houseFilterLiveReducers.priceTo,
       priceFrom: state.houseFilterLiveReducers.priceFrom,
       roomFilters: state.houseFilterLiveReducers.roomFilters,
-      priceFilters: state.houseFilterLiveReducers.priceFilters,
     },
   };
 }
@@ -155,7 +157,7 @@ function mapDispatchToProps(dispatch) {
     changeRoomsTo: (value, changeRoomsTo) => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterRoomsTo(value, changeRoomsTo)),
     changePriceFrom: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterPriceFrom(value)),
     changePriceTo: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterPriceTo(value)),
-    addRoomCount: (value) => dispatch(actions.houseWatchLotsFilterActions.addRoomCount(value)),
+    addRoomCount: value => dispatch(actions.houseWatchLotsFilterActions.addRoomCount(value)),
     applyFilter: value => dispatch(actions.houseWatchLotsFilterActions.updateHouseWatchFilterApply(value)),
   };
 }

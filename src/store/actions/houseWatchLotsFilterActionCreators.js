@@ -1,27 +1,9 @@
 import {
-  UPDATE_HOUSE_WATCH_FILTER_ROOMS_FROM,
-  UPDATE_HOUSE_WATCH_FILTER_ROOMS_TO,
   UPDATE_HOUSE_WATCH_FILTER_PRICE_FROM,
   UPDATE_HOUSE_WATCH_FILTER_PRICE_TO,
   UPDATE_HOUSE_WATCH_FILTER_APPLY,
   ADD_ROOM_COUNT,
 } from '../../constants/Actions';
-
-export const updateHouseWatchFilterRoomsTo = (value, newRoomFilters) => ({
-  type: UPDATE_HOUSE_WATCH_FILTER_ROOMS_TO,
-  payload: {
-    roomsTo: value,
-    roomFilters: newRoomFilters,
-  },
-});
-
-export const updateHouseWatchFilterRoomsFrom = (value, newRoomFilters) => ({
-  type: UPDATE_HOUSE_WATCH_FILTER_ROOMS_FROM,
-  payload: {
-    roomsFrom: value,
-    roomFilters: newRoomFilters,
-  },
-});
 
 export const updateHouseWatchFilterPriceTo = value => ({
   type: UPDATE_HOUSE_WATCH_FILTER_PRICE_TO,

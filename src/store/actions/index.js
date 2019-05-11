@@ -37,8 +37,6 @@ import {
 } from './houseWatchLotsActionCreators';
 
 import {
-  updateHouseFilterRoomsTo,
-  updateHouseFilterRoomsFrom,
   updateHouseFilterPriceTo,
   updateHouseFilterPriceFrom,
 } from './houseLotsFilterActionCreators';
@@ -54,8 +52,6 @@ import {
 } from './authActionCreators';
 
 import {
-  updateHouseWatchFilterRoomsTo,
-  updateHouseWatchFilterRoomsFrom,
   updateHouseWatchFilterPriceTo,
   updateHouseWatchFilterPriceFrom,
   addRoomCount,
@@ -103,14 +99,10 @@ export default {
     checkPausedHouseLotsFalse,
   },
   houseLotsFilterActions: {
-    updateHouseFilterRoomsTo,
-    updateHouseFilterRoomsFrom,
     updateHouseFilterPriceTo,
     updateHouseFilterPriceFrom,
   },
   houseWatchLotsFilterActions: {
-    updateHouseWatchFilterRoomsTo,
-    updateHouseWatchFilterRoomsFrom,
     updateHouseWatchFilterPriceTo,
     updateHouseWatchFilterPriceFrom,
     addRoomCount,

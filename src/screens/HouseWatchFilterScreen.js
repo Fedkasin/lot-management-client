@@ -57,8 +57,7 @@ class HouseWatchFilterScreen extends React.PureComponent {
 function mapStateToProps(state) {
   return {
     filters: {
-      roomsTo: state.houseFilterLiveReducers.roomsTo,
-      roomsFrom: state.houseFilterLiveReducers.roomsFrom,
+      roomFilters: state.houseFilterLiveReducers.roomFilters,
       priceTo: state.houseFilterLiveReducers.priceTo,
       priceFrom: state.houseFilterLiveReducers.priceFrom,
     },

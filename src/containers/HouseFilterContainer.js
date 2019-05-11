@@ -125,8 +125,6 @@ class HouseFilterContainer extends PureComponent {
 function mapStateToProps(state) {
   return {
     filters: {
-      roomsTo: state.houseFilterReducers.roomsTo,
-      roomsFrom: state.houseFilterReducers.roomsFrom,
       priceTo: state.houseFilterReducers.priceTo,
       priceFrom: state.houseFilterReducers.priceFrom,
     },

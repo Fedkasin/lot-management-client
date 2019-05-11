@@ -26,30 +26,19 @@ const styles = StyleSheet.create({
 class HouseFilter extends React.PureComponent {
   render() {
     const { filters, handlers } = this.props;
+    const roomsArray = filters.roomFilters.slice();
     return (
       <View style={styles.container}>
         <Text style={styles.bigLabel}>Rooms count</Text>
         <View style={{ flexDirection: 'row' }}>
-          <SettingChildCheckbox
-            value={false}
-            label="1"
-            handler={handlers.addRoomCount}
-          />
-          <SettingChildCheckbox
-            value={false}
-            label="2"
-            handler={handlers.addRoomCount}
-          />
-          <SettingChildCheckbox
-            value={false}
-            label="3"
-            handler={handlers.addRoomCount}
-          />
-          <SettingChildCheckbox
-            value={false}
-            label="4"
-            handler={handlers.addRoomCount}
-          />
+          { filtersConst.roomCount.map((value, index) => (
+            <SettingChildCheckbox
+              key={`checkBox-${index + 1}`}
+              value={(roomsArray.indexOf(value) !== -1)}
+              label={value}
+              handler={handlers.addRoomCount}
+            />
+          ))}
         </View>
         <Text style={styles.bigLabel}>Price</Text>
         <View style={{ flexDirection: 'row' }}>

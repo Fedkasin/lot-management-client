@@ -70,8 +70,8 @@ function* updateHouseWatchFilterApply(action) {
   try {
     const { filters } = action.payload;
     const rooms = [];
-    for (let i = parseInt(filters.roomsFrom, 10); i < parseInt(filters.roomsTo, 10) + 1; i += 1) {
-      rooms.push(i);
+    for (let i = 0; i < filters.roomFilters.length; i += 1) {
+      rooms.push(parseInt(filters.roomFilters[i], 10));
     }
     const params = {
       rooms,

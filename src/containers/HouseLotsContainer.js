@@ -53,8 +53,6 @@ function mapStateToProps(state) {
     filters: state.houseFilterReducers || {
       priceFrom: '50',
       priceTo: '500',
-      roomsFrom: '1',
-      roomsTo: '3',
     },
     page: state.houseLotsReducers.page,
     itemsPerPage: state.houseLotsReducers.itemsPerPage,
