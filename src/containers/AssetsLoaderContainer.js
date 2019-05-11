@@ -87,7 +87,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    checkIfLoggedIn: () => dispatch(actions.authActions.checkIfLoggedIn()),
     showFirstSplashScreen: () => dispatch(actions.authActions.showFirstSplashScreen()),
     appIsReady: () => dispatch(actions.rootActions.appIsReady()),
   };

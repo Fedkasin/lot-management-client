@@ -4,7 +4,7 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import {
-  SETTINGS_SCREEN,
+  PROFILE_SCREEN,
   CAR_LOTS_SCREEN,
   HOUSE_LOTS_SCREEN,
   HOUSE_WATCH_LOTS_SCREEN,
@@ -15,19 +15,19 @@ import {
 import TabBarIcon from '../components/core/TabBarIcon';
 import CarLotsScreen from '../screens/CarLotsScreen';
 import HouseLotsScreen from '../screens/HouseLotsScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import HouseWatchLotsScreen from '../screens/HouseWatchLotsScreen';
 
 import HouseFilterScreen from '../screens/HouseFilterScreen';
 import HouseWatchFilterScreen from '../screens/HouseWatchFilterScreen';
 import JobWatchLotsScreen from '../screens/JobWatchLotsScreen';
 
-const SettingsStack = createStackNavigator({
-  [SETTINGS_SCREEN]: SettingsScreen,
+const ProfileStack = createStackNavigator({
+  [PROFILE_SCREEN]: ProfileScreen,
 });
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+ProfileStack.navigationOptions = {
+  tabBarLabel: 'Profile',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -84,12 +84,12 @@ HouseWatchLotsStack.navigationOptions = {
 
 export default createBottomTabNavigator(
   {
-    SettingsStack,
+    ProfileStack,
     CarLotsStack,
     HouseLotsStack,
     HouseWatchLotsStack,
   },
   {
-    initialRouteName: 'SettingsStack',
+    initialRouteName: 'ProfileStack',
   },
 );

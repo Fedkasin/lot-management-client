@@ -5,9 +5,9 @@ import carLotsReducers from './carLotsReducers';
 import houseLotsReducers from './houseLotsReducers';
 import houseFilterReducers from './houseFilterReducers';
 import houseFilterLiveReducers from './houseFilterLiveReducers';
-import settingsReducers from './settingsReducers';
 import authReducers from './authReducers';
 import houseWatchLotsReducers from './houseWatchLotsReducers';
+import profileReducers from './profileReducers';
 
 export default combineReducers({
   rootReducers,
@@ -15,7 +15,7 @@ export default combineReducers({
   houseLotsReducers,
   houseFilterReducers,
   houseFilterLiveReducers,
-  settingsReducers,
   authReducers,
   houseWatchLotsReducers,
+  profileReducers,
 });

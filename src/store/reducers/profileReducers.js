@@ -1,52 +1,34 @@
 import {
-  LOGIN,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOGOUT,
-  LOGOUT_SUCCESS,
-  LOGOUT_FAIL,
+  FETCH_PROFILE,
+  FETCH_PROFILE_SUCCESS,
+  FETCH_PROFILE_FAIL,
 } from '../../constants/Actions';
 
 const initialState = {
   isLoading: false,
+  profile: null,
   error: null,
 };
 
 const authReducers = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN:
+    case FETCH_PROFILE:
       return {
         ...state,
         isLoading: true,
       };
-    case LOGIN_SUCCESS:
+    case FETCH_PROFILE_SUCCESS:
       return {
         ...state,
+        profile: JSON.parse(action.payload),
         error: null,
         isLoading: false,
       };
-    case LOGIN_FAIL:
+    case FETCH_PROFILE_FAIL:
       return {
         ...state,
         error: action.error,
         isLoading: false,
-      };
-    case LOGOUT:
-      return {
-        ...state,
-        isLoading: true,
-      };
-    case LOGOUT_SUCCESS:
-      return {
-        ...state,
-        err: null,
-        isLoading: false,
-      };
-    case LOGOUT_FAIL:
-      return {
-        ...state,
-        isLoading: false,
-        err: action.error,
       };
     default:
       return state;

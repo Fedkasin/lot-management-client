@@ -5,20 +5,20 @@ SCRIPTPATH="$(dirname $(realpath -s $0))"
 echo "${SCRIPTPATH}"
 
 API_DEFAULT_PATH="localhost"
-API_ROOT=${API_ROOT/%":$1"/}
+API_URL=${API_URL/%":$1"/}
 
-if [ -z $API_ROOT ]; then
+if [ -z API_URL ]; then
   echo "API set to default (${API_DEFAULT_PATH})..."
-  API_ROOT=$API_DEFAULT_PATH
+  API_URL=$API_DEFAULT_PATH
 else
-  echo "API root is ${API_ROOT}"
+  echo "API root is ${API_URL}"
 fi
 
 echo "import { Constants } from 'expo';
 
 const ENV = {
   dev: {
-    apiUrl: '${API_ROOT}',
+    apiUrl: '${API_URL}',
   },
   staging: {
     apiUrl: '',

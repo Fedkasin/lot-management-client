@@ -106,7 +106,6 @@ class AuthSignOrRegisterContainer extends PureComponent {
 function mapStateToProps(state) {
   return {
     isLoading: state.authReducers.isLoading,
-    authToken: state.authReducers.authToken,
     error: state.authReducers.error ? state.authReducers.error : null,
   };
 }
