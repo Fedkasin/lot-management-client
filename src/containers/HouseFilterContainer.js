@@ -12,55 +12,20 @@ class HouseFilterContainer extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.onChangeHouseFilterRoomsTo = this.onChangeHouseFilterRoomsTo.bind(this);
-    this.onChangeHouseFilterRoomsFrom = this.onChangeHouseFilterRoomsFrom.bind(this);
+    this.onAddRoomCount = this.onAddRoomCount.bind(this);
     this.onChangeHouseFilterPriceTo = this.onChangeHouseFilterPriceTo.bind(this);
     this.onChangeHouseFilterPriceFrom = this.onChangeHouseFilterPriceFrom.bind(this);
-    this.onApplyFilter = this.onApplyFilter.bind(this);
   }
 
-  onApplyFilter() {
-    const { applyFilter, filters, navigation } = this.props;
-    navigation.pop(null);
-    applyFilter(filters);
-  }
-
-  onChangeHouseFilterRoomsFrom(value) {
-    const { changeRoomsFrom, filters } = this.props;
-    if (value > filters.roomsTo) {
-      Alert.alert(
-        'You shouldn`t do this',
-        'FROM should be less or equal TO',
-        [
-          {
-            text: 'okay',
-            onPress: () => { },
-          },
-        ],
-        { cancelable: false },
-      );
+  onAddRoomCount(label) {
+    const { addRoomCount, filters } = this.props;
+    const roomsArray = filters.roomFilters.slice();
+    if (roomsArray.indexOf(label) === -1) {
+      roomsArray.push(label);
     } else {
-      changeRoomsFrom(value.toString());
+      roomsArray.splice(roomsArray.indexOf(label), 1);
     }
-  }
-
-  onChangeHouseFilterRoomsTo(value) {
-    const { changeRoomsTo, filters } = this.props;
-    if (value < filters.roomsFrom) {
-      Alert.alert(
-        'You shouldn`t do this',
-        'TO should be more or equal FROM',
-        [
-          {
-            text: 'okay',
-            onPress: () => { },
-          },
-        ],
-        { cancelable: false },
-      );
-    } else {
-      changeRoomsTo(value.toString());
-    }
+    addRoomCount(roomsArray); // send array of rooms
   }
 
   onChangeHouseFilterPriceFrom(value) {
@@ -102,14 +67,12 @@ class HouseFilterContainer extends PureComponent {
   }
 
   render() {
+    const { navigation, filters } = this.props;
     const handlers = {
-      roomsToHandler: this.onChangeHouseFilterRoomsTo,
-      roomsFromHandler: this.onChangeHouseFilterRoomsFrom,
       priceToHandler: this.onChangeHouseFilterPriceTo,
       priceFromHandler: this.onChangeHouseFilterPriceFrom,
-      applyFilter: this.onApplyFilter,
+      addRoomCount: this.onAddRoomCount,
     };
-    const { navigation, filters } = this.props;
 
     return (
       <ScrollView style={{ backgroundColor: Colors.white }}>
@@ -127,28 +90,25 @@ function mapStateToProps(state) {
     filters: {
       priceTo: state.houseFilterReducers.priceTo,
       priceFrom: state.houseFilterReducers.priceFrom,
+      roomFilters: state.houseFilterReducers.roomFilters,
     },
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    changeRoomsFrom: value => dispatch(actions.houseLotsFilterActions.updateHouseFilterRoomsFrom(value)),
-    changeRoomsTo: value => dispatch(actions.houseLotsFilterActions.updateHouseFilterRoomsTo(value)),
     changePriceFrom: value => dispatch(actions.houseLotsFilterActions.updateHouseFilterPriceFrom(value)),
     changePriceTo: value => dispatch(actions.houseLotsFilterActions.updateHouseFilterPriceTo(value)),
-    applyFilter: filters => dispatch(actions.houseLotsActions.fetchHouseLots(filters)),
+    addRoomCount: value => dispatch(actions.houseLotsFilterActions.addRoomCount(value)),
   };
 }
 
 HouseFilterContainer.propTypes = {
   navigation: PropTypes.objectOf(PropTypes.any).isRequired,
   filters: PropTypes.objectOf(PropTypes.any).isRequired,
-  changeRoomsTo: PropTypes.func.isRequired,
-  changeRoomsFrom: PropTypes.func.isRequired,
   changePriceTo: PropTypes.func.isRequired,
   changePriceFrom: PropTypes.func.isRequired,
-  applyFilter: PropTypes.func.isRequired,
+  addRoomCount: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(HouseFilterContainer));

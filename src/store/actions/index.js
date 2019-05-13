@@ -39,6 +39,7 @@ import {
 import {
   updateHouseFilterPriceTo,
   updateHouseFilterPriceFrom,
+  addRoomCount,
 } from './houseLotsFilterActionCreators';
 
 import {
@@ -54,7 +55,7 @@ import {
 import {
   updateHouseWatchFilterPriceTo,
   updateHouseWatchFilterPriceFrom,
-  addRoomCount,
+  addWatchRoomCount,
   updateHouseWatchFilterApply,
 } from './houseWatchLotsFilterActionCreators';
 
@@ -101,11 +102,12 @@ export default {
   houseLotsFilterActions: {
     updateHouseFilterPriceTo,
     updateHouseFilterPriceFrom,
+    addRoomCount,
   },
   houseWatchLotsFilterActions: {
     updateHouseWatchFilterPriceTo,
     updateHouseWatchFilterPriceFrom,
-    addRoomCount,
+    addWatchRoomCount,
     updateHouseWatchFilterApply,
   },
   authActions: {

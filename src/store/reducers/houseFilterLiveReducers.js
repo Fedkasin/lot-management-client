@@ -2,7 +2,7 @@ import {
   UPDATE_HOUSE_WATCH_FILTER_PRICE_FROM,
   UPDATE_HOUSE_WATCH_FILTER_PRICE_TO,
   UPDATE_HOUSE_WATCH_FILTER_APPLY,
-  ADD_ROOM_COUNT,
+  ADD_WATCH_ROOM_COUNT,
 } from '../../constants/Actions';
 
 const initialState = {
@@ -27,12 +27,10 @@ const houseFilterLiveReducers = (state = initialState, action) => {
       return {
         ...state,
         filters: action.payload.filters,
-        roomFilters: action.payload.roomFilters,
       };
-    case ADD_ROOM_COUNT:
+    case ADD_WATCH_ROOM_COUNT:
       return {
         ...state,
-        filters: action.payload.filters,
         roomFilters: action.payload.roomFilters,
       };
     default:

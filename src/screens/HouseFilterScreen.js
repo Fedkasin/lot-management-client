@@ -59,6 +59,7 @@ function mapStateToProps(state) {
     filters: {
       priceTo: state.houseFilterReducers.priceTo,
       priceFrom: state.houseFilterReducers.priceFrom,
+      roomFilters: state.houseFilterReducers.roomFilters,
     },
   };
 }
