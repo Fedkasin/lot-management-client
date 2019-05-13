@@ -19,6 +19,7 @@ firebase.initializeApp(firebaseConfig);
 
 const store = initStore();
 
+
 const getPushToken = async () => {
   const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
 
@@ -38,6 +39,24 @@ class App extends PureComponent {
     await AsyncStorage.setItem('@RootStore:NOTIFICATIONS_TOKEN', TOKEN || '[NOTIFICATIONS_FORBIDDEN]');
 
     this._notificationSubscription = Notifications.addListener(this._handleNotification);
+
+    firebase.auth().onAuthStateChanged(async (user) => {
+      if (!user) {
+        try {
+          await AsyncStorage.removeItem('@UserStore:FBUSER');
+          store.dispatch(actions.authActions.logoutSuccess());
+        } catch (err) {
+          store.dispatch(actions.authActions.logoutFail(err));
+        }
+      } else {
+        try {
+          await AsyncStorage.setItem('@UserStore:FBUSER', JSON.stringify(user.providerData[0]));
+          store.dispatch(actions.authActions.loginSuccess());
+        } catch (err) {
+          store.dispatch(actions.authActions.loginFail(err.message));
+        }
+      }
+    });
   }
 
   attachNavigatorService(rootSwitchNavigatorRef) {

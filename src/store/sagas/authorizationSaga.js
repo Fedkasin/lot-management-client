@@ -1,17 +1,19 @@
 import { AsyncStorage } from 'react-native';
-import { call, put, takeLatest } from 'redux-saga/effects';
+import {
+  call, put, takeLatest,
+} from 'redux-saga/effects';
 import { Constants } from 'expo';
-import LMapi from '../../helpers/lmapi';
 
-import actions from '../actions/index';
+import LMapi from '../../helpers/lmapi';
 import { navigate } from '../actions/navigationActionCreators';
 import {
   LOGIN,
   LOGOUT,
-  CHECK_IF_LOGGED_IN,
+  LOGOUT_SUCCESS,
+  LOGIN_SUCCESS,
 } from '../../constants/Actions';
-import { signInWithGoogleAsync, signOut, isLoggedIn } from '../../helpers/authHelpers';
-import { APP_TAB, AUTH_STACK } from '../../constants/Routes';
+import { signInWithGoogleAsync, signOut } from '../../helpers/authHelpers';
+import { AUTH_STACK, APP_TAB } from '../../constants/Routes';
 
 function* login(action) {
   try {
@@ -38,37 +40,45 @@ function* login(action) {
       expo,
     };
     yield call(LMapi.logIn, body);
-    yield put(actions.authActions.loginSuccess(data.user));
-    yield put(navigate(APP_TAB));
   } catch (err) {
-    yield put(actions.authActions.loginFail(err.message));
-    yield put(navigate(AUTH_STACK));
+    throw err;
   }
 }
 
 function* logout() {
   try {
-    yield put(navigate(AUTH_STACK));
     yield call(signOut);
-    yield put(actions.authActions.logoutSuccess());
-    yield call(LMapi.logOut);
   } catch (err) {
-    yield put(actions.authActions.logoutFail(err));
-    yield put(navigate(APP_TAB));
+    throw err;
   }
 }
 
 function* checkIfLoggedIn() {
   try {
-    const user = yield call(isLoggedIn);
-    if (user) {
-      yield put(navigate(APP_TAB));
-    } else {
-      yield put(navigate(AUTH_STACK));
+    const user = yield call(AsyncStorage.getItem, '@UserStore:FBUSER');
+    const token = yield call(AsyncStorage.getItem, '@UserStore:API_TOKEN');
+    if (!user || !token) {
+      yield logout();
     }
   } catch (err) {
     yield put(navigate(AUTH_STACK));
   }
+}
+
+function* navigateToTabs() {
+  yield put(navigate(APP_TAB));
+}
+
+function* navigateToAuth() {
+  yield put(navigate(AUTH_STACK));
+}
+
+export function* proceedLogin() {
+  yield takeLatest(LOGIN_SUCCESS, navigateToTabs);
+}
+
+export function* proceedLogout() {
+  yield takeLatest(LOGOUT_SUCCESS, navigateToAuth);
 }
 
 export function* loginSaga() {
@@ -80,5 +90,5 @@ export function* logoutSaga() {
 }
 
 export function* loggedInSaga() {
-  yield takeLatest(CHECK_IF_LOGGED_IN, checkIfLoggedIn);
+  yield takeLatest(action => /^FETCH_/.test(action.type), checkIfLoggedIn);
 }

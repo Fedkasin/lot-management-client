@@ -2,7 +2,7 @@ import superagent from 'superagent';
 import { AsyncStorage } from 'react-native';
 import getEnvVars from '../constants/environment';
 
-const respTime = { response: 3500 };
+const respTime = { response: 10000 };
 
 class LMapi {
   constructor(jobs) {
@@ -55,7 +55,7 @@ class LMapi {
     } catch (err) {
       throw err;
     }
-  }
+  };
 
   removeCurrentUserJob = async (jobId) => {
     try {
@@ -67,7 +67,7 @@ class LMapi {
     } catch (err) {
       throw err;
     }
-  }
+  };
 
   pauseCurrentUserJob = async (jobId) => {
     try {
@@ -79,7 +79,7 @@ class LMapi {
     } catch (err) {
       throw err;
     }
-  }
+  };
 
   resumeCurrentUserJob = async (jobId) => {
     try {
@@ -91,7 +91,7 @@ class LMapi {
     } catch (err) {
       throw err;
     }
-  }
+  };
 
   logIn = async (prop) => {
     try {
@@ -105,11 +105,12 @@ class LMapi {
     } catch (err) {
       throw err;
     }
-  }
+  };
 
   logOut = async () => {
     try {
       const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+      if (!token) return;
       const req = superagent.delete(`${getEnvVars.apiUrl}/v1/users/logout`);
       req.timeout(respTime);
       req.set('Authorization', token);
@@ -121,7 +122,7 @@ class LMapi {
     } catch (err) {
       throw err;
     }
-  }
+  };
 
   getHouses = async (query) => {
     try {
@@ -138,7 +139,7 @@ class LMapi {
     } catch (err) {
       throw err;
     }
-  }
+  };
 
   getHousesWatch = async (jobId) => {
     try {
@@ -155,7 +156,7 @@ class LMapi {
     } catch (err) {
       throw err;
     }
-  }
+  };
 
   getCars = async (start, limit) => {
     try {

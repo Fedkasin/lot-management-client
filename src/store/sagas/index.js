@@ -2,12 +2,13 @@ import { all } from 'redux-saga/effects';
 
 import appSaga from './appSaga';
 import navigateSaga from './navigateSaga';
-import changeSettingSaga from './changeSettingsSaga';
-import fetchSettingsSaga from './fetchSettingsSaga';
-import { loginSaga, logoutSaga, loggedInSaga } from './authorizationSaga';
+import {
+  loginSaga, logoutSaga, loggedInSaga, proceedLogin, proceedLogout,
+} from './authorizationSaga';
 import fetchCarLotsSaga from './fetchCarLotsSaga';
 import fetchHouseLotsSaga from './fetchHouseLotsSaga';
 import updateHouseWatchLotsSaga from './updateHouseWatchLotsSaga';
+import fetchProfileSaga from './profileSaga';
 import {
   watchHouseLotsSaga,
   checkWatchHouseLotsStateSaga,
@@ -21,11 +22,12 @@ export default function* (service) {
   const rootSagas = [
     appSaga(),
     navigateSaga(service),
+    proceedLogin(),
+    proceedLogout(),
     loggedInSaga(),
-    changeSettingSaga(),
-    fetchSettingsSaga(),
     loginSaga(),
     logoutSaga(),
+    fetchProfileSaga(),
     fetchCarLotsSaga(),
     fetchHouseLotsSaga(),
     updateHouseWatchLotsSaga(),
