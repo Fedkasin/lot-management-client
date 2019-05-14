@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import actions from '../store/actions';
 import HouseWatchLotsContainer from '../containers/HouseWatchLotsContainer';
-import TopBarButton from '../components/core/TopBarButton';
+import TopbarNavButton from '../components/core/TopbarNavButton';
 import TopBarStateButton from '../components/core/TopBarStateButton';
 import { HOUSE_WATCH_FILTER_SCREEN } from '../constants/Routes';
 import * as Colors from '../constants/Colors';
@@ -20,7 +20,7 @@ class HouseWatchScreen extends React.PureComponent {
           otherIcon="md-create"
           onTap={() => navigation.getParam('handleClick')}
         />
-        <TopBarButton
+        <TopbarNavButton
           iconColor={Colors.black}
           iosIcon="ios-add"
           otherIcon="md-add"
@@ -53,7 +53,6 @@ HouseWatchScreen.propTypes = {
 function mapStateToProps(state) {
   return {
     isEditing: state.houseWatchLotsReducers.isEditing,
-    isWatching: state.houseWatchLotsReducers.isWatching,
   };
 }
 

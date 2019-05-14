@@ -1,9 +1,6 @@
 import React from 'react';
 import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
+  View, Text, TouchableOpacity, StyleSheet,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import * as Colors from '../../constants/Colors';
@@ -43,6 +40,7 @@ const styles = StyleSheet.create({
 class SettingChildCheckbox extends React.PureComponent {
   render() {
     const { label, handler, value } = this.props;
+
     return (
       <View style={styles.container}>
         <Text style={styles.label}>
@@ -50,9 +48,7 @@ class SettingChildCheckbox extends React.PureComponent {
         </Text>
         <TouchableOpacity
           style={styles.box}
-          onPress={() => {
-            handler(label);
-          }}
+          onPress={() => handler(label)}
         >
           <View style={[styles.checkMark, { backgroundColor: value === true ? Colors.green : Colors.silver }]} />
         </TouchableOpacity>

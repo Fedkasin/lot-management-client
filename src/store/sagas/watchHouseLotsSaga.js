@@ -17,7 +17,7 @@ function* checkWatchHouseLotsState() {
   try {
     const res = yield call(LMapi.getCurrentUserJobs);
     const { message } = res || { message: [] };
-    if (message.length > 0) {
+    if (message.length) {
       yield put(actions.houseWatchLotsActions.watchHouseLotsTrue(message));
     } else {
       yield put(actions.houseWatchLotsActions.watchHouseLotsFalse());
@@ -69,10 +69,7 @@ function* pauseAllJobs(action) {
 function* updateHouseWatchFilterApply(action) {
   try {
     const { filters } = action.payload;
-    const rooms = [];
-    for (let i = 0; i < filters.roomFilters.length; i += 1) {
-      rooms.push(parseInt(filters.roomFilters[i], 10));
-    }
+    const rooms = filters.roomFilters.map(item => parseInt(item, 10));
     const params = {
       rooms,
       max: parseInt(filters.priceTo, 10),

@@ -1,14 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  View,
-  TouchableOpacity,
-  Platform,
-} from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import actions from '../store/actions';
-import IonIcon from '../components/core/IonIcon';
 import HouseFilterContainer from '../containers/HouseFilterContainer';
+import TopbarActionButton from '../components/core/TopbarActionButton';
 import * as Colors from '../constants/Colors';
 
 class HouseFilterScreen extends React.PureComponent {
@@ -16,24 +12,12 @@ class HouseFilterScreen extends React.PureComponent {
     title: 'Houses Filter',
     headerRight: (
       <View style={{ flexDirection: 'row' }}>
-        <TouchableOpacity
-          onPress={navigation.getParam('handleClick')}
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'row',
-            height: 40,
-            width: 40,
-            backgroundColor: Colors.white,
-            marginRight: 5,
-            zIndex: 1,
-          }}
-        >
-          <IonIcon
-            name={Platform.OS === 'ios' ? 'ios-checkmark' : 'md-checkmark'}
-            color={Colors.black}
-          />
-        </TouchableOpacity>
+        <TopbarActionButton
+          iconColor={Colors.black}
+          iosIcon="ios-checkmark"
+          otherIcon="md-checkmark"
+          onTap={navigation.getParam('handleClick')}
+        />
       </View>
     ),
   });

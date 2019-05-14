@@ -4,7 +4,7 @@ SCRIPTPATH="$(dirname $(realpath -s $0))"
 
 echo "${SCRIPTPATH}"
 
-API_DEFAULT_PATH="localhost"
+API_DEFAULT_PATH="http://localhost"
 API_URL=${API_URL/%":$1"/}
 
 if [ -z $API_URL ]; then
@@ -19,12 +19,15 @@ echo "import { Constants } from 'expo';
 const ENV = {
   dev: {
     apiUrl: '${API_URL}',
+    respTime: { response: 10000 },
   },
   staging: {
     apiUrl: '',
+    respTime: { response: 10000 },
   },
   prod: {
     apiUrl: '',
+    respTime: { response: 5000 },
   },
 };
 

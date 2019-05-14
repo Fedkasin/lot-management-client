@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, StyleSheet, Text,
+  View, StyleSheet, Text, Alert,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -24,9 +24,66 @@ const styles = StyleSheet.create({
 });
 
 class HouseFilter extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.onChangeHouseFilterPriceTo = this.onChangeHouseFilterPriceTo.bind(this);
+    this.onChangeHouseFilterPriceFrom = this.onChangeHouseFilterPriceFrom.bind(this);
+    this.onAddRoomCount = this.onAddRoomCount.bind(this);
+  }
+
+  onAddRoomCount(label) {
+    const { addRoomCount, filters } = this.props;
+    const roomsArray = [...filters.roomFilters];
+    if (roomsArray.indexOf(label) === -1) {
+      roomsArray.push(label);
+    } else {
+      roomsArray.splice(roomsArray.indexOf(label), 1);
+    }
+    addRoomCount(roomsArray); // send array of rooms
+  }
+
+  onChangeHouseFilterPriceFrom(value) {
+    const { changePriceFrom, filters } = this.props;
+    if (parseInt(value, 10) > parseInt(filters.priceTo, 10)) {
+      Alert.alert(
+        'You shouldn`t do this',
+        'FROM should be less or equal TO',
+        [
+          {
+            text: 'okay',
+            onPress: () => { },
+          },
+        ],
+        { cancelable: false },
+      );
+    } else {
+      changePriceFrom(value);
+    }
+  }
+
+  onChangeHouseFilterPriceTo(value) {
+    const { changePriceTo, filters } = this.props;
+    if (parseInt(value, 10) < parseInt(filters.priceFrom, 10)) {
+      Alert.alert(
+        'You shouldn`t do this',
+        'TO should be more or equal FROM',
+        [
+          {
+            text: 'okay',
+            onPress: () => { },
+          },
+        ],
+        { cancelable: false },
+      );
+    } else {
+      changePriceTo(value);
+    }
+  }
+
   render() {
-    const { filters, handlers } = this.props;
-    const roomsArray = filters.roomFilters.slice();
+    const { filters } = this.props;
+    const roomsArray = [...filters.roomFilters];
     return (
       <View style={styles.container}>
         <Text style={styles.bigLabel}>Rooms count</Text>
@@ -36,7 +93,7 @@ class HouseFilter extends React.PureComponent {
               key={`checkBox-${index + 1}`}
               value={(roomsArray.indexOf(value) !== -1)}
               label={value}
-              handler={handlers.addRoomCount}
+              handler={this.onAddRoomCount}
             />
           ))}
         </View>
@@ -47,14 +104,14 @@ class HouseFilter extends React.PureComponent {
             value={filters.priceFrom}
             items={filtersConst.pricing}
             label="from"
-            handler={handlers.priceFromHandler}
+            handler={this.onChangeHouseFilterPriceFrom}
           />
           <SettingChildSelect
             style={{ height: 50, width: '50%' }}
             value={filters.priceTo}
             items={filtersConst.pricing}
             label="to"
-            handler={handlers.priceToHandler}
+            handler={this.onChangeHouseFilterPriceTo}
           />
         </View>
       </View>
@@ -64,7 +121,9 @@ class HouseFilter extends React.PureComponent {
 
 HouseFilter.propTypes = {
   filters: PropTypes.objectOf(PropTypes.any).isRequired,
-  handlers: PropTypes.objectOf(PropTypes.func).isRequired,
+  changePriceTo: PropTypes.func.isRequired,
+  changePriceFrom: PropTypes.func.isRequired,
+  addRoomCount: PropTypes.func.isRequired,
 };
 
 export default HouseFilter;
