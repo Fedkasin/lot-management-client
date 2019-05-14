@@ -18,6 +18,7 @@ import { AUTH_STACK, APP_TAB } from '../../constants/Routes';
 function* login(action) {
   try {
     const data = yield call(signInWithGoogleAsync, action.payload);
+    const idToken = yield call(AsyncStorage.getItem, '@UserStore:TOKEN');
     const {
       accessToken,
       refreshToken,
@@ -31,6 +32,7 @@ function* login(action) {
     };
     const body = {
       auth: {
+        id_token: idToken,
         access_token: accessToken,
         refresh_token: refreshToken,
         uid: id,
