@@ -1,6 +1,6 @@
 import React from 'react';
 import CarLotsContainer from '../containers/CarLotsContainer';
-import TopBarButton from '../components/core/TopBarButton';
+import TopbarNavButton from '../components/core/TopbarNavButton';
 import { CAR_LOTS_FILTER_SCREEN } from '../constants/Routes';
 import * as Colors from '../constants/Colors';
 
@@ -8,7 +8,7 @@ class CarLotsScreen extends React.PureComponent {
   static navigationOptions = {
     title: 'Cars',
     headerRight: (
-      <TopBarButton
+      <TopbarNavButton
         iconColor={Colors.black}
         iosIcon="ios-options"
         otherIcon="md-options"

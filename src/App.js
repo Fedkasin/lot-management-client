@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react';
 import {
-  Permissions,
-  Notifications,
-  registerRootComponent,
+  Permissions, Notifications, registerRootComponent,
 } from 'expo';
 import { AsyncStorage } from 'react-native';
 import { Provider } from 'react-redux';
@@ -18,7 +16,6 @@ import AssetsLoader from './containers/AssetsLoaderContainer';
 firebase.initializeApp(firebaseConfig);
 
 const store = initStore();
-
 
 const getPushToken = async () => {
   const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
@@ -66,7 +63,7 @@ class App extends PureComponent {
   _handleNotification(notification) {
     const splitted = notification.data.type.split('-');
     if (splitted[0] === 'update') {
-      store.dispatch(actions.houseWatchLotsActions.updateHouseWatchLots(notification.data.jobId));
+      store.dispatch(actions.houseWatchLotsActions.checkWatchHouseLotsState());
     }
   }
 

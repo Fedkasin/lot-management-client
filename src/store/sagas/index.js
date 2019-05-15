@@ -16,6 +16,7 @@ import {
   removeHouseWatchJobSaga,
   pauseHouseWatchJobSaga,
   resumeHouseWatchJobSaga,
+  pauseAllJobsSaga,
 } from './watchHouseLotsSaga';
 
 export default function* (service) {
@@ -37,6 +38,7 @@ export default function* (service) {
     removeHouseWatchJobSaga(),
     pauseHouseWatchJobSaga(),
     resumeHouseWatchJobSaga(),
+    pauseAllJobsSaga(),
   ];
 
   yield all(rootSagas, service);

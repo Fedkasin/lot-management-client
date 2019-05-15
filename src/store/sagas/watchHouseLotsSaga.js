@@ -10,16 +10,28 @@ import {
   REMOVE_HOUSE_WATCH_JOB,
   PAUSE_HOUSE_WATCH_JOB,
   RESUME_HOUSE_WATCH_JOB,
+  CHECK_PAUSED_HOUSE_WATCH_JOBS,
 } from '../../constants/Actions';
 
 function* checkWatchHouseLotsState() {
   try {
     const res = yield call(LMapi.getCurrentUserJobs);
     const { message } = res || { message: [] };
-    if (message.length > 0) {
-      yield put(actions.houseWatchLotsActions.watchHouseLotsTrue(res.message));
+    if (message.length) {
+      yield put(actions.houseWatchLotsActions.watchHouseLotsTrue(message));
     } else {
       yield put(actions.houseWatchLotsActions.watchHouseLotsFalse());
+    }
+    let paused = 0;
+    message.forEach((value) => {
+      if (value.state === 'PAUSED') {
+        paused += 1;
+      }
+    });
+    if (paused !== message.length) {
+      yield put(actions.houseWatchLotsActions.checkPausedHouseLotsTrue());
+    } else {
+      yield put(actions.houseWatchLotsActions.checkPausedHouseLotsFalse());
     }
   } catch (err) {
     // eslint-disable-next-line no-console
@@ -30,7 +42,6 @@ function* checkWatchHouseLotsState() {
 function* watchHouseLots(action) {
   try {
     if (!action.payload) {
-      yield call(LMapi.stopAllCurrentUserJobs);
       yield call(checkWatchHouseLotsState);
     } else {
       yield put(actions.houseWatchLotsActions.watchHouseLotsTrue());
@@ -41,13 +52,24 @@ function* watchHouseLots(action) {
   }
 }
 
+function* pauseAllJobs(action) {
+  try {
+    if (action.payload) {
+      yield call(LMapi.pauseAllCurrentUserJobs);
+    } else {
+      yield call(LMapi.resumeAllCurrentUserJobs);
+    }
+    yield call(checkWatchHouseLotsState);
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error(err);
+  }
+}
+
 function* updateHouseWatchFilterApply(action) {
   try {
     const { filters } = action.payload;
-    const rooms = [];
-    for (let i = parseInt(filters.roomsFrom, 10); i < parseInt(filters.roomsTo, 10) + 1; i += 1) {
-      rooms.push(i);
-    }
+    const rooms = filters.roomFilters.map(item => parseInt(item, 10));
     const params = {
       rooms,
       max: parseInt(filters.priceTo, 10),
@@ -111,6 +133,11 @@ export function* removeHouseWatchJobSaga() {
 export function* pauseHouseWatchJobSaga() {
   yield takeLatest(PAUSE_HOUSE_WATCH_JOB, pauseHouseWatchJob);
 }
+
 export function* resumeHouseWatchJobSaga() {
   yield takeLatest(RESUME_HOUSE_WATCH_JOB, resumeHouseWatchJob);
+}
+
+export function* pauseAllJobsSaga() {
+  yield takeLatest(CHECK_PAUSED_HOUSE_WATCH_JOBS, pauseAllJobs);
 }

@@ -54,7 +54,6 @@ export const onSignIn = googleUser => {
 export const signInWithGoogleAsync = async config => {
   try {
     const result = await Google.logInAsync(config);
-
     if (result.type === 'success') {
       onSignIn(result);
       return result;

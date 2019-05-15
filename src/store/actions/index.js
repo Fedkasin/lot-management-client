@@ -24,7 +24,7 @@ import {
   updateHouseWatchLots,
   updateHouseWatchLotsSuccess,
   updateHouseWatchLotsFail,
-  watchHouseLots,
+  pauseAllJobs,
   checkWatchHouseLotsState,
   watchHouseLotsTrue,
   watchHouseLotsFalse,
@@ -32,13 +32,14 @@ import {
   pauseHouseWatchJob,
   resumeHouseWatchJob,
   editHouseWatchJobList,
+  checkPausedHouseLotsTrue,
+  checkPausedHouseLotsFalse,
 } from './houseWatchLotsActionCreators';
 
 import {
-  updateHouseFilterRoomsTo,
-  updateHouseFilterRoomsFrom,
   updateHouseFilterPriceTo,
   updateHouseFilterPriceFrom,
+  addRoomCount,
 } from './houseLotsFilterActionCreators';
 
 import {
@@ -52,10 +53,9 @@ import {
 } from './authActionCreators';
 
 import {
-  updateHouseWatchFilterRoomsTo,
-  updateHouseWatchFilterRoomsFrom,
   updateHouseWatchFilterPriceTo,
   updateHouseWatchFilterPriceFrom,
+  addWatchRoomCount,
   updateHouseWatchFilterApply,
 } from './houseWatchLotsFilterActionCreators';
 
@@ -88,7 +88,7 @@ export default {
     updateHouseWatchLots,
     updateHouseWatchLotsSuccess,
     updateHouseWatchLotsFail,
-    watchHouseLots,
+    pauseAllJobs,
     checkWatchHouseLotsState,
     watchHouseLotsTrue,
     watchHouseLotsFalse,
@@ -96,18 +96,18 @@ export default {
     pauseHouseWatchJob,
     resumeHouseWatchJob,
     editHouseWatchJobList,
+    checkPausedHouseLotsTrue,
+    checkPausedHouseLotsFalse,
   },
   houseLotsFilterActions: {
-    updateHouseFilterRoomsTo,
-    updateHouseFilterRoomsFrom,
     updateHouseFilterPriceTo,
     updateHouseFilterPriceFrom,
+    addRoomCount,
   },
   houseWatchLotsFilterActions: {
-    updateHouseWatchFilterRoomsTo,
-    updateHouseWatchFilterRoomsFrom,
     updateHouseWatchFilterPriceTo,
     updateHouseWatchFilterPriceFrom,
+    addWatchRoomCount,
     updateHouseWatchFilterApply,
   },
   authActions: {

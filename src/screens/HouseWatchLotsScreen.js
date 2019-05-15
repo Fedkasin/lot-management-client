@@ -1,15 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  View,
-  TouchableOpacity,
-  Platform,
-} from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import actions from '../store/actions';
 import HouseWatchLotsContainer from '../containers/HouseWatchLotsContainer';
-import TopBarButton from '../components/core/TopBarButton';
-import IonIcon from '../components/core/IonIcon';
+import TopbarNavButton from '../components/core/TopbarNavButton';
+import TopBarStateButton from '../components/core/TopBarStateButton';
 import { HOUSE_WATCH_FILTER_SCREEN } from '../constants/Routes';
 import * as Colors from '../constants/Colors';
 
@@ -18,25 +14,13 @@ class HouseWatchScreen extends React.PureComponent {
     title: 'Houses (Live)',
     headerRight: (
       <View style={{ flexDirection: 'row' }}>
-        <TouchableOpacity
-          onPress={navigation.getParam('handleClick')}
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'row',
-            height: 40,
-            width: 40,
-            backgroundColor: Colors.white,
-            marginRight: 5,
-            zIndex: 1,
-          }}
-        >
-          <IonIcon
-            name={Platform.OS === 'ios' ? 'ios-create' : 'md-create'}
-            color={Colors.black}
-          />
-        </TouchableOpacity>
-        <TopBarButton
+        <TopBarStateButton
+          iconColor={Colors.black}
+          iosIcon="ios-create"
+          otherIcon="md-create"
+          onTap={() => navigation.getParam('handleClick')}
+        />
+        <TopbarNavButton
           iconColor={Colors.black}
           iosIcon="ios-add"
           otherIcon="md-add"
@@ -69,7 +53,6 @@ HouseWatchScreen.propTypes = {
 function mapStateToProps(state) {
   return {
     isEditing: state.houseWatchLotsReducers.isEditing,
-    isWatching: state.houseWatchLotsReducers.isWatching,
   };
 }
 
