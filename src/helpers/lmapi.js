@@ -11,7 +11,7 @@ class LMapi {
     try {
       const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
       const req = superagent.get(`${getEnvVars.apiUrl}/v1/users/jobs`);
-      req.timeout(getEnvVars.respTime);
+      req.timeout({ response: parseInt(getEnvVars.respTime, 10) });
       req.set('Authorization', token);
       const res = await req;
       const { body } = res || { body: { message: [] } };
@@ -85,7 +85,7 @@ class LMapi {
     try {
       const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
       const req = superagent.post(`${getEnvVars.apiUrl}/v1/users/watch`, params);
-      req.timeout(getEnvVars.respTime);
+      req.timeout({ response: parseInt(getEnvVars.respTime, 10) });
       req.set('Authorization', token);
       await req;
     } catch (err) {
@@ -97,7 +97,7 @@ class LMapi {
     try {
       const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
       const req = superagent.delete(`${getEnvVars.apiUrl}/v1/users/watch/${jobId}`);
-      req.timeout(getEnvVars.respTime);
+      req.timeout({ response: parseInt(getEnvVars.respTime, 10) });
       req.set('Authorization', token);
       await req;
     } catch (err) {
@@ -109,7 +109,7 @@ class LMapi {
     try {
       const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
       const req = superagent.post(`${getEnvVars.apiUrl}/v1/users/watch/${jobId}/pause`);
-      req.timeout(getEnvVars.respTime);
+      req.timeout({ response: parseInt(getEnvVars.respTime, 10) });
       req.set('Authorization', token);
       await req;
     } catch (err) {
@@ -121,7 +121,7 @@ class LMapi {
     try {
       const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
       const req = superagent.post(`${getEnvVars.apiUrl}/v1/users/watch/${jobId}/resume`);
-      req.timeout(getEnvVars.respTime);
+      req.timeout({ response: parseInt(getEnvVars.respTime, 10) });
       req.set('Authorization', token);
       await req;
     } catch (err) {
@@ -132,7 +132,7 @@ class LMapi {
   async logIn(prop) {
     try {
       const req = superagent.post(`${getEnvVars.apiUrl}/v1/users`, prop);
-      req.timeout(getEnvVars.respTime);
+      req.timeout({ response: parseInt(getEnvVars.respTime, 10) });
       const res = await req;
       const { body } = res || { body: { status: [] } };
       if (body.status === 'success') {
@@ -148,7 +148,7 @@ class LMapi {
       const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
       if (!token) return;
       const req = superagent.delete(`${getEnvVars.apiUrl}/v1/users/logout`);
-      req.timeout(getEnvVars.respTime);
+      req.timeout({ response: parseInt(getEnvVars.respTime, 10) });
       req.set('Authorization', token);
       const res = await req;
       const { body } = res || { body: { status: [] } };
@@ -164,7 +164,7 @@ class LMapi {
     try {
       const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
       const req = superagent.get(`${getEnvVars.apiUrl}/v1/onliner?${query}`);
-      req.timeout(getEnvVars.respTime);
+      req.timeout({ response: parseInt(getEnvVars.respTime, 10) });
       req.set('Authorization', token);
       const res = await req;
       const { body } = res || { body: { status: [] } };
@@ -181,7 +181,7 @@ class LMapi {
     try {
       const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
       const req = superagent.get(`${getEnvVars.apiUrl}/v1/users/watch/${jobId}`);
-      req.timeout(getEnvVars.respTime);
+      req.timeout({ response: parseInt(getEnvVars.respTime, 10) });
       req.set('Authorization', token);
       const res = await req;
       const { body } = res || { body: { status: [] } };
@@ -198,7 +198,7 @@ class LMapi {
     try {
       const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
       const req = superagent.get(`https://jsonplaceholder.typicode.com/photos?_start=${start}&_limit=${limit}`);
-      req.timeout(getEnvVars.respTime);
+      req.timeout({ response: parseInt(getEnvVars.respTime, 10) });
       req.set('Authorization', token);
       const res = await req;
       const { status = null } = res;

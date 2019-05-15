@@ -5,7 +5,9 @@ SCRIPTPATH="$(dirname $(realpath -s $0))"
 echo "${SCRIPTPATH}"
 
 API_DEFAULT_PATH="http://localhost"
+RESP_DEFAULT_TIME=5000
 API_URL=${API_URL/%":$1"/}
+RESP_TIME=$RESP_TIME
 
 if [ -z $API_URL ]; then
   echo "API set to default (${API_DEFAULT_PATH})..."
@@ -14,20 +16,27 @@ else
   echo "API root is ${API_URL}"
 fi
 
+if [ -z $RESP_TIME ]; then
+  echo "RESP_TIME set to default (${RESP_DEFAULT_TIME}ms)..."
+  RESP_TIME=$RESP_DEFAULT_TIME
+else
+  echo "RESP_TIME is ${RESP_TIME}"
+fi
+
 echo "import { Constants } from 'expo';
 
 const ENV = {
   dev: {
     apiUrl: '${API_URL}',
-    respTime: { response: 10000 },
+    respTime: '${RESP_TIME}',
   },
   staging: {
-    apiUrl: '',
-    respTime: { response: 10000 },
+    apiUrl: '${API_URL}',
+    respTime: '${RESP_TIME}',
   },
   prod: {
-    apiUrl: '',
-    respTime: { response: 5000 },
+    apiUrl: '${API_URL}',
+    respTime: '${RESP_TIME}',
   },
 };
 
@@ -51,4 +60,3 @@ fi
 
 # docker-compose -f docker-compose.yml up --build -d
 $SCRIPTPATH/../node_modules/.bin/expo start
-
