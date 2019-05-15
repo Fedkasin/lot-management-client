@@ -41,14 +41,22 @@ class App extends PureComponent {
       if (!user) {
         try {
           await AsyncStorage.removeItem('@UserStore:FBUSER');
+          await AsyncStorage.removeItem('@UserStore:API_TOKEN');
           store.dispatch(actions.authActions.logoutSuccess());
         } catch (err) {
+          // await AsyncStorage.removeItem('@UserStore:API_TOKEN');
           store.dispatch(actions.authActions.logoutFail(err));
         }
       } else {
         try {
           await AsyncStorage.setItem('@UserStore:FBUSER', JSON.stringify(user.providerData[0]));
-          store.dispatch(actions.authActions.loginSuccess());
+          const API_TOKEN = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+          console.log(API_TOKEN);
+          if (API_TOKEN) {
+            store.dispatch(actions.authActions.loginSuccess());
+          } else {
+            store.dispatch(actions.authActions.loginFail('Failed to Log In'));
+          }
         } catch (err) {
           store.dispatch(actions.authActions.loginFail(err.message));
         }

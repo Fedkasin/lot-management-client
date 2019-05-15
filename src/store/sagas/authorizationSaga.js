@@ -4,13 +4,16 @@ import {
 } from 'redux-saga/effects';
 import { Constants } from 'expo';
 
+import actions from '../actions/index';
 import LMapi from '../../helpers/lmapi';
 import { navigate } from '../actions/navigationActionCreators';
 import {
   LOGIN,
   LOGOUT,
   LOGOUT_SUCCESS,
+  LOGOUT_FAIL,
   LOGIN_SUCCESS,
+  LOGIN_FAIL,
 } from '../../constants/Actions';
 import { signInWithGoogleAsync, signOut } from '../../helpers/authHelpers';
 import { AUTH_STACK, APP_TAB } from '../../constants/Routes';
@@ -40,16 +43,18 @@ function* login(action) {
       expo,
     };
     yield call(LMapi.logIn, body);
+    yield put(actions.authActions.loginSuccess());
   } catch (err) {
-    throw err;
+    yield put(actions.authActions.loginFail('Failed to login'));
   }
 }
 
 function* logout() {
   try {
     yield call(signOut);
+    yield put(navigate(AUTH_STACK));
   } catch (err) {
-    throw err;
+    yield put(actions.authActions.logoutFail('Failed to logout'));
   }
 }
 
@@ -73,12 +78,20 @@ function* navigateToAuth() {
   yield put(navigate(AUTH_STACK));
 }
 
-export function* proceedLogin() {
+export function* loginSuccess() {
   yield takeLatest(LOGIN_SUCCESS, navigateToTabs);
 }
 
-export function* proceedLogout() {
+export function* loginFail() {
+  yield takeLatest(LOGIN_FAIL, navigateToAuth);
+}
+
+export function* logoutSuccess() {
   yield takeLatest(LOGOUT_SUCCESS, navigateToAuth);
+}
+
+export function* logoutFail() {
+  yield takeLatest(LOGOUT_FAIL, navigateToAuth);
 }
 
 export function* loginSaga() {

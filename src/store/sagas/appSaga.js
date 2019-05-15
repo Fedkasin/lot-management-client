@@ -9,7 +9,6 @@ export function* splashFlow() {
   yield all([
     take(APP_READY),
   ]);
-
   SplashScreen.hide();
 }
 

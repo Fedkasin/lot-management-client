@@ -7,9 +7,10 @@ import LMapi from './lmapi';
 export const isUserEqual = (googleUser, firebaseUser) => {
   if (firebaseUser) {
     const { providerData } = firebaseUser;
+    const googleUserData = (googleUser.getBasicProfile) ? googleUser.getBasicProfile().getId() : null;
     for (let i = 0; i < providerData.length; i += 1) {
       if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID
-        && providerData[i].uid === googleUser.getBasicProfile().getId()) {
+        && providerData[i].uid === googleUserData) {
         return true;
       }
     }
