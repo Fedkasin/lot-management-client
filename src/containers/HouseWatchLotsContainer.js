@@ -1,13 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {
-  Alert,
-  ScrollView,
-  ActivityIndicator,
-  View,
-  Text,
-  Switch,
-  StyleSheet,
+  Alert, ActivityIndicator, View, Text, Switch, StyleSheet, FlatList,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import actions from '../store/actions';
@@ -96,6 +90,7 @@ class HouseWatchLotsContainer extends PureComponent {
       jobs,
       isEditing,
       error,
+      onCheckHouseWatchState,
     } = this.props;
     if (!houseWatchLots.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
     return (
@@ -108,22 +103,27 @@ class HouseWatchLotsContainer extends PureComponent {
             onValueChange={() => this.onPauseAllJobs(isAnyPaused)}
           />
         </View>
-        <ScrollView style={styles.scrollview}>
-          <View style={styles.container}>
-            { (jobs && jobs.length) ? jobs.map((value, index) => (
-              <HouseJob
-                key={`job-${index + 1}`}
-                index={index + 1}
-                item={value}
-                iosIcon={value.state === 'RUNNING' ? 'ios-pause' : 'ios-play'}
-                otherIcon={value.state === 'RUNNING' ? 'md-pause' : 'md-play'}
-                onPlayPause={() => this.onPlayPauseJob({ id: value.jobId, state: value.state })}
-                onClose={() => this.onCloseJob(value.jobId)}
-                isEditing={isEditing}
-              />
-            )) : <BgMessage text={error ? Errors.connection : Errors.notfound} />}
-          </View>
-        </ScrollView>
+        <FlatList
+          data={jobs}
+          renderItem={({ item, index }) => (
+            <HouseJob
+              key={`job-${index + 1}`}
+              index={index + 1}
+              item={item}
+              iosIcon={item.state === 'RUNNING' ? 'ios-pause' : 'ios-play'}
+              otherIcon={item.state === 'RUNNING' ? 'md-pause' : 'md-play'}
+              onPlayPause={() => this.onPlayPauseJob({ id: item.jobId, state: item.state })}
+              onClose={() => this.onCloseJob(item.jobId)}
+              isEditing={isEditing}
+            />
+          )}
+          keyExtractor={jobId => JSON.stringify(jobId)}
+          onRefresh={onCheckHouseWatchState}
+          onEndReached={this.handleScrollEnd}
+          onEndReachedThreshold={0}
+          refreshing={isFetching}
+          ListEmptyComponent={() => <BgMessage text={error ? Errors.connection : Errors.notfound} />}
+        />
       </View>
     );
   }
