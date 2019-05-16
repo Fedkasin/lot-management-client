@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.silver,
     marginBottom: 9,
     borderRadius: 9,
+    marginHorizontal: 9,
   },
   job: {
     fontSize: 16,
@@ -26,8 +27,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    /* borderWidth: 1,
-    borderColor: Colors.black, */
   },
   jobCard: {
     flexDirection: 'row',
@@ -44,7 +43,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: 70,
     height: '100%',
-    /* backgroundColor: Colors.blue, */
   },
   buttonRemove: {
     flex: 2,
@@ -64,12 +62,9 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
     alignItems: 'center',
     flexDirection: 'row',
-    /* borderWidth: 1,
-    borderColor: Colors.black, */
   },
   jobBody: {
     flexDirection: 'row',
-    /* backgroundColor: Colors.blue, */
     flex: 1,
   },
   countLabel: {
@@ -94,15 +89,9 @@ const styles = StyleSheet.create({
     flex: 2,
     paddingTop: 6,
     paddingBottom: 6,
-    /* backgroundColor: Colors.green,
-    borderColor: Colors.black,
-    borderWidth: 1, */
   },
   cardItemInner: {
     textAlign: 'left',
-    /* borderColor: Colors.black,
-    borderWidth: 1,
-    backgroundColor: Colors.blue, */
   },
   priceCard: {
     width: 85,

@@ -34,8 +34,7 @@ function* checkWatchHouseLotsState() {
       yield put(actions.houseWatchLotsActions.checkPausedHouseLotsFalse());
     }
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
+    yield put(actions.houseWatchLotsActions.updateHouseWatchLotsFail(err));
   }
 }
 
@@ -47,8 +46,7 @@ function* watchHouseLots(action) {
       yield put(actions.houseWatchLotsActions.watchHouseLotsTrue());
     }
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
+    yield put(actions.houseWatchLotsActions.updateHouseWatchLotsFail(err));
   }
 }
 
@@ -61,8 +59,7 @@ function* pauseAllJobs(action) {
     }
     yield call(checkWatchHouseLotsState);
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
+    yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(err));
   }
 }
 
@@ -79,8 +76,7 @@ function* updateHouseWatchFilterApply(action) {
     yield call(checkWatchHouseLotsState);
     yield put(navigate(HOUSE_WATCH_LOTS_SCREEN));
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
+    yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(err));
   }
 }
 
@@ -89,8 +85,7 @@ function* removeHouseWatchJob(action) {
     yield call(LMapi.removeCurrentUserJob, action.payload);
     yield call(checkWatchHouseLotsState);
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
+    yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(err));
   }
 }
 
@@ -99,8 +94,7 @@ function* pauseHouseWatchJob(action) {
     yield call(LMapi.pauseCurrentUserJob, action.payload);
     yield call(checkWatchHouseLotsState);
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
+    yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(err));
   }
 }
 
@@ -109,8 +103,7 @@ function* resumeHouseWatchJob(action) {
     yield call(LMapi.resumeCurrentUserJob, action.payload);
     yield call(checkWatchHouseLotsState);
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
+    yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(err));
   }
 }
 

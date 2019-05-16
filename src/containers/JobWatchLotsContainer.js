@@ -12,10 +12,7 @@ import * as Colors from '../constants/Colors';
 
 class JobWatchLotsContainer extends PureComponent {
   render() {
-    const {
-      isFetching,
-      houseWatchLots,
-    } = this.props;
+    const { isFetching, houseWatchLots, error } = this.props;
     if (!houseWatchLots.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
     return (
       <FlatList
@@ -26,7 +23,7 @@ class JobWatchLotsContainer extends PureComponent {
         onEndReached={this.handleScrollEnd}
         onEndReachedThreshold={0}
         refreshing={isFetching}
-        ListEmptyComponent={() => <BgMessage text="There are no matches" />}
+        ListEmptyComponent={() => <BgMessage text={error ? 'Server error: chech your internet connection' : 'There are no matches'} />}
       />
     );
   }
@@ -46,6 +43,11 @@ function mapStateToProps(state) {
 JobWatchLotsContainer.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   houseWatchLots: PropTypes.arrayOf(PropTypes.any).isRequired,
+  error: PropTypes.objectOf(PropTypes.any),
+};
+
+JobWatchLotsContainer.defaultProps = {
+  error: null,
 };
 
 export default connect(mapStateToProps)(JobWatchLotsContainer);

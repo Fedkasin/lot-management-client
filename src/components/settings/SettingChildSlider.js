@@ -24,12 +24,7 @@ const styles = StyleSheet.create({
 class SettingChildSlider extends React.PureComponent {
   render() {
     const {
-      text,
-      from,
-      to,
-      step,
-      value,
-      handler,
+      text, from, to, step, value, handler,
     } = this.props;
     return (
       <View style={styles.container}>

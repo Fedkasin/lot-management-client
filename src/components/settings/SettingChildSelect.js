@@ -23,6 +23,15 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.lightGray,
     borderBottomWidth: 1,
   },
+  placeholder: {
+    fontSize: 20,
+    margin: 10,
+    color: Colors.lightGray,
+  },
+  iospicker: {
+    width: 150,
+    height: 40,
+  },
 });
 
 class SettingChildSelect extends React.PureComponent {
@@ -40,16 +49,13 @@ class SettingChildSelect extends React.PureComponent {
 
   render() {
     const {
-      value,
-      items,
-      label,
-      handler,
+      value, items, label, handler,
     } = this.props;
     if (Platform.OS === 'ios') {
       return (
         <View style={styles.container}>
           <Text style={styles.label}>{label}</Text>
-          <Text style={{ fontSize: 20, margin: 10, color: Colors.lightGray }} onPress={() => { this.handleClick(); }}>{value}</Text>
+          <Text style={styles.placeholder} onPress={() => { this.handleClick(); }}>{value}</Text>
           <View style={styles.divider} />
         </View>
       );
@@ -59,7 +65,7 @@ class SettingChildSelect extends React.PureComponent {
         <Text style={styles.label}>{label}</Text>
         <Picker
           placeholder={{}}
-          style={{ width: 150, height: 40 }}
+          style={styles.iospicker}
           onValueChange={itemValue => handler(itemValue)}
           items={items.map(opt => ({ label: opt, value: opt }))}
           selectedValue={value}

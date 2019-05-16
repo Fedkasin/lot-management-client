@@ -5,6 +5,7 @@ import {
   CHECK_HOUSE_WATCH_STATE,
   CHECK_HOUSE_WATCH_STATE_TRUE,
   CHECK_HOUSE_WATCH_STATE_FALSE,
+  CHECK_HOUSE_WATCH_STATE_FAIL,
   REMOVE_HOUSE_WATCH_JOB,
   PAUSE_HOUSE_WATCH_JOB,
   PAUSED_HOUSE_WATCH_JOBS_TRUE,
@@ -42,6 +43,11 @@ export const watchHouseLotsTrue = data => ({
 export const watchHouseLotsFalse = data => ({
   type: CHECK_HOUSE_WATCH_STATE_FALSE,
   payload: data,
+});
+
+export const checkWatchHouseLotsStateFail = err => ({
+  type: CHECK_HOUSE_WATCH_STATE_FAIL,
+  error: err,
 });
 
 export const removeHouseWatchJob = data => ({

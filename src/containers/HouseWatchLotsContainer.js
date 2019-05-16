@@ -15,12 +15,11 @@ import BgMessage from '../components/bgmessage/BackgroundMessage';
 
 import HouseJob from '../components/house/HouseJob';
 import * as Colors from '../constants/Colors';
+import * as Errors from '../constants/Errors';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.white,
     justifyContent: 'center',
-    paddingHorizontal: 10,
     flex: 1,
   },
   job: {
@@ -32,6 +31,19 @@ const styles = StyleSheet.create({
   divider: {
     borderBottomColor: Colors.lightGray,
     borderBottomWidth: 1,
+  },
+  scrollview: {
+    backgroundColor: Colors.white,
+    marginBottom: 50,
+  },
+  switchContainer: {
+    flexDirection: 'row',
+    padding: 10,
+  },
+  sectionLabel: {
+    fontSize: 24,
+    color: Colors.gray,
+    marginLeft: 9,
   },
 });
 
@@ -83,19 +95,20 @@ class HouseWatchLotsContainer extends PureComponent {
       isAnyPaused,
       jobs,
       isEditing,
+      error,
     } = this.props;
     if (!houseWatchLots.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
     return (
       <View style={{ flexDirection: 'column' }}>
-        <View style={{ display: isWatching ? 'flex' : 'none', flexDirection: 'row', padding: 10 }}>
-          <Text style={{ fontSize: 24, color: Colors.gray, marginLeft: 9 }}>Live tracking</Text>
+        <View style={[styles.switchContainer, { display: isWatching ? 'flex' : 'none' }]}>
+          <Text style={styles.sectionLabel}>Live tracking</Text>
           <Switch
             value={isAnyPaused}
             style={{ marginLeft: 'auto' }}
             onValueChange={() => this.onPauseAllJobs(isAnyPaused)}
           />
         </View>
-        <ScrollView style={{ backgroundColor: Colors.white, marginBottom: 50 }}>
+        <ScrollView style={styles.scrollview}>
           <View style={styles.container}>
             { (jobs && jobs.length) ? jobs.map((value, index) => (
               <HouseJob
@@ -108,7 +121,7 @@ class HouseWatchLotsContainer extends PureComponent {
                 onClose={() => this.onCloseJob(value.jobId)}
                 isEditing={isEditing}
               />
-            )) : <BgMessage text="There are no trackers" />}
+            )) : <BgMessage text={error ? Errors.connection : Errors.notfound} />}
           </View>
         </ScrollView>
       </View>
@@ -152,6 +165,11 @@ HouseWatchLotsContainer.propTypes = {
   removeJob: PropTypes.func.isRequired,
   pauseJob: PropTypes.func.isRequired,
   resumeJob: PropTypes.func.isRequired,
+  error: PropTypes.objectOf(PropTypes.any),
+};
+
+HouseWatchLotsContainer.defaultProps = {
+  error: null,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HouseWatchLotsContainer);

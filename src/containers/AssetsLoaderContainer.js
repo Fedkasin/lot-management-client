@@ -26,9 +26,6 @@ class AssetsLoader extends PureComponent {
   };
 
   cacheResourcesAsync = async () => {
-    // await Asset.loadAsync({
-    //   Splash: '../../assets/images/vector-six-grunge-paint-stroke-set.jpg'
-    // });
     await Font.loadAsync({
       sans: require('../../assets/fonts/NotoSansTC-Regular.otf'),
       'sans-bold': require('../../assets/fonts/NotoSansTC-Black.otf'),
@@ -92,7 +89,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AssetsLoader);
+export default connect(mapStateToProps, mapDispatchToProps)(AssetsLoader);

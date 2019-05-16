@@ -8,8 +8,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: '100%',
     marginTop: '50%',
+    padding: 10,
   },
   text: {
+    textAlign: 'center',
     fontSize: 28,
     opacity: 0.5,
   },
