@@ -6,7 +6,7 @@ import { AsyncStorage } from 'react-native';
 import actions from '../actions/index';
 import { navigate } from '../actions/navigationActionCreators';
 import {
-  FETCH_PROFILE, LOGIN_SUCCESS, LOGOUT_SUCCESS,
+  LOAD_PROFILE, LOGIN_SUCCESS, LOGOUT_SUCCESS,
 } from '../../constants/Actions';
 import { AUTH_STACK } from '../../constants/Routes';
 
@@ -31,5 +31,5 @@ function* fetchProfile() {
 }
 
 export default function* fetchProfileSaga() {
-  yield takeLatest(FETCH_PROFILE, fetchProfile);
+  yield takeLatest(LOAD_PROFILE, fetchProfile);
 }

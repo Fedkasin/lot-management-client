@@ -156,6 +156,7 @@ class LMapi {
 
   async logOut() {
     try {
+      console.log('lm logout');
       const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
       if (!token) return;
       const req = superagent.delete(`${getEnvVars.apiUrl}/v1/users/logout`);

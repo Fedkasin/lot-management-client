@@ -42,20 +42,18 @@ class App extends PureComponent {
         try {
           await AsyncStorage.removeItem('@UserStore:FBUSER');
           await AsyncStorage.removeItem('@UserStore:API_TOKEN');
-          store.dispatch(actions.authActions.logoutSuccess());
+          store.dispatch(actions.authActions.loginFail());
         } catch (err) {
-          // await AsyncStorage.removeItem('@UserStore:API_TOKEN');
-          store.dispatch(actions.authActions.logoutFail(err));
+          store.dispatch(actions.authActions.logoutFail('Failed to Log Out'));
         }
       } else {
         try {
           await AsyncStorage.setItem('@UserStore:FBUSER', JSON.stringify(user.providerData[0]));
           const API_TOKEN = await AsyncStorage.getItem('@UserStore:API_TOKEN');
-          console.log(API_TOKEN);
           if (API_TOKEN) {
             store.dispatch(actions.authActions.loginSuccess());
           } else {
-            store.dispatch(actions.authActions.loginFail('Failed to Log In'));
+            store.dispatch(actions.authActions.loginFail('Authentication failed'));
           }
         } catch (err) {
           store.dispatch(actions.authActions.loginFail(err.message));

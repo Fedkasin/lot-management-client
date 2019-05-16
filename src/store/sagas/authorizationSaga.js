@@ -52,9 +52,9 @@ function* login(action) {
 function* logout() {
   try {
     yield call(signOut);
-    yield put(navigate(AUTH_STACK));
+    yield put(actions.authActions.logoutSuccess());
   } catch (err) {
-    yield put(actions.authActions.logoutFail('Failed to logout'));
+    yield put(actions.authActions.logoutFail());
   }
 }
 
@@ -66,7 +66,7 @@ function* checkIfLoggedIn() {
       yield logout();
     }
   } catch (err) {
-    yield put(navigate(AUTH_STACK));
+    yield put(actions.authActions.logout());
   }
 }
 
