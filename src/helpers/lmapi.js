@@ -44,6 +44,25 @@ class LMapi {
     }
   }
 
+  async stopAllCurrentUserJobs() {
+    try {
+      const req = await this.getCurrentUserJobs();
+      const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+      const jobs = [...req.message];
+      if (jobs) {
+        const requests = [];
+        for (let i = 0; i < jobs.length; i += 1) {
+          const request = superagent.delete(`${getEnvVars.apiUrl}/v1/users/watch/${jobs[i].jobId}`);
+          request.set('Authorization', token);
+          requests.push(request);
+        }
+        await Promise.all(requests);
+      }
+    } catch (err) {
+      throw err;
+    }
+  }
+
   async resumeAllCurrentUserJobs() {
     try {
       const req = await this.getCurrentUserJobs();
@@ -188,6 +207,19 @@ class LMapi {
         return res.body;
       }
       return null;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async getUserDevices() {
+    try {
+      const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+      const req = superagent.get(`${getEnvVars.apiUrl}/v1/users/`);
+      req.timeout({ response: parseInt(getEnvVars.respTime, 10) });
+      req.set('Authorization', token);
+      const res = await req;
+      return res;
     } catch (err) {
       throw err;
     }

@@ -61,12 +61,18 @@ function* logout() {
 
 function* checkIfLoggedIn() {
   try {
+    console.log('[CHECKLOGGEDIN]');
     const user = yield call(AsyncStorage.getItem, '@UserStore:FBUSER');
     const token = yield call(AsyncStorage.getItem, '@UserStore:API_TOKEN');
+    console.log('[token]', token);
+    yield call([LMapi, LMapi.getUserDevices]);
+    // console.log('[err.status]', err.status); // 500/401
     if (!user || !token) {
       yield logout();
     }
   } catch (err) {
+    console.log(err.toString());
+    console.log('[err.response]', (err.response) ? err.response.body.error : err.response);
     yield put(actions.authActions.logout());
   }
 }

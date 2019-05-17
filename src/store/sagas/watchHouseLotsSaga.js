@@ -34,7 +34,11 @@ function* checkWatchHouseLotsState() {
       yield put(actions.houseWatchLotsActions.checkPausedHouseLotsFalse());
     }
   } catch (err) {
-    yield put(actions.houseWatchLotsActions.updateHouseWatchLotsFail(err));
+    // console.log('[err.status]', err.status); // 500/401
+    // console.log('[err.response]', (err.response) ? err.response.body.error : err.response);
+    // console.log('[err.toString()]', err.toString());
+    const error = (err.response) ? `Error: ${err.response.body.error}` : 'Unknown error';
+    yield put(actions.houseWatchLotsActions.updateHouseWatchLotsFail(error));
   }
 }
 
@@ -46,7 +50,8 @@ function* watchHouseLots(action) {
       yield put(actions.houseWatchLotsActions.watchHouseLotsTrue());
     }
   } catch (err) {
-    yield put(actions.houseWatchLotsActions.updateHouseWatchLotsFail(err));
+    const error = (err.response) ? `Error: ${err.response.body.error}` : 'Unknown error';
+    yield put(actions.houseWatchLotsActions.updateHouseWatchLotsFail(error));
   }
 }
 
@@ -59,7 +64,8 @@ function* pauseAllJobs(action) {
     }
     yield call(checkWatchHouseLotsState);
   } catch (err) {
-    yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(err));
+    const error = (err.response) ? `Error: ${err.response.body.error}` : 'Unknown error';
+    yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(error));
   }
 }
 
@@ -76,7 +82,8 @@ function* updateHouseWatchFilterApply(action) {
     yield call(checkWatchHouseLotsState);
     yield put(navigate(HOUSE_WATCH_LOTS_SCREEN));
   } catch (err) {
-    yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(err));
+    const error = (err.response) ? `Error: ${err.response.body.error}` : 'Unknown error';
+    yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(error));
   }
 }
 
@@ -85,7 +92,8 @@ function* removeHouseWatchJob(action) {
     yield call([LMapi, LMapi.removeCurrentUserJob], action.payload);
     yield call(checkWatchHouseLotsState);
   } catch (err) {
-    yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(err));
+    const error = (err.response) ? `Error: ${err.response.body.error}` : 'Unknown error';
+    yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(error));
   }
 }
 
@@ -94,7 +102,8 @@ function* pauseHouseWatchJob(action) {
     yield call([LMapi, LMapi.pauseCurrentUserJob], action.payload);
     yield call(checkWatchHouseLotsState);
   } catch (err) {
-    yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(err));
+    const error = (err.response) ? `Error: ${err.response.body.error}` : 'Unknown error';
+    yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(error));
   }
 }
 
@@ -103,7 +112,8 @@ function* resumeHouseWatchJob(action) {
     yield call([LMapi, LMapi.resumeCurrentUserJob], action.payload);
     yield call(checkWatchHouseLotsState);
   } catch (err) {
-    yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(err));
+    const error = (err.response) ? `Error: ${err.response.body.error}` : 'Unknown error';
+    yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(error));
   }
 }
 

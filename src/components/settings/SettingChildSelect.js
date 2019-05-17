@@ -55,7 +55,7 @@ class SettingChildSelect extends React.PureComponent {
       return (
         <View style={styles.container}>
           <Text style={styles.label}>{label}</Text>
-          <Text style={styles.placeholder} onPress={() => { this.handleClick(); }}>{value}</Text>
+          <Text style={styles.placeholder} onPress={() => this.handleClick()}>{value}</Text>
           <View style={styles.divider} />
         </View>
       );

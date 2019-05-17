@@ -25,7 +25,7 @@ function* fetchProfile() {
       }
     }
   } catch (err) {
-    yield put(actions.profileActions.fetchProfileFail(err.message));
+    yield put(actions.profileActions.fetchProfileFail(err.toString()));
     yield put(navigate(AUTH_STACK));
   }
 }

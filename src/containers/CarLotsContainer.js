@@ -29,9 +29,9 @@ class CarLotsContainer extends PureComponent {
   }
 
   render() {
-    const { carLots, isFetching } = this.props;
+    const { carLots, isFetching, error } = this.props;
     if (!carLots.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
-    if (!carLots.length && !isFetching) return <BgMessage text="There is no cars" />;
+    if (!carLots.length && !isFetching) return <BgMessage text={error || 'Unknown error'} />;
     return (
       <FlatList
         data={carLots}
@@ -67,6 +67,11 @@ CarLotsContainer.propTypes = {
   itemsPerPage: PropTypes.number.isRequired,
   carLots: PropTypes.arrayOf(PropTypes.any).isRequired,
   isFetching: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+};
+
+CarLotsContainer.defaultProps = {
+  error: '',
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarLotsContainer);

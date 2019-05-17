@@ -12,7 +12,8 @@ function* updateHouseWatchLots(action) {
     const response = yield call(LMapi.getHousesWatch, jobId);
     yield put(actions.houseWatchLotsActions.updateHouseWatchLotsSuccess(response));
   } catch (err) {
-    yield put(actions.houseWatchLotsActions.updateHouseWatchLotsFail(err));
+    const error = (err.response) ? `Error: ${err.response.body.error}` : 'Unknown error';
+    yield put(actions.houseWatchLotsActions.updateHouseWatchLotsFail(error));
   }
 }
 

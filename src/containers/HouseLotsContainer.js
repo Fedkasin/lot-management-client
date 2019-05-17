@@ -7,7 +7,6 @@ import actions from '../store/actions/index';
 import HouseLotCard from '../components/house/HouseLotCard';
 import BgMessage from '../components/bgmessage/BackgroundMessage';
 import * as Colors from '../constants/Colors';
-import * as Errors from '../constants/Errors';
 
 class HouseLotsContainer extends PureComponent {
   constructor(props) {
@@ -41,7 +40,7 @@ class HouseLotsContainer extends PureComponent {
         onEndReached={this.handleScrollEnd}
         onEndReachedThreshold={0}
         refreshing={isFetching}
-        ListEmptyComponent={() => <BgMessage text={error ? Errors.connection : Errors.notfound} />}
+        ListEmptyComponent={() => <BgMessage text={error || 'Unknown error'} />}
       />
     );
   }
@@ -69,11 +68,11 @@ HouseLotsContainer.propTypes = {
   houseLots: PropTypes.arrayOf(PropTypes.any).isRequired,
   filters: PropTypes.objectOf(PropTypes.any).isRequired,
   isFetching: PropTypes.bool.isRequired,
-  error: PropTypes.objectOf(PropTypes.any),
+  error: PropTypes.string,
 };
 
 HouseLotsContainer.defaultProps = {
-  error: null,
+  error: '',
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HouseLotsContainer);

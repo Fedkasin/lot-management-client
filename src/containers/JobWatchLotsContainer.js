@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import HouseLotCard from '../components/house/HouseLotCard';
 import BgMessage from '../components/bgmessage/BackgroundMessage';
 import * as Colors from '../constants/Colors';
-import * as Errors from '../constants/Errors';
 
 class JobWatchLotsContainer extends PureComponent {
   render() {
@@ -24,7 +23,7 @@ class JobWatchLotsContainer extends PureComponent {
         onEndReached={this.handleScrollEnd}
         onEndReachedThreshold={0}
         refreshing={isFetching}
-        ListEmptyComponent={() => <BgMessage text={error ? Errors.connection : Errors.notfound} />}
+        ListEmptyComponent={() => <BgMessage text={error || 'Unknown error'} />}
       />
     );
   }
@@ -44,11 +43,11 @@ function mapStateToProps(state) {
 JobWatchLotsContainer.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   houseWatchLots: PropTypes.arrayOf(PropTypes.any).isRequired,
-  error: PropTypes.objectOf(PropTypes.any),
+  error: PropTypes.string,
 };
 
 JobWatchLotsContainer.defaultProps = {
-  error: null,
+  error: '',
 };
 
 export default connect(mapStateToProps)(JobWatchLotsContainer);

@@ -9,7 +9,6 @@ import BgMessage from '../components/bgmessage/BackgroundMessage';
 
 import HouseJob from '../components/house/HouseJob';
 import * as Colors from '../constants/Colors';
-import * as Errors from '../constants/Errors';
 
 const styles = StyleSheet.create({
   container: {
@@ -121,7 +120,7 @@ class HouseWatchLotsContainer extends PureComponent {
           onRefresh={onCheckHouseWatchState}
           onEndReachedThreshold={0}
           refreshing={isFetching}
-          ListEmptyComponent={() => <BgMessage text={error ? Errors.connection : Errors.notfound} />}
+          ListEmptyComponent={() => <BgMessage text={error || 'Unknown error'} />}
         />
       </View>
     );
@@ -164,11 +163,11 @@ HouseWatchLotsContainer.propTypes = {
   removeJob: PropTypes.func.isRequired,
   pauseJob: PropTypes.func.isRequired,
   resumeJob: PropTypes.func.isRequired,
-  error: PropTypes.objectOf(PropTypes.any),
+  error: PropTypes.string,
 };
 
 HouseWatchLotsContainer.defaultProps = {
-  error: null,
+  error: '',
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HouseWatchLotsContainer);

@@ -57,7 +57,7 @@ class App extends PureComponent {
             store.dispatch(actions.authActions.loginFail(Errors.authfail));
           }
         } catch (err) {
-          store.dispatch(actions.authActions.loginFail(err.message));
+          store.dispatch(actions.authActions.loginFail(err.toString()));
         }
       }
     });
