@@ -6,9 +6,7 @@ import * as Colors from '../../constants/Colors';
 function ErrorContainer(props) {
   const { error } = props;
   return (
-    <>
-      <Text style={{ color: Colors.red }}>{error}</Text>
-    </>
+    <Text style={{ color: Colors.red }}>{error}</Text>
   );
 }
 

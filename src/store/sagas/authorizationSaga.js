@@ -17,6 +17,7 @@ import {
 } from '../../constants/Actions';
 import { signInWithGoogleAsync, signOut } from '../../helpers/authHelpers';
 import { AUTH_STACK, APP_TAB } from '../../constants/Routes';
+import * as Errors from '../../constants/Errors';
 
 function* login(action) {
   try {
@@ -45,7 +46,7 @@ function* login(action) {
     yield call(LMapi.logIn, body);
     yield put(actions.authActions.loginSuccess());
   } catch (err) {
-    yield put(actions.authActions.loginFail('Failed to login'));
+    yield put(actions.authActions.loginFail(Errors.authfail));
   }
 }
 

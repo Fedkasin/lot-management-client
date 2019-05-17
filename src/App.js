@@ -12,6 +12,7 @@ import { firebaseConfig } from './constants/Config';
 import initStore from './store';
 import sagaService from './services/sagaService';
 import AssetsLoader from './containers/AssetsLoaderContainer';
+import * as Errors from './constants/Errors';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -44,7 +45,7 @@ class App extends PureComponent {
           await AsyncStorage.removeItem('@UserStore:API_TOKEN');
           store.dispatch(actions.authActions.loginFail());
         } catch (err) {
-          store.dispatch(actions.authActions.logoutFail('Failed to Log Out'));
+          store.dispatch(actions.authActions.logoutFail());
         }
       } else {
         try {
@@ -53,7 +54,7 @@ class App extends PureComponent {
           if (API_TOKEN) {
             store.dispatch(actions.authActions.loginSuccess());
           } else {
-            store.dispatch(actions.authActions.loginFail('Authentication failed'));
+            store.dispatch(actions.authActions.loginFail(Errors.authfail));
           }
         } catch (err) {
           store.dispatch(actions.authActions.loginFail(err.message));
