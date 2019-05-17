@@ -27,8 +27,7 @@ class LMapi {
 
   async pauseAllCurrentUserJobs() {
     try {
-      const lmapi = new LMapi();
-      const req = await lmapi.getCurrentUserJobs();
+      const req = await this.getCurrentUserJobs();
       const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
       const jobs = [...req.message];
       if (jobs) {
@@ -47,8 +46,7 @@ class LMapi {
 
   async resumeAllCurrentUserJobs() {
     try {
-      const lmapi = new LMapi();
-      const req = await lmapi.getCurrentUserJobs();
+      const req = await this.getCurrentUserJobs();
       const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
       const jobs = [...req.message];
       if (jobs) {

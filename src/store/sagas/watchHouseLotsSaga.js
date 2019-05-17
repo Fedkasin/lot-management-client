@@ -53,9 +53,9 @@ function* watchHouseLots(action) {
 function* pauseAllJobs(action) {
   try {
     if (action.payload) {
-      yield call(LMapi.pauseAllCurrentUserJobs);
+      yield call([LMapi, LMapi.pauseAllCurrentUserJobs]);
     } else {
-      yield call(LMapi.resumeAllCurrentUserJobs);
+      yield call([LMapi, LMapi.resumeAllCurrentUserJobs]);
     }
     yield call(checkWatchHouseLotsState);
   } catch (err) {
@@ -72,7 +72,7 @@ function* updateHouseWatchFilterApply(action) {
       max: parseInt(filters.priceTo, 10),
       min: parseInt(filters.priceFrom, 10),
     };
-    yield call(LMapi.startCurrentUserJob, params);
+    yield call([LMapi, LMapi.startCurrentUserJob], params);
     yield call(checkWatchHouseLotsState);
     yield put(navigate(HOUSE_WATCH_LOTS_SCREEN));
   } catch (err) {
@@ -82,7 +82,7 @@ function* updateHouseWatchFilterApply(action) {
 
 function* removeHouseWatchJob(action) {
   try {
-    yield call(LMapi.removeCurrentUserJob, action.payload);
+    yield call([LMapi, LMapi.removeCurrentUserJob], action.payload);
     yield call(checkWatchHouseLotsState);
   } catch (err) {
     yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(err));
@@ -91,7 +91,7 @@ function* removeHouseWatchJob(action) {
 
 function* pauseHouseWatchJob(action) {
   try {
-    yield call(LMapi.pauseCurrentUserJob, action.payload);
+    yield call([LMapi, LMapi.pauseCurrentUserJob], action.payload);
     yield call(checkWatchHouseLotsState);
   } catch (err) {
     yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(err));
@@ -100,7 +100,7 @@ function* pauseHouseWatchJob(action) {
 
 function* resumeHouseWatchJob(action) {
   try {
-    yield call(LMapi.resumeCurrentUserJob, action.payload);
+    yield call([LMapi, LMapi.resumeCurrentUserJob], action.payload);
     yield call(checkWatchHouseLotsState);
   } catch (err) {
     yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(err));

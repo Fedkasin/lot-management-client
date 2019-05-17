@@ -26,13 +26,13 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.lightGray,
     borderBottomWidth: 1,
   },
-  scrollview: {
-    backgroundColor: Colors.white,
+  mainView: {
+    flexDirection: 'column',
     marginBottom: 50,
   },
   switchContainer: {
     flexDirection: 'row',
-    padding: 10,
+    padding: 9,
   },
   sectionLabel: {
     fontSize: 24,
@@ -94,7 +94,7 @@ class HouseWatchLotsContainer extends PureComponent {
     } = this.props;
     if (!houseWatchLots.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
     return (
-      <View style={{ flexDirection: 'column' }}>
+      <View style={styles.mainView}>
         <View style={[styles.switchContainer, { display: isWatching ? 'flex' : 'none' }]}>
           <Text style={styles.sectionLabel}>Live tracking</Text>
           <Switch
@@ -119,7 +119,6 @@ class HouseWatchLotsContainer extends PureComponent {
           )}
           keyExtractor={jobId => JSON.stringify(jobId)}
           onRefresh={onCheckHouseWatchState}
-          onEndReached={this.handleScrollEnd}
           onEndReachedThreshold={0}
           refreshing={isFetching}
           ListEmptyComponent={() => <BgMessage text={error ? Errors.connection : Errors.notfound} />}
