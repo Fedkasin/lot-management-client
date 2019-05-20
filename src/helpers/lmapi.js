@@ -5,6 +5,7 @@ import getEnvVars from '../constants/environment';
 class LMapi {
   constructor(jobs) {
     this.jobs = jobs;
+    this.getCurrentUserJobs = this.getCurrentUserJobs.bind(this);
   }
 
   async getCurrentUserJobs() {
@@ -24,7 +25,7 @@ class LMapi {
     }
   }
 
-  async stopAllCurrentUserJobs() {
+  async pauseAllCurrentUserJobs() {
     try {
       const req = await this.getCurrentUserJobs();
       const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
@@ -32,7 +33,7 @@ class LMapi {
       if (jobs) {
         const requests = [];
         for (let i = 0; i < jobs.length; i += 1) {
-          const request = superagent.delete(`${getEnvVars.apiUrl}/v1/users/watch/${jobs[i].jobId}`);
+          const request = superagent.post(`${getEnvVars.apiUrl}/v1/users/watch/${jobs[i].jobId}/pause`);
           request.set('Authorization', token);
           requests.push(request);
         }
@@ -43,7 +44,7 @@ class LMapi {
     }
   }
 
-  async pauseAllCurrentUserJobs() {
+  async stopAllCurrentUserJobs() {
     try {
       const req = await this.getCurrentUserJobs();
       const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
@@ -51,7 +52,7 @@ class LMapi {
       if (jobs) {
         const requests = [];
         for (let i = 0; i < jobs.length; i += 1) {
-          const request = superagent.post(`${getEnvVars.apiUrl}/v1/users/watch/${jobs[i].jobId}/pause`);
+          const request = superagent.delete(`${getEnvVars.apiUrl}/v1/users/watch/${jobs[i].jobId}`);
           request.set('Authorization', token);
           requests.push(request);
         }
@@ -206,6 +207,19 @@ class LMapi {
         return res.body;
       }
       return null;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async getUserDevices() {
+    try {
+      const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+      const req = superagent.get(`${getEnvVars.apiUrl}/v1/users/`);
+      req.timeout({ response: parseInt(getEnvVars.respTime, 10) });
+      req.set('Authorization', token);
+      const res = await req;
+      return res;
     } catch (err) {
       throw err;
     }

@@ -5,7 +5,7 @@ import { navigate } from '../actions/navigationActionCreators';
 import { HOUSE_WATCH_LOTS_SCREEN } from '../../constants/Routes';
 import {
   UPDATE_HOUSE_WATCH_STATE,
-  CHECK_HOUSE_WATCH_STATE,
+  FETCH_HOUSE_WATCH_STATE,
   UPDATE_HOUSE_WATCH_FILTER_APPLY,
   REMOVE_HOUSE_WATCH_JOB,
   PAUSE_HOUSE_WATCH_JOB,
@@ -34,8 +34,8 @@ function* checkWatchHouseLotsState() {
       yield put(actions.houseWatchLotsActions.checkPausedHouseLotsFalse());
     }
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
+    const error = (err.response) ? `Error: ${err.response.body.error}` : 'Unknown error';
+    yield put(actions.houseWatchLotsActions.updateHouseWatchLotsFail(error));
   }
 }
 
@@ -47,22 +47,22 @@ function* watchHouseLots(action) {
       yield put(actions.houseWatchLotsActions.watchHouseLotsTrue());
     }
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
+    const error = (err.response) ? `Error: ${err.response.body.error}` : 'Unknown error';
+    yield put(actions.houseWatchLotsActions.updateHouseWatchLotsFail(error));
   }
 }
 
 function* pauseAllJobs(action) {
   try {
     if (action.payload) {
-      yield call(LMapi.pauseAllCurrentUserJobs);
+      yield call([LMapi, LMapi.pauseAllCurrentUserJobs]);
     } else {
-      yield call(LMapi.resumeAllCurrentUserJobs);
+      yield call([LMapi, LMapi.resumeAllCurrentUserJobs]);
     }
     yield call(checkWatchHouseLotsState);
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
+    const error = (err.response) ? `Error: ${err.response.body.error}` : 'Unknown error';
+    yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(error));
   }
 }
 
@@ -75,42 +75,42 @@ function* updateHouseWatchFilterApply(action) {
       max: parseInt(filters.priceTo, 10),
       min: parseInt(filters.priceFrom, 10),
     };
-    yield call(LMapi.startCurrentUserJob, params);
+    yield call([LMapi, LMapi.startCurrentUserJob], params);
     yield call(checkWatchHouseLotsState);
     yield put(navigate(HOUSE_WATCH_LOTS_SCREEN));
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
+    const error = (err.response) ? `Error: ${err.response.body.error}` : 'Unknown error';
+    yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(error));
   }
 }
 
 function* removeHouseWatchJob(action) {
   try {
-    yield call(LMapi.removeCurrentUserJob, action.payload);
+    yield call([LMapi, LMapi.removeCurrentUserJob], action.payload);
     yield call(checkWatchHouseLotsState);
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
+    const error = (err.response) ? `Error: ${err.response.body.error}` : 'Unknown error';
+    yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(error));
   }
 }
 
 function* pauseHouseWatchJob(action) {
   try {
-    yield call(LMapi.pauseCurrentUserJob, action.payload);
+    yield call([LMapi, LMapi.pauseCurrentUserJob], action.payload);
     yield call(checkWatchHouseLotsState);
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
+    const error = (err.response) ? `Error: ${err.response.body.error}` : 'Unknown error';
+    yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(error));
   }
 }
 
 function* resumeHouseWatchJob(action) {
   try {
-    yield call(LMapi.resumeCurrentUserJob, action.payload);
+    yield call([LMapi, LMapi.resumeCurrentUserJob], action.payload);
     yield call(checkWatchHouseLotsState);
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
+    const error = (err.response) ? `Error: ${err.response.body.error}` : 'Unknown error';
+    yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(error));
   }
 }
 
@@ -119,7 +119,7 @@ export function* watchHouseLotsSaga() {
 }
 
 export function* checkWatchHouseLotsStateSaga() {
-  yield takeLatest(CHECK_HOUSE_WATCH_STATE, checkWatchHouseLotsState);
+  yield takeLatest(FETCH_HOUSE_WATCH_STATE, checkWatchHouseLotsState);
 }
 
 export function* updateHouseWatchFilterApplySaga() {

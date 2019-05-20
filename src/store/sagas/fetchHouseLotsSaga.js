@@ -16,7 +16,8 @@ function* fetchHouseLots(action) {
     const response = yield call(LMapi.getHouses, query);
     yield put(actions.houseLotsActions.fetchHouseLotsSuccess(response));
   } catch (err) {
-    yield put(actions.houseLotsActions.fetchHouseLotsFail(err));
+    const error = (err.response) ? `Error: ${err.response.body.error}` : 'Unknown error';
+    yield put(actions.houseLotsActions.fetchHouseLotsFail(error));
   }
 }
 

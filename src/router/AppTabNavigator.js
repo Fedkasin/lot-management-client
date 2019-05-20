@@ -38,7 +38,6 @@ ProfileStack.navigationOptions = {
 
 const CarLotsStack = createStackNavigator({
   [CAR_LOTS_SCREEN]: CarLotsScreen,
-  // [FILTER_SCREEN]: FilterScreen,
 });
 
 CarLotsStack.navigationOptions = {

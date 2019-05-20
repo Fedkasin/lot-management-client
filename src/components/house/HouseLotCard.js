@@ -108,7 +108,6 @@ class HouseLotCard extends React.PureComponent {
               </View>
             </LinearGradient>
           </ImageBackground>
-          {/* <Text style={styles.innerText}>{this.props.item.title || "В 2019 ГОДУ ПУТИН ЗАПРЕТИТ РОССИЯНАМ ПОКУПАТЬ... ЧИТАТЬ ПРОДОЛЖЕНИЕ"}</Text> */}
         </TouchableOpacity>
       </View>
     );

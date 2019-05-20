@@ -1,13 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {
-  Alert,
-  ScrollView,
-  ActivityIndicator,
-  View,
-  Text,
-  Switch,
-  StyleSheet,
+  Alert, ActivityIndicator, View, Text, Switch, StyleSheet, FlatList,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import actions from '../store/actions';
@@ -15,12 +9,11 @@ import BgMessage from '../components/bgmessage/BackgroundMessage';
 
 import HouseJob from '../components/house/HouseJob';
 import * as Colors from '../constants/Colors';
+import * as Errors from '../constants/Errors';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.white,
     justifyContent: 'center',
-    paddingHorizontal: 10,
     flex: 1,
   },
   job: {
@@ -32,6 +25,19 @@ const styles = StyleSheet.create({
   divider: {
     borderBottomColor: Colors.lightGray,
     borderBottomWidth: 1,
+  },
+  mainView: {
+    flexDirection: 'column',
+    marginBottom: 50,
+  },
+  switchContainer: {
+    flexDirection: 'row',
+    padding: 9,
+  },
+  sectionLabel: {
+    fontSize: 24,
+    color: Colors.gray,
+    marginLeft: 9,
   },
 });
 
@@ -83,34 +89,40 @@ class HouseWatchLotsContainer extends PureComponent {
       isAnyPaused,
       jobs,
       isEditing,
+      error,
+      onCheckHouseWatchState,
     } = this.props;
     if (!houseWatchLots.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
     return (
-      <View style={{ flexDirection: 'column' }}>
-        <View style={{ display: isWatching ? 'flex' : 'none', flexDirection: 'row', padding: 10 }}>
-          <Text style={{ fontSize: 24, color: Colors.gray, marginLeft: 9 }}>Live tracking</Text>
+      <View style={styles.mainView}>
+        <View style={[styles.switchContainer, { display: isWatching ? 'flex' : 'none' }]}>
+          <Text style={styles.sectionLabel}>Live tracking</Text>
           <Switch
             value={isAnyPaused}
             style={{ marginLeft: 'auto' }}
             onValueChange={() => this.onPauseAllJobs(isAnyPaused)}
           />
         </View>
-        <ScrollView style={{ backgroundColor: Colors.white, marginBottom: 50 }}>
-          <View style={styles.container}>
-            { (jobs && jobs.length) ? jobs.map((value, index) => (
-              <HouseJob
-                key={`job-${index + 1}`}
-                index={index + 1}
-                item={value}
-                iosIcon={value.state === 'RUNNING' ? 'ios-pause' : 'ios-play'}
-                otherIcon={value.state === 'RUNNING' ? 'md-pause' : 'md-play'}
-                onPlayPause={() => this.onPlayPauseJob({ id: value.jobId, state: value.state })}
-                onClose={() => this.onCloseJob(value.jobId)}
-                isEditing={isEditing}
-              />
-            )) : <BgMessage text="There are no trackers" />}
-          </View>
-        </ScrollView>
+        <FlatList
+          data={jobs}
+          renderItem={({ item, index }) => (
+            <HouseJob
+              key={`job-${index + 1}`}
+              index={index + 1}
+              item={item}
+              iosIcon={item.state === 'RUNNING' ? 'ios-pause' : 'ios-play'}
+              otherIcon={item.state === 'RUNNING' ? 'md-pause' : 'md-play'}
+              onPlayPause={() => this.onPlayPauseJob({ id: item.jobId, state: item.state })}
+              onClose={() => this.onCloseJob(item.jobId)}
+              isEditing={isEditing}
+            />
+          )}
+          keyExtractor={jobId => JSON.stringify(jobId)}
+          onRefresh={onCheckHouseWatchState}
+          onEndReachedThreshold={0}
+          refreshing={isFetching}
+          ListEmptyComponent={() => <BgMessage text={error || Errors.notfound} />}
+        />
       </View>
     );
   }
@@ -152,6 +164,11 @@ HouseWatchLotsContainer.propTypes = {
   removeJob: PropTypes.func.isRequired,
   pauseJob: PropTypes.func.isRequired,
   resumeJob: PropTypes.func.isRequired,
+  error: PropTypes.string,
+};
+
+HouseWatchLotsContainer.defaultProps = {
+  error: '',
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HouseWatchLotsContainer);

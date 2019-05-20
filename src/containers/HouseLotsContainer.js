@@ -7,6 +7,7 @@ import actions from '../store/actions/index';
 import HouseLotCard from '../components/house/HouseLotCard';
 import BgMessage from '../components/bgmessage/BackgroundMessage';
 import * as Colors from '../constants/Colors';
+import * as Errors from '../constants/Errors';
 
 class HouseLotsContainer extends PureComponent {
   constructor(props) {
@@ -29,7 +30,7 @@ class HouseLotsContainer extends PureComponent {
   }
 
   render() {
-    const { houseLots, isFetching } = this.props;
+    const { houseLots, isFetching, error } = this.props;
     if (!houseLots.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
     return (
       <FlatList
@@ -40,7 +41,7 @@ class HouseLotsContainer extends PureComponent {
         onEndReached={this.handleScrollEnd}
         onEndReachedThreshold={0}
         refreshing={isFetching}
-        ListEmptyComponent={() => <BgMessage text="There are no houses" />}
+        ListEmptyComponent={() => <BgMessage text={error || Errors.notfound} />}
       />
     );
   }
@@ -50,10 +51,7 @@ function mapStateToProps(state) {
   return {
     isFetching: state.houseLotsReducers.isFetching,
     houseLots: state.houseLotsReducers.houseLots,
-    filters: state.houseFilterReducers || {
-      priceFrom: '50',
-      priceTo: '500',
-    },
+    filters: state.houseFilterReducers,
     page: state.houseLotsReducers.page,
     itemsPerPage: state.houseLotsReducers.itemsPerPage,
     error: state.houseLotsReducers.error ? state.houseLotsReducers.error : null,
@@ -71,6 +69,11 @@ HouseLotsContainer.propTypes = {
   houseLots: PropTypes.arrayOf(PropTypes.any).isRequired,
   filters: PropTypes.objectOf(PropTypes.any).isRequired,
   isFetching: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+};
+
+HouseLotsContainer.defaultProps = {
+  error: '',
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HouseLotsContainer);

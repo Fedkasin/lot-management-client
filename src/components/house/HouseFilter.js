@@ -21,6 +21,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     padding: 10,
   },
+  select: {
+    height: 50,
+    width: '50%',
+  },
 });
 
 class HouseFilter extends React.PureComponent {
@@ -100,14 +104,14 @@ class HouseFilter extends React.PureComponent {
         <Text style={styles.bigLabel}>Price</Text>
         <View style={{ flexDirection: 'row' }}>
           <SettingChildSelect
-            style={{ height: 50, width: '50%' }}
+            style={styles.select}
             value={filters.priceFrom}
             items={filtersConst.pricing}
             label="from"
             handler={this.onChangeHouseFilterPriceFrom}
           />
           <SettingChildSelect
-            style={{ height: 50, width: '50%' }}
+            style={styles.select}
             value={filters.priceTo}
             items={filtersConst.pricing}
             label="to"

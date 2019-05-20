@@ -3,7 +3,7 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import LMapi from '../../helpers/lmapi';
 import actions from '../actions/index';
 import {
-  UPDATE_HOUSE_WATCH_LOTS,
+  FETCH_HOUSE_WATCH_LOTS,
 } from '../../constants/Actions';
 
 function* updateHouseWatchLots(action) {
@@ -12,10 +12,11 @@ function* updateHouseWatchLots(action) {
     const response = yield call(LMapi.getHousesWatch, jobId);
     yield put(actions.houseWatchLotsActions.updateHouseWatchLotsSuccess(response));
   } catch (err) {
-    yield put(actions.houseWatchLotsActions.updateHouseWatchLotsFail(err));
+    const error = (err.response) ? `Error: ${err.response.body.error}` : 'Unknown error';
+    yield put(actions.houseWatchLotsActions.updateHouseWatchLotsFail(error));
   }
 }
 
 export default function* updateHouseWatchLotsSaga() {
-  yield takeLatest(UPDATE_HOUSE_WATCH_LOTS, updateHouseWatchLots);
+  yield takeLatest(FETCH_HOUSE_WATCH_LOTS, updateHouseWatchLots);
 }

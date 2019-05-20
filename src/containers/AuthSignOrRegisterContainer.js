@@ -123,7 +123,7 @@ AuthSignOrRegisterContainer.propTypes = {
 };
 
 AuthSignOrRegisterContainer.defaultProps = {
-  error: null,
+  error: '',
   onSignIn: null,
 };
 
