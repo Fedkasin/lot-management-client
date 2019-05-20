@@ -3,7 +3,7 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import LMapi from '../../helpers/lmapi';
 import actions from '../actions/index';
 import {
-  UPDATE_HOUSE_WATCH_LOTS,
+  FETCH_HOUSE_WATCH_LOTS,
 } from '../../constants/Actions';
 
 function* updateHouseWatchLots(action) {
@@ -18,5 +18,5 @@ function* updateHouseWatchLots(action) {
 }
 
 export default function* updateHouseWatchLotsSaga() {
-  yield takeLatest(UPDATE_HOUSE_WATCH_LOTS, updateHouseWatchLots);
+  yield takeLatest(FETCH_HOUSE_WATCH_LOTS, updateHouseWatchLots);
 }

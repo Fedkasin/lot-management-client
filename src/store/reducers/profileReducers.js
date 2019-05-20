@@ -1,7 +1,7 @@
 import {
-  LOAD_PROFILE,
-  LOAD_PROFILE_SUCCESS,
-  LOAD_PROFILE_FAIL,
+  FETCH_PROFILE,
+  FETCH_PROFILE_SUCCESS,
+  FETCH_PROFILE_FAIL,
 } from '../../constants/Actions';
 
 const initialState = {
@@ -12,19 +12,19 @@ const initialState = {
 
 const authReducers = (state = initialState, action) => {
   switch (action.type) {
-    case LOAD_PROFILE:
+    case FETCH_PROFILE:
       return {
         ...state,
         isLoading: true,
       };
-    case LOAD_PROFILE_SUCCESS:
+    case FETCH_PROFILE_SUCCESS:
       return {
         ...state,
         profile: JSON.parse(action.payload),
         error: null,
         isLoading: false,
       };
-    case LOAD_PROFILE_FAIL:
+    case FETCH_PROFILE_FAIL:
       return {
         ...state,
         error: action.error,

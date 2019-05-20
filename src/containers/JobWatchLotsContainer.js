@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import HouseLotCard from '../components/house/HouseLotCard';
 import BgMessage from '../components/bgmessage/BackgroundMessage';
 import * as Colors from '../constants/Colors';
+import * as Errors from '../constants/Errors';
 
 class JobWatchLotsContainer extends PureComponent {
   render() {
@@ -23,7 +24,7 @@ class JobWatchLotsContainer extends PureComponent {
         onEndReached={this.handleScrollEnd}
         onEndReachedThreshold={0}
         refreshing={isFetching}
-        ListEmptyComponent={() => <BgMessage text={error || 'Unknown error'} />}
+        ListEmptyComponent={() => <BgMessage text={error || Errors.notfound} />}
       />
     );
   }

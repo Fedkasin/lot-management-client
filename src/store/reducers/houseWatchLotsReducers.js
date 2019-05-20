@@ -1,7 +1,7 @@
 import {
-  UPDATE_HOUSE_WATCH_LOTS,
-  UPDATE_HOUSE_WATCH_LOTS_SUCCESS,
-  UPDATE_HOUSE_WATCH_LOTS_FAIL,
+  FETCH_HOUSE_WATCH_LOTS,
+  FETCH_HOUSE_WATCH_LOTS_SUCCESS,
+  FETCH_HOUSE_WATCH_LOTS_FAIL,
   FETCH_HOUSE_WATCH_STATE,
   FETCH_HOUSE_WATCH_STATE_TRUE,
   FETCH_HOUSE_WATCH_STATE_FALSE,
@@ -28,19 +28,19 @@ const initialState = {
 
 const houseWatchLotsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_HOUSE_WATCH_LOTS:
+    case FETCH_HOUSE_WATCH_LOTS:
       return {
         ...state,
         isFetching: true,
       };
-    case UPDATE_HOUSE_WATCH_LOTS_SUCCESS:
+    case FETCH_HOUSE_WATCH_LOTS_SUCCESS:
       return {
         ...state,
         error: null,
         houseWatchLots: action.payload.message.apartments.onliner ? [...action.payload.message.apartments.onliner.apartments] : [],
         isFetching: false,
       };
-    case UPDATE_HOUSE_WATCH_LOTS_FAIL:
+    case FETCH_HOUSE_WATCH_LOTS_FAIL:
       return {
         ...state,
         error: action.error,
