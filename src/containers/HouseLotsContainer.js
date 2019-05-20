@@ -7,6 +7,7 @@ import actions from '../store/actions/index';
 import HouseLotCard from '../components/house/HouseLotCard';
 import BgMessage from '../components/bgmessage/BackgroundMessage';
 import * as Colors from '../constants/Colors';
+import * as Errors from '../constants/Errors';
 
 class HouseLotsContainer extends PureComponent {
   constructor(props) {
@@ -40,7 +41,7 @@ class HouseLotsContainer extends PureComponent {
         onEndReached={this.handleScrollEnd}
         onEndReachedThreshold={0}
         refreshing={isFetching}
-        ListEmptyComponent={() => <BgMessage text={error || 'Unknown error'} />}
+        ListEmptyComponent={() => <BgMessage text={error || Errors.notfound} />}
       />
     );
   }

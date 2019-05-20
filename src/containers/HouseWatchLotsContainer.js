@@ -9,6 +9,7 @@ import BgMessage from '../components/bgmessage/BackgroundMessage';
 
 import HouseJob from '../components/house/HouseJob';
 import * as Colors from '../constants/Colors';
+import * as Errors from '../constants/Errors';
 
 const styles = StyleSheet.create({
   container: {
@@ -120,7 +121,7 @@ class HouseWatchLotsContainer extends PureComponent {
           onRefresh={onCheckHouseWatchState}
           onEndReachedThreshold={0}
           refreshing={isFetching}
-          ListEmptyComponent={() => <BgMessage text={error || 'Unknown error'} />}
+          ListEmptyComponent={() => <BgMessage text={error || Errors.notfound} />}
         />
       </View>
     );

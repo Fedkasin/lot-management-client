@@ -2,10 +2,10 @@ import {
   UPDATE_HOUSE_WATCH_LOTS,
   UPDATE_HOUSE_WATCH_LOTS_SUCCESS,
   UPDATE_HOUSE_WATCH_LOTS_FAIL,
-  CHECK_HOUSE_WATCH_STATE,
-  CHECK_HOUSE_WATCH_STATE_TRUE,
-  CHECK_HOUSE_WATCH_STATE_FALSE,
-  CHECK_HOUSE_WATCH_STATE_FAIL,
+  FETCH_HOUSE_WATCH_STATE,
+  FETCH_HOUSE_WATCH_STATE_TRUE,
+  FETCH_HOUSE_WATCH_STATE_FALSE,
+  FETCH_HOUSE_WATCH_STATE_FAIL,
   EDIT_HOUSE_WATCH_JOB_LIST,
   PAUSED_HOUSE_WATCH_JOBS_TRUE,
   PAUSED_HOUSE_WATCH_JOBS_FALSE,
@@ -47,19 +47,19 @@ const houseWatchLotsReducer = (state = initialState, action) => {
         houseWatchLots: [],
         isFetching: false,
       };
-    case CHECK_HOUSE_WATCH_STATE:
+    case FETCH_HOUSE_WATCH_STATE:
       return {
         ...state,
         isFetching: true,
       };
-    case CHECK_HOUSE_WATCH_STATE_TRUE:
+    case FETCH_HOUSE_WATCH_STATE_TRUE:
       return {
         ...state,
         houseWatchJobs: [...action.payload],
         isWatching: true,
         isFetching: false,
       };
-    case CHECK_HOUSE_WATCH_STATE_FALSE:
+    case FETCH_HOUSE_WATCH_STATE_FALSE:
       return {
         ...state,
         isWatching: false,
@@ -67,7 +67,7 @@ const houseWatchLotsReducer = (state = initialState, action) => {
         houseWatchLots: [],
         houseWatchJobs: [],
       };
-    case CHECK_HOUSE_WATCH_STATE_FAIL:
+    case FETCH_HOUSE_WATCH_STATE_FAIL:
       return {
         ...state,
         error: action.error,

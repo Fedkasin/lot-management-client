@@ -2,10 +2,10 @@ import {
   UPDATE_HOUSE_WATCH_LOTS,
   UPDATE_HOUSE_WATCH_LOTS_SUCCESS,
   UPDATE_HOUSE_WATCH_LOTS_FAIL,
-  CHECK_HOUSE_WATCH_STATE,
-  CHECK_HOUSE_WATCH_STATE_TRUE,
-  CHECK_HOUSE_WATCH_STATE_FALSE,
-  CHECK_HOUSE_WATCH_STATE_FAIL,
+  FETCH_HOUSE_WATCH_STATE,
+  FETCH_HOUSE_WATCH_STATE_TRUE,
+  FETCH_HOUSE_WATCH_STATE_FALSE,
+  FETCH_HOUSE_WATCH_STATE_FAIL,
   REMOVE_HOUSE_WATCH_JOB,
   PAUSE_HOUSE_WATCH_JOB,
   PAUSED_HOUSE_WATCH_JOBS_TRUE,
@@ -31,22 +31,22 @@ export const updateHouseWatchLotsFail = err => ({
 });
 
 export const checkWatchHouseLotsState = data => ({
-  type: CHECK_HOUSE_WATCH_STATE,
+  type: FETCH_HOUSE_WATCH_STATE,
   payload: data,
 });
 
 export const watchHouseLotsTrue = data => ({
-  type: CHECK_HOUSE_WATCH_STATE_TRUE,
+  type: FETCH_HOUSE_WATCH_STATE_TRUE,
   payload: data,
 });
 
 export const watchHouseLotsFalse = data => ({
-  type: CHECK_HOUSE_WATCH_STATE_FALSE,
+  type: FETCH_HOUSE_WATCH_STATE_FALSE,
   payload: data,
 });
 
 export const checkWatchHouseLotsStateFail = err => ({
-  type: CHECK_HOUSE_WATCH_STATE_FAIL,
+  type: FETCH_HOUSE_WATCH_STATE_FAIL,
   error: err,
 });
 

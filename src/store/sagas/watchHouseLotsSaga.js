@@ -5,7 +5,7 @@ import { navigate } from '../actions/navigationActionCreators';
 import { HOUSE_WATCH_LOTS_SCREEN } from '../../constants/Routes';
 import {
   UPDATE_HOUSE_WATCH_STATE,
-  CHECK_HOUSE_WATCH_STATE,
+  FETCH_HOUSE_WATCH_STATE,
   UPDATE_HOUSE_WATCH_FILTER_APPLY,
   REMOVE_HOUSE_WATCH_JOB,
   PAUSE_HOUSE_WATCH_JOB,
@@ -34,9 +34,6 @@ function* checkWatchHouseLotsState() {
       yield put(actions.houseWatchLotsActions.checkPausedHouseLotsFalse());
     }
   } catch (err) {
-    // console.log('[err.status]', err.status); // 500/401
-    // console.log('[err.response]', (err.response) ? err.response.body.error : err.response);
-    // console.log('[err.toString()]', err.toString());
     const error = (err.response) ? `Error: ${err.response.body.error}` : 'Unknown error';
     yield put(actions.houseWatchLotsActions.updateHouseWatchLotsFail(error));
   }
@@ -122,7 +119,7 @@ export function* watchHouseLotsSaga() {
 }
 
 export function* checkWatchHouseLotsStateSaga() {
-  yield takeLatest(CHECK_HOUSE_WATCH_STATE, checkWatchHouseLotsState);
+  yield takeLatest(FETCH_HOUSE_WATCH_STATE, checkWatchHouseLotsState);
 }
 
 export function* updateHouseWatchFilterApplySaga() {
