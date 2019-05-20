@@ -19,6 +19,14 @@ import { signInWithGoogleAsync, signOut } from '../../helpers/authHelpers';
 import { AUTH_STACK, APP_TAB } from '../../constants/Routes';
 import * as Errors from '../../constants/Errors';
 
+function* logout() {
+  try {
+    yield call(signOut);
+    yield put(actions.authActions.logoutSuccess());
+  } catch (err) {
+    yield put(actions.authActions.logoutFail());
+  }
+}
 
 function* checkIfLoggedIn() {
   try {
@@ -26,7 +34,7 @@ function* checkIfLoggedIn() {
     const token = yield call(AsyncStorage.getItem, '@UserStore:API_TOKEN');
     yield call([LMapi, LMapi.getCurrentUserJobs]);
     if (!user || !token) {
-      yield put(actions.authActions.loginFail(Errors.authfail));
+      yield put({ type: 'LOGOUT', logout });
     } else {
       yield put(actions.authActions.loginSuccess());
     }
@@ -65,15 +73,6 @@ function* login(action) {
     if (user && token) yield call(checkIfLoggedIn);
   } catch (err) {
     yield put(actions.authActions.loginFail(Errors.authfail));
-  }
-}
-
-function* logout() {
-  try {
-    yield call(signOut);
-    yield put(actions.authActions.logoutSuccess());
-  } catch (err) {
-    yield put(actions.authActions.logoutFail());
   }
 }
 
