@@ -168,7 +168,7 @@ class HouseJob extends React.PureComponent {
               </View>
               <View style={styles.cardItemInner}>
                 <Text style={styles.cardLabel}>
-                  {i18n.t('Rooms')}
+                  {i18n.t('ROOMS')}
                 </Text>
                 <View style={styles.priceCard}>
                   <IonIcon
