@@ -27,5 +27,8 @@
   "LIVE_TRACKING": "Live tracking",
   "CANCEL": "Cancel",
   "YOU_SURE": "Are you sure about that?",
-  "REMOVE_TASK": "Remove task"
+  "REMOVE_TASK": "Remove task",
+  "SEARCH_RESULTS": "Search results",
+  "CREATED": "Created:",
+  "UP": "Up"
 }
