@@ -2,14 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
+import { Localization } from 'expo';
+import i18n from 'i18n-js';
 import actions from '../store/actions';
 import TopbarActionButton from '../components/core/TopbarActionButton';
 import HouseWatchFilterContainer from '../containers/HouseWatchFilterContainer';
 import * as Colors from '../constants/Colors';
+import Locales from '../../assets/locales';
+
+i18n.fallbacks = true;
+i18n.translations = Locales;
+i18n.locale = Localization.locale;
 
 class HouseWatchFilterScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Create houses watcher',
+    title: `${i18n.t('CREATE_WATCHER')}`,
     headerRight: (
       <View style={{ flexDirection: 'row' }}>
         <TopbarActionButton
