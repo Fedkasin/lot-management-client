@@ -4,12 +4,15 @@ import PropTypes from 'prop-types';
 import {
   Alert, ActivityIndicator, StyleSheet, Text, View,
 } from 'react-native';
-import { DangerZone } from 'expo';
+import { DangerZone, Localization } from 'expo';
+import i18n from 'i18n-js';
+
 import { googleAuthorizationConfig } from '../constants/Config';
 import actions from '../store/actions';
 import ErrorContainer from '../components/core/ErrorContainer';
 import IcoButton from '../components/core/IcoButton';
 import * as Colors from '../constants/Colors';
+import Locales from '../../assets/locales';
 
 const { Lottie } = DangerZone;
 
@@ -34,6 +37,10 @@ const styles = StyleSheet.create({
   },
 });
 
+i18n.fallbacks = true;
+i18n.translations = Locales;
+i18n.locale = Localization.locale;
+
 class AuthSignOrRegisterContainer extends PureComponent {
   constructor(props) {
     super(props);
@@ -46,7 +53,7 @@ class AuthSignOrRegisterContainer extends PureComponent {
   }
 
   onSignUp() {
-    Alert.alert('Sorry, this option is temporary not avalible');
+    Alert.alert(`${i18n.t('NOT_AVALIBLE')}`);
   }
 
   render() {
@@ -67,7 +74,7 @@ class AuthSignOrRegisterContainer extends PureComponent {
           loop={false}
           style={styles.lottieLogo}
         />
-        <Text style={[styles.text]}>Please log in using one of your existing accounts:</Text>
+        <Text style={[styles.text]}>{i18n.t('PLEASE_LOGIN')}</Text>
         <View style={styles.container}>
           <IcoButton
             text="Google"
@@ -106,7 +113,6 @@ class AuthSignOrRegisterContainer extends PureComponent {
 function mapStateToProps(state) {
   return {
     isLoading: state.authReducers.isLoading,
-    authToken: state.authReducers.authToken,
     error: state.authReducers.error ? state.authReducers.error : null,
   };
 }
@@ -124,7 +130,7 @@ AuthSignOrRegisterContainer.propTypes = {
 };
 
 AuthSignOrRegisterContainer.defaultProps = {
-  error: null,
+  error: '',
   onSignIn: null,
 };
 

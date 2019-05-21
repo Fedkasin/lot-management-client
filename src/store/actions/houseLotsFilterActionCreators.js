@@ -1,23 +1,8 @@
 import {
-  UPDATE_HOUSE_FILTER_ROOMS_TO,
-  UPDATE_HOUSE_FILTER_ROOMS_FROM,
   UPDATE_HOUSE_FILTER_PRICE_TO,
   UPDATE_HOUSE_FILTER_PRICE_FROM,
+  ADD_ROOM_COUNT,
 } from '../../constants/Actions';
-
-export const updateHouseFilterRoomsTo = value => ({
-  type: UPDATE_HOUSE_FILTER_ROOMS_TO,
-  payload: {
-    roomsTo: value,
-  },
-});
-
-export const updateHouseFilterRoomsFrom = value => ({
-  type: UPDATE_HOUSE_FILTER_ROOMS_FROM,
-  payload: {
-    roomsFrom: value,
-  },
-});
 
 export const updateHouseFilterPriceTo = value => ({
   type: UPDATE_HOUSE_FILTER_PRICE_TO,
@@ -30,5 +15,13 @@ export const updateHouseFilterPriceFrom = value => ({
   type: UPDATE_HOUSE_FILTER_PRICE_FROM,
   payload: {
     priceFrom: value,
+  },
+});
+
+
+export const addRoomCount = (value) => ({
+  type: ADD_ROOM_COUNT,
+  payload: {
+    roomFilters: value,
   },
 });

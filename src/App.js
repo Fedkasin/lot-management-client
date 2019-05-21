@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react';
 import {
-  Permissions,
-  Notifications,
-  registerRootComponent,
+  Permissions, Notifications, registerRootComponent, Audio,
 } from 'expo';
 import { AsyncStorage } from 'react-native';
 import { Provider } from 'react-redux';
@@ -14,6 +12,7 @@ import { firebaseConfig } from './constants/Config';
 import initStore from './store';
 import sagaService from './services/sagaService';
 import AssetsLoader from './containers/AssetsLoaderContainer';
+import * as Errors from './constants/Errors';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -35,20 +34,50 @@ const getPushToken = async () => {
 class App extends PureComponent {
   async componentDidMount() {
     const TOKEN = await getPushToken();
-    await AsyncStorage.setItem('@RootStore:NOTIFICATIONS_TOKEN', TOKEN);
+    await AsyncStorage.setItem('@RootStore:NOTIFICATIONS_TOKEN', TOKEN || '[NOTIFICATIONS_FORBIDDEN]');
 
     this._notificationSubscription = Notifications.addListener(this._handleNotification);
+
+    firebase.auth().onAuthStateChanged(async (user) => {
+      if (!user) {
+        try {
+          await AsyncStorage.removeItem('@UserStore:FBUSER');
+          await AsyncStorage.removeItem('@UserStore:API_TOKEN');
+          store.dispatch(actions.authActions.logout());
+        } catch (err) {
+          store.dispatch(actions.authActions.logoutFail());
+        }
+      } else {
+        try {
+          await AsyncStorage.setItem('@UserStore:FBUSER', JSON.stringify(user.providerData[0]));
+          const API_TOKEN = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+          if (API_TOKEN) {
+            store.dispatch(actions.authActions.loginSuccess());
+          } else {
+            store.dispatch(actions.authActions.loginFail(Errors.authfail));
+          }
+        } catch (err) {
+          store.dispatch(actions.authActions.loginFail(err.toString()));
+        }
+      }
+    });
   }
 
   attachNavigatorService(rootSwitchNavigatorRef) {
     sagaService.setNavigatorContainer(rootSwitchNavigatorRef);
   }
 
-  _handleNotification(notification) {
-    store.dispatch(actions.navigationActions.navigate('HOUSE_WATCH_LOTS_SCREEN'));
+  async _handleNotification(notification) {
     const splitted = notification.data.type.split('-');
     if (splitted[0] === 'update') {
-      store.dispatch(actions.houseLotsActions.updateHouseWatchLots(notification.data.jobId));
+      store.dispatch(actions.houseWatchLotsActions.checkWatchHouseLotsState());
+      const soundObject = new Audio.Sound();
+      try {
+        await soundObject.loadAsync(require('../assets/sounds/miao.mp3'));
+        await soundObject.playAsync();
+      } catch (error) {
+        // An error occurred!
+      }
     }
   }
 

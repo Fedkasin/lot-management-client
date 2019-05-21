@@ -9,3 +9,4 @@ npm-debug.*
 .env
 app.json
 src/constants/environment.js
+src/constants/Config.js

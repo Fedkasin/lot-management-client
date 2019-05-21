@@ -1,29 +1,17 @@
 import {
-  UPDATE_HOUSE_FILTER_ROOMS_TO,
-  UPDATE_HOUSE_FILTER_ROOMS_FROM,
   UPDATE_HOUSE_FILTER_PRICE_TO,
   UPDATE_HOUSE_FILTER_PRICE_FROM,
+  ADD_ROOM_COUNT,
 } from '../../constants/Actions';
 
 const initialState = {
-  roomsFrom: '1',
-  roomsTo: '2',
   priceFrom: '200',
   priceTo: '500',
+  roomFilters: [],
 };
 
 const houseFilterReducers = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_HOUSE_FILTER_ROOMS_FROM:
-      return {
-        ...state,
-        roomsFrom: action.payload.roomsFrom,
-      };
-    case UPDATE_HOUSE_FILTER_ROOMS_TO:
-      return {
-        ...state,
-        roomsTo: action.payload.roomsTo,
-      };
     case UPDATE_HOUSE_FILTER_PRICE_FROM:
       return {
         ...state,
@@ -33,6 +21,11 @@ const houseFilterReducers = (state = initialState, action) => {
       return {
         ...state,
         priceTo: action.payload.priceTo,
+      };
+    case ADD_ROOM_COUNT:
+      return {
+        ...state,
+        roomFilters: action.payload.roomFilters,
       };
     default:
       return state;

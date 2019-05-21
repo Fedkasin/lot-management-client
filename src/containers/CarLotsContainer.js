@@ -7,6 +7,7 @@ import actions from '../store/actions/index';
 import CarLotCard from '../components/car/CarLotCard';
 import BgMessage from '../components/bgmessage/BackgroundMessage';
 import * as Colors from '../constants/Colors';
+import * as Errors from '../constants/Errors';
 
 class CarLotsContainer extends PureComponent {
   constructor(props) {
@@ -29,9 +30,9 @@ class CarLotsContainer extends PureComponent {
   }
 
   render() {
-    const { carLots, isFetching } = this.props;
+    const { carLots, isFetching, error } = this.props;
     if (!carLots.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
-    if (!carLots.length && !isFetching) return <BgMessage text="There is no cars" />;
+    if (!carLots.length && !isFetching) return <BgMessage text={error || Errors.notfound} />;
     return (
       <FlatList
         data={carLots}
@@ -67,6 +68,11 @@ CarLotsContainer.propTypes = {
   itemsPerPage: PropTypes.number.isRequired,
   carLots: PropTypes.arrayOf(PropTypes.any).isRequired,
   isFetching: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+};
+
+CarLotsContainer.defaultProps = {
+  error: '',
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarLotsContainer);

@@ -15,27 +15,33 @@ import {
 } from './carLotsActionCreators';
 
 import {
-  updateHouseWatchLots,
-  updateHouseWatchLotsSuccess,
-  updateHouseWatchLotsFail,
   fetchHouseLots,
   fetchHouseLotsSuccess,
   fetchHouseLotsFail,
 } from './houseLotsActionCreators';
 
 import {
-  updateHouseFilterRoomsTo,
-  updateHouseFilterRoomsFrom,
-  updateHouseFilterPriceTo,
-  updateHouseFilterPriceFrom,
-} from './houseLotsFilterActionCreators';
+  updateHouseWatchLots,
+  updateHouseWatchLotsSuccess,
+  updateHouseWatchLotsFail,
+  pauseAllJobs,
+  checkWatchHouseLotsState,
+  watchHouseLotsTrue,
+  watchHouseLotsFalse,
+  checkWatchHouseLotsStateFail,
+  removeHouseWatchJob,
+  pauseHouseWatchJob,
+  resumeHouseWatchJob,
+  editHouseWatchJobList,
+  checkPausedHouseLotsTrue,
+  checkPausedHouseLotsFalse,
+} from './houseWatchLotsActionCreators';
 
 import {
-  fetchSettings,
-  fetchSettingsSuccess,
-  fetchSettingsFail,
-  changeSetting,
-} from './settingsActionCreators';
+  updateHouseFilterPriceTo,
+  updateHouseFilterPriceFrom,
+  addRoomCount,
+} from './houseLotsFilterActionCreators';
 
 import {
   login,
@@ -44,16 +50,21 @@ import {
   logout,
   logoutSuccess,
   logoutFail,
-  checkIfLoggedIn,
   showFirstSplashScreen,
 } from './authActionCreators';
 
 import {
-  updateHouseWatchFilterRoomsTo,
-  updateHouseWatchFilterRoomsFrom,
   updateHouseWatchFilterPriceTo,
   updateHouseWatchFilterPriceFrom,
+  addWatchRoomCount,
+  updateHouseWatchFilterApply,
 } from './houseWatchLotsFilterActionCreators';
+
+import {
+  fetchProfile,
+  fetchProfileSuccess,
+  fetchProfileFail,
+} from './profileActionCreators';
 
 export default {
   rootActions: {
@@ -70,30 +81,36 @@ export default {
     fetchCarLotsFail,
   },
   houseLotsActions: {
-    updateHouseWatchLots,
-    updateHouseWatchLotsSuccess,
-    updateHouseWatchLotsFail,
     fetchHouseLots,
     fetchHouseLotsSuccess,
     fetchHouseLotsFail,
   },
+  houseWatchLotsActions: {
+    updateHouseWatchLots,
+    updateHouseWatchLotsSuccess,
+    updateHouseWatchLotsFail,
+    pauseAllJobs,
+    checkWatchHouseLotsState,
+    checkWatchHouseLotsStateFail,
+    watchHouseLotsTrue,
+    watchHouseLotsFalse,
+    removeHouseWatchJob,
+    pauseHouseWatchJob,
+    resumeHouseWatchJob,
+    editHouseWatchJobList,
+    checkPausedHouseLotsTrue,
+    checkPausedHouseLotsFalse,
+  },
   houseLotsFilterActions: {
-    updateHouseFilterRoomsTo,
-    updateHouseFilterRoomsFrom,
     updateHouseFilterPriceTo,
     updateHouseFilterPriceFrom,
+    addRoomCount,
   },
   houseWatchLotsFilterActions: {
-    updateHouseWatchFilterRoomsTo,
-    updateHouseWatchFilterRoomsFrom,
     updateHouseWatchFilterPriceTo,
     updateHouseWatchFilterPriceFrom,
-  },
-  settingsActions: {
-    fetchSettings,
-    fetchSettingsSuccess,
-    fetchSettingsFail,
-    changeSetting,
+    addWatchRoomCount,
+    updateHouseWatchFilterApply,
   },
   authActions: {
     login,
@@ -102,7 +119,11 @@ export default {
     logout,
     logoutSuccess,
     logoutFail,
-    checkIfLoggedIn,
     showFirstSplashScreen,
+  },
+  profileActions: {
+    fetchProfile,
+    fetchProfileSuccess,
+    fetchProfileFail,
   },
 };

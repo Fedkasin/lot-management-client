@@ -1,17 +1,24 @@
 import React from 'react';
 import moment from 'moment';
-import { LinearGradient } from 'expo';
+import 'moment/locale/ru';
+import { LinearGradient, Localization } from 'expo';
 import {
-  Text, View, StyleSheet, ImageBackground, TouchableOpacity, Linking,
+  Text, View, StyleSheet, ImageBackground, TouchableOpacity, Linking, Image,
 } from 'react-native';
+import i18n from 'i18n-js';
 import PropTypes from 'prop-types';
 import * as Colors from '../../constants/Colors';
+import Locales from '../../../assets/locales';
+
+i18n.fallbacks = true;
+i18n.translations = Locales;
+i18n.locale = Localization.locale;
+
+moment.locale(i18n.currentLocale());
 
 const styles = StyleSheet.create({
   item: {
     marginBottom: 20,
-    paddingBottom: 30,
-    marginTop: 10,
     backgroundColor: Colors.white,
     color: Colors.gray,
     borderRadius: 4,
@@ -53,6 +60,10 @@ const styles = StyleSheet.create({
     color: Colors.white,
     fontSize: 16,
   },
+  fetcherLogo: {
+    width: 21,
+    height: 21,
+  },
 });
 
 class HouseLotCard extends React.PureComponent {
@@ -67,11 +78,12 @@ class HouseLotCard extends React.PureComponent {
               style={styles.imageHeadingBlock}
             >
               <View style={styles.itemDescription}>
+                <Image
+                  style={styles.fetcherLogo}
+                  source={require('../../../assets/images/onlinerby.png')}
+                />
                 <Text numberOfLines={1} style={styles.itemDescriptionText}>
-                                    ANALner
-                </Text>
-                <Text numberOfLines={1} style={styles.itemDescriptionText}>
-                                    Created:
+                  {i18n.t('CREATED')}
                   {' '}
                   {moment(item.created_at).fromNow()}
                 </Text>
@@ -79,7 +91,7 @@ class HouseLotCard extends React.PureComponent {
               <View style={styles.itemDescription}>
                 <Text numberOfLines={1} style={styles.itemDescriptionText} />
                 <Text numberOfLines={1} style={styles.itemDescriptionText}>
-                                    Up:
+                  {i18n.t('UP')}
                   {' '}
                   {moment(item.last_time_up).fromNow()}
                 </Text>
@@ -105,7 +117,6 @@ class HouseLotCard extends React.PureComponent {
               </View>
             </LinearGradient>
           </ImageBackground>
-          {/* <Text style={styles.innerText}>{this.props.item.title || "В 2019 ГОДУ ПУТИН ЗАПРЕТИТ РОССИЯНАМ ПОКУПАТЬ... ЧИТАТЬ ПРОДОЛЖЕНИЕ"}</Text> */}
         </TouchableOpacity>
       </View>
     );
