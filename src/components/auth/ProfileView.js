@@ -3,8 +3,15 @@ import PropTypes from 'prop-types';
 import {
   View, Image, Text, StyleSheet, ActivityIndicator,
 } from 'react-native';
+import { Localization } from 'expo';
+import i18n from 'i18n-js';
 import IcoButton from '../core/IcoButton';
 import * as Colors from '../../constants/Colors';
+import Locales from '../../../assets/locales';
+
+i18n.fallbacks = true;
+i18n.translations = Locales;
+i18n.locale = Localization.locale;
 
 const styles = StyleSheet.create({
   container: {
@@ -44,7 +51,7 @@ class ProfileView extends React.PureComponent {
           : (
             <View style={{ width: 120 }}>
               <IcoButton
-                text="Log out"
+                text={i18n.t('Log out')}
                 color={Colors.white}
                 onPress={onClick}
                 textColor={Colors.black}

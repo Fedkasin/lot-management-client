@@ -1,10 +1,17 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
+import { Localization } from 'expo';
+import i18n from 'i18n-js';
 import LMapi from '../../helpers/lmapi';
 import actions from '../actions/index';
 import {
   FETCH_HOUSE_LOTS,
 } from '../../constants/Actions';
+import Locales from '../../../assets/locales';
+
+i18n.fallbacks = true;
+i18n.translations = Locales;
+i18n.locale = Localization.locale;
 
 function* fetchHouseLots(action) {
   try {
@@ -16,7 +23,7 @@ function* fetchHouseLots(action) {
     const response = yield call(LMapi.getHouses, query);
     yield put(actions.houseLotsActions.fetchHouseLotsSuccess(response));
   } catch (err) {
-    const error = (err.response) ? `Error: ${err.response.body.error}` : 'Unknown error';
+    const error = (err.response) ? `${i18n.t('Error')}: ${err.response.body.error}` : `${i18n.t('Unknown error')}`;
     yield put(actions.houseLotsActions.fetchHouseLotsFail(error));
   }
 }

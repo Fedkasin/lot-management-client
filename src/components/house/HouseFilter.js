@@ -4,10 +4,17 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 
+import { Localization } from 'expo';
+import i18n from 'i18n-js';
 import SettingChildSelect from '../settings/SettingChildSelect';
 import SettingChildCheckbox from '../settings/SettingChildCheckbox';
 import * as filtersConst from '../../constants/Filters';
 import * as Colors from '../../constants/Colors';
+import Locales from '../../../assets/locales';
+
+i18n.fallbacks = true;
+i18n.translations = Locales;
+i18n.locale = Localization.locale;
 
 const styles = StyleSheet.create({
   container: {
@@ -51,11 +58,11 @@ class HouseFilter extends React.PureComponent {
     const { changePriceFrom, filters } = this.props;
     if (parseInt(value, 10) > parseInt(filters.priceTo, 10)) {
       Alert.alert(
-        'You shouldn`t do this',
-        'FROM should be less or equal TO',
+        `${i18n.t('You shouldn`t do this')}`,
+        `${i18n.t('FROM should be less or equal TO')}`,
         [
           {
-            text: 'okay',
+            text: `${i18n.t('okay')}`,
             onPress: () => { },
           },
         ],
@@ -70,11 +77,11 @@ class HouseFilter extends React.PureComponent {
     const { changePriceTo, filters } = this.props;
     if (parseInt(value, 10) < parseInt(filters.priceFrom, 10)) {
       Alert.alert(
-        'You shouldn`t do this',
-        'TO should be more or equal FROM',
+        `${i18n.t('You shouldn`t do this')}`,
+        `${i18n.t('TO should be more or equal FROM')}`,
         [
           {
-            text: 'okay',
+            text: `${i18n.t('okay')}`,
             onPress: () => { },
           },
         ],
@@ -90,7 +97,7 @@ class HouseFilter extends React.PureComponent {
     const roomsArray = [...filters.roomFilters];
     return (
       <View style={styles.container}>
-        <Text style={styles.bigLabel}>Rooms count</Text>
+        <Text style={styles.bigLabel}>{i18n.t('Rooms count')}</Text>
         <View style={{ flexDirection: 'row' }}>
           { filtersConst.roomCount.map((value, index) => (
             <SettingChildCheckbox
@@ -101,20 +108,20 @@ class HouseFilter extends React.PureComponent {
             />
           ))}
         </View>
-        <Text style={styles.bigLabel}>Price</Text>
+        <Text style={styles.bigLabel}>{i18n.t('Price')}</Text>
         <View style={{ flexDirection: 'row' }}>
           <SettingChildSelect
             style={styles.select}
             value={filters.priceFrom}
             items={filtersConst.pricing}
-            label="from"
+            label={i18n.t('from')}
             handler={this.onChangeHouseFilterPriceFrom}
           />
           <SettingChildSelect
             style={styles.select}
             value={filters.priceTo}
             items={filtersConst.pricing}
-            label="to"
+            label={i18n.t('to')}
             handler={this.onChangeHouseFilterPriceTo}
           />
         </View>

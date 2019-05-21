@@ -2,14 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
+import { Localization } from 'expo';
+import i18n from 'i18n-js';
 import actions from '../store/actions';
 import HouseFilterContainer from '../containers/HouseFilterContainer';
 import TopbarActionButton from '../components/core/TopbarActionButton';
 import * as Colors from '../constants/Colors';
+import Locales from '../../assets/locales';
+
+i18n.fallbacks = true;
+i18n.translations = Locales;
+i18n.locale = Localization.locale;
 
 class HouseFilterScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Houses Filter',
+    title: `${i18n.t('Houses Filter')}`,
     headerRight: (
       <View style={{ flexDirection: 'row' }}>
         <TopbarActionButton

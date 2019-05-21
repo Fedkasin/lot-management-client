@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import {
-  Permissions, Notifications, registerRootComponent,
+  Permissions, Notifications, registerRootComponent, Audio,
 } from 'expo';
 import { AsyncStorage } from 'react-native';
 import { Provider } from 'react-redux';
@@ -67,10 +67,19 @@ class App extends PureComponent {
     sagaService.setNavigatorContainer(rootSwitchNavigatorRef);
   }
 
-  _handleNotification(notification) {
+  async _handleNotification(notification) {
     const splitted = notification.data.type.split('-');
     if (splitted[0] === 'update') {
       store.dispatch(actions.houseWatchLotsActions.checkWatchHouseLotsState());
+      const soundObject = new Audio.Sound();
+      try {
+        await soundObject.loadAsync(require('../assets/sounds/miao.mp3'));
+        await soundObject.playAsync();
+        console.log('play sound');
+        // A sound is playing!
+      } catch (error) {
+        // An error occurred!
+      }
     }
   }
 
