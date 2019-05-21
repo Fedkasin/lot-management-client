@@ -34,7 +34,7 @@ const ProfileStack = createStackNavigator({
 });
 
 ProfileStack.navigationOptions = {
-  tabBarLabel: `${i18n.t('Profile')}`,
+  tabBarLabel: `${i18n.t('PROFILE')}`,
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -48,7 +48,7 @@ const CarLotsStack = createStackNavigator({
 });
 
 CarLotsStack.navigationOptions = {
-  tabBarLabel: `${i18n.t('Cars')}`,
+  tabBarLabel: `${i18n.t('CARS')}`,
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -63,7 +63,7 @@ const HouseLotsStack = createStackNavigator({
 });
 
 HouseLotsStack.navigationOptions = {
-  tabBarLabel: `${i18n.t('Houses (all)')}`,
+  tabBarLabel: `${i18n.t('HOUSES_ALL')}`,
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -79,7 +79,7 @@ const HouseWatchLotsStack = createStackNavigator({
 });
 
 HouseWatchLotsStack.navigationOptions = {
-  tabBarLabel: `${i18n.t('Houses (live)')}`,
+  tabBarLabel: `${i18n.t('HOUSES_LIVE')}`,
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}

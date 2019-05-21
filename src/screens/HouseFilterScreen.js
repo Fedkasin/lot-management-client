@@ -16,7 +16,7 @@ i18n.locale = Localization.locale;
 
 class HouseFilterScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => ({
-    title: `${i18n.t('Houses Filter')}`,
+    title: `${i18n.t('HOUSES_FILTER')}`,
     headerRight: (
       <View style={{ flexDirection: 'row' }}>
         <TopbarActionButton

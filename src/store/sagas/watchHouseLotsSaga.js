@@ -41,7 +41,7 @@ function* checkWatchHouseLotsState() {
       yield put(actions.houseWatchLotsActions.checkPausedHouseLotsFalse());
     }
   } catch (err) {
-    const error = (err.response) ? `${i18n.t('Error')}: ${err.response.body.error}` : `${i18n.t('Unknown error')}`;
+    const error = (err.response) ? `${i18n.t('ERROR')}: ${err.response.body.error}` : `${i18n.t('UNKNOWN_ERROR')}`;
     yield put(actions.houseWatchLotsActions.updateHouseWatchLotsFail(error));
   }
 }
@@ -54,7 +54,7 @@ function* watchHouseLots(action) {
       yield put(actions.houseWatchLotsActions.watchHouseLotsTrue());
     }
   } catch (err) {
-    const error = (err.response) ? `${i18n.t('Error')}: ${err.response.body.error}` : `${i18n.t('Unknown error')}`;
+    const error = (err.response) ? `${i18n.t('ERROR')}: ${err.response.body.error}` : `${i18n.t('UNKNOWN_ERROR')}`;
     yield put(actions.houseWatchLotsActions.updateHouseWatchLotsFail(error));
   }
 }
@@ -68,7 +68,7 @@ function* pauseAllJobs(action) {
     }
     yield call(checkWatchHouseLotsState);
   } catch (err) {
-    const error = (err.response) ? `${i18n.t('Error')}: ${err.response.body.error}` : `${i18n.t('Unknown error')}`;
+    const error = (err.response) ? `${i18n.t('ERROR')}: ${err.response.body.error}` : `${i18n.t('UNKNOWN_ERROR')}`;
     yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(error));
   }
 }
@@ -86,7 +86,7 @@ function* updateHouseWatchFilterApply(action) {
     yield call(checkWatchHouseLotsState);
     yield put(navigate(HOUSE_WATCH_LOTS_SCREEN));
   } catch (err) {
-    const error = (err.response) ? `${i18n.t('Error')}: ${err.response.body.error}` : `${i18n.t('Unknown error')}`;
+    const error = (err.response) ? `${i18n.t('ERROR')}: ${err.response.body.error}` : `${i18n.t('UNKNOWN_ERROR')}`;
     yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(error));
   }
 }
@@ -96,7 +96,7 @@ function* removeHouseWatchJob(action) {
     yield call([LMapi, LMapi.removeCurrentUserJob], action.payload);
     yield call(checkWatchHouseLotsState);
   } catch (err) {
-    const error = (err.response) ? `${i18n.t('Error')}: ${err.response.body.error}` : `${i18n.t('Unknown error')}`;
+    const error = (err.response) ? `${i18n.t('ERROR')}: ${err.response.body.error}` : `${i18n.t('UNKNOWN_ERROR')}`;
     yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(error));
   }
 }
@@ -106,7 +106,7 @@ function* pauseHouseWatchJob(action) {
     yield call([LMapi, LMapi.pauseCurrentUserJob], action.payload);
     yield call(checkWatchHouseLotsState);
   } catch (err) {
-    const error = (err.response) ? `${i18n.t('Error')}: ${err.response.body.error}` : `${i18n.t('Unknown error')}`;
+    const error = (err.response) ? `${i18n.t('ERROR')}: ${err.response.body.error}` : `${i18n.t('UNKNOWN_ERROR')}`;
     yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(error));
   }
 }
@@ -116,7 +116,7 @@ function* resumeHouseWatchJob(action) {
     yield call([LMapi, LMapi.resumeCurrentUserJob], action.payload);
     yield call(checkWatchHouseLotsState);
   } catch (err) {
-    const error = (err.response) ? `${i18n.t('Error')}: ${err.response.body.error}` : `${i18n.t('Unknown error')}`;
+    const error = (err.response) ? `${i18n.t('ERROR')}: ${err.response.body.error}` : `${i18n.t('UNKNOWN_ERROR')}`;
     yield put(actions.houseWatchLotsActions.checkWatchHouseLotsStateFail(error));
   }
 }

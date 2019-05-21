@@ -2,6 +2,8 @@ import React from 'react';
 import {
   View, StyleSheet, Text, Platform, TouchableOpacity, Image,
 } from 'react-native';
+import { Localization } from 'expo';
+import i18n from 'i18n-js';
 import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -9,6 +11,7 @@ import actions from '../../store/actions/index';
 import IonIcon from '../core/IonIcon';
 import { JOB_WATCH_SCREEN } from '../../constants/Routes';
 import * as Colors from '../../constants/Colors';
+import Locales from '../../../assets/locales';
 
 const styles = StyleSheet.create({
   container: {
@@ -117,6 +120,10 @@ const styles = StyleSheet.create({
   },
 });
 
+i18n.fallbacks = true;
+i18n.translations = Locales;
+i18n.locale = Localization.locale;
+
 class HouseJob extends React.PureComponent {
   onClickViewJob(navigation, onUpdateHouseWatchLots, item) {
     onUpdateHouseWatchLots(item.jobId);
@@ -149,7 +156,7 @@ class HouseJob extends React.PureComponent {
             <View style={styles.cardItem}>
               <View style={styles.cardItemInner}>
                 <Text style={styles.cardLabel}>
-                PRICE
+                  {i18n.t('PRICE')}
                 </Text>
                 <View style={styles.priceCard}>
                   <Text style={styles.cardLabel}>
@@ -161,7 +168,7 @@ class HouseJob extends React.PureComponent {
               </View>
               <View style={styles.cardItemInner}>
                 <Text style={styles.cardLabel}>
-                ROOMS
+                  {i18n.t('Rooms')}
                 </Text>
                 <View style={styles.priceCard}>
                   <IonIcon

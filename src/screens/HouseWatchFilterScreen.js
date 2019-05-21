@@ -16,7 +16,7 @@ i18n.locale = Localization.locale;
 
 class HouseWatchFilterScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => ({
-    title: `${i18n.t('Create houses watcher')}`,
+    title: `${i18n.t('CREATE_WATCHER')}`,
     headerRight: (
       <View style={{ flexDirection: 'row' }}>
         <TopbarActionButton

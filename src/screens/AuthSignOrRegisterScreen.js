@@ -10,7 +10,7 @@ i18n.locale = Localization.locale;
 
 class AuthSignOrRegisterScreen extends React.PureComponent {
   static navigationOptions = {
-    title: `${i18n.t('Welcome')}`,
+    title: `${i18n.t('WELCOME')}`,
   };
 
   render() {

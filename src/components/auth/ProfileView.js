@@ -51,7 +51,7 @@ class ProfileView extends React.PureComponent {
           : (
             <View style={{ width: 120 }}>
               <IcoButton
-                text={i18n.t('Log out')}
+                text={i18n.t('LOG_OUT')}
                 color={Colors.white}
                 onPress={onClick}
                 textColor={Colors.black}

@@ -13,7 +13,7 @@ i18n.locale = Localization.locale;
 
 class CarLotsScreen extends React.PureComponent {
   static navigationOptions = {
-    title: `${i18n.t('Cars')}`,
+    title: `${i18n.t('CARS')}`,
     headerRight: (
       <TopbarNavButton
         iconColor={Colors.black}

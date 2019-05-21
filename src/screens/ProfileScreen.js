@@ -10,7 +10,7 @@ i18n.locale = Localization.locale;
 
 class ProfileScreen extends PureComponent {
   static navigationOptions = () => ({
-    title: `${i18n.t('Settings')}`,
+    title: `${i18n.t('SETTINGS')}`,
   });
 
   render() {

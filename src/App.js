@@ -75,8 +75,6 @@ class App extends PureComponent {
       try {
         await soundObject.loadAsync(require('../assets/sounds/miao.mp3'));
         await soundObject.playAsync();
-        console.log('play sound');
-        // A sound is playing!
       } catch (error) {
         // An error occurred!
       }

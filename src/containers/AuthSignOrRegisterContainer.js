@@ -53,7 +53,7 @@ class AuthSignOrRegisterContainer extends PureComponent {
   }
 
   onSignUp() {
-    Alert.alert(`${i18n.t('Sorry, this option is temporary not avalible')}`);
+    Alert.alert(`${i18n.t('NOT_AVALIBLE')}`);
   }
 
   render() {
@@ -74,7 +74,7 @@ class AuthSignOrRegisterContainer extends PureComponent {
           loop={false}
           style={styles.lottieLogo}
         />
-        <Text style={[styles.text]}>{i18n.t('Please log in using one of your existing accounts:')}</Text>
+        <Text style={[styles.text]}>{i18n.t('PLEASE_LOGIN')}</Text>
         <View style={styles.container}>
           <IcoButton
             text="Google"

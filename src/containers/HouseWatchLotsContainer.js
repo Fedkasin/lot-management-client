@@ -3,9 +3,12 @@ import { connect } from 'react-redux';
 import {
   Alert, ActivityIndicator, View, Text, Switch, StyleSheet, FlatList,
 } from 'react-native';
+import { Localization } from 'expo';
+import i18n from 'i18n-js';
 import PropTypes from 'prop-types';
 import actions from '../store/actions';
 import BgMessage from '../components/bgmessage/BackgroundMessage';
+import Locales from '../../assets/locales';
 
 import HouseJob from '../components/house/HouseJob';
 import * as Colors from '../constants/Colors';
@@ -41,6 +44,10 @@ const styles = StyleSheet.create({
   },
 });
 
+i18n.fallbacks = true;
+i18n.translations = Locales;
+i18n.locale = Localization.locale;
+
 class HouseWatchLotsContainer extends PureComponent {
   componentDidMount() {
     const { onCheckHouseWatchState } = this.props;
@@ -50,11 +57,11 @@ class HouseWatchLotsContainer extends PureComponent {
   onCloseJob(value) {
     const { removeJob } = this.props;
     Alert.alert(
-      'Remove task',
-      'Are you sure about that?',
+      `${i18n.t('REMOVE_TASK')}`,
+      `${i18n.t('YOU_SURE')}`,
       [
         {
-          text: 'Cancel',
+          text: `${i18n.t('CANCEL')}`,
           style: 'cancel',
         },
         {
@@ -96,7 +103,7 @@ class HouseWatchLotsContainer extends PureComponent {
     return (
       <View style={styles.mainView}>
         <View style={[styles.switchContainer, { display: isWatching ? 'flex' : 'none' }]}>
-          <Text style={styles.sectionLabel}>Live tracking</Text>
+          <Text style={styles.sectionLabel}>{i18n.t('LIVE_TRACKING')}</Text>
           <Switch
             value={isAnyPaused}
             style={{ marginLeft: 'auto' }}
