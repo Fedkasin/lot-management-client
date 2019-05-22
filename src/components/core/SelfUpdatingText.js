@@ -14,7 +14,7 @@ i18n.locale = Localization.locale;
 moment.locale(i18n.currentLocale());
 
 class SelfUpdatingText extends React.PureComponent {
-  componentWillMount() {
+  componentDidMount() {
     this.interv = setInterval(() => {
       this.forceUpdate();
     }, 1000);
