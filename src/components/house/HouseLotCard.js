@@ -1,21 +1,11 @@
 import React from 'react';
-import moment from 'moment';
-import 'moment/locale/ru';
-import { LinearGradient, Localization } from 'expo';
+import { LinearGradient } from 'expo';
 import {
   Text, View, StyleSheet, ImageBackground, TouchableOpacity, Linking, Image,
 } from 'react-native';
-import i18n from 'i18n-js';
 import PropTypes from 'prop-types';
 import * as Colors from '../../constants/Colors';
-import Locales from '../../../assets/locales';
 import SelfUpdatingText from '../core/SelfUpdatingText';
-
-i18n.fallbacks = true;
-i18n.translations = Locales;
-i18n.locale = Localization.locale;
-
-moment.locale(i18n.currentLocale());
 
 const styles = StyleSheet.create({
   item: {
