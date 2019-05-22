@@ -31,5 +31,10 @@
   "REMOVE_TASK": "Remove task",
   "SEARCH_RESULTS": "Search results",
   "CREATED": "Created:",
-  "UP": "Up"
+  "UP": "Up",
+  "room": "Room",
+  "1_room": "1-room",
+  "2_rooms": "2-room",
+  "3_rooms": "3-room",
+  "4_rooms": "4-room"
 }
