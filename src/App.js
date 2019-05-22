@@ -43,6 +43,7 @@ class App extends PureComponent {
         try {
           await AsyncStorage.removeItem('@UserStore:FBUSER');
           await AsyncStorage.removeItem('@UserStore:API_TOKEN');
+          await AsyncStorage.removeItem('@UserStore:TOKEN');
           store.dispatch(actions.authActions.logout());
         } catch (err) {
           store.dispatch(actions.authActions.logoutFail());
