@@ -42,6 +42,13 @@ class HouseLotsContainer extends PureComponent {
     const {
       houseLots, isFetching, error,
     } = this.props;
+    const items = [...houseLots];
+/*     items.sort((a, b) => a.price.amount.localeCompare(b.price.amount));
+    items.forEach((item, index) => {
+      console.log(index, item.price.amount, item.price.currency);
+    }); */
+    // item.last_time_up
+    // item.price.amount
     if (!houseLots.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
     return (
       <>

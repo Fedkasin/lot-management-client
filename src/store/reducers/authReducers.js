@@ -13,6 +13,7 @@ const initialState = {
 };
 
 const authReducers = (state = initialState, action) => {
+  console.log(action.type);
   switch (action.type) {
     case LOGIN:
       return {

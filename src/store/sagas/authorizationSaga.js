@@ -23,6 +23,7 @@ function* logout() {
   try {
     yield call(signOut);
     yield put(actions.authActions.logoutSuccess());
+    console.log('[authSaga:26]authActions.logoutSuccess()')
   } catch (err) {
     yield put(actions.authActions.logoutFail());
   }
@@ -32,10 +33,12 @@ function* checkIfLoggedIn() {
   try {
     const user = yield call(AsyncStorage.getItem, '@UserStore:FBUSER');
     const token = yield call(AsyncStorage.getItem, '@UserStore:API_TOKEN');
-    yield call([LMapi, LMapi.getCurrentUserJobs]);
+    yield call([LMapi, LMapi.getUserDevices]);
     if (!user || !token) {
+      console.log('checkIfLoggedIn false');
       yield put({ type: 'LOGOUT', logout });
     } else {
+      console.log('checkIfLoggedIn true');
       yield put(actions.authActions.loginSuccess());
     }
   } catch (err) {
@@ -46,6 +49,7 @@ function* checkIfLoggedIn() {
 function* login(action) {
   try {
     const data = yield call(signInWithGoogleAsync, action.payload);
+    console.log('[saga] signInWithGoogleAsync');
     const idToken = yield call(AsyncStorage.getItem, '@UserStore:TOKEN');
     const {
       accessToken,
@@ -67,10 +71,15 @@ function* login(action) {
       },
       expo,
     };
+    console.log('[saga] call LMapi.logIn', idToken);
     yield call(LMapi.logIn, body);
+    console.log('[saga] call LMapi.logIn passed');
     const user = yield call(AsyncStorage.getItem, '@UserStore:FBUSER');
     const token = yield call(AsyncStorage.getItem, '@UserStore:API_TOKEN');
-    if (user && token) yield call(checkIfLoggedIn);
+    if (user && token) {
+      yield call(checkIfLoggedIn);
+      console.log('[saga] call checkIfLoggedIn');
+    }
   } catch (err) {
     yield put(actions.authActions.loginFail(Errors.authfail));
   }
