@@ -36,5 +36,9 @@
   "1_room": "1-room",
   "2_rooms": "2-room",
   "3_rooms": "3-room",
-  "4_rooms": "4-room"
+  "4_rooms": "4-room",
+  "SORT_BY": "Sort by",
+  "PRICE_LOW": "price (low to high)",
+  "PRICE_HIGH": "price (high to low)",
+  "DATE_NEW": "date (new first)"
 }

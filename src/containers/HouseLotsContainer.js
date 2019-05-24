@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {
-  FlatList, ActivityIndicator, StyleSheet, View, Text, Platform,
+  FlatList, ActivityIndicator, View, Text, Platform,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { Localization, Icon } from 'expo';
@@ -9,45 +9,10 @@ import i18n from 'i18n-js';
 import actions from '../store/actions/index';
 import HouseLotCard from '../components/house/HouseLotCard';
 import BgMessage from '../components/bgmessage/BackgroundMessage';
-import IcoButton from '../components/core/IcoButton';
+import SingleSelect from '../components/settings/SingleSelect';
 import * as Colors from '../constants/Colors';
 import * as Errors from '../constants/Errors';
 import Locales from '../../assets/locales';
-
-const styles = StyleSheet.create({
-  sortContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Colors.silver,
-    paddingHorizontal: 9,
-  },
-  sectionLabel: {
-    fontSize: 20,
-    color: Colors.gray,
-    marginLeft: 6,
-  },
-  icoBtn: {
-    width: 30,
-    marginLeft: 5,
-    marginBottom: 5,
-  },
-  ionIcon: {
-    marginTop: 4,
-    marginLeft: 9,
-    marginRight: 6,
-  },
-  filterContainer: {
-    height: 46,
-    flexDirection: 'row',
-    flex: 2,
-  },
-  smFilterContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-});
 
 i18n.fallbacks = true;
 i18n.translations = Locales;
@@ -74,77 +39,40 @@ class HouseLotsContainer extends PureComponent {
   }
 
   render() {
-    const { houseLots, isFetching, error } = this.props;
+    const {
+      houseLots, isFetching, error,
+    } = this.props;
     if (!houseLots.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
     return (
       <>
-        <View style={[styles.sortContainer, { display: houseLots ? 'flex' : 'none' }]}>
-          <View style={styles.filterContainer}>
-            <View style={styles.smFilterContainer}>
-              <Text style={styles.sectionLabel}>Sort by</Text>
-              <Icon.Ionicons
-                name={Platform.OS === 'ios' ? 'ios-cash' : 'md-cash'}
-                color={Colors.gray}
-                size={26}
-                style={styles.ionIcon}
-              />
-              <View style={styles.icoBtn}>
-                <IcoButton
-                  text=""
-                  color={Colors.silver}
-                  onPress={() => {}}
-                  textColor={Colors.black}
-                  iconColor={Colors.gray}
-                  iosIcon="ios-arrow-round-down"
-                  otherIcon="md-arrow-round-down"
-                />
-              </View>
-              <View style={styles.icoBtn}>
-                <IcoButton
-                  text=""
-                  color={Colors.silver}
-                  onPress={() => {}}
-                  textColor={Colors.black}
-                  iconColor={Colors.gray}
-                  iosIcon="ios-arrow-round-up"
-                  otherIcon="md-arrow-round-up"
-                />
-              </View>
-            </View>
+        <View style={{
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: 45,
+          display: houseLots ? 'flex' : 'none',
+        }}
+        >
+          {/* iosIcon="ios-swap"
+              otherIcon="md-swap" */}
+          <View style={{
+            alignItems: 'center', justifyContent: 'flex-end', flex: 2, flexDirection: 'row',
+          }}
+          >
+            <Text style={{ fontSize: 16, marginRight: 9 }}>{i18n.t('SORT_BY')}</Text>
+            <Icon.Ionicons
+              name={Platform.OS === 'ios' ? 'ios-swap' : 'md-swap'}
+              color={Colors.gray}
+              size={26}
+              style={{ margin: 3 }}
+            />
           </View>
-          <View style={[styles.filterContainer, { justifyContent: 'flex-end' }]}>
-            <View style={styles.smFilterContainer}>
-              <Text style={styles.sectionLabel}>by</Text>
-              <Icon.Ionicons
-                name={Platform.OS === 'ios' ? 'ios-calendar' : 'md-calendar'}
-                color={Colors.gray}
-                size={26}
-                style={styles.ionIcon}
-              />
-              <View style={styles.icoBtn}>
-                <IcoButton
-                  text=""
-                  color={Colors.silver}
-                  onPress={() => {}}
-                  textColor={Colors.black}
-                  iconColor={Colors.gray}
-                  iosIcon="ios-arrow-round-down"
-                  otherIcon="md-arrow-round-down"
-                />
-              </View>
-              <View style={styles.icoBtn}>
-                <IcoButton
-                  text=""
-                  color={Colors.silver}
-                  onPress={() => {}}
-                  textColor={Colors.black}
-                  iconColor={Colors.gray}
-                  iosIcon="ios-arrow-round-up"
-                  otherIcon="md-arrow-round-up"
-                />
-              </View>
-            </View>
-          </View>
+          <SingleSelect
+            value="0"
+            items={[i18n.t('PRICE_LOW'), i18n.t('PRICE_HIGH'), i18n.t('DATE_NEW')]}
+            handler={() => { console.log('ITEM-CLI'); }}
+          />
         </View>
         <FlatList
           data={houseLots}
