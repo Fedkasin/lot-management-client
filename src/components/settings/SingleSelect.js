@@ -24,6 +24,10 @@ const styles = StyleSheet.create({
 });
 
 class SingleSelect extends React.PureComponent {
+  state = {
+    currentValue: 0,
+  }
+
   handleClick() {
     const { items, handler } = this.props;
     ActionSheetIOS.showActionSheetWithOptions(
@@ -40,6 +44,7 @@ class SingleSelect extends React.PureComponent {
     const {
       value, items, handler,
     } = this.props;
+    const { currentValue } = this.state;
     if (Platform.OS === 'ios') {
       return (
         <View style={styles.container}>
@@ -53,13 +58,13 @@ class SingleSelect extends React.PureComponent {
         <Picker
           placeholder={{}}
           style={styles.picker}
-          onValueChange={itemValue => handler(itemValue)}
-          items={items.map(opt => ({ label: opt, value: opt }))}
-          selectedValue={value}
+          onValueChange={(itemValue) => { this.setState({ currentValue: itemValue }); handler(itemValue); }}
+          items={items.map((opt, index) => ({ label: opt, value: index }))}
+          selectedValue={currentValue}
           collapsable
         >
           {items.map((opt, index) => (
-            <Picker.Item key={`item-${index + 1}`} label={opt} value={opt} />))}
+            <Picker.Item key={`item-${index + 1}`} label={opt} value={index} />))}
         </Picker>
       </View>
     );

@@ -39,12 +39,10 @@ class App extends PureComponent {
 
     firebase.auth().onAuthStateChanged(async (user) => {
       if (!user) {
-        console.log('[APP] User NOT exist');
         try {
           await AsyncStorage.removeItem('@UserStore:FBUSER');
           await AsyncStorage.removeItem('@UserStore:API_TOKEN');
           await AsyncStorage.removeItem('@UserStore:TOKEN');
-          console.log('APP.js:48 logout()');
           store.dispatch(actions.authActions.logoutSuccess());
           return;
         } catch (err) {
@@ -52,7 +50,6 @@ class App extends PureComponent {
           return;
         }
       }
-      console.log('[APP] User exist');
       try {
         await AsyncStorage.setItem('@UserStore:FBUSER', JSON.stringify(user.providerData[0]));
         const API_TOKEN = await AsyncStorage.getItem('@UserStore:API_TOKEN');

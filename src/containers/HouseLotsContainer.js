@@ -23,6 +23,7 @@ class HouseLotsContainer extends PureComponent {
     super(props);
     this.fetchHouses = this.fetchHouses.bind(this);
     this.handleRefresh = this.handleRefresh.bind(this);
+    this.handleSort = this.handleSort.bind(this);
   }
 
   componentDidMount() {
@@ -38,17 +39,34 @@ class HouseLotsContainer extends PureComponent {
     this.fetchHouses();
   }
 
+  handleSort(value) {
+    const { houseLots } = this.props;
+    this.flatListRef.scrollToIndex({ animated: true, index: 0 });
+    switch (value) {
+      case 0:
+        houseLots.sort((a, b) => a.created_at.localeCompare(b.created_at));
+        houseLots.reverse();
+        break;
+      case 1:
+        houseLots.sort((a, b) => a.last_time_up.localeCompare(b.last_time_up));
+        houseLots.reverse();
+        break;
+      case 2:
+        houseLots.sort((a, b) => a.price.converted.USD.amount.localeCompare(b.price.converted.USD.amount));
+        houseLots.reverse();
+        break;
+      case 3:
+        houseLots.sort((a, b) => a.price.converted.USD.amount.localeCompare(b.price.converted.USD.amount));
+        break;
+      default:
+    }
+    this.forceUpdate();
+  }
+
   render() {
     const {
       houseLots, isFetching, error,
     } = this.props;
-    const items = [...houseLots];
-/*     items.sort((a, b) => a.price.amount.localeCompare(b.price.amount));
-    items.forEach((item, index) => {
-      console.log(index, item.price.amount, item.price.currency);
-    }); */
-    // item.last_time_up
-    // item.price.amount
     if (!houseLots.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
     return (
       <>
@@ -61,8 +79,6 @@ class HouseLotsContainer extends PureComponent {
           display: houseLots ? 'flex' : 'none',
         }}
         >
-          {/* iosIcon="ios-swap"
-              otherIcon="md-swap" */}
           <View style={{
             alignItems: 'center', justifyContent: 'flex-end', flex: 2, flexDirection: 'row',
           }}
@@ -77,12 +93,13 @@ class HouseLotsContainer extends PureComponent {
           </View>
           <SingleSelect
             value="0"
-            items={[i18n.t('PRICE_LOW'), i18n.t('PRICE_HIGH'), i18n.t('DATE_NEW')]}
-            handler={() => { console.log('ITEM-CLI'); }}
+            items={[i18n.t('DATE_NEW'), i18n.t('UP_NEW'), i18n.t('PRICE_HIGH'), i18n.t('PRICE_LOW')]}
+            handler={this.handleSort}
           />
         </View>
         <FlatList
           data={houseLots}
+          ref={(ref) => { this.flatListRef = ref; }}
           renderItem={({ item }) => <HouseLotCard item={item} />}
           keyExtractor={item => item.id.toString()}
           onRefresh={this.handleRefresh}
