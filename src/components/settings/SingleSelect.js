@@ -35,8 +35,8 @@ class SingleSelect extends React.PureComponent {
         options: items,
       },
       (buttonIndex) => {
-        handler(items[buttonIndex]);
-        this.setState({ currentValue: buttonIndex }); handler(buttonIndex);
+        this.setState({ currentValue: buttonIndex });
+        handler(buttonIndex);
       },
     );
   }
@@ -57,7 +57,6 @@ class SingleSelect extends React.PureComponent {
     return (
       <View style={styles.container}>
         <Picker
-          placeholder={{}}
           style={styles.picker}
           onValueChange={(itemValue) => { this.setState({ currentValue: itemValue }); handler(itemValue); }}
           items={items.map((opt, index) => ({ label: opt, value: index }))}
