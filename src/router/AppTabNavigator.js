@@ -3,8 +3,7 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
-import { Localization } from 'expo';
-import i18n from 'i18n-js';
+import t from '../helpers/i18helper';
 import {
   PROFILE_SCREEN,
   CAR_LOTS_SCREEN,
@@ -23,18 +22,13 @@ import HouseWatchLotsScreen from '../screens/HouseWatchLotsScreen';
 import HouseFilterScreen from '../screens/HouseFilterScreen';
 import HouseWatchFilterScreen from '../screens/HouseWatchFilterScreen';
 import JobWatchLotsScreen from '../screens/JobWatchLotsScreen';
-import Locales from '../../assets/locales';
-
-i18n.fallbacks = true;
-i18n.translations = Locales;
-i18n.locale = Localization.locale;
 
 const ProfileStack = createStackNavigator({
   [PROFILE_SCREEN]: ProfileScreen,
 });
 
 ProfileStack.navigationOptions = {
-  tabBarLabel: `${i18n.t('PROFILE')}`,
+  tabBarLabel: t('PROFILE'),
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -48,7 +42,7 @@ const CarLotsStack = createStackNavigator({
 });
 
 CarLotsStack.navigationOptions = {
-  tabBarLabel: `${i18n.t('CARS')}`,
+  tabBarLabel: t('CARS'),
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -63,7 +57,7 @@ const HouseLotsStack = createStackNavigator({
 });
 
 HouseLotsStack.navigationOptions = {
-  tabBarLabel: `${i18n.t('HOUSES_ALL')}`,
+  tabBarLabel: t('HOUSES_ALL'),
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -79,7 +73,7 @@ const HouseWatchLotsStack = createStackNavigator({
 });
 
 HouseWatchLotsStack.navigationOptions = {
-  tabBarLabel: `${i18n.t('HOUSES_LIVE')}`,
+  tabBarLabel: t('HOUSES_LIVE'),
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}

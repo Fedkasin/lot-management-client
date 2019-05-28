@@ -5,18 +5,12 @@ import { LinearGradient, Localization } from 'expo';
 import {
   Text, View, StyleSheet, ImageBackground, TouchableOpacity, Linking, Image,
 } from 'react-native';
-import i18n from 'i18n-js';
 import PropTypes from 'prop-types';
 import * as Colors from '../../constants/Colors';
-import Locales from '../../../assets/locales';
+import t from '../../helpers/i18helper';
 import SelfUpdatingText from '../core/SelfUpdatingText';
 
-i18n.fallbacks = true;
-i18n.translations = Locales;
-i18n.locale = Localization.locale;
-
-moment.locale(i18n.currentLocale());
-
+moment.locale(Localization.locale);
 const styles = StyleSheet.create({
   item: {
     marginBottom: 20,
@@ -110,7 +104,7 @@ class HouseLotCard extends React.PureComponent {
               </View>
               <View style={styles.itemDescription}>
                 <Text numberOfLines={1} style={styles.itemDescriptionText}>
-                  {i18n.t(item.rent_type)}
+                  {t(item.rent_type)}
                 </Text>
                 <Text numberOfLines={1} style={styles.itemDescriptionText}>
                   {`${item.price.amount} ${item.price.currency}`}

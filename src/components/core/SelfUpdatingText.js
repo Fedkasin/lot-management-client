@@ -1,17 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text } from 'react-native';
-import { Localization } from 'expo';
 import moment from 'moment';
-import 'moment/locale/ru';
-import i18n from 'i18n-js';
-import Locales from '../../../assets/locales';
-
-i18n.fallbacks = true;
-i18n.translations = Locales;
-i18n.locale = Localization.locale;
-
-moment.locale(i18n.currentLocale());
+import t from '../../helpers/i18helper';
 
 class SelfUpdatingText extends React.PureComponent {
   componentDidMount() {
@@ -32,7 +23,7 @@ class SelfUpdatingText extends React.PureComponent {
         size={26}
         style={style}
       >
-        {i18n.t(prefix)}
+        {t(prefix)}
         {' '}
         {moment(date).fromNow()}
       </Text>

@@ -2,19 +2,13 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { FlatList, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
-import { Localization } from 'expo';
-import i18n from 'i18n-js';
 import actions from '../store/actions/index';
 import HouseLotCard from '../components/house/HouseLotCard';
 import BgMessage from '../components/bgmessage/BackgroundMessage';
 import SortBar from '../components/house/SortBar';
 import * as Colors from '../constants/Colors';
 import * as Errors from '../constants/Errors';
-import Locales from '../../assets/locales';
 
-i18n.fallbacks = true;
-i18n.translations = Locales;
-i18n.locale = Localization.locale;
 
 class HouseLotsContainer extends PureComponent {
   constructor(props) {
