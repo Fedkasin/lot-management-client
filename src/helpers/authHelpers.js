@@ -18,7 +18,7 @@ export const isUserEqual = (googleUser, firebaseUser) => {
   return false;
 };
 
-export const onSignIn = googleUser => {
+export const onSignIn = googleUser => new Promise((resolve) => {
   // We need to register an Observer on Firebase Auth to make sure auth is initialized.
   const unsubscribe = firebase.auth()
     .onAuthStateChanged(firebaseUser => {
@@ -30,12 +30,13 @@ export const onSignIn = googleUser => {
           googleUser.idToken,
           googleUser.accessToken,
         );
-        // Sign in with credential from the Google user.
+          // Sign in with credential from the Google user.
         firebase.auth()
           .signInAndRetrieveDataWithCredential(credential)
           .then(async () => {
             const token = await firebase.auth().currentUser.getIdToken();
             await AsyncStorage.setItem('@UserStore:TOKEN', token);
+            return resolve();
           })
           .catch(error => {
             throw error;
@@ -50,13 +51,13 @@ export const onSignIn = googleUser => {
           });
       }
     });
-};
+});
 
 export const signInWithGoogleAsync = async config => {
   try {
     const result = await Google.logInAsync(config);
     if (result.type === 'success') {
-      onSignIn(result);
+      await onSignIn(result);
       return result;
     } else {
       return { cancelled: true };

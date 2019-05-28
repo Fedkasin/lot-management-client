@@ -12,7 +12,6 @@ import { firebaseConfig } from './constants/Config';
 import initStore from './store';
 import sagaService from './services/sagaService';
 import AssetsLoader from './containers/AssetsLoaderContainer';
-import * as Errors from './constants/Errors';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -43,22 +42,18 @@ class App extends PureComponent {
         try {
           await AsyncStorage.removeItem('@UserStore:FBUSER');
           await AsyncStorage.removeItem('@UserStore:API_TOKEN');
-          store.dispatch(actions.authActions.logout());
+          await AsyncStorage.removeItem('@UserStore:TOKEN');
+          store.dispatch(actions.authActions.logoutSuccess());
         } catch (err) {
           store.dispatch(actions.authActions.logoutFail());
         }
-      } else {
-        try {
-          await AsyncStorage.setItem('@UserStore:FBUSER', JSON.stringify(user.providerData[0]));
-          const API_TOKEN = await AsyncStorage.getItem('@UserStore:API_TOKEN');
-          if (API_TOKEN) {
-            store.dispatch(actions.authActions.loginSuccess());
-          } else {
-            store.dispatch(actions.authActions.loginFail(Errors.authfail));
-          }
-        } catch (err) {
-          store.dispatch(actions.authActions.loginFail(err.toString()));
-        }
+      }
+      try {
+        await AsyncStorage.setItem('@UserStore:FBUSER', JSON.stringify(user.providerData[0]));
+        const API_TOKEN = await AsyncStorage.getItem('@UserStore:API_TOKEN');
+        if (API_TOKEN) store.dispatch(actions.authActions.loginSuccess());
+      } catch (err) {
+        store.dispatch(actions.authActions.loginFail(err.toString()));
       }
     });
   }

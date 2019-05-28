@@ -31,5 +31,16 @@
   "REMOVE_TASK": "Remove task",
   "SEARCH_RESULTS": "Search results",
   "CREATED": "Created:",
-  "UP": "Up"
+  "UP": "Up",
+  "room": "Room",
+  "1_room": "1-room",
+  "2_rooms": "2-room",
+  "3_rooms": "3-room",
+  "4_rooms": "4-room",
+  "5_rooms": "5-room",
+  "SORT_BY": "Sort by",
+  "PRICE_LOW": "price (low to high)",
+  "PRICE_HIGH": "price (high to low)",
+  "DATE_NEW": "date (new first)",
+  "UP_NEW": "UP (new first)"
 }

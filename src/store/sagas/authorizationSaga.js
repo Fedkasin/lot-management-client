@@ -32,7 +32,7 @@ function* checkIfLoggedIn() {
   try {
     const user = yield call(AsyncStorage.getItem, '@UserStore:FBUSER');
     const token = yield call(AsyncStorage.getItem, '@UserStore:API_TOKEN');
-    yield call([LMapi, LMapi.getCurrentUserJobs]);
+    yield call([LMapi, LMapi.getUserDevices]);
     if (!user || !token) {
       yield put({ type: 'LOGOUT', logout });
     } else {
@@ -70,7 +70,9 @@ function* login(action) {
     yield call(LMapi.logIn, body);
     const user = yield call(AsyncStorage.getItem, '@UserStore:FBUSER');
     const token = yield call(AsyncStorage.getItem, '@UserStore:API_TOKEN');
-    if (user && token) yield call(checkIfLoggedIn);
+    if (user && token) {
+      yield call(checkIfLoggedIn);
+    }
   } catch (err) {
     yield put(actions.authActions.loginFail(Errors.authfail));
   }

@@ -5,17 +5,12 @@ import { LinearGradient, Localization } from 'expo';
 import {
   Text, View, StyleSheet, ImageBackground, TouchableOpacity, Linking, Image,
 } from 'react-native';
-import i18n from 'i18n-js';
 import PropTypes from 'prop-types';
 import * as Colors from '../../constants/Colors';
-import Locales from '../../../assets/locales';
+import t from '../../helpers/i18helper';
+import SelfUpdatingText from '../core/SelfUpdatingText';
 
-i18n.fallbacks = true;
-i18n.translations = Locales;
-i18n.locale = Localization.locale;
-
-moment.locale(i18n.currentLocale());
-
+moment.locale(Localization.locale);
 const styles = StyleSheet.create({
   item: {
     marginBottom: 20,
@@ -82,19 +77,19 @@ class HouseLotCard extends React.PureComponent {
                   style={styles.fetcherLogo}
                   source={require('../../../assets/images/onlinerby.png')}
                 />
-                <Text numberOfLines={1} style={styles.itemDescriptionText}>
-                  {i18n.t('CREATED')}
-                  {' '}
-                  {moment(item.created_at).fromNow()}
-                </Text>
+                <SelfUpdatingText
+                  prefix="CREATED"
+                  date={item.created_at}
+                  style={styles.itemDescriptionText}
+                />
               </View>
               <View style={styles.itemDescription}>
                 <Text numberOfLines={1} style={styles.itemDescriptionText} />
-                <Text numberOfLines={1} style={styles.itemDescriptionText}>
-                  {i18n.t('UP')}
-                  {' '}
-                  {moment(item.last_time_up).fromNow()}
-                </Text>
+                <SelfUpdatingText
+                  prefix="UP"
+                  date={item.last_time_up}
+                  style={styles.itemDescriptionText}
+                />
               </View>
             </LinearGradient>
             <LinearGradient
@@ -109,7 +104,7 @@ class HouseLotCard extends React.PureComponent {
               </View>
               <View style={styles.itemDescription}>
                 <Text numberOfLines={1} style={styles.itemDescriptionText}>
-                  { item.rent_type }
+                  {t(item.rent_type)}
                 </Text>
                 <Text numberOfLines={1} style={styles.itemDescriptionText}>
                   {`${item.price.amount} ${item.price.currency}`}

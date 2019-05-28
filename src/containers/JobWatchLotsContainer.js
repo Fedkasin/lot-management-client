@@ -17,7 +17,6 @@ class JobWatchLotsContainer extends PureComponent {
     if (!houseWatchLots.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
     return (
       <FlatList
-        style={{ marginBottom: 30 }}
         data={houseWatchLots}
         renderItem={({ item }) => <HouseLotCard item={item} />}
         keyExtractor={item => item.id.toString()}
