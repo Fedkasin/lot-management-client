@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   placeholder: {
-    fontSize: 20,
+    fontSize: 16,
     margin: 9,
     color: Colors.lightGray,
   },
@@ -36,6 +36,7 @@ class SingleSelect extends React.PureComponent {
       },
       (buttonIndex) => {
         handler(items[buttonIndex]);
+        this.setState({ currentValue: buttonIndex }); handler(buttonIndex);
       },
     );
   }
@@ -47,8 +48,8 @@ class SingleSelect extends React.PureComponent {
     const { currentValue } = this.state;
     if (Platform.OS === 'ios') {
       return (
-        <View style={styles.container}>
-          <Text style={styles.placeholder} onPress={() => this.handleClick()}>{value}</Text>
+        <View style={[styles.container, { marginRight: -25 }]}>
+          <Text style={styles.placeholder} onPress={() => this.handleClick()}>{items[value]}</Text>
           <View style={styles.divider} />
         </View>
       );
