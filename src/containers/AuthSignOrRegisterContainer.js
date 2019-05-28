@@ -4,15 +4,14 @@ import PropTypes from 'prop-types';
 import {
   Alert, ActivityIndicator, StyleSheet, Text, View,
 } from 'react-native';
-import { DangerZone, Localization } from 'expo';
-import i18n from 'i18n-js';
+import { DangerZone } from 'expo';
 
 import { googleAuthorizationConfig } from '../constants/Config';
 import actions from '../store/actions';
 import ErrorContainer from '../components/core/ErrorContainer';
 import IcoButton from '../components/core/IcoButton';
 import * as Colors from '../constants/Colors';
-import Locales from '../../assets/locales';
+import t from '../helpers/i18helper';
 
 const { Lottie } = DangerZone;
 
@@ -37,10 +36,6 @@ const styles = StyleSheet.create({
   },
 });
 
-i18n.fallbacks = true;
-i18n.translations = Locales;
-i18n.locale = Localization.locale;
-
 class AuthSignOrRegisterContainer extends PureComponent {
   constructor(props) {
     super(props);
@@ -53,7 +48,7 @@ class AuthSignOrRegisterContainer extends PureComponent {
   }
 
   onSignUp() {
-    Alert.alert(`${i18n.t('NOT_AVALIBLE')}`);
+    Alert.alert(t('NOT_AVALIBLE'));
   }
 
   render() {
@@ -74,7 +69,7 @@ class AuthSignOrRegisterContainer extends PureComponent {
           loop={false}
           style={styles.lottieLogo}
         />
-        <Text style={[styles.text]}>{i18n.t('PLEASE_LOGIN')}</Text>
+        <Text style={[styles.text]}>{t('PLEASE_LOGIN')}</Text>
         <View style={styles.container}>
           <IcoButton
             text="Google"
