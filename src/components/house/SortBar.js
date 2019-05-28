@@ -23,11 +23,11 @@ const styles = StyleSheet.create({
   },
 });
 
-class HouseSorting extends React.PureComponent {
+class SortBar extends React.PureComponent {
   render() {
-    const { houseLots, handler } = this.props;
+    const { display, handler } = this.props;
     return (
-      <View style={[styles.container, { display: houseLots ? 'flex' : 'none' }]}>
+      <View style={[styles.container, { display: display ? 'flex' : 'none' }]}>
         <View style={styles.label}>
           <Text style={{ fontSize: 16, marginRight: 9 }}>SORT_BY</Text>
           <Icon.Ionicons
@@ -47,9 +47,9 @@ class HouseSorting extends React.PureComponent {
   }
 }
 
-HouseSorting.propTypes = {
-  houseLots: PropTypes.arrayOf(PropTypes.any).isRequired,
+SortBar.propTypes = {
+  display: PropTypes.bool.isRequired,
   handler: PropTypes.func.isRequired,
 };
 
-export default HouseSorting;
+export default SortBar;
