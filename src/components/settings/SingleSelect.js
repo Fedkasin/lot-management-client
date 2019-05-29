@@ -43,13 +43,13 @@ class SingleSelect extends React.PureComponent {
 
   render() {
     const {
-      value, items, handler,
+      items, handler,
     } = this.props;
     const { currentValue } = this.state;
     if (Platform.OS === 'ios') {
       return (
         <View style={[styles.container, { marginRight: -25 }]}>
-          <Text style={styles.placeholder} onPress={() => this.handleClick()}>{items[value]}</Text>
+          <Text style={styles.placeholder} onPress={() => this.handleClick()}>{items[currentValue]}</Text>
           <View style={styles.divider} />
         </View>
       );
@@ -73,7 +73,6 @@ class SingleSelect extends React.PureComponent {
 
 SingleSelect.propTypes = {
   items: PropTypes.arrayOf(PropTypes.string).isRequired,
-  value: PropTypes.string.isRequired,
   handler: PropTypes.func.isRequired,
 };
 

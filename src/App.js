@@ -47,6 +47,7 @@ class App extends PureComponent {
         } catch (err) {
           store.dispatch(actions.authActions.logoutFail());
         }
+        return;
       }
       try {
         await AsyncStorage.setItem('@UserStore:FBUSER', JSON.stringify(user.providerData[0]));

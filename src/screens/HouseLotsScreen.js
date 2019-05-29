@@ -16,6 +16,9 @@ class HouseLotsScreen extends React.PureComponent {
         routeName={HOUSE_FILTER_SCREEN}
       />
     ),
+    headerStyle: {
+      backgroundColor: Colors.silver,
+    },
   };
 
   render() {

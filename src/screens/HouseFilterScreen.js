@@ -21,6 +21,9 @@ class HouseFilterScreen extends React.PureComponent {
         />
       </View>
     ),
+    headerStyle: {
+      backgroundColor: Colors.silver,
+    },
   });
 
   componentDidMount() {
