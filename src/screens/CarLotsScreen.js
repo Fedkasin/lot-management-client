@@ -16,6 +16,9 @@ class CarLotsScreen extends React.PureComponent {
         routeName={CAR_LOTS_FILTER_SCREEN}
       />
     ),
+    headerStyle: {
+      backgroundColor: Colors.silver,
+    },
   };
 
   render() {

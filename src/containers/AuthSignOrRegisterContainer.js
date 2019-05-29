@@ -20,13 +20,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    marginTop: 20,
     backgroundColor: Colors.white,
   },
   text: {
     fontSize: 21,
     textAlign: 'center',
     marginBottom: 20,
+    paddingHorizontal: 10,
   },
   lottieLogo: {
     width: '100%',

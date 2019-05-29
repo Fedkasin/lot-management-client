@@ -39,7 +39,6 @@ class SortBar extends React.PureComponent {
           />
         </View>
         <SingleSelect
-          value="0"
           items={[t('DATE_NEW'), t('UP_NEW'), t('PRICE_HIGH'), t('PRICE_LOW')]}
           handler={handler}
         />

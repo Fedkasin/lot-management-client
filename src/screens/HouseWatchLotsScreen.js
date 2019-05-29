@@ -13,6 +13,9 @@ import * as Colors from '../constants/Colors';
 class HouseWatchScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => ({
     title: t('HOUSES_LIVE'),
+    headerStyle: {
+      backgroundColor: Colors.silver,
+    },
     headerRight: (
       <View style={{ flexDirection: 'row' }}>
         <TopBarStateButton
