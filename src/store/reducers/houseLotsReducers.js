@@ -2,13 +2,13 @@ import {
   FETCH_HOUSE_LOTS,
   FETCH_HOUSE_LOTS_SUCCESS,
   FETCH_HOUSE_LOTS_FAIL,
+  SORT_HOUSE_LOTS,
 } from '../../constants/Actions';
 
 const initialState = {
   isFetching: false,
   houseLots: [],
-  page: 0,
-  itemsPerPage: 10,
+  sortedItems: [],
   error: null,
 };
 
@@ -25,6 +25,7 @@ const houseLotsReducer = (state = initialState, action) => {
         ...state,
         error: null,
         houseLots: [...state.houseLots, ...action.payload.message.apartments],
+        sortedItems: action.payload.message.apartments,
         isFetching: false,
       };
     case FETCH_HOUSE_LOTS_FAIL:
@@ -33,6 +34,11 @@ const houseLotsReducer = (state = initialState, action) => {
         error: action.error,
         houseLots: [],
         isFetching: false,
+      };
+    case SORT_HOUSE_LOTS:
+      return {
+        ...state,
+        sortedItems: action.payload,
       };
     default:
       return state;
