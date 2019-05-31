@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 import { FlatList, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 import actions from '../store/actions/index';
@@ -9,12 +10,43 @@ import SortBar from '../components/house/SortBar';
 import * as Colors from '../constants/Colors';
 import * as Errors from '../constants/Errors';
 
+const dataSelector = (state) => state.houseLotsReducers.houseLots;
+
+const byDateSelector = createSelector(
+  dataSelector,
+  data => data
+    .sort((a, b) => a.created_at.localeCompare(b.created_at))
+    .reverse()
+    .map(data => data)
+);
+
+const byLastTimeUpSelector = createSelector(
+  dataSelector,
+  data => data
+    .sort((a, b) => a.last_time_up.localeCompare(b.last_time_up))
+    .reverse()
+    .map(data => data)
+);
+
+const byPriceLowSelector = createSelector(
+  dataSelector,
+  data => data
+    .sort((a, b) => a.price.converted.USD.amount - b.price.converted.USD.amount)
+    .map(data => data)
+);
+
+const priceHighSelector = createSelector(
+  dataSelector,
+  data => data
+    .sort((a, b) => a.price.converted.USD.amount - b.price.converted.USD.amount)
+    .reverse()
+    .map(data => data)
+);
 
 class HouseLotsContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.fetchHouses = this.fetchHouses.bind(this);
-    this.handleRefresh = this.handleRefresh.bind(this);
     this.handleSort = this.handleSort.bind(this);
   }
 
@@ -27,45 +59,42 @@ class HouseLotsContainer extends PureComponent {
     onFetchHouseLots(filters);
   }
 
-  handleRefresh() {
-    this.fetchHouses();
-  }
-
   handleSort(value) {
-    const { houseLots } = this.props;
-    this.flatListRef.scrollToIndex({ animated: true, index: 0 });
+    const {
+      housesByDate, housesByLastTimeUp, housesByPriceLow, housesByPriceHigh, onSetSortHouseLots,
+    } = this.props;
     switch (value) {
       case 0:
-        houseLots.sort((a, b) => a.created_at.localeCompare(b.created_at)).reverse();
+        onSetSortHouseLots(housesByDate);
         break;
       case 1:
-        houseLots.sort((a, b) => a.last_time_up.localeCompare(b.last_time_up)).reverse();
+        onSetSortHouseLots(housesByLastTimeUp);
         break;
       case 2:
-        houseLots.sort((a, b) => a.price.converted.USD.amount.localeCompare(b.price.converted.USD.amount)).reverse();
+        onSetSortHouseLots(housesByPriceHigh);
         break;
       case 3:
-        houseLots.sort((a, b) => a.price.converted.USD.amount.localeCompare(b.price.converted.USD.amount));
+        onSetSortHouseLots(housesByPriceLow);
         break;
       default:
     }
-    this.forceUpdate();
+    setTimeout(() => { this.flatListRef.scrollToIndex({ animated: true, index: 0 }); }, 10);
   }
 
   render() {
     const {
-      houseLots, isFetching, error,
+      isFetching, error, sortedItems,
     } = this.props;
-    if (!houseLots.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
+    if (!sortedItems.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
     return (
       <>
-        <SortBar display={!!(houseLots)} handler={this.handleSort} />
+        <SortBar display={!!(sortedItems)} handler={this.handleSort} />
         <FlatList
-          data={houseLots}
+          data={sortedItems}
           ref={(ref) => { this.flatListRef = ref; }}
           renderItem={({ item }) => <HouseLotCard item={item} />}
           keyExtractor={item => item.id.toString()}
-          onRefresh={this.handleRefresh}
+          onRefresh={this.fetchHouses}
           onEndReached={this.handleScrollEnd}
           onEndReachedThreshold={0}
           refreshing={isFetching}
@@ -76,26 +105,32 @@ class HouseLotsContainer extends PureComponent {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    isFetching: state.houseLotsReducers.isFetching,
-    houseLots: state.houseLotsReducers.houseLots,
-    filters: state.houseFilterReducers,
-    page: state.houseLotsReducers.page,
-    itemsPerPage: state.houseLotsReducers.itemsPerPage,
-    error: state.houseLotsReducers.error ? state.houseLotsReducers.error : null,
-  };
-}
+const mapStateToProps = (state, props) => ({
+  isFetching: state.houseLotsReducers.isFetching,
+  filters: state.houseFilterReducers,
+  error: state.houseLotsReducers.error ? state.houseLotsReducers.error : null,
+  housesByDate: byDateSelector(state, props),
+  housesByLastTimeUp: byLastTimeUpSelector(state, props),
+  housesByPriceLow: byPriceLowSelector(state, props),
+  housesByPriceHigh: priceHighSelector(state, props),
+  sortedItems: state.houseLotsReducers.sortedItems,
+});
 
 function mapDispatchToProps(dispatch) {
   return {
     onFetchHouseLots: filters => dispatch(actions.houseLotsActions.fetchHouseLots(filters)),
+    onSetSortHouseLots: houseLotsSorted => dispatch(actions.houseLotsActions.setSortHouseLots(houseLotsSorted)),
   };
 }
 
 HouseLotsContainer.propTypes = {
+  housesByDate: PropTypes.arrayOf(PropTypes.any).isRequired,
+  housesByLastTimeUp: PropTypes.arrayOf(PropTypes.any).isRequired,
+  housesByPriceLow: PropTypes.arrayOf(PropTypes.any).isRequired,
+  housesByPriceHigh: PropTypes.arrayOf(PropTypes.any).isRequired,
+  sortedItems: PropTypes.arrayOf(PropTypes.any).isRequired,
   onFetchHouseLots: PropTypes.func.isRequired,
-  houseLots: PropTypes.arrayOf(PropTypes.any).isRequired,
+  onSetSortHouseLots: PropTypes.func.isRequired,
   filters: PropTypes.objectOf(PropTypes.any).isRequired,
   isFetching: PropTypes.bool.isRequired,
   error: PropTypes.string,
