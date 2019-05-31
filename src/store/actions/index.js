@@ -18,6 +18,7 @@ import {
   fetchHouseLots,
   fetchHouseLotsSuccess,
   fetchHouseLotsFail,
+  setSortHouseLots,
 } from './houseLotsActionCreators';
 
 import {
@@ -84,6 +85,7 @@ export default {
     fetchHouseLots,
     fetchHouseLotsSuccess,
     fetchHouseLotsFail,
+    setSortHouseLots,
   },
   houseWatchLotsActions: {
     updateHouseWatchLots,

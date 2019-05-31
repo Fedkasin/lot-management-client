@@ -32,10 +32,7 @@ class JobWatchLotsContainer extends PureComponent {
 function mapStateToProps(state) {
   return {
     isFetching: state.houseWatchLotsReducers.isFetching,
-    isWatching: state.houseWatchLotsReducers.isWatching,
     houseWatchLots: state.houseWatchLotsReducers.houseWatchLots,
-    page: state.houseWatchLotsReducers.page,
-    itemsPerPage: state.houseWatchLotsReducers.itemsPerPage,
     error: state.houseWatchLotsReducers.error ? state.houseWatchLotsReducers.error : null,
   };
 }
