@@ -11,7 +11,6 @@ import AppContainer from './router';
 import { firebaseConfig } from './constants/Config';
 import initStore from './store';
 import sagaService from './services/sagaService';
-import AssetsLoader from './containers/AssetsLoaderContainer';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -31,7 +30,13 @@ const getPushToken = async () => {
 };
 
 class App extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.appContainer = React.createRef();
+  }
+
   async componentDidMount() {
+    sagaService.setNavigatorContainer(this.appContainer);
     const TOKEN = await getPushToken();
     await AsyncStorage.setItem('@RootStore:NOTIFICATIONS_TOKEN', TOKEN || '[NOTIFICATIONS_FORBIDDEN]');
 
@@ -59,10 +64,6 @@ class App extends PureComponent {
     });
   }
 
-  attachNavigatorService(rootSwitchNavigatorRef) {
-    sagaService.setNavigatorContainer(rootSwitchNavigatorRef);
-  }
-
   async _handleNotification(notification) {
     const splitted = notification.data.type.split('-');
     if (splitted[0] === 'update') {
@@ -80,9 +81,7 @@ class App extends PureComponent {
   render() {
     return (
       <Provider store={store}>
-        <AssetsLoader>
-          <AppContainer ref={this.attachNavigatorService} />
-        </AssetsLoader>
+        <AppContainer ref={this.appContainer} />
       </Provider>
     );
   }

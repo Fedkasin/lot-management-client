@@ -1,6 +1,5 @@
 import { all } from 'redux-saga/effects';
 
-import appSaga from './appSaga';
 import navigateSaga from './navigateSaga';
 import {
   loginSaga, logoutSaga, loggedInSaga, loginSuccess, loginFail, logoutSuccess, logoutFail,
@@ -21,7 +20,6 @@ import {
 
 export default function* (service) {
   const rootSagas = [
-    appSaga(),
     navigateSaga(service),
     loginSuccess(),
     loginFail(),

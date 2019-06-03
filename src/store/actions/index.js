@@ -1,8 +1,4 @@
 import {
-  appIsReady,
-} from './rootActionCreators';
-
-import {
   navigate,
   navigateDeep,
   reset,
@@ -51,7 +47,6 @@ import {
   logout,
   logoutSuccess,
   logoutFail,
-  showFirstSplashScreen,
 } from './authActionCreators';
 
 import {
@@ -68,9 +63,6 @@ import {
 } from './profileActionCreators';
 
 export default {
-  rootActions: {
-    appIsReady,
-  },
   navigationActions: {
     navigate,
     navigateDeep,
@@ -121,7 +113,6 @@ export default {
     logout,
     logoutSuccess,
     logoutFail,
-    showFirstSplashScreen,
   },
   profileActions: {
     fetchProfile,
