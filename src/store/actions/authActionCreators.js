@@ -1,5 +1,5 @@
 import {
-  LOGIN, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL, SHOW_FIRST_SPLASH_SCREEN,
+  LOGIN, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL,
 } from '../../constants/Actions';
 
 export const login = config => ({
@@ -27,8 +27,4 @@ export const logoutSuccess = () => ({
 export const logoutFail = err => ({
   type: LOGOUT_FAIL,
   error: err,
-});
-
-export const showFirstSplashScreen = () => ({
-  type: SHOW_FIRST_SPLASH_SCREEN,
 });

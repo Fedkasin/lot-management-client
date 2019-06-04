@@ -1,5 +1,3 @@
-export const APP_READY = 'APP_READY';
-
 export const NAVIGATE = 'NAVIGATE';
 export const NAVIGATE_DEEP = 'NAVIGATE_DEEP';
 export const RESET = 'RESET';
@@ -52,7 +50,6 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAIL = 'LOGOUT_FAIL';
-export const SHOW_FIRST_SPLASH_SCREEN = 'SHOW_FIRST_SPLASH_SCREEN';
 
 export const FETCH_PROFILE = 'FETCH_PROFILE';
 export const FETCH_PROFILE_SUCCESS = 'FETCH_PROFILE_SUCCESS';
