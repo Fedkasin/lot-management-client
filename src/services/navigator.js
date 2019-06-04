@@ -23,7 +23,7 @@ function reset(routeName, params) {
 
 function navigate(routeName, params, key) {
   try {
-    container.dispatch(
+    container.current.dispatch(
       NavigationActions.navigate({
         type: 'Navigation/NAVIGATE',
         routeName,
