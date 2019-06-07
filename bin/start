@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo fs.inotify.max_user_watches=524288 | tee -a /etc/sysctl.conf && sysctl -p
+
 SCRIPTPATH="$(dirname $(realpath -s $0))"
 
 echo "${SCRIPTPATH}"
@@ -52,7 +54,7 @@ export default getEnvVars(Constants.manifest.releaseChannel);" > ${SCRIPTPATH}/.
 
 if [ -n $EXPO_USER ] && [ -n $EXPO_PASSWORD ]
 then
-  $SCRIPTPATH/../node_modules/.bin/expo login -u $EXPO_USER -p $EXPO_PASSWORD
+  yes Y | $SCRIPTPATH/../node_modules/.bin/expo login -u $EXPO_USER -p $EXPO_PASSWORD
 else
   echo "Expo credentials are not set, skipping log in."
   echo "To log in, export EXPO_USER and EXPO_PASSWORD env vars"
