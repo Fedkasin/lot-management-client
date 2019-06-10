@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {
-  Alert, ActivityIndicator, View, Text, Switch, StyleSheet, FlatList,
+  Alert, View, Text, Switch, StyleSheet, FlatList,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import t from '../helpers/i18helper';
@@ -85,7 +85,6 @@ class HouseWatchLotsContainer extends PureComponent {
   render() {
     const {
       isFetching,
-      houseWatchLots,
       isWatching,
       isAnyPaused,
       jobs,
@@ -93,13 +92,13 @@ class HouseWatchLotsContainer extends PureComponent {
       error,
       onCheckHouseWatchState,
     } = this.props;
-    if (!houseWatchLots.length && isFetching) return <ActivityIndicator size="large" color={Colors.lightGray} />;
     return (
       <View style={styles.mainView}>
         <View style={[styles.switchContainer, { display: isWatching ? 'flex' : 'none' }]}>
           <Text style={styles.sectionLabel}>{t('LIVE_TRACKING')}</Text>
           <Switch
             value={isAnyPaused}
+            disabled={isFetching}
             style={{ marginLeft: 'auto' }}
             onValueChange={() => this.onPauseAllJobs(isAnyPaused)}
           />
@@ -158,7 +157,6 @@ HouseWatchLotsContainer.propTypes = {
   isWatching: PropTypes.bool.isRequired,
   isEditing: PropTypes.bool.isRequired,
   isAnyPaused: PropTypes.bool.isRequired,
-  houseWatchLots: PropTypes.arrayOf(PropTypes.any).isRequired,
   jobs: PropTypes.arrayOf(PropTypes.any).isRequired,
   onPauseAllJobs: PropTypes.func.isRequired,
   onCheckHouseWatchState: PropTypes.func.isRequired,
