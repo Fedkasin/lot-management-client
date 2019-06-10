@@ -39,6 +39,7 @@ const houseWatchLotsReducer = (state = initialState, action) => {
         error: null,
         houseWatchLots: action.payload.message.apartments.onliner ? [...action.payload.message.apartments.onliner.apartments] : [],
         isFetching: false,
+        isEditing: false,
       };
     case FETCH_HOUSE_WATCH_LOTS_FAIL:
       return {
@@ -51,6 +52,7 @@ const houseWatchLotsReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: true,
+        isEditing: false,
       };
     case FETCH_HOUSE_WATCH_STATE_TRUE:
       return {
@@ -95,11 +97,13 @@ const houseWatchLotsReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: true,
+        isEditing: false,
       };
     case UPDATE_HOUSE_WATCH_FILTER_APPLY:
       return {
         ...state,
         isFetching: true,
+        isEditing: false,
       };
     case CHECK_PAUSED_HOUSE_WATCH_JOBS:
       return {
