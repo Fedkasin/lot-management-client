@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
   },
   settingHeaderText: {
     fontSize: 28,
-    fontFamily: 'sans',
     textAlign: 'center',
   },
   settingBody: {

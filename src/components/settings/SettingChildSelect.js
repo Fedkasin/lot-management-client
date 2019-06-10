@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
   },
   label: {
     flex: 1,
-    fontFamily: 'sans',
     fontSize: 20,
     paddingLeft: 9,
     textAlign: 'left',

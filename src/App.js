@@ -11,6 +11,7 @@ import AppContainer from './router';
 import { firebaseConfig } from './constants/Config';
 import initStore from './store';
 import sagaService from './services/sagaService';
+import { JOB_WATCH_SCREEN } from './constants/Routes';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -25,7 +26,6 @@ const getPushToken = async () => {
       return null;
     }
   }
-
   return Notifications.getExpoPushTokenAsync();
 };
 
@@ -68,12 +68,18 @@ class App extends PureComponent {
     const splitted = notification.data.type.split('-');
     if (splitted[0] === 'update') {
       store.dispatch(actions.houseWatchLotsActions.checkWatchHouseLotsState());
-      const soundObject = new Audio.Sound();
-      try {
-        await soundObject.loadAsync(require('../assets/sounds/miao.mp3'));
-        await soundObject.playAsync();
-      } catch (error) {
-        // An error occurred!
+      if (notification.origin === 'received') {
+        const soundObject = new Audio.Sound();
+        try {
+          await soundObject.loadAsync(require('../assets/sounds/miao.mp3'));
+          await soundObject.playAsync();
+        } catch (error) {
+          // An error occurred!
+        }
+      }
+      if (notification.origin === 'selected') {
+        store.dispatch(actions.houseWatchLotsActions.updateHouseWatchLots(notification.data.jobId));
+        store.dispatch(actions.navigationActions.navigate(JOB_WATCH_SCREEN));
       }
     }
   }
