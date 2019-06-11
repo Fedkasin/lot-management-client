@@ -40,6 +40,9 @@ const styles = StyleSheet.create({
     color: Colors.gray,
     marginLeft: 9,
   },
+  itemsList: {
+    height: '100%',
+  },
 });
 
 class HouseWatchLotsContainer extends PureComponent {
@@ -104,6 +107,7 @@ class HouseWatchLotsContainer extends PureComponent {
           />
         </View>
         <FlatList
+          style={styles.itemsList}
           data={jobs}
           renderItem={({ item, index }) => (
             <HouseJob

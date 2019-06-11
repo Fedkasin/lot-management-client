@@ -32,6 +32,7 @@ const houseWatchLotsReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: true,
+        jobId: action.payload.jobId,
       };
     case FETCH_HOUSE_WATCH_LOTS_SUCCESS:
       return {
