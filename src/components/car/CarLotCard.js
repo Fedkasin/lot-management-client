@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
   },
   innerText: {
     fontSize: 17,
-    fontFamily: 'sans',
     padding: '5%',
   },
   itemTitle: {

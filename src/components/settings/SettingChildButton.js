@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   label: {
-    fontFamily: 'sans',
     fontSize: 20,
     padding: 5,
     textAlign: 'center',
