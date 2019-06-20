@@ -1,20 +1,13 @@
 #!/usr/bin/env bash
 
-npm cache clear
-
-echo fs.inotify.max_user_instances=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-echo fs.inotify.max_queued_events=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-
 SCRIPTPATH="$(dirname $(realpath -s $0))"
-
-echo "${SCRIPTPATH}"
 
 API_DEFAULT_PATH="http://localhost"
 RESP_DEFAULT_TIME=5000
 API_URL=${API_URL/%":$1"/}
 RESP_TIME=$RESP_TIME
 
+echo "Checking API_URL..."
 if [ -z $API_URL ]; then
   echo "API set to default (${API_DEFAULT_PATH})..."
   API_URL=$API_DEFAULT_PATH
@@ -22,12 +15,15 @@ else
   echo "API root is ${API_URL}"
 fi
 
+echo "Checking RESP_TIME..."
 if [ -z $RESP_TIME ]; then
   echo "RESP_TIME set to default (${RESP_DEFAULT_TIME}ms)..."
   RESP_TIME=$RESP_DEFAULT_TIME
 else
   echo "RESP_TIME is ${RESP_TIME}"
 fi
+
+echo "Generating the runtime config..."
 
 echo "import { Constants } from 'expo';
 
@@ -56,13 +52,15 @@ function getEnvVars(env = '') {
 
 export default getEnvVars(Constants.manifest.releaseChannel);" > ${SCRIPTPATH}/../src/constants/environment.js
 
-if [ -n $EXPO_USER ] && [ -n $EXPO_PASSWORD ]
+echo "Checking Expo Auth..."
+
+if [ -z $EXPO_USER ] && [ -z $EXPO_PASSWORD ]
 then
-  yes Y | $SCRIPTPATH/../node_modules/.bin/expo login -u $EXPO_USER -p $EXPO_PASSWORD
-else
   echo "Expo credentials are not set, skipping log in."
   echo "To log in, export EXPO_USER and EXPO_PASSWORD env vars"
+  echo "Exiting"
+else
+  yes Y | $SCRIPTPATH/../node_modules/.bin/expo login -u ${EXPO_USER} -p ${EXPO_PASSWORD}
+  $SCRIPTPATH/../node_modules/.bin/expo start
 fi
 
-# docker-compose -f docker-compose.yml up --build -d
-$SCRIPTPATH/../node_modules/.bin/expo start
