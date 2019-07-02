@@ -17,6 +17,7 @@
   "dependencies": {
     "expo": "^31.0.2",
     "expo-cli": "^2.9.0",
+    "expokit": "31.1.0",
     "firebase": "^5.8.3",
     "i18n-js": "^3.2.2",
     "lodash": "^4.17.11",
@@ -24,7 +25,7 @@
     "pre-commit": "^1.2.2",
     "prop-types": "^15.7.1",
     "react": "16.5.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.2.tar.gz",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
     "react-native-material-ui": "^1.30.1",
     "react-navigation": "^3.3.2",
     "react-redux": "^5.1.1",

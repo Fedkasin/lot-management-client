@@ -6,7 +6,10 @@
     "slug": "used-car-lot-client",
     "privacy": "public",
     "sdkVersion": "31.0.0",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -32,7 +35,14 @@
     },
     "android": {
       "package": "net.exp.exponent",
-      "googleServicesFile": "./google-services.json"
-    }
+      "googleServicesFile": "./google-services.json",
+      "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
+      "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
+    },
+    "isDetached": true,
+    "detach": {
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.9.2-sdk31.0.0-f0c63b44-0556-45f2-b4b9-ff5082f9ef72.tar.gz"
+    },
+    "scheme": "expf27a70aec3354352982f0b6b2e9748b2"
   }
 }

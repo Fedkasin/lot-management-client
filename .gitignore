@@ -1,6 +1,8 @@
 .idea
 node_modules/**/*
 .expo/*
+.expo-*
+android
 npm-debug.*
 *.jks
 *.p12
