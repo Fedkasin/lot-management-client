@@ -25,15 +25,20 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "703291837548-v8qa1s0i221djtm2jtr9r2c5t6j5stv3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "703291837548-tnn5kk1fus8f0sj0g90oo0dhbh8eb858.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dev.expo.lot-management-client"
+              }
+            }
+          ]
         }
       }
     }
