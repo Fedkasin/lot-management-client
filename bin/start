@@ -2,55 +2,8 @@
 
 SCRIPTPATH="$(dirname $(realpath -s $0))"
 
-API_DEFAULT_PATH="http://localhost"
-RESP_DEFAULT_TIME=5000
-API_URL=${API_URL/%":$1"/}
-RESP_TIME=$RESP_TIME
-
-echo "Checking API_URL..."
-if [ -z $API_URL ]; then
-  echo "API set to default (${API_DEFAULT_PATH})..."
-  API_URL=$API_DEFAULT_PATH
-else
-  echo "API root is ${API_URL}"
-fi
-
-echo "Checking RESP_TIME..."
-if [ -z $RESP_TIME ]; then
-  echo "RESP_TIME set to default (${RESP_DEFAULT_TIME}ms)..."
-  RESP_TIME=$RESP_DEFAULT_TIME
-else
-  echo "RESP_TIME is ${RESP_TIME}"
-fi
-
-echo "Generating the runtime config..."
-
-echo "import { Constants } from 'expo';
-
-const ENV = {
-  dev: {
-    apiUrl: '${API_URL}',
-    respTime: '${RESP_TIME}',
-  },
-  staging: {
-    apiUrl: '${API_URL}',
-    respTime: '${RESP_TIME}',
-  },
-  prod: {
-    apiUrl: '${API_URL}',
-    respTime: '${RESP_TIME}',
-  },
-};
-
-// eslint-disable-next-line consistent-return
-function getEnvVars(env = '') {
-  if (env === null || env === undefined || env === '') return ENV.dev;
-  if (env.indexOf('dev') !== -1) return ENV.dev;
-  if (env.indexOf('staging') !== -1) return ENV.staging;
-  if (env.indexOf('prod') !== -1) return ENV.prod;
-}
-
-export default getEnvVars(Constants.manifest.releaseChannel);" > ${SCRIPTPATH}/../src/constants/environment.js
+echo "Updating the app config..."
+$SCRIPTPATH/create_config $(realpath ${SCRIPTPATH}/../src/constants/environment.js)
 
 echo "Checking Expo Auth..."
 

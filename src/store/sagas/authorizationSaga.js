@@ -2,7 +2,7 @@ import { AsyncStorage } from 'react-native';
 import {
   call, put, takeLatest,
 } from 'redux-saga/effects';
-import { Constants } from 'expo';
+import Constants from 'expo-constants';
 
 import actions from '../actions/index';
 import LMapi from '../../helpers/lmapi';
