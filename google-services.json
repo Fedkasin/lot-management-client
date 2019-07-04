@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "703291837548-r0tb4i5kcoqam5d4ujo46258th7kp7f7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dev.expo.lot_management_client",
+            "certificate_hash": "9ec46e511283eb4b5815c00aee7345dfedefa4f7"
+          }
+        },
+        {
           "client_id": "703291837548-v8qa1s0i221djtm2jtr9r2c5t6j5stv3.apps.googleusercontent.com",
           "client_type": 3
         }

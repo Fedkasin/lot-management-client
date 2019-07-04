@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import {
-  Permissions, Notifications, registerRootComponent, Audio,
+  Notifications, registerRootComponent, Audio,
 } from 'expo';
+import * as Permissions from 'expo-permissions';
 import { AsyncStorage } from 'react-native';
 import { Provider } from 'react-redux';
 import firebase from 'firebase';
@@ -37,7 +38,7 @@ class App extends PureComponent {
 
   async componentDidMount() {
     sagaService.setNavigatorContainer(this.appContainer);
-    const TOKEN = await getPushToken();
+    const TOKEN = await getPushToken().catch(() => Promise.resolve(''));
     await AsyncStorage.setItem('@RootStore:NOTIFICATIONS_TOKEN', TOKEN || '[NOTIFICATIONS_FORBIDDEN]');
 
     this._notificationSubscription = Notifications.addListener(this._handleNotification);
