@@ -38,7 +38,7 @@ class App extends PureComponent {
 
   async componentDidMount() {
     sagaService.setNavigatorContainer(this.appContainer);
-    const TOKEN = await getPushToken().catch(() => Promise.resolve(''));
+    const TOKEN = await getPushToken().catch(() => Promise.resolve(null));
     await AsyncStorage.setItem('@RootStore:NOTIFICATIONS_TOKEN', TOKEN || '[NOTIFICATIONS_FORBIDDEN]');
 
     this._notificationSubscription = Notifications.addListener(this._handleNotification);
