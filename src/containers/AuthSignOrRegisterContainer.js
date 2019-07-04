@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {
   Alert, ActivityIndicator, StyleSheet, Text, View,
 } from 'react-native';
-import { DangerZone } from 'expo';
+import Lottie from 'lottie-react-native';
 
 import { googleAuthorizationConfig } from '../constants/Config';
 import actions from '../store/actions';
@@ -12,8 +12,6 @@ import ErrorContainer from '../components/core/ErrorContainer';
 import IcoButton from '../components/core/IcoButton';
 import * as Colors from '../constants/Colors';
 import t from '../helpers/i18helper';
-
-const { Lottie } = DangerZone;
 
 const styles = StyleSheet.create({
   container: {

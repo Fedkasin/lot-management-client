@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+SCRIPTPATH="$(dirname $(realpath -s $0))"
+
+# Android build required env vars checks
+if [ -z $ANDROID_KEYSTORE_PATH ]; then
+  echo "ANDROID_KEYSTORE_PATH should present in env to build the APK"
+  exit
+fi
+
+if [ -z $ANDROID_KEYSTORE_PASSWORD ]; then
+  echo "ANDROID_KEYSTORE_PASSWORD should present in env to build the APK"
+  exit
+fi
+
+if [ -z $ANDROID_KEY_ALIAS ]; then
+  echo "ANDROID_KEY_ALIAS should present in env to build the APK"
+  exit
+fi
+
+if [ -z $ANDROID_KEY_PASSWORD ]; then
+  echo "ANDROID_KEY_PASSWORD should present in env to build the APK"
+  exit
+fi
+
+if [ -z $ANDROID_HOME ]; then
+  ANDROID_HOME=$(realpath ~/Android/Sdk)
+fi
+
+if [ -z $ANDROID_NDK_HOME ]; then
+  ANDROID_NDK_HOME=$(realpath ~/Android/Sdk/ndk-bundle)
+fi
+
+# end of Android build required env vars checks
+
+# Prepare the tools
+echo "Cleanup..."
+rm -rf $SCRIPTPATH/tmp
+mkdir $SCRIPTPATH/tmp
+echo "Tools download..."
+curl -L -o $SCRIPTPATH/tmp/gradle.zip https://services.gradle.org/distributions/gradle-5.5-all.zip && \
+curl -L -o $SCRIPTPATH/tmp/bundletool.jar https://github.com/google/bundletool/releases/download/0.10.0/bundletool-all-0.10.0.jar
+echo "Tools unpack..."
+unzip -o -qq $SCRIPTPATH/tmp/gradle.zip -d $SCRIPTPATH/tmp/ && \
+
+$SCRIPTPATH/create_config $(realpath ${SCRIPTPATH}/../src/constants/environment.js)
+
+# Android build
+rm -rf $(realpath $SCRIPTPATH/../android) && rm -rf $(realpath $SCRIPTPATH/../.expo-source)
+
+expo eject && \
+expo publish && \
+cd $(realpath $SCRIPTPATH/../android) && \
+ANDROID_HOME=$ANDROID_HOME ANDROID_NDK_HOME=$ANDROID_NDK_HOME $SCRIPTPATH/tmp/gradle-5.5/bin/gradle wrapper && \
+ANDROID_HOME=$ANDROID_HOME ANDROID_NDK_HOME=$ANDROID_NDK_HOME $(realpath $SCRIPTPATH/../android/gradlew) bundleRelease && \
+java -jar "$SCRIPTPATH/tmp/bundletool.jar" build-apks \
+--bundle="$(realpath $SCRIPTPATH/../android/app/build/outputs/bundle/release/app.aab)" \
+--output=$SCRIPTPATH/build/latest.apks \
+--ks=$ANDROID_KEYSTORE_PATH \
+--ks-pass=pass:$ANDROID_KEYSTORE_PASSWORD \
+--ks-key-alias=$ANDROID_KEY_ALIAS \
+--key-pass=pass:$ANDROID_KEY_PASSWORD

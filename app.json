@@ -2,10 +2,9 @@
   "expo": {
     "name": "used-car-lot-client",
     "entryPoint": "./src/App.js",
-    "description": "A very interesting project.",
     "slug": "used-car-lot-client",
     "privacy": "public",
-    "sdkVersion": "31.0.0",
+    "sdkVersion": "33.0.0",
     "platforms": [
       "ios",
       "android"
@@ -25,24 +24,18 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "net.exp.exponent",
-      "config": {
-        "googleSignIn": {
-          "reservedClientId": "com.googleusercontent.apps.703291837548-tnn5kk1fus8f0sj0g90oo0dhbh8eb858"
-        }
-      }
+      "bundleIdentifier": "net.exp.exponent"
     },
     "android": {
-      "package": "net.exp.exponent",
+      "package": "com.dev.expo.lot_management_client",
       "googleServicesFile": "./google-services.json",
-      "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
-      "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
-    },
-    "isDetached": true,
-    "detach": {
-      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.9.2-sdk31.0.0-f0c63b44-0556-45f2-b4b9-ff5082f9ef72.tar.gz"
-    },
-    "scheme": "expf27a70aec3354352982f0b6b2e9748b2"
+      "config": {
+        "googleSignIn": {
+          "apiKey": "AIzaSyA8X-oEy0cGZarQkTU3Tm-VVNc0xLXlF0c",
+          "certificateHash": "9EC46E511283EB4B5815C00AEE7345DFEDEFA4F7"
+        }
+      }
+    }
   }
 }
+

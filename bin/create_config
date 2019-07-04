@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+DEFAULT_API_URL="http://localhost"
+DEFAULT_RESP_TIME=5000
+
+API_URL=$API_URL
+RESP_TIME=$RESP_TIME
+
+OUT=$1
+
+if [ -z $1 ]; then
+  echo "Config output is not specified, please provide the exact path in first argument"
+  exit
+fi
+
+if [ -z $API_URL ]; then
+  API_URL=$DEFAULT_API_URL
+fi
+
+if [ -z $RESP_TIME ]; then
+  RESP_TIME=$DEFAULT_RESP_TIME
+fi
+
+echo "Generating the runtime config..."
+
+echo "import Constants from 'expo-constants';
+
+const ENV = {
+  dev: {
+    apiUrl: '${API_URL}',
+    respTime: '${RESP_TIME}',
+  },
+  staging: {
+    apiUrl: '${API_URL}',
+    respTime: '${RESP_TIME}',
+  },
+  prod: {
+    apiUrl: '${API_URL}',
+    respTime: '${RESP_TIME}',
+  },
+};
+
+// eslint-disable-next-line consistent-return
+function getEnvVars(env = '') {
+  if (env === null || env === undefined || env === '') return ENV.dev;
+  if (env.indexOf('dev') !== -1) return ENV.dev;
+  if (env.indexOf('staging') !== -1) return ENV.staging;
+  if (env.indexOf('prod') !== -1) return ENV.prod;
+}
+
+export default getEnvVars(Constants.manifest.releaseChannel);" > $OUT
+
+echo "Done."
