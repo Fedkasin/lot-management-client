@@ -12,3 +12,5 @@ npm-debug.*
 app.json
 src/constants/environment.js
 src/constants/Config.js
+yarn.lock
+package.lock
