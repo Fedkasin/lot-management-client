@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import 'moment/locale/ru';
-import { LinearGradient } from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
 import * as Localization from 'expo-localization';
 import {
   Text, View, StyleSheet, ImageBackground, TouchableOpacity, Linking, Image,

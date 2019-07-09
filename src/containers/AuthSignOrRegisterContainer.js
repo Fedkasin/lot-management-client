@@ -27,8 +27,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   lottieLogo: {
-    width: '100%',
-    height: '40%',
+    width: 190,
     marginTop: 10,
     marginBottom: 20,
   },
