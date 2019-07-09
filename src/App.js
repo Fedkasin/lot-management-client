@@ -57,8 +57,12 @@ class App extends PureComponent {
       }
       try {
         await AsyncStorage.setItem('@UserStore:FBUSER', JSON.stringify(user.providerData[0]));
-        const API_TOKEN = await AsyncStorage.getItem('@UserStore:API_TOKEN');
-        if (API_TOKEN) store.dispatch(actions.authActions.loginSuccess());
+        await AsyncStorage.getItem('@UserStore:API_TOKEN', err => {
+          if (err) {
+            return store.dispatch(actions.authActions.loginFail(err.toString()));
+          }
+          return store.dispatch(actions.authActions.loginSuccess());
+        });
       } catch (err) {
         store.dispatch(actions.authActions.loginFail(err.toString()));
       }
