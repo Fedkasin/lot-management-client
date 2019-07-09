@@ -37,6 +37,8 @@ class App extends PureComponent {
   }
 
   async componentDidMount() {
+    // eslint-disable-next-line no-console
+    console.disableYellowBox = true;
     sagaService.setNavigatorContainer(this.appContainer);
     const TOKEN = await getPushToken().catch(() => Promise.resolve(null));
     await AsyncStorage.setItem('@RootStore:NOTIFICATIONS_TOKEN', TOKEN || '[NOTIFICATIONS_FORBIDDEN]');
