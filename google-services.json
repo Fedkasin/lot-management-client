@@ -1,49 +1,41 @@
 {
   "project_info": {
-    "project_number": "703291837548",
-    "firebase_url": "https://lot-management-client.firebaseio.com",
-    "project_id": "lot-management-client",
-    "storage_bucket": "lot-management-client.appspot.com"
+    "project_number": "174973245157",
+    "firebase_url": "https://coral-airlock-245512.firebaseio.com",
+    "project_id": "coral-airlock-245512",
+    "storage_bucket": "coral-airlock-245512.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:703291837548:android:a44e37b54bef2699",
+        "mobilesdk_app_id": "1:174973245157:android:3c5b6b79a78f77a2",
         "android_client_info": {
-          "package_name": "com.dev.expo.lot_management_client"
+          "package_name": "com.kostylsystems.lmc"
         }
       },
       "oauth_client": [
         {
-          "client_id": "703291837548-r0tb4i5kcoqam5d4ujo46258th7kp7f7.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.dev.expo.lot_management_client",
-            "certificate_hash": "9ec46e511283eb4b5815c00aee7345dfedefa4f7"
-          }
-        },
-        {
-          "client_id": "703291837548-v8qa1s0i221djtm2jtr9r2c5t6j5stv3.apps.googleusercontent.com",
+          "client_id": "174973245157-a4vojptpdmc485v0g60um0k8njtbjip0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA8X-oEy0cGZarQkTU3Tm-VVNc0xLXlF0c"
+          "current_key": "AIzaSyA2ekV9cChOneXcx4UfJz4EqwpZ0toqOFM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "703291837548-v8qa1s0i221djtm2jtr9r2c5t6j5stv3.apps.googleusercontent.com",
+              "client_id": "174973245157-a4vojptpdmc485v0g60um0k8njtbjip0.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "703291837548-tnn5kk1fus8f0sj0g90oo0dhbh8eb858.apps.googleusercontent.com",
+              "client_id": "174973245157-bs5f84vvt5t2m02ab498q8rlbdtru44m.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.dev.expo.lot-management-client"
+                "bundle_id": "com.kostylsystems.lmc"
               }
             }
           ]

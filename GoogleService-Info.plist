@@ -2,39 +2,37 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
-	<string>ca-app-pub-3940256099942544/2934735716</string>
-	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
-	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>703291837548-tnn5kk1fus8f0sj0g90oo0dhbh8eb858.apps.googleusercontent.com</string>
+	<string>174973245157-bs5f84vvt5t2m02ab498q8rlbdtru44m.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.703291837548-tnn5kk1fus8f0sj0g90oo0dhbh8eb858</string>
+	<string>com.googleusercontent.apps.174973245157-bs5f84vvt5t2m02ab498q8rlbdtru44m</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>174973245157-ic1v7sti3uuupeagg2df1vnl50vsdu7r.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBnYQcUL_x0EtAWB76zt6q_yX3Wi6YMZ5Y</string>
+	<string>AIzaSyBElIJfWTAJEm5_52ZWHMrN1DpdLDSMpSQ</string>
 	<key>GCM_SENDER_ID</key>
-	<string>703291837548</string>
+	<string>174973245157</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.dev.expo.lot-management-client</string>
+	<string>com.kostylsystems.lmc</string>
 	<key>PROJECT_ID</key>
-	<string>lot-management-client</string>
+	<string>coral-airlock-245512</string>
 	<key>STORAGE_BUCKET</key>
-	<string>lot-management-client.appspot.com</string>
+	<string>coral-airlock-245512.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true></true>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
 	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<false></false>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
 	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:703291837548:ios:cb7c34bff71ff228</string>
+	<string>1:174973245157:ios:3c5b6b79a78f77a2</string>
 	<key>DATABASE_URL</key>
-	<string>https://lot-management-client.firebaseio.com</string>
+	<string>https://coral-airlock-245512.firebaseio.com</string>
 </dict>
 </plist>

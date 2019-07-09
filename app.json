@@ -24,15 +24,14 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "net.exp.exponent"
+      "bundleIdentifier": "com.kostylsystems.lmc"
     },
     "android": {
-      "package": "com.dev.expo.lot_management_client",
+      "package": "com.kostylsystems.lmc",
       "googleServicesFile": "./google-services.json",
       "config": {
         "googleSignIn": {
-          "apiKey": "AIzaSyA8X-oEy0cGZarQkTU3Tm-VVNc0xLXlF0c",
-          "certificateHash": "9EC46E511283EB4B5815C00AEE7345DFEDEFA4F7"
+          "apiKey": "AIzaSyBElIJfWTAJEm5_52ZWHMrN1DpdLDSMpSQ"
         }
       }
     }
