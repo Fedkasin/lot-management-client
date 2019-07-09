@@ -2,7 +2,7 @@ import React from 'react';
 import {
   View, StyleSheet, Text, Platform,
 } from 'react-native';
-import { Icon } from 'expo';
+import * as Icon from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import t from '../../helpers/i18helper';
 import SingleSelect from '../settings/SingleSelect';

@@ -2,7 +2,7 @@
   "PLEASE_LOGIN": "Please log in using one of your existing accounts",
   "NOT_AVALIBLE": "Sorry, this option is temporary not avalible", 
   "WELCOME": "Welcome",
-  "AUTH_FAIL": "Authentication failed",
+  "AUTH_FAIL": "Authentication failed. Please try again later",
   "NO_MATCH": "There are no matches",
   "CONNECT_FAILED": "Failed connect to server",
   "UNKNOWN_ERROR": "Unknown error",

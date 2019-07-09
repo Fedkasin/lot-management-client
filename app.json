@@ -2,11 +2,13 @@
   "expo": {
     "name": "used-car-lot-client",
     "entryPoint": "./src/App.js",
-    "description": "A very interesting project.",
     "slug": "used-car-lot-client",
     "privacy": "public",
-    "sdkVersion": "31.0.0",
-    "platforms": ["ios", "android"],
+    "sdkVersion": "33.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -22,17 +24,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "net.exp.exponent",
-      "config": {
-        "googleSignIn": {
-          "reservedClientId": "com.googleusercontent.apps.703291837548-tnn5kk1fus8f0sj0g90oo0dhbh8eb858"
-        }
-      }
+      "bundleIdentifier": "com.kostylsystems.lmc"
     },
     "android": {
-      "package": "net.exp.exponent",
-      "googleServicesFile": "./google-services.json"
+      "package": "com.kostylsystems.lmc",
+      "googleServicesFile": "./google-services.json",
+      "config": {
+        "googleSignIn": {
+          "apiKey": "AIzaSyBElIJfWTAJEm5_52ZWHMrN1DpdLDSMpSQ"
+        }
+      }
     }
   }
 }
+

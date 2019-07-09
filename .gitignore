@@ -1,6 +1,8 @@
 .idea
 node_modules/**/*
-.expo/*
+.expo
+.expo-*
+android
 npm-debug.*
 *.jks
 *.p12
@@ -10,3 +12,5 @@ npm-debug.*
 app.json
 src/constants/environment.js
 src/constants/Config.js
+yarn.lock
+package.lock

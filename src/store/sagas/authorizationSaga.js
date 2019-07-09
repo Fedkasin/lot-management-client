@@ -2,7 +2,7 @@ import { AsyncStorage } from 'react-native';
 import {
   call, put, takeLatest,
 } from 'redux-saga/effects';
-import { Constants } from 'expo';
+import Constants from 'expo-constants';
 
 import actions from '../actions/index';
 import LMapi from '../../helpers/lmapi';
@@ -17,14 +17,13 @@ import {
 } from '../../constants/Actions';
 import { signInWithGoogleAsync, signOut } from '../../helpers/authHelpers';
 import { AUTH_STACK, APP_TAB } from '../../constants/Routes';
-import * as Errors from '../../constants/Errors';
 
 function* logout() {
   try {
     yield call(signOut);
     yield put(actions.authActions.logoutSuccess());
   } catch (err) {
-    yield put(actions.authActions.logoutFail());
+    yield put(actions.authActions.logoutFail(err.toString()));
   }
 }
 
@@ -39,7 +38,7 @@ function* checkIfLoggedIn() {
       yield put(actions.authActions.loginSuccess());
     }
   } catch (err) {
-    yield put(actions.authActions.loginFail(Errors.authfail));
+    yield put(actions.authActions.loginFail(err.toString()));
   }
 }
 
@@ -74,7 +73,8 @@ function* login(action) {
       yield call(checkIfLoggedIn);
     }
   } catch (err) {
-    yield put(actions.authActions.loginFail(Errors.authfail));
+    yield call(signOut);
+    yield put(actions.authActions.loginFail(err.toString()));
   }
 }
 

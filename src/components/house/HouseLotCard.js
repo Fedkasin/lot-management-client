@@ -1,7 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 import 'moment/locale/ru';
-import { LinearGradient, Localization } from 'expo';
+import { LinearGradient } from 'expo';
+import * as Localization from 'expo-localization';
 import {
   Text, View, StyleSheet, ImageBackground, TouchableOpacity, Linking, Image,
 } from 'react-native';
@@ -121,6 +122,11 @@ HouseLotCard.propTypes = {
   item: PropTypes.shape({
     url: PropTypes.string,
     photo: PropTypes.string,
+    created_at: PropTypes.string.isRequired,
+    last_time_up: PropTypes.string.isRequired,
+    rent_type: PropTypes.string.isRequired,
+    location: PropTypes.objectOf(PropTypes.any).isRequired,
+    price: PropTypes.objectOf(PropTypes.any).isRequired,
   }).isRequired,
 };
 

@@ -1,68 +1,19 @@
 #!/usr/bin/env bash
 
-npm cache clear
-
-echo fs.inotify.max_user_instances=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-echo fs.inotify.max_queued_events=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-
 SCRIPTPATH="$(dirname $(realpath -s $0))"
 
-echo "${SCRIPTPATH}"
+echo "Updating the app config..."
+$SCRIPTPATH/create_config $(realpath ${SCRIPTPATH}/../src/constants/environment.js)
 
-API_DEFAULT_PATH="http://localhost"
-RESP_DEFAULT_TIME=5000
-API_URL=${API_URL/%":$1"/}
-RESP_TIME=$RESP_TIME
+echo "Checking Expo Auth..."
 
-if [ -z $API_URL ]; then
-  echo "API set to default (${API_DEFAULT_PATH})..."
-  API_URL=$API_DEFAULT_PATH
-else
-  echo "API root is ${API_URL}"
-fi
-
-if [ -z $RESP_TIME ]; then
-  echo "RESP_TIME set to default (${RESP_DEFAULT_TIME}ms)..."
-  RESP_TIME=$RESP_DEFAULT_TIME
-else
-  echo "RESP_TIME is ${RESP_TIME}"
-fi
-
-echo "import { Constants } from 'expo';
-
-const ENV = {
-  dev: {
-    apiUrl: '${API_URL}',
-    respTime: '${RESP_TIME}',
-  },
-  staging: {
-    apiUrl: '${API_URL}',
-    respTime: '${RESP_TIME}',
-  },
-  prod: {
-    apiUrl: '${API_URL}',
-    respTime: '${RESP_TIME}',
-  },
-};
-
-// eslint-disable-next-line consistent-return
-function getEnvVars(env = '') {
-  if (env === null || env === undefined || env === '') return ENV.dev;
-  if (env.indexOf('dev') !== -1) return ENV.dev;
-  if (env.indexOf('staging') !== -1) return ENV.staging;
-  if (env.indexOf('prod') !== -1) return ENV.prod;
-}
-
-export default getEnvVars(Constants.manifest.releaseChannel);" > ${SCRIPTPATH}/../src/constants/environment.js
-
-if [ -n $EXPO_USER ] && [ -n $EXPO_PASSWORD ]
+if [ -z $EXPO_USER ] && [ -z $EXPO_PASSWORD ]
 then
-  yes Y | $SCRIPTPATH/../node_modules/.bin/expo login -u $EXPO_USER -p $EXPO_PASSWORD
-else
   echo "Expo credentials are not set, skipping log in."
   echo "To log in, export EXPO_USER and EXPO_PASSWORD env vars"
+  echo "Exiting"
+else
+  yes Y | $SCRIPTPATH/../node_modules/.bin/expo login -u ${EXPO_USER} -p ${EXPO_PASSWORD}
+  $SCRIPTPATH/../node_modules/.bin/expo start
 fi
 
-# docker-compose -f docker-compose.yml up --build -d
-$SCRIPTPATH/../node_modules/.bin/expo start
