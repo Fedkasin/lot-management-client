@@ -2,8 +2,9 @@ import React, { PureComponent } from 'react';
 import {
   Notifications, registerRootComponent, Audio,
 } from 'expo';
+import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Alert } from 'react-native';
 import { Provider } from 'react-redux';
 import firebase from 'firebase';
 
@@ -17,6 +18,7 @@ import { JOB_WATCH_SCREEN } from './constants/Routes';
 firebase.initializeApp(firebaseConfig);
 
 const store = initStore();
+const { isDevice } = Constants;
 
 const getPushToken = async () => {
   const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
@@ -41,7 +43,21 @@ class App extends PureComponent {
     console.disableYellowBox = true;
     sagaService.setNavigatorContainer(this.appContainer);
     const TOKEN = await getPushToken().catch(() => Promise.resolve(null));
-    await AsyncStorage.setItem('@RootStore:NOTIFICATIONS_TOKEN', TOKEN || '[NOTIFICATIONS_FORBIDDEN]');
+    store.dispatch(actions.profileActions.setDeviceStatus(isDevice));
+    if (!TOKEN) {
+      if (isDevice) {
+        Alert.alert(
+          'Please enable notifications for this application',
+          'otherwise it will not work correctly.'
+        );
+      } else {
+        Alert.alert(
+          'Push notifications are not avalible',
+          'The application is not allowed to receive notifications due running on a virtual device / emulator or for another reason.'
+        );
+      }
+    }
+    await AsyncStorage.setItem('@RootStore:NOTIFICATIONS_TOKEN', TOKEN || '');
 
     this._notificationSubscription = Notifications.addListener(this._handleNotification);
 

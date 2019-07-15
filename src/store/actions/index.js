@@ -60,6 +60,9 @@ import {
   fetchProfile,
   fetchProfileSuccess,
   fetchProfileFail,
+  setDeviceStatus,
+  setGlobalNotifyStatus,
+  setLocalNotifyStatus,
 } from './profileActionCreators';
 
 export default {
@@ -118,5 +121,8 @@ export default {
     fetchProfile,
     fetchProfileSuccess,
     fetchProfileFail,
+    setDeviceStatus,
+    setGlobalNotifyStatus,
+    setLocalNotifyStatus,
   },
 };

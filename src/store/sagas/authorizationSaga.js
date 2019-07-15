@@ -31,7 +31,8 @@ function* checkIfLoggedIn() {
   try {
     const user = yield call(AsyncStorage.getItem, '@UserStore:FBUSER');
     const token = yield call(AsyncStorage.getItem, '@UserStore:API_TOKEN');
-    yield call([LMapi, LMapi.getUserDevices]);
+    const fullAuthUser = yield call([LMapi, LMapi.getUserDevices]);
+    yield put(actions.profileActions.setGlobalNotifyStatus(fullAuthUser.body.message.universal.pushEnabled));
     if (!user || !token) {
       yield put({ type: 'LOGOUT', logout });
     } else {
@@ -51,10 +52,9 @@ function* login(action) {
       refreshToken,
       user: { id },
     } = data;
-    const expo = {
+    const device = {
       pushToken: yield call(AsyncStorage.getItem, '@RootStore:NOTIFICATIONS_TOKEN'),
-      uniqueId: Constants.installationId,
-      deviceId: Constants.deviceName,
+      systemIdentifier: Constants.deviceName,
       systemName: Constants.platform.android ? 'android' : 'ios',
     };
     const body = {
@@ -64,7 +64,7 @@ function* login(action) {
         refresh_token: refreshToken,
         uid: id,
       },
-      expo,
+      device,
     };
     yield call(LMapi.logIn, body);
     const user = yield call(AsyncStorage.getItem, '@UserStore:FBUSER');

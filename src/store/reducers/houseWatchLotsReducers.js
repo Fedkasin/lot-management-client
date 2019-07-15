@@ -109,6 +109,7 @@ const houseWatchLotsReducer = (state = initialState, action) => {
     case CHECK_PAUSED_HOUSE_WATCH_JOBS:
       return {
         ...state,
+        isAnyPaused: !state.isAnyPaused,
         isFetching: true,
       };
     default:

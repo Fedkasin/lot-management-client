@@ -10,7 +10,7 @@ import t from '../../helpers/i18helper';
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    marginTop: '25%',
+    marginTop: '15%',
   },
   avatar: {
     width: 100,
