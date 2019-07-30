@@ -46,8 +46,6 @@ class ProfileContainer extends PureComponent {
     const {
       isLoading, profile, isLogouting, isDeviceReal, isGlobalNotifyGranted, isLocalNotifyGranted,
     } = this.props;
-    console.log('<< isGlobalNotifyGranted', isGlobalNotifyGranted);
-    console.log('<< isLocalNotifyGranted', isLocalNotifyGranted);
     if (!profile) return <ActivityIndicator size="large" color={Colors.lightGray} />;
 
     return (

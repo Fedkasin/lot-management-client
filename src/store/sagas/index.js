@@ -7,7 +7,7 @@ import {
 import fetchCarLotsSaga from './fetchCarLotsSaga';
 import fetchHouseLotsSaga from './fetchHouseLotsSaga';
 import updateHouseWatchLotsSaga from './updateHouseWatchLotsSaga';
-import fetchProfileSaga from './profileSaga';
+import { fetchProfileSaga, fetchSettingsSaga } from './profileSaga';
 import {
   watchHouseLotsSaga,
   checkWatchHouseLotsStateSaga,
@@ -29,6 +29,7 @@ export default function* (service) {
     loginSaga(),
     logoutSaga(),
     fetchProfileSaga(),
+    fetchSettingsSaga(),
     fetchCarLotsSaga(),
     fetchHouseLotsSaga(),
     updateHouseWatchLotsSaga(),

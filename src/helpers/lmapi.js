@@ -164,7 +164,7 @@ class LMapi {
   async getHouses(query) {
     try {
       const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
-      const req = superagent.get(`${getEnvVars.apiUrl}/v1/onliner?${query}`);
+      const req = superagent.get(`${getEnvVars.apiUrl}/v1/onliner/apts?${query}`);
       req.timeout({ response: parseInt(getEnvVars.respTime, 10) });
       req.set('Authorization', token);
       const res = await req;
@@ -195,16 +195,17 @@ class LMapi {
     }
   }
 
-  async getCars(start, limit) {
+  async getCars(query) {
     try {
       const token = await AsyncStorage.getItem('@UserStore:API_TOKEN');
-      const req = superagent.get(`https://jsonplaceholder.typicode.com/photos?_start=${start}&_limit=${limit}`);
+      const req = superagent.get(`${getEnvVars.apiUrl}/v1/onliner/cars?${query}`);
       req.timeout({ response: parseInt(getEnvVars.respTime, 10) });
       req.set('Authorization', token);
       const res = await req;
+      const { body: { message: { cars } } } = res;
       const { status = null } = res;
       if (status === 200) {
-        return res.body;
+        return cars;
       }
       return null;
     } catch (err) {

@@ -14,6 +14,7 @@ const carLotsReducers = (state = initialState, action) => {
       return {
         ...state,
         isFetching: true,
+        carLots: [],
         page: action.payload.page,
         itemsPerPage: action.payload.itemsPerPage,
       };
